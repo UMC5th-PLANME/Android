@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--bold-->
     <font
@@ -11,8 +9,7 @@
         android:fontWeight="1000"
         app:font="@font/pretendard_bold"
         app:fontStyle="normal"
-        app:fontWeight="1000"
-        tools:targetApi="o" />
+        app:fontWeight="1000" />
 
     <!--medium-->
     <font
@@ -21,8 +18,7 @@
         android:fontWeight="500"
         app:font="@font/pretendard_medium"
         app:fontStyle="normal"
-        app:fontWeight="500"
-        tools:targetApi="o" />
+        app:fontWeight="500" />
 
     <!--regular-->
     <font
@@ -31,6 +27,5 @@
         android:fontWeight="300"
         app:font="@font/pretendard_regular"
         app:fontStyle="normal"
-        app:fontWeight="300"
-        tools:targetApi="o" />
+        app:fontWeight="300" />
 </font-family>
