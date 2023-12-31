@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="drak_gray">#393939</color>  //공통 사용
+    <color name="ivory">#EFEFFB</color>  //공통 사용
+</resources>
