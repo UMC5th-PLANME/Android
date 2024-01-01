@@ -10,10 +10,10 @@
         tools:ignore="AlwaysShowAction"
         android:icon="@drawable/main_navi_planner"/>
     <item
-        android:id="@+id/mystoryFragment"
+        android:id="@+id/mestoryFragment"
         app:showAsAction="always"
-        android:title="@string/mystory"
-        android:icon="@drawable/main_navi_mystory"/>
+        android:title="@string/mestory"
+        android:icon="@drawable/main_navi_mestory"/>
     <item
         android:id="@+id/timerFragment"
         app:showAsAction="always"
@@ -24,5 +24,4 @@
         app:showAsAction="always"
         android:title="@string/setting"
         android:icon="@drawable/main_navi_setting"/>
-
 </menu>
