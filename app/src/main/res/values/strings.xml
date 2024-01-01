@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Plan_Me</string>
     <string name="planner">PLANNER</string>
-    <string name="mystory">MYSTORY</string>
+    <string name="mestory">MESTORY</string>
     <string name="timer">TIMER</string>
     <string name="setting">SETTING</string>
 </resources>
