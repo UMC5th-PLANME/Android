@@ -23,7 +23,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="70dp"
         android:background="@color/dark_gray"
-        app:menu="@menu/navi_menu"/>
+        app:menu="@menu/navi_menu"
+        app:elevation="0dp"/>
 
     <FrameLayout
         android:id="@+id/main_frm"
@@ -34,7 +35,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
