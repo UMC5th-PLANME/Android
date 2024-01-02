@@ -24,13 +24,4 @@
         <item name="android:fontFamily">@font/pretendard_medium</item>
     </style>
 
-    <style name="AppTheme.Splash"  parent="Theme.SplashScreen">
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/dark_gray</item>
-        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/main_navi_timer</item>  //logo 들어갈 예정
-        <item name="windowSplashScreenAnimationDuration">1000</item>
-        <item name="postSplashScreenTheme">@style/Base.Theme.Plan_Me</item>
-    </style>
-
-
-
 </resources>
