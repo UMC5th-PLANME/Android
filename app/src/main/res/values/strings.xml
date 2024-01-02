@@ -4,4 +4,6 @@
     <string name="mestory">MESTORY</string>
     <string name="timer">TIMER</string>
     <string name="setting">SETTING</string>
+
+    <string name="offline"><u>오프라인으로 사용하기</u></string>
 </resources>
