@@ -1,0 +1,99 @@
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'org.jetbrains.kotlin.android'
+    id("kotlin-kapt")
+}
+
+    android {
+        namespace 'xyz.teamgravity.customcalendarview'
+        compileSdk 34
+        defaultConfig {
+            namespace 'com.example.plan_me'
+            minSdk 26
+            targetSdk 33
+            versionCode 1
+            versionName "1.0"
+            vectorDrawables.useSupportLibrary = true
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        compileOptions {
+            coreLibraryDesugaringEnabled true
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+            jvmTarget = '1.8'
+        }
+
+        buildFeatures {
+            viewBinding true
+        }
+    }
+
+    dependencies {
+
+        // core
+        implementation 'androidx.core:core-ktx:1.9.0'
+
+        // app compat
+        implementation 'androidx.appcompat:appcompat:1.5.1'
+
+        // material
+        implementation 'com.google.android.material:material:1.7.0'
+
+        // constraint layout
+        implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+        // viewmodel
+        implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
+        // lifecycle
+        implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+
+        // coroutines
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+        implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+
+        // hilt
+        implementation 'com.google.dagger:hilt-android:2.43.2'
+        kapt 'com.google.dagger:hilt-compiler:2.43.2'
+
+        // fragment ktx
+        implementation 'androidx.fragment:fragment-ktx:1.5.4'
+
+        // desugar jdk
+        coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
+
+        // The view calendar library
+        implementation 'com.kizitonwose.calendar:view:2.4.1'
+
+        // The compose calendar library
+        implementation 'com.kizitonwose.calendar:compose:2.5.0-beta01'
+
+        // timber
+        implementation 'com.jakewharton.timber:timber:5.0.1'
+
+
+        //Retrofit
+        implementation "com.squareup.retrofit2:retrofit:2.9.0"
+        implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+        implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
+
+
+        //Glide
+        implementation 'com.github.bumptech.glide:glide:4.11.0'
+        annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+        implementation 'androidx.core:core-splashscreen:1.0.1'
+    }
