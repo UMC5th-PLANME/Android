@@ -96,5 +96,9 @@ plugins {
         annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 
+        //kakao
+        implementation 'com.kakao.sdk:v2-user:2.12.1'
+
+
         implementation 'androidx.core:core-splashscreen:1.0.1'
     }
