@@ -4,8 +4,16 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.databinding.ActivityLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.Scope
+import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -13,6 +21,15 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity: AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
+    private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        try {
+            //goMainActivity()
+            Log.d(TAG, "google 로그인 성공")
+        } catch (e: ApiException) {
+            Log.e(TAG, "google 로그인 실패", e)
+        }
+    }
 
     // 카카오 로그인
     // 카카오 계정으로 로그인 공통 callback 구성
@@ -34,6 +51,43 @@ class LoginActivity: AppCompatActivity() {
         // 카카오 로그인
         binding.loginKakaoBtn.setOnClickListener {
             login_kakao()
+        }
+
+        // 구글 로그인
+        binding.loginGoogleBtn.setOnClickListener {
+            login_google()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == R.string.google_client_id) {
+            // Google 로그인 결과 처리
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleGoogleSignInResult(task)
+        }
+    }
+
+    private fun handleGoogleSignInResult(compltedTask: Task<GoogleSignInAccount>) {
+        try{
+            val account = compltedTask.getResult(ApiException::class.java)
+
+            // Google 로그인 성공
+            getUserInfoFromGoogle(account)
+        } catch(e: ApiException) {
+            // Google 로그인 실패
+            Log.e(TAG, "Google 로그인 실패", e)
+        }
+    }
+
+    private fun getUserInfoFromGoogle(account: GoogleSignInAccount?) {
+        // Google 로그인 성공 시, 사용자 정보 가져오기
+        if(account != null) {
+            val userId = account.id
+            val userName = account.displayName
+            Log.d("Google 사용자 정보", "id: $userId & name: $userName")
+            //goMainActivity()
         }
     }
 
@@ -60,6 +114,22 @@ class LoginActivity: AppCompatActivity() {
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
         }
+    }
+
+    private fun getGoogleClient(): GoogleSignInClient {
+        val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestScopes(Scope("https://www.googleapis.com/auth/pubsub"))
+            .requestServerAuthCode(getString(R.string.google_client_id)) // server authCode 요청
+            .requestEmail() // 이메일도 요청 가능
+            .build()
+
+        return GoogleSignIn.getClient(this@LoginActivity, googleSignInOption)
+    }
+
+    private fun login_google() {
+        googleSignInClient.signOut()
+        val signInIntent = googleSignInClient.signInIntent
+        googleAuthLauncher.launch(signInIntent)
     }
 
     private fun goMainActivity() {
