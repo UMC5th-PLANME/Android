@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".TimerActivity"></activity>
         <activity android:name=".LoginActivity"/>
 
         <!--카카오 로그인, 인가코드를 받기 위한 액티비티-->

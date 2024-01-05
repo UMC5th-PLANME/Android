@@ -90,26 +90,31 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
 
-    //Retrofit
+    // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
 
 
-    //Glide
+    // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 
-    //kakao
+    // kakao
     implementation 'com.kakao.sdk:v2-user:2.12.1'
 
 
-    //google play services
+    // google play services
     implementation 'com.google.gms:google-services:4.4.0'
     implementation 'com.google.firebase:firebase-auth:22.3.0'
     implementation 'com.google.firebase:firebase-bom:32.7.0'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
-
+    
+    // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
+    
+    // Circle indicator
+    implementation 'me.relex:circleindicator:2.1.6'
 }
+
