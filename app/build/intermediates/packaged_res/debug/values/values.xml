@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="black">#FF000000</color>
+    <color name="blue_gray">#AAA9EF</color>
+    <color name="dark_gray">#393939</color>
+    <color name="deep_ivory">#DEDEF9</color>
+    <color name="grapefruit">#EF8374</color>
+    <color name="gray">#A3A3A3</color>
+    <color name="ivory">#EFEFFB</color>
+    <color name="light_gray">#E5E5E5</color>
+    <color name="sky_blue">#BAD2FF</color>
+    <color name="transparent">#00ff0000</color>
+    <color name="white">#FFFFFFFF</color>
+    <dimen name="design_bottom_navigation_active_text_size" ns1:override="true">10sp</dimen>
+    <dimen name="design_bottom_navigation_text_size" ns1:override="true">10sp</dimen>
+    <string name="app_name">Plan_Me</string>
+    <string name="google_client_id">871101631148-hs33esoeuhp090asta0fak3egq7ig0dl.apps.googleusercontent.com</string>
+    <string name="kakao_appkey">55b1939dd22f9a5ef6176930e7a09231</string>
+    <string name="mestory">MESTORY</string>
+    <string name="offline"><u>오프라인으로 사용하기</u></string>
+    <string name="planner">PLANNER</string>
+    <string name="setting">SETTING</string>
+    <string name="timer">TIMER</string>
+    <style name="AppTheme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground" ns1:targetApi="s">@color/dark_gray</item>
+        <item name="android:windowSplashScreenAnimatedIcon" ns1:targetApi="s">@drawable/main_navi_timer</item>  //logo 들어갈 예정
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.Plan_Me</item>
+    </style>
+    <style name="Base.Theme.Plan_Me" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/dark_gray</item>
+        
+        
+        <item name="android:textViewStyle">@style/pretendard_bold</item>
+        <item name="android:buttonStyle">@style/pretendard_bold</item>
+        <item name="android:editTextStyle">@style/pretendard_bold</item>
+        <item name="android:radioButtonStyle">@style/pretendard_bold</item>
+        <item name="android:checkboxStyle">@style/pretendard_bold</item>
+    </style>
+    <style name="NoElevation">
+        <item name="android:elevation">0dp</item>
+    </style>
+    <style name="Theme.Plan_Me" parent="Base.Theme.Plan_Me"/>
+    <style name="pretendard_bold" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
+    <style name="pretendard_medium" parent="@android:style/Widget.DeviceDefault.EditText">
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+    </style>
+    <style name="pretendard_regular" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/pretendard_regular</item>
+    </style>
+</resources>
