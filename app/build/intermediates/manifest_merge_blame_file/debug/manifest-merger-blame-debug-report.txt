@@ -10,374 +10,379 @@
 10
 11    <!-- 인터넷 사용 권한 설정 -->
 12    <uses-permission android:name="android.permission.INTERNET" />
-12-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:6:5-66
-12-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:6:22-64
+12-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:6:5-67
+12-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:6:22-64
 13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-13-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:26:5-79
-13-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:26:22-76
+13-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:26:5-79
+13-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:26:22-76
 14
 15    <queries>
-15-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:9:5-22:15
+15-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:9:5-22:15
 16        <package android:name="com.kakao.talk" />
-16-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:10:9-50
-16-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:10:18-47
+16-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:10:9-50
+16-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:10:18-47
 17        <package android:name="com.kakao.talk.alpha" />
-17-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:11:9-56
-17-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:11:18-53
+17-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:11:9-56
+17-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:11:18-53
 18        <package android:name="com.kakao.talk.sandbox" />
-18-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:12:9-58
-18-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:12:18-55
+18-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:12:9-58
+18-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:12:18-55
 19        <package android:name="com.kakao.onetalk" />
-19-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:13:9-53
-19-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:13:18-50
+19-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:13:9-53
+19-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:13:18-50
 20
 21        <intent>
-21-->[com.kakao.sdk:v2-common:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:15:9-21:18
+21-->[com.kakao.sdk:v2-common:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/4ff505e86740718cce902fc39cdf28da/transformed/v2-common-2.12.1/AndroidManifest.xml:15:9-21:18
 22            <action android:name="android.intent.action.VIEW" />
-22-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:17-68
-22-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:25-66
+22-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:17-69
+22-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:25-66
 23
 24            <category android:name="android.intent.category.BROWSABLE" />
-24-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:17-77
-24-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:27-75
+24-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:17-78
+24-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:27-75
 25
 26            <data android:scheme="https" />
-26-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:17-43:77
-26-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:43:21-75
+26-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:45:17-47:78
+26-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:47:21-75
 27        </intent>
 28    </queries>
 29
 30    <permission
-30-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
+30-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
 31        android:name="com.example.plan_me.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-31-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
+31-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
 32        android:protectionLevel="signature" />
-32-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
+32-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
 33
 34    <uses-permission android:name="com.example.plan_me.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-34-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
-34-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
+34-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
+34-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
 35
 36    <application
-36-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:8:5-46:19
+36-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:8:5-54:19
 37        android:name="com.example.plan_me.GlobalApplication"
-37-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:9:9-42
+37-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:9:9-42
 38        android:allowBackup="true"
-38-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:10:9-35
+38-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:10:9-35
 39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-39-->[androidx.core:core:1.12.0] /Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
+39-->[androidx.core:core:1.12.0] /Users/parkhyejeong/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/AndroidManifest.xml:28:18-86
 40        android:dataExtractionRules="@xml/data_extraction_rules"
-40-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:11:9-65
+40-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:11:9-65
 41        android:debuggable="true"
 42        android:extractNativeLibs="false"
 43        android:fullBackupContent="@xml/backup_rules"
-43-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:12:9-54
+43-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:12:9-54
 44        android:icon="@mipmap/ic_launcher"
-44-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:13:9-43
+44-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:13:9-43
 45        android:label="@string/app_name"
-45-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:14:9-41
+45-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:14:9-41
 46        android:roundIcon="@mipmap/ic_launcher_round"
-46-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:15:9-54
+46-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:15:9-54
 47        android:supportsRtl="true"
-47-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:16:9-35
+47-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:16:9-35
 48        android:testOnly="true"
 49        android:theme="@style/Theme.Plan_Me" >
-49-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:17:9-45
+49-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:17:9-45
 50        <meta-data
-50-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:19:9-21:51
+50-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:19:9-21:52
 51            android:name="com.kakao.sdk.AppKey"
-51-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:20:13-48
+51-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:20:13-48
 52            android:value="@string/kakao_appkey" />
-52-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:21:13-49
+52-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:21:13-49
 53
 54        <activity
-54-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:23:9-31:20
-55            android:name="com.example.plan_me.TimerActivity"
-55-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:24:13-42
+54-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:23:9-31:20
+55            android:name="com.example.plan_me.SplashActivity"
+55-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:24:13-43
 56            android:exported="true" >
-56-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:25:13-36
+56-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:25:13-36
 57            <intent-filter>
-57-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:26:13-30:29
+57-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:26:13-30:29
 58                <action android:name="android.intent.action.MAIN" />
-58-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:27:17-69
-58-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:27:25-66
+58-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:27:17-69
+58-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:27:25-66
 59
 60                <category android:name="android.intent.category.LAUNCHER" />
-60-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:29:17-77
-60-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:29:27-74
+60-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:29:17-77
+60-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:29:27-74
 61            </intent-filter>
 62        </activity>
-63        <!-- <activity android:name=".TimerActivity"></activity> -->
-64        <activity android:name="com.example.plan_me.LoginActivity" />
-64-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:33:9-50
-64-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:33:19-48
-65
-66        <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
-67        <activity
-67-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:36:9-45:20
-68            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-68-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:36:19-76
-69            android:exported="true"
-69-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:37:13-36
-70            android:launchMode="singleTask"
-70-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:18:13-44
-71            android:theme="@style/TransparentCompat" >
-71-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:19:13-53
-72            <intent-filter>
-72-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:38:13-44:29
-73                <action android:name="android.intent.action.VIEW" />
-73-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:17-68
-73-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:25-66
-74
-75                <category android:name="android.intent.category.DEFAULT" />
-75-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:17-75
-75-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:27-73
-76                <category android:name="android.intent.category.BROWSABLE" />
-76-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:17-77
-76-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:27-75
-77
-78                <data
-78-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:17-43:77
-79                    android:host="oauth"
-79-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:23-43
-80                    android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
-80-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:43:21-75
-81            </intent-filter>
-82        </activity>
-83        <activity
-83-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:10:9-15:56
-84            android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
-84-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:11:13-67
-85            android:configChanges="orientation|screenSize|keyboardHidden"
-85-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:12:13-74
-86            android:exported="false"
-86-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:13:13-37
-87            android:launchMode="singleTask"
-87-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:14:13-44
-88            android:theme="@style/TransparentCompat" />
-88-->[com.kakao.sdk:v2-auth:2.12.1] /Users/seohyeonpark/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:15:13-53
-89        <activity
-89-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:29:9-46:20
-90            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-90-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:30:13-80
-91            android:excludeFromRecents="true"
-91-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:31:13-46
-92            android:exported="true"
-92-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:32:13-36
-93            android:launchMode="singleTask"
-93-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:33:13-44
-94            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-94-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:34:13-72
-95            <intent-filter>
-95-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:35:13-45:29
-96                <action android:name="android.intent.action.VIEW" />
-96-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:17-68
-96-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:25-66
-97
-98                <category android:name="android.intent.category.DEFAULT" />
-98-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:17-75
-98-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:27-73
-99                <category android:name="android.intent.category.BROWSABLE" />
-99-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:17-77
-99-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:27-75
-100
-101                <data
-101-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:17-43:77
-102                    android:host="firebase.auth"
-102-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:23-43
-103                    android:path="/"
-104                    android:scheme="genericidp" />
-104-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:43:21-75
-105            </intent-filter>
-106        </activity>
-107        <activity
-107-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:47:9-64:20
-108            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-108-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:48:13-79
-109            android:excludeFromRecents="true"
-109-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:49:13-46
-110            android:exported="true"
-110-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:50:13-36
-111            android:launchMode="singleTask"
-111-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:51:13-44
-112            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-112-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:52:13-72
-113            <intent-filter>
-113-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:53:13-63:29
-114                <action android:name="android.intent.action.VIEW" />
-114-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:17-68
-114-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:39:25-66
-115
-116                <category android:name="android.intent.category.DEFAULT" />
-116-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:17-75
-116-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:40:27-73
-117                <category android:name="android.intent.category.BROWSABLE" />
-117-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:17-77
-117-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:41:27-75
-118
-119                <data
-119-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:17-43:77
-120                    android:host="firebase.auth"
-120-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:42:23-43
-121                    android:path="/"
-122                    android:scheme="recaptcha" />
-122-->/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/src/main/AndroidManifest.xml:43:21-75
-123            </intent-filter>
-124        </activity>
-125
-126        <service
-126-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:66:9-72:19
-127            android:name="com.google.firebase.components.ComponentDiscoveryService"
-127-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:67:13-84
-128            android:directBootAware="true"
-128-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:32:13-43
-129            android:exported="false" >
-129-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:68:13-37
-130            <meta-data
-130-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:69:13-71:85
-131                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-131-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:70:17-109
-132                android:value="com.google.firebase.components.ComponentRegistrar" />
-132-->[com.google.firebase:firebase-auth:22.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:71:17-82
-133            <meta-data
-133-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
-134                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
-134-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
-135                android:value="com.google.firebase.components.ComponentRegistrar" />
-135-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
-136            <meta-data
-136-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
-137                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-137-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:36:17-109
-138                android:value="com.google.firebase.components.ComponentRegistrar" />
-138-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:37:17-82
-139        </service>
-140
-141        <activity
-141-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
-142            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-142-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
-143            android:excludeFromRecents="true"
-143-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
-144            android:exported="false"
-144-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
-145            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-145-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
-146        <!--
-147            Service handling Google Sign-In user revocation. For apps that do not integrate with
-148            Google Sign-In, this service will never be started.
-149        -->
-150        <service
-150-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
-151            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-151-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
-152            android:exported="true"
-152-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
-153            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-153-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
-154            android:visibleToInstantApps="true" />
-154-->[com.google.android.gms:play-services-auth:20.7.0] /Users/seohyeonpark/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
-155
-156        <provider
-156-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
-157            android:name="com.google.firebase.provider.FirebaseInitProvider"
-157-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:24:13-77
-158            android:authorities="com.example.plan_me.firebaseinitprovider"
-158-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:25:13-72
-159            android:directBootAware="true"
-159-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:26:13-43
-160            android:exported="false"
-160-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:27:13-37
-161            android:initOrder="100" />
-161-->[com.google.firebase:firebase-common:20.4.2] /Users/seohyeonpark/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:28:13-36
-162
-163        <activity
-163-->[com.google.android.gms:play-services-base:18.0.1] /Users/seohyeonpark/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
-164            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-164-->[com.google.android.gms:play-services-base:18.0.1] /Users/seohyeonpark/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
-165            android:exported="false"
-165-->[com.google.android.gms:play-services-base:18.0.1] /Users/seohyeonpark/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
-166            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-166-->[com.google.android.gms:play-services-base:18.0.1] /Users/seohyeonpark/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
-167        <activity
-167-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/seohyeonpark/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
-168            android:name="androidx.compose.ui.tooling.PreviewActivity"
-168-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/seohyeonpark/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
-169            android:exported="true" />
-169-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/seohyeonpark/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
-170
-171        <provider
-171-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
-172            android:name="androidx.startup.InitializationProvider"
-172-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
-173            android:authorities="com.example.plan_me.androidx-startup"
-173-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
-174            android:exported="false" >
-174-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
-175            <meta-data
-175-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
-176                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-176-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
-177                android:value="androidx.startup" />
-177-->[androidx.emoji2:emoji2:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
-178            <meta-data
-178-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/seohyeonpark/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
-179                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-179-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/seohyeonpark/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
-180                android:value="androidx.startup" />
-180-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/seohyeonpark/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
-181            <meta-data
-181-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-182                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-182-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-183                android:value="androidx.startup" />
-183-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-184        </provider>
-185
-186        <meta-data
-186-->[com.google.android.gms:play-services-basement:18.2.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
-187            android:name="com.google.android.gms.version"
-187-->[com.google.android.gms:play-services-basement:18.2.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
-188            android:value="@integer/google_play_services_version" />
-188-->[com.google.android.gms:play-services-basement:18.2.0] /Users/seohyeonpark/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
-189
-190        <receiver
-190-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-191            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-191-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-192            android:directBootAware="false"
-192-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-193            android:enabled="true"
-193-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-194            android:exported="true"
-194-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-195            android:permission="android.permission.DUMP" >
-195-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-196            <intent-filter>
-196-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-197                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-197-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-197-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-198            </intent-filter>
-199            <intent-filter>
-199-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-200                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-200-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-200-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-201            </intent-filter>
-202            <intent-filter>
-202-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-203                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-203-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-203-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-204            </intent-filter>
-205            <intent-filter>
-205-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-206                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-206-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-206-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/seohyeonpark/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-207            </intent-filter>
-208        </receiver>
-209    </application>
-210
-211</manifest>
+63        <activity android:name="com.example.plan_me.LoginActivity" />
+63-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:33:9-51
+63-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:33:19-48
+64
+65        <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
+66        <activity
+66-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:36:9-49:20
+67            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+67-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:37:13-70
+68            android:exported="true"
+68-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:38:13-36
+69            android:launchMode="singleTask"
+69-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:18:13-44
+70            android:theme="@style/TransparentCompat" >
+70-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:19:13-53
+71            <intent-filter>
+71-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:39:13-48:29
+72                <action android:name="android.intent.action.VIEW" />
+72-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:17-69
+72-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:25-66
+73
+74                <category android:name="android.intent.category.DEFAULT" />
+74-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:17-76
+74-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:27-73
+75                <category android:name="android.intent.category.BROWSABLE" />
+75-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:17-78
+75-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:27-75
+76
+77                <data
+77-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:45:17-47:78
+78                    android:host="oauth"
+78-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:46:21-41
+79                    android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
+79-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:47:21-75
+80            </intent-filter>
+81        </activity>
+82        <activity android:name="com.example.plan_me.PlannerActivity" />
+82-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:51:9-53
+82-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:51:19-50
+83        <activity android:name="com.example.plan_me.TimerActivity" />
+83-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:9-60
+83-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:19-48
+84        <activity
+84-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:10:9-15:56
+85            android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
+85-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:11:13-67
+86            android:configChanges="orientation|screenSize|keyboardHidden"
+86-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:12:13-74
+87            android:exported="false"
+87-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:13:13-37
+88            android:launchMode="singleTask"
+88-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:14:13-44
+89            android:theme="@style/TransparentCompat" />
+89-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:15:13-53
+90        <activity
+90-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:29:9-46:20
+91            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+91-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:30:13-80
+92            android:excludeFromRecents="true"
+92-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:31:13-46
+93            android:exported="true"
+93-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:32:13-36
+94            android:launchMode="singleTask"
+94-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:33:13-44
+95            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+95-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:34:13-72
+96            <intent-filter>
+96-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:35:13-45:29
+97                <action android:name="android.intent.action.VIEW" />
+97-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:17-69
+97-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:25-66
+98
+99                <category android:name="android.intent.category.DEFAULT" />
+99-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:17-76
+99-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:27-73
+100                <category android:name="android.intent.category.BROWSABLE" />
+100-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:17-78
+100-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:27-75
+101
+102                <data
+102-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:45:17-47:78
+103                    android:host="firebase.auth"
+103-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:46:21-41
+104                    android:path="/"
+105                    android:scheme="genericidp" />
+105-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:47:21-75
+106            </intent-filter>
+107        </activity>
+108        <activity
+108-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:47:9-64:20
+109            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+109-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:48:13-79
+110            android:excludeFromRecents="true"
+110-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:49:13-46
+111            android:exported="true"
+111-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:50:13-36
+112            android:launchMode="singleTask"
+112-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:51:13-44
+113            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+113-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:52:13-72
+114            <intent-filter>
+114-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:53:13-63:29
+115                <action android:name="android.intent.action.VIEW" />
+115-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:17-69
+115-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:40:25-66
+116
+117                <category android:name="android.intent.category.DEFAULT" />
+117-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:17-76
+117-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:42:27-73
+118                <category android:name="android.intent.category.BROWSABLE" />
+118-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:17-78
+118-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:43:27-75
+119
+120                <data
+120-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:45:17-47:78
+121                    android:host="firebase.auth"
+121-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:46:21-41
+122                    android:path="/"
+123                    android:scheme="recaptcha" />
+123-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:47:21-75
+124            </intent-filter>
+125        </activity>
+126
+127        <service
+127-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:66:9-72:19
+128            android:name="com.google.firebase.components.ComponentDiscoveryService"
+128-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:67:13-84
+129            android:directBootAware="true"
+129-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:32:13-43
+130            android:exported="false" >
+130-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:68:13-37
+131            <meta-data
+131-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:69:13-71:85
+132                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+132-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:70:17-109
+133                android:value="com.google.firebase.components.ComponentRegistrar" />
+133-->[com.google.firebase:firebase-auth:22.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f191338a7b33d4eb7e82b1d31c074c3b/transformed/firebase-auth-22.3.0/AndroidManifest.xml:71:17-82
+134            <meta-data
+134-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:12:13-14:85
+135                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+135-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:13:17-116
+136                android:value="com.google.firebase.components.ComponentRegistrar" />
+136-->[com.google.firebase:firebase-common-ktx:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/24741bde79710f63b78455839c3056fa/transformed/firebase-common-ktx-20.4.2/AndroidManifest.xml:14:17-82
+137            <meta-data
+137-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:35:13-37:85
+138                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+138-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:36:17-109
+139                android:value="com.google.firebase.components.ComponentRegistrar" />
+139-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:37:17-82
+140        </service>
+141
+142        <activity
+142-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:23:9-27:75
+143            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+143-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:24:13-93
+144            android:excludeFromRecents="true"
+144-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:25:13-46
+145            android:exported="false"
+145-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:26:13-37
+146            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+146-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:27:13-72
+147        <!--
+148            Service handling Google Sign-In user revocation. For apps that do not integrate with
+149            Google Sign-In, this service will never be started.
+150        -->
+151        <service
+151-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:33:9-37:51
+152            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+152-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:34:13-89
+153            android:exported="true"
+153-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:35:13-36
+154            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+154-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:36:13-107
+155            android:visibleToInstantApps="true" />
+155-->[com.google.android.gms:play-services-auth:20.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/cd59b5abba7d0760340e53378c937b9e/transformed/play-services-auth-20.7.0/AndroidManifest.xml:37:13-48
+156
+157        <provider
+157-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:23:9-28:39
+158            android:name="com.google.firebase.provider.FirebaseInitProvider"
+158-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:24:13-77
+159            android:authorities="com.example.plan_me.firebaseinitprovider"
+159-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:25:13-72
+160            android:directBootAware="true"
+160-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:26:13-43
+161            android:exported="false"
+161-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:27:13-37
+162            android:initOrder="100" />
+162-->[com.google.firebase:firebase-common:20.4.2] /Users/parkhyejeong/.gradle/caches/transforms-3/d94a6d35cb4d54ae7cbf3fe8d538b092/transformed/firebase-common-20.4.2/AndroidManifest.xml:28:13-36
+163
+164        <activity
+164-->[com.google.android.gms:play-services-base:18.0.1] /Users/parkhyejeong/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:9-22:45
+165            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+165-->[com.google.android.gms:play-services-base:18.0.1] /Users/parkhyejeong/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+166            android:exported="false"
+166-->[com.google.android.gms:play-services-base:18.0.1] /Users/parkhyejeong/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:22:19-43
+167            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+167-->[com.google.android.gms:play-services-base:18.0.1] /Users/parkhyejeong/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/AndroidManifest.xml:21:19-78
+168        <activity
+168-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/parkhyejeong/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:23:9-25:39
+169            android:name="androidx.compose.ui.tooling.PreviewActivity"
+169-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/parkhyejeong/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:24:13-71
+170            android:exported="true" />
+170-->[androidx.compose.ui:ui-tooling-android:1.6.0-beta02] /Users/parkhyejeong/.gradle/caches/transforms-3/e622d03e4e042769f2233063ed322328/transformed/ui-tooling-release/AndroidManifest.xml:25:13-36
+171
+172        <provider
+172-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+173            android:name="androidx.startup.InitializationProvider"
+173-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+174            android:authorities="com.example.plan_me.androidx-startup"
+174-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+175            android:exported="false" >
+175-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+176            <meta-data
+176-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+177                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+177-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+178                android:value="androidx.startup" />
+178-->[androidx.emoji2:emoji2:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/0e71aadc6a3c4083a3fad40d0b0e7479/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+179            <meta-data
+179-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/parkhyejeong/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:29:13-31:52
+180                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+180-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/parkhyejeong/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:30:17-78
+181                android:value="androidx.startup" />
+181-->[androidx.lifecycle:lifecycle-process:2.6.1] /Users/parkhyejeong/.gradle/caches/transforms-3/9868b6556e34db0668f1859bcc6f2827/transformed/lifecycle-process-2.6.1/AndroidManifest.xml:31:17-49
+182            <meta-data
+182-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+183                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+183-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+184                android:value="androidx.startup" />
+184-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+185        </provider>
+186
+187        <meta-data
+187-->[com.google.android.gms:play-services-basement:18.2.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:21:9-23:69
+188            android:name="com.google.android.gms.version"
+188-->[com.google.android.gms:play-services-basement:18.2.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:22:13-58
+189            android:value="@integer/google_play_services_version" />
+189-->[com.google.android.gms:play-services-basement:18.2.0] /Users/parkhyejeong/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/AndroidManifest.xml:23:13-66
+190
+191        <receiver
+191-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+192            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+192-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+193            android:directBootAware="false"
+193-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+194            android:enabled="true"
+194-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+195            android:exported="true"
+195-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+196            android:permission="android.permission.DUMP" >
+196-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+197            <intent-filter>
+197-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+198                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+198-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+198-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+199            </intent-filter>
+200            <intent-filter>
+200-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+201                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+201-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+201-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+202            </intent-filter>
+203            <intent-filter>
+203-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+204                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+204-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+204-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+205            </intent-filter>
+206            <intent-filter>
+206-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+207                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+207-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+207-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/parkhyejeong/.gradle/caches/transforms-3/5e239266671081e65fe66988768f82f3/transformed/profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+208            </intent-filter>
+209        </receiver>
+210    </application>
+211
+212</manifest>

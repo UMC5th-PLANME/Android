@@ -11,4 +11,7 @@
     <color name="transparent">#00ff0000</color>
     <color name="sky_blue">#BAD2FF</color>
     <color name="blue_gray">#AAA9EF</color>
+    <color name="dark_ivory">#F5F5F5</color>
+    <color name="neon_green">#D4EA60</color>
+    <color name="white_gray">#919191</color>
 </resources>

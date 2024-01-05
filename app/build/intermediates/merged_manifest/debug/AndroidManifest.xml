@@ -52,7 +52,7 @@
             android:value="@string/kakao_appkey" />
 
         <activity
-            android:name="com.example.plan_me.TimerActivity"
+            android:name="com.example.plan_me.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,7 +60,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name=".TimerActivity"></activity> -->
         <activity android:name="com.example.plan_me.LoginActivity" />
 
         <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
@@ -80,6 +79,8 @@
                     android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.plan_me.PlannerActivity" />
+        <activity android:name="com.example.plan_me.TimerActivity" />
         <activity
             android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
