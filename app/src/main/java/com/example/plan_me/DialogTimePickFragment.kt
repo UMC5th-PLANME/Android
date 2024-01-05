@@ -27,6 +27,8 @@ class DialogTimePickFragment(context : Context, dialogTimePickInerface: DialogTi
         binding = FragmentDialogTimepickBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val calendar = Calendar.getInstance()
+        time = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
         clickListener()
     }
     private fun clickListener() {

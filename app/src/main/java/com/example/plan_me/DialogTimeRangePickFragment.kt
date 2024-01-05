@@ -26,6 +26,9 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentDialogTimerangepickBinding.inflate(layoutInflater)
+        val calendar = Calendar.getInstance()
+        startTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
+        endTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         clickListener()

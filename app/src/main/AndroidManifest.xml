@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--인터넷 사용 권한 설정-->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".GlobalApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Plan_Me"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_appkey"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,7 +30,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".TimerActivity"></activity>
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".LoginActivity"/>
+
+        <!--카카오 로그인, 인가코드를 받기 위한 액티비티-->
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="oauth"
+                    android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
