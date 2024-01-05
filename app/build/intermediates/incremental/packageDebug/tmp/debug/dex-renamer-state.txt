@@ -1,12 +1,12 @@
-#Fri Jan 05 21:54:11 KST 2024
-base.0=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
-base.3=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
-base.4=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/desugar_lib_dex/debug/classes1000.dex
-base.5=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
-base.6=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
-base.7=/Users/seohyeonpark/Desktop/UMC/Project_Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes4.dex
+#Sat Jan 06 00:15:22 KST 2024
+base.0=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
+base.3=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
+base.4=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/desugar_lib_dex/debug/classes1000.dex
+base.5=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
+base.6=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
+base.7=/Users/parkhyejeong/Desktop/Planme/app/build/intermediates/dex/debug/mergeExtDexDebug/classes4.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=5/classes.dex
