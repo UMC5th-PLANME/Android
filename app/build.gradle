@@ -84,17 +84,18 @@ plugins {
         // timber
         implementation 'com.jakewharton.timber:timber:5.0.1'
 
-
-        //Retrofit
+        // Retrofit
         implementation "com.squareup.retrofit2:retrofit:2.9.0"
         implementation "com.squareup.retrofit2:converter-gson:2.9.0"
         implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
 
-
-        //Glide
+        // Glide
         implementation 'com.github.bumptech.glide:glide:4.11.0'
         annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-
+        // Splash Screen
         implementation 'androidx.core:core-splashscreen:1.0.1'
+
+        // Circle indicator
+        implementation 'me.relex:circleindicator:2.1.6'
     }
