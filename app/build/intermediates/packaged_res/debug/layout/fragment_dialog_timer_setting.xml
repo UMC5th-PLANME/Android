@@ -31,25 +31,24 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="35dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FOCUS"
-                android:textSize="18dp"
-                android:fontFamily="@font/pretendard_bold"
+                android:text="집중시간"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/pretendard_medium"
                 android:textColor="@color/black"/>
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="5dp">
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/dialog_timer_focus_time_iv"
@@ -60,10 +59,11 @@
 
                 <TextView
                     android:id="@+id/dialog_timer_focus_time_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="22dp"
+                    android:gravity="center"
                     android:text="50"
                     android:textSize="18dp"
                     android:fontFamily="@font/pretendard_bold"
@@ -90,25 +90,24 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="vertical"
             android:layout_marginTop="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BREAK"
-                android:textSize="18dp"
-                android:fontFamily="@font/pretendard_bold"
+                android:text="휴식시간"
+                android:textSize="16dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_regular"
                 android:textColor="@color/black"/>
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="5dp">
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/dialog_timer_break_time_iv"
@@ -119,12 +118,13 @@
 
                 <TextView
                     android:id="@+id/dialog_timer_break_time_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="22dp"
                     android:text="10"
                     android:textSize="18dp"
+                    android:gravity="center"
                     android:fontFamily="@font/pretendard_bold"
                     android:textColor="@color/black" />
 
@@ -138,6 +138,65 @@
 
                 <ImageView
                     android:id="@+id/dialog_timer_break_time_down_iv"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="43dp"
+                    android:layout_marginStart="137dp"
+                    android:src="@drawable/timer_time_down" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="반복횟수"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:textColor="@color/black"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/dialog_timer_repetition_num_iv"
+                    android:layout_width="200dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/timer_setting_time" />
+
+                <TextView
+                    android:id="@+id/dialog_timer_repetition_num_tv"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="22dp"
+                    android:text="5"
+                    android:textSize="18dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/dialog_timer_repetition_num_up_iv"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="137dp"
+                    android:src="@drawable/timer_time_up" />
+
+                <ImageView
+                    android:id="@+id/dialog_timer_repetition_num_down_iv"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="43dp"
@@ -163,7 +222,7 @@
                 android:layout_weight="1"
                 android:text="취소"
                 android:textSize="15sp"
-                android:fontFamily="@font/pretendard_medium"
+                android:fontFamily="@font/pretendard_bold"
                 android:textColor="@color/black"
                 android:gravity="center"/>
 
@@ -174,7 +233,7 @@
                 android:layout_weight="1"
                 android:text="확인"
                 android:textSize="15sp"
-                android:fontFamily="@font/pretendard_medium"
+                android:fontFamily="@font/pretendard_bold"
                 android:textColor="@color/black"
                 android:gravity="center"/>
         </LinearLayout>

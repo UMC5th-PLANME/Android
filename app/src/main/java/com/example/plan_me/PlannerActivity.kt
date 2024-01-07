@@ -97,7 +97,7 @@ class PlannerActivity : AppCompatActivity() {
     }
 
     private fun goTimerActivity() {
-        val intent = Intent(this@PlannerActivity, TimerActivity::class.java)
+        val intent = Intent(this@PlannerActivity, TimerFocusActivity::class.java)
         startActivity(intent)
     }
 

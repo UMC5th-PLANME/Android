@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false">
+        <layer-list>
+            <item android:drawable="@drawable/planner_btn_menu_unfocus"/>
+            <item android:drawable="@drawable/main_navi_timer_white" android:top="14dp" android:width="24dp" android:height="28dp" android:gravity="center_horizontal"/>
+        </layer-list>
+    </item>
+
+    <item android:state_enabled="true">
+        <layer-list>
+            <item android:drawable="@drawable/planner_btn_menu_focus"/>
+            <item android:drawable="@drawable/main_navi_timer_white" android:top="14dp" android:width="24dp" android:height="28dp" android:gravity="center_horizontal"/>
+        </layer-list>
+    </item>
+
+</selector>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/planner_first_lo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="77dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/planner_second_lo"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/planner_list_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:padding="6dp"
+            android:src="@drawable/public_more" />
+
+        <TextView
+            android:id="@+id/planner_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="planner"
+            android:textColor="@color/dark_gray"
+            android:textSize="20dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/planner_all_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/planner_btn_all"
+            android:fontFamily="@font/pretendard_bold"
+            android:gravity="center_horizontal"
+            android:text="ALL"
+            android:textColor="@color/dark_gray"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/planner_second_lo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/planner_lo_category"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="@id/planner_first_lo"
+        app:layout_constraintStart_toStartOf="@id/planner_first_lo"
+        app:layout_constraintTop_toBottomOf="@id/planner_first_lo">
+
+        <TextView
+            android:id="@+id/planner_category_imoticon_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:text="💚"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/planner_category_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="STUDY"
+            android:textColor="@color/black"
+            android:textSize="32dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/planner_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="today"
+        android:textColor="@color/dark_gray"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_second_lo" />
+
+    <ListView
+        android:id="@+id/planner_todo_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/planner_add_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_day_tv"
+        tools:listitem="@layout/item_todo" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/planner_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        app:tint="@color/white"
+        android:src="@drawable/main_add_white"
+        app:backgroundTint="@color/white_gray"
+        android:visibility="gone"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_todo_lv" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/planner_setting_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        app:tint="@color/white"
+        android:src="@drawable/main_navi_setting_white"
+        app:backgroundTint="@color/white_gray"
+        android:visibility="gone"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_add_btn" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/planner_timer_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        app:tint="@color/white"
+        android:src="@drawable/main_navi_timer_white"
+        app:backgroundTint="@color/white_gray"
+        android:visibility="gone"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_setting_btn" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/planner_mestory_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        app:tint="@color/white"
+        android:src="@drawable/main_navi_mestory_white"
+        app:backgroundTint="@color/white_gray"
+        android:visibility="gone"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_timer_btn" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/planner_menu_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="56dp"
+        app:tint="@color/white"
+        android:src="@drawable/main_navi_planner_white"
+        app:backgroundTint="@color/dark_gray"
+        app:fabSize="normal"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/planner_mestory_btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
