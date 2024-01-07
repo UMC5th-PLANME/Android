@@ -147,7 +147,7 @@
 82-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:51:9-53
 82-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:51:19-50
 83        <activity android:name="com.example.plan_me.TimerActivity" />
-83-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:9-60
+83-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:9-50
 83-->/Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:19-48
 84        <activity
 84-->[com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:10:9-15:56
