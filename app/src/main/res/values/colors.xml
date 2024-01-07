@@ -14,4 +14,11 @@
     <color name="dark_ivory">#F5F5F5</color>
     <color name="neon_green">#D4EA60</color>
     <color name="white_gray">#919191</color>
+    <color name="sky_blue_main">#B9ECFF</color>
+    <color name="red_orange">#F1C7A6</color>
+    <color name="lemon">#FBE7A2</color>
+    <color name="green">#83DEA2</color>
+    <color name="red_pink">#FEB9B9</color>
+    <color name="purple_pink">#E1BBFF</color>
+    <color name="pink">#FFB5DD</color>
 </resources>

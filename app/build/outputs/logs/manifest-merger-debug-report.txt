@@ -261,7 +261,7 @@ ADDED from /Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:5
 	android:name
 		ADDED from /Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:51:19-50
 activity#com.example.plan_me.TimerActivity
-ADDED from /Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:9-60
+ADDED from /Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:9-50
 	android:name
 		ADDED from /Users/parkhyejeong/Desktop/Planme/app/src/main/AndroidManifest.xml:52:19-48
 uses-sdk
