@@ -50,12 +50,27 @@ public final class FragmentDialogTimerSettingBinding implements ViewBinding {
   @NonNull
   public final ImageView dialogTimerFocusTimeUpIv;
 
+  @NonNull
+  public final ImageView dialogTimerRepetitionNumDownIv;
+
+  @NonNull
+  public final ImageView dialogTimerRepetitionNumIv;
+
+  @NonNull
+  public final TextView dialogTimerRepetitionNumTv;
+
+  @NonNull
+  public final ImageView dialogTimerRepetitionNumUpIv;
+
   private FragmentDialogTimerSettingBinding(@NonNull FrameLayout rootView,
       @NonNull TextView dialogTimeSettingCancel, @NonNull TextView dialogTimeSettingConfirm,
       @NonNull ImageView dialogTimerBreakTimeDownIv, @NonNull ImageView dialogTimerBreakTimeIv,
       @NonNull TextView dialogTimerBreakTimeTv, @NonNull ImageView dialogTimerBreakTimeUpIv,
       @NonNull ImageView dialogTimerFocusTimeDownIv, @NonNull ImageView dialogTimerFocusTimeIv,
-      @NonNull TextView dialogTimerFocusTimeTv, @NonNull ImageView dialogTimerFocusTimeUpIv) {
+      @NonNull TextView dialogTimerFocusTimeTv, @NonNull ImageView dialogTimerFocusTimeUpIv,
+      @NonNull ImageView dialogTimerRepetitionNumDownIv,
+      @NonNull ImageView dialogTimerRepetitionNumIv, @NonNull TextView dialogTimerRepetitionNumTv,
+      @NonNull ImageView dialogTimerRepetitionNumUpIv) {
     this.rootView = rootView;
     this.dialogTimeSettingCancel = dialogTimeSettingCancel;
     this.dialogTimeSettingConfirm = dialogTimeSettingConfirm;
@@ -67,6 +82,10 @@ public final class FragmentDialogTimerSettingBinding implements ViewBinding {
     this.dialogTimerFocusTimeIv = dialogTimerFocusTimeIv;
     this.dialogTimerFocusTimeTv = dialogTimerFocusTimeTv;
     this.dialogTimerFocusTimeUpIv = dialogTimerFocusTimeUpIv;
+    this.dialogTimerRepetitionNumDownIv = dialogTimerRepetitionNumDownIv;
+    this.dialogTimerRepetitionNumIv = dialogTimerRepetitionNumIv;
+    this.dialogTimerRepetitionNumTv = dialogTimerRepetitionNumTv;
+    this.dialogTimerRepetitionNumUpIv = dialogTimerRepetitionNumUpIv;
   }
 
   @Override
@@ -156,10 +175,36 @@ public final class FragmentDialogTimerSettingBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.dialog_timer_repetition_num_down_iv;
+      ImageView dialogTimerRepetitionNumDownIv = ViewBindings.findChildViewById(rootView, id);
+      if (dialogTimerRepetitionNumDownIv == null) {
+        break missingId;
+      }
+
+      id = R.id.dialog_timer_repetition_num_iv;
+      ImageView dialogTimerRepetitionNumIv = ViewBindings.findChildViewById(rootView, id);
+      if (dialogTimerRepetitionNumIv == null) {
+        break missingId;
+      }
+
+      id = R.id.dialog_timer_repetition_num_tv;
+      TextView dialogTimerRepetitionNumTv = ViewBindings.findChildViewById(rootView, id);
+      if (dialogTimerRepetitionNumTv == null) {
+        break missingId;
+      }
+
+      id = R.id.dialog_timer_repetition_num_up_iv;
+      ImageView dialogTimerRepetitionNumUpIv = ViewBindings.findChildViewById(rootView, id);
+      if (dialogTimerRepetitionNumUpIv == null) {
+        break missingId;
+      }
+
       return new FragmentDialogTimerSettingBinding((FrameLayout) rootView, dialogTimeSettingCancel,
           dialogTimeSettingConfirm, dialogTimerBreakTimeDownIv, dialogTimerBreakTimeIv,
           dialogTimerBreakTimeTv, dialogTimerBreakTimeUpIv, dialogTimerFocusTimeDownIv,
-          dialogTimerFocusTimeIv, dialogTimerFocusTimeTv, dialogTimerFocusTimeUpIv);
+          dialogTimerFocusTimeIv, dialogTimerFocusTimeTv, dialogTimerFocusTimeUpIv,
+          dialogTimerRepetitionNumDownIv, dialogTimerRepetitionNumIv, dialogTimerRepetitionNumTv,
+          dialogTimerRepetitionNumUpIv);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -49,7 +49,8 @@
         </activity>
 
         <activity android:name=".PlannerActivity" />
-        <activity android:name=".TimerActivity"/>
+        <activity android:name=".TimerFocusActivity"/>
+        <activity android:name=".TimerBreakActivity"/>
 
     </application>
 

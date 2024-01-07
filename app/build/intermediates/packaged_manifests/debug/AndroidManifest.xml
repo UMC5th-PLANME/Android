@@ -80,7 +80,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.plan_me.PlannerActivity" />
-        <activity android:name="com.example.plan_me.TimerActivity" />
+        <activity android:name="com.example.plan_me.TimerFocusActivity" />
+        <activity android:name="com.example.plan_me.TimerBreakActivity" />
         <activity
             android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
