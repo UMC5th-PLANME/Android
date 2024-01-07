@@ -24,7 +24,7 @@ class LoginActivity: AppCompatActivity() {
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         try {
-            //goMainActivity()
+            goMainActivity()
             Log.d(TAG, "google 로그인 성공")
         } catch (e: ApiException) {
             Log.e(TAG, "google 로그인 실패", e)
@@ -39,6 +39,18 @@ class LoginActivity: AppCompatActivity() {
             Log.e(TAG, "카카오계정으로 로그인 실패", error)
         } else if(token != null) {
             Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+            // 사용자 정보 가져오기
+            UserApiClient.instance.me { user, meError ->
+                if (meError != null) {
+                    Log.e(TAG, "사용자 정보 가져오기 실패", meError)
+                } else if (user != null) {
+                    val userId = user.id.toString()
+                    val userName = user.kakaoAccount?.profile?.nickname
+                    val userEmail = user.kakaoAccount?.email
+                    Log.d("카카오 사용자 정보", "id: $userId & name: $userName & email: $userEmail")
+                    goMainActivity()
+                }
+            }
             goMainActivity()
         }
     }
@@ -133,7 +145,7 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun goMainActivity() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        val intent = Intent(this@LoginActivity, PlannerActivity::class.java)
         startActivity(intent)
     }
 }
