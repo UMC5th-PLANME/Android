@@ -34,7 +34,7 @@
     <uses-permission android:name="com.example.plan_me.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 
     <application
-        android:name="com.example.plan_me.GlobalApplication"
+        android:name="com.example.plan_me.utils.GlobalApplication"
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -79,9 +79,9 @@
                     android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.plan_me.ui.planner.PlannerActivity" />
         <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
         <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
+        <activity android:name="com.example.plan_me.MainActivity" />
         <activity
             android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

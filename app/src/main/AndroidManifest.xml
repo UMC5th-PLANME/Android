@@ -49,9 +49,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.planner.PlannerActivity" />
         <activity android:name=".ui.timer.TimerFocusActivity"/>
         <activity android:name=".ui.timer.TimerBreakActivity"/>
+        <activity android:name=".MainActivity"/>
 
     </application>
 
