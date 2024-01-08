@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-58:12
-INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-58:12
+ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-59:12
+INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-59:12
+INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-59:12
+INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:2:1-59:12
 MERGED from [androidx.databinding:viewbinding:8.1.2] /Users/parkhyejeong/.gradle/caches/transforms-3/28224ed68bccbdad5bd5392a71ed02ad/transformed/viewbinding-8.1.2/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/8ebb0da31a9568bfe4ac871a8badbb9e/transformed/material-1.7.0/AndroidManifest.xml:17:1-26:12
 MERGED from [com.kakao.sdk:v2-user:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/a8d3bafeb338078d4c0904bab415d85a/transformed/v2-user-2.12.1/AndroidManifest.xml:2:1-9:12
@@ -124,8 +124,8 @@ MERGED from [com.google.android.recaptcha:recaptcha:18.1.2] /Users/parkhyejeong/
 	android:name
 		ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:6:22-64
 application
-ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:8:5-56:19
-INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:8:5-56:19
+ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:8:5-57:19
+INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:8:5-57:19
 MERGED from [com.google.android.material:material:1.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/8ebb0da31a9568bfe4ac871a8badbb9e/transformed/material-1.7.0/AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.7.0] /Users/parkhyejeong/.gradle/caches/transforms-3/8ebb0da31a9568bfe4ac871a8badbb9e/transformed/material-1.7.0/AndroidManifest.xml:24:5-20
 MERGED from [com.kakao.sdk:v2-auth:2.12.1] /Users/parkhyejeong/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:9:5-20:19
@@ -268,6 +268,10 @@ activity#com.example.plan_me.MainActivity
 ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:54:9-49
 	android:name
 		ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:54:19-47
+activity#com.example.plan_me.ui.login.InitProfileActivity
+ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:55:9-65
+	android:name
+		ADDED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml:55:19-63
 uses-sdk
 INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/parkhyejeong/Desktop/Planme/Android/app/src/main/AndroidManifest.xml
