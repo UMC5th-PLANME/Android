@@ -60,8 +60,8 @@
 35
 36    <application
 36-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:8:5-56:19
-37        android:name="com.example.plan_me.GlobalApplication"
-37-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:9:9-42
+37        android:name="com.example.plan_me.utils.GlobalApplication"
+37-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:9:9-48
 38        android:allowBackup="true"
 38-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:10:9-35
 39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -143,15 +143,15 @@
 79-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:48:21-75
 80            </intent-filter>
 81        </activity>
-82        <activity android:name="com.example.plan_me.ui.planner.PlannerActivity" />
+82        <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
 82-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:52:9-64
-82-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:52:19-61
-83        <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
+82-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:52:19-62
+83        <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
 83-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:53:9-64
 83-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:53:19-62
-84        <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
-84-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:54:9-64
-84-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:54:19-62
+84        <activity android:name="com.example.plan_me.MainActivity" />
+84-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:54:9-49
+84-->/Users/gohyeoncheol/Documents/planme/Android/app/src/main/AndroidManifest.xml:54:19-47
 85        <activity
 85-->[com.kakao.sdk:v2-auth:2.12.1] /Users/gohyeoncheol/.gradle/caches/transforms-3/f28ffbed6da2b7382ac5af32cfbbd4a6/transformed/v2-auth-2.12.1/AndroidManifest.xml:10:9-15:56
 86            android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"

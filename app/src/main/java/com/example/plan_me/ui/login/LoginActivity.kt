@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide.init
-import com.example.plan_me.ui.planner.PlannerActivity
+import com.example.plan_me.MainActivity
+import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -148,7 +148,7 @@ class LoginActivity: AppCompatActivity() {
     }
 
     private fun goMainActivity() {
-        val intent = Intent(this@LoginActivity, PlannerActivity::class.java)
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
     }
 }
