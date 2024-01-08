@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.login
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import com.example.plan_me.MainActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityLoginBinding
+import com.example.plan_me.ui.dialog.DialogTermsActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -27,7 +29,7 @@ class LoginActivity: AppCompatActivity() {
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         try {
-            goMainActivity()
+            openTermsPopup()
             Log.d(TAG, "google 로그인 성공")
         } catch (e: ApiException) {
             Log.e(TAG, "google 로그인 실패", e)
@@ -51,10 +53,10 @@ class LoginActivity: AppCompatActivity() {
                     val userName = user.kakaoAccount?.profile?.nickname
                     val userEmail = user.kakaoAccount?.email
                     Log.d("카카오 사용자 정보", "id: $userId & name: $userName & email: $userEmail")
-                    goMainActivity()
+                    openTermsPopup()
                 }
             }
-            goMainActivity()
+            openTermsPopup()
         }
     }
 
@@ -123,7 +125,7 @@ class LoginActivity: AppCompatActivity() {
                     UserApiClient.instance.loginWithKakaoAccount(this@LoginActivity, callback = callback)
                 } else if (token != null) {
                     Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
-                    goMainActivity()
+                    openTermsPopup()
                 }
             }
         } else {
@@ -147,8 +149,7 @@ class LoginActivity: AppCompatActivity() {
         googleAuthLauncher.launch(signInIntent)
     }
 
-    private fun goMainActivity() {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        startActivity(intent)
+    private fun openTermsPopup() {
+        DialogTermsActivity(this@LoginActivity).show()
     }
 }

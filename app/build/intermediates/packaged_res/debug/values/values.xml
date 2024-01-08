@@ -23,6 +23,7 @@
     <color name="white_gray">#919191</color>
     <dimen name="design_bottom_navigation_active_text_size" ns1:override="true">10sp</dimen>
     <dimen name="design_bottom_navigation_text_size" ns1:override="true">10sp</dimen>
+    <dimen name="design_fab_image_size">58sp</dimen>
     <string name="app_name">Plan_Me</string>
     <string name="google_client_id">871101631148-hs33esoeuhp090asta0fak3egq7ig0dl.apps.googleusercontent.com</string>
     <string name="kakao_appkey">55b1939dd22f9a5ef6176930e7a09231</string>
