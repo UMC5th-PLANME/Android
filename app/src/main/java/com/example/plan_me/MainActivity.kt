@@ -22,6 +22,7 @@ import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogRepeatFragment
+import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             toggleFab()
         }
         binding.mainFabMestoryBtn.setOnClickListener {
+            switchActivity(MestoryActivity())
         }
         binding.mainFabTimerBtn.setOnClickListener {
             switchActivity(TimerFocusActivity())

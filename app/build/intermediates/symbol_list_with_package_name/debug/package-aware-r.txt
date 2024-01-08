@@ -2729,6 +2729,8 @@ drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
 drawable mestory_background_black
 drawable mestory_calendar
+drawable mestory_category_down
+drawable mestory_category_up
 drawable mestory_percent_line_gray
 drawable mestory_percent_line_transparent
 drawable mestory_sharing
@@ -2788,6 +2790,7 @@ drawable planner_btn_menu_focus
 drawable planner_btn_menu_unfocus
 drawable planner_lo_category
 drawable profile_default
+drawable progress_bar
 drawable public_more
 drawable radio_ico_check
 drawable radio_ico_oval
@@ -3167,7 +3170,16 @@ id matrix
 id message
 id mestoryFragment
 id mestory_calendar_iv
-id mestory_category_vp
+id mestory_category_detail_tv
+id mestory_category_down_bt
+id mestory_category_emoticon_tv
+id mestory_category_progressBar
+id mestory_category_progress_minute_tv
+id mestory_category_progress_percentage_tv
+id mestory_category_rv
+id mestory_category_tv
+id mestory_category_up_bt
+id mestory_item_opened_cv
 id mestory_mestory_tv
 id mestory_percent_line_gray
 id mestory_profile_date_tv

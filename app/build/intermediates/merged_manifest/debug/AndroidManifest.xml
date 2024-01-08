@@ -79,6 +79,7 @@
                     android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.plan_me.ui.mestory.MestoryActivity" />
         <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
         <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
         <activity android:name="com.example.plan_me.MainActivity" />
