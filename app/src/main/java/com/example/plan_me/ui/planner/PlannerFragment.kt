@@ -107,7 +107,7 @@ class PlannerActivity : AppCompatActivity() {
     }
 
     private fun addPopup() {
-        val mDialogView = LayoutInflater.from(this@PlannerActivity).inflate(R.layout.dialog_add_category, null)
+        val mDialogView = LayoutInflater.from(this@PlannerActivity).inflate(R.layout.fragment_dialog_add_category, null)
         val mBuilder = AlertDialog.Builder(this@PlannerActivity)
             .setView(mDialogView)
 
