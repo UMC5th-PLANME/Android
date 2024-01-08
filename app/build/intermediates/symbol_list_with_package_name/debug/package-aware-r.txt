@@ -2792,6 +2792,7 @@ drawable schedule_et_background
 drawable schedule_menu
 drawable schedule_top_shape
 drawable selector_btn_radio
+drawable splash_img
 drawable test_level_drawable
 drawable timer_clock
 drawable timer_clock_round
@@ -3571,6 +3572,7 @@ layout abc_tooltip
 layout activity_login
 layout activity_main
 layout activity_planner
+layout activity_splash
 layout activity_talk_auth_code
 layout activity_timer_break
 layout activity_timer_focus
@@ -3875,7 +3877,6 @@ style Animation_AppCompat_DropDownUp
 style Animation_AppCompat_Tooltip
 style Animation_Design_BottomSheetDialog
 style Animation_MaterialComponents_BottomSheetDialog
-style AppTheme_Splash
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog
@@ -4250,6 +4251,7 @@ style ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Day
 style ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Window_Fullscreen
 style ShapeAppearanceOverlay_MaterialComponents_MaterialCalendar_Year
 style ShapeAppearanceOverlay_MaterialComponents_TextInputLayout_FilledBox
+style SplashTheme
 style TextAppearance_AppCompat
 style TextAppearance_AppCompat_Body1
 style TextAppearance_AppCompat_Body2

@@ -1,6 +1,5 @@
 package com.example.plan_me
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +7,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.plan_me.databinding.FragmentScheduleAddBinding
+import com.example.plan_me.ui.dialog.DialogAlarmFragment
+import com.example.plan_me.ui.dialog.DialogRepeatFragment
+import com.example.plan_me.ui.dialog.DialogRepeatInterface
+import com.example.plan_me.ui.dialog.DialogTimePickFragment
+import com.example.plan_me.ui.dialog.DialogTimePickInerface
+import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
+import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
 
-class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterface, DialogTimeRangePickInerface{
+class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterface,
+    DialogTimeRangePickInerface {
     private lateinit var binding : FragmentScheduleAddBinding
     private lateinit var dialogAlarm : DialogAlarmFragment
     private lateinit var dialogRepeat : DialogRepeatFragment

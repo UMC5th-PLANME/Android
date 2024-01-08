@@ -1,0 +1,4 @@
+com.example.plan_me.test.app-androidTest-0 /Users/gohyeoncheol/Documents/planme/Android/app/build/generated/res/resValues/androidTest/debug
+com.example.plan_me.test.app-mergeDebugAndroidTestResources-1 /Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.example.plan_me.test.app-mergeDebugAndroidTestResources-2 /Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.example.plan_me.test.app-merged_res-3 /Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/merged_res/debugAndroidTest

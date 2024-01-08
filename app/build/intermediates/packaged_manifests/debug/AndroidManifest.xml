@@ -52,7 +52,7 @@
             android:value="@string/kakao_appkey" />
 
         <activity
-            android:name="com.example.plan_me.SplashActivity"
+            android:name="com.example.plan_me.ui.spalsh.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,8 +60,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.plan_me.LoginActivity" />
-
+        <activity android:name="com.example.plan_me.ui.login.LoginActivity" >
+        </activity>
         <!-- 카카오 로그인, 인가코드를 받기 위한 액티비티 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -79,9 +79,9 @@
                     android:scheme="kakao55b1939dd22f9a5ef6176930e7a09231" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.plan_me.PlannerActivity" />
-        <activity android:name="com.example.plan_me.TimerFocusActivity" />
-        <activity android:name="com.example.plan_me.TimerBreakActivity" />
+        <activity android:name="com.example.plan_me.ui.planner.PlannerActivity" />
+        <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
+        <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
         <activity
             android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
