@@ -20,6 +20,14 @@
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_setting.xml"
     },
     {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_drawer.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
+    },
+    {
+        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_drawer.xml",
+        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
+    },
+    {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_break.xml",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_timer_break.xml"
     },
@@ -54,10 +62,6 @@
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_alarm.xml",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_alarm.xml"
-    },
-    {
-        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_main.xml",
-        "source": "com.example.plan_me.app-main-70:/layout/activity_main.xml"
     },
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_focus.xml",

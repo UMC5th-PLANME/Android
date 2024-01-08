@@ -9,15 +9,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
@@ -31,19 +35,37 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
     private lateinit var dialogAdd : DialogAddFragment
+    private lateinit var drawerView:View
+    private lateinit var drawerCancel:ImageView
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
+        drawerView = findViewById(R.id.drawer_layout)
+        drawerCancel = findViewById(R.id.drawer_cancel)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
 
+        clickListener()
+    }
+
+    override fun onBackPressed() {
+        if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
+            binding.mainDrawerLayout.closeDrawers()
+        }
+        else {
+            super.onBackPressed()
+        }
+    }
+    private fun clickListener() {
         binding.mainFabMenuBtn.setOnClickListener {
             Log.d("fab","fab")
             toggleFab()
@@ -59,8 +81,12 @@ class MainActivity : AppCompatActivity() {
             dialogAdd = DialogAddFragment(this)
             dialogAdd.show()
         }
-
-        setContentView(binding.root)
+        binding.mainMenu.setOnClickListener{
+            binding.mainDrawerLayout.openDrawer(drawerView!!)
+        }
+        drawerCancel.setOnClickListener {
+            binding.mainDrawerLayout.closeDrawers()
+        }
     }
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)

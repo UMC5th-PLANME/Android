@@ -52,20 +52,16 @@
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/timer_menu.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_mestory_sharing.xml.flat",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/mestory_sharing.xml"
-    },
-    {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_planner_btn_menu_focus.xml.flat",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/planner_btn_menu_focus.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_category_radio_color6.xml.flat",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/category_radio_color6.xml"
+        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_mestory_sharing.xml.flat",
+        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/mestory_sharing.xml"
     },
     {
-        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_main.xml.flat",
-        "source": "com.example.plan_me.app-main-70:/layout/activity_main.xml"
+        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_category_radio_color6.xml.flat",
+        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/category_radio_color6.xml"
     },
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_main_btn_timer.xml.flat",
@@ -112,12 +108,12 @@
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/main_navi_planner_white.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_category_radio_color1.xml.flat",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/category_radio_color1.xml"
-    },
-    {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/layout_activity_main.xml.flat",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_category_radio_color1.xml.flat",
+        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/category_radio_color1.xml"
     },
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_indicator_unselect.xml.flat",
@@ -226,6 +222,10 @@
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_main_navi_timer.xml.flat",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/main_navi_timer.xml"
+    },
+    {
+        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/layout_activity_drawer.xml.flat",
+        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
     },
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_mestory_calendar.xml.flat",
@@ -406,6 +406,10 @@
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_main_navi_mestory_white.xml.flat",
         "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/drawable/main_navi_mestory_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_drawer.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
     },
     {
         "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-merged_res-68:/drawable_main_navi_back_selector.xml.flat",

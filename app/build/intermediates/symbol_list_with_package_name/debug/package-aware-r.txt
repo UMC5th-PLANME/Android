@@ -3041,6 +3041,13 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
+id drawer_add_tv
+id drawer_border
+id drawer_cancel
+id drawer_delete_tv
+id drawer_layout
+id drawer_modify_tv
+id drawer_tv
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -3132,6 +3139,7 @@ id login_offline_tv
 id login_text1_tv
 id login_text2_tv
 id main_all_btn
+id main_drawer_layout
 id main_fab_add_btn
 id main_fab_menu_btn
 id main_fab_mestory_btn
@@ -3583,6 +3591,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_drawer
 layout activity_login
 layout activity_main
 layout activity_mestory
@@ -4956,6 +4965,7 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style aggro_bold
 style pretendard_bold
 style pretendard_medium
 style pretendard_regular

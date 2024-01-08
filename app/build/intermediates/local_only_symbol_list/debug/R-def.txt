@@ -144,12 +144,20 @@ id dialog_timer_repetition_num_tv
 id dialog_timer_repetition_num_up_iv
 id dialog_timerangepick_cancel
 id dialog_timerangepick_confirm
+id drawer_add_tv
+id drawer_border
+id drawer_cancel
+id drawer_delete_tv
+id drawer_layout
+id drawer_modify_tv
+id drawer_tv
 id login_google_btn
 id login_kakao_btn
 id login_offline_tv
 id login_text1_tv
 id login_text2_tv
 id main_all_btn
+id main_drawer_layout
 id main_fab_add_btn
 id main_fab_menu_btn
 id main_fab_mestory_btn
@@ -231,6 +239,7 @@ id timer_focus_time_tv
 id todo_btn
 id todo_lo
 id todo_tv
+layout activity_drawer
 layout activity_login
 layout activity_main
 layout activity_mestory
@@ -268,6 +277,7 @@ style NoElevation
 style ShapeAppearanceOverlay.App.CornerCircle
 style SplashTheme
 style Theme.Plan_Me
+style aggro_bold
 style pretendard_bold
 style pretendard_medium
 style pretendard_regular

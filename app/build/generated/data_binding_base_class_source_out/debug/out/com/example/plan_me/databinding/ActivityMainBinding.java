@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.plan_me.R;
@@ -22,10 +22,13 @@ import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final DrawerLayout rootView;
 
   @NonNull
   public final AppCompatButton mainAllBtn;
+
+  @NonNull
+  public final DrawerLayout mainDrawerLayout;
 
   @NonNull
   public final FloatingActionButton mainFabAddBtn;
@@ -54,8 +57,8 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final TextView maintTv;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull AppCompatButton mainAllBtn, @NonNull FloatingActionButton mainFabAddBtn,
+  private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull AppCompatButton mainAllBtn,
+      @NonNull DrawerLayout mainDrawerLayout, @NonNull FloatingActionButton mainFabAddBtn,
       @NonNull FloatingActionButton mainFabMenuBtn, @NonNull FloatingActionButton mainFabMestoryBtn,
       @NonNull FloatingActionButton mainFabSettingBtn,
       @NonNull FloatingActionButton mainFabTimerBtn, @NonNull FrameLayout mainFrm,
@@ -63,6 +66,7 @@ public final class ActivityMainBinding implements ViewBinding {
       @NonNull TextView maintTv) {
     this.rootView = rootView;
     this.mainAllBtn = mainAllBtn;
+    this.mainDrawerLayout = mainDrawerLayout;
     this.mainFabAddBtn = mainFabAddBtn;
     this.mainFabMenuBtn = mainFabMenuBtn;
     this.mainFabMestoryBtn = mainFabMestoryBtn;
@@ -76,7 +80,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -106,6 +110,8 @@ public final class ActivityMainBinding implements ViewBinding {
       if (mainAllBtn == null) {
         break missingId;
       }
+
+      DrawerLayout mainDrawerLayout = (DrawerLayout) rootView;
 
       id = R.id.main_fab_add_btn;
       FloatingActionButton mainFabAddBtn = ViewBindings.findChildViewById(rootView, id);
@@ -161,9 +167,9 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, mainAllBtn, mainFabAddBtn,
-          mainFabMenuBtn, mainFabMestoryBtn, mainFabSettingBtn, mainFabTimerBtn, mainFrm, mainMenu,
-          mainTopLayout, maintTv);
+      return new ActivityMainBinding((DrawerLayout) rootView, mainAllBtn, mainDrawerLayout,
+          mainFabAddBtn, mainFabMenuBtn, mainFabMestoryBtn, mainFabSettingBtn, mainFabTimerBtn,
+          mainFrm, mainMenu, mainTopLayout, maintTv);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
