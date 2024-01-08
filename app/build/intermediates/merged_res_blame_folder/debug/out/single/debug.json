@@ -28,6 +28,10 @@
         "source": "com.example.plan_me.app-main-70:/drawable/timer_setting.xml"
     },
     {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_profile_et_name.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/profile_et_name.xml"
+    },
+    {
         "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_percent_line_transparent.xml.flat",
         "source": "com.example.plan_me.app-main-70:/drawable/mestory_percent_line_transparent.xml"
     },
@@ -136,6 +140,10 @@
         "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color2.xml"
     },
     {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_init_profile.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_init_profile.xml"
+    },
+    {
         "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_planner.xml.flat",
         "source": "com.example.plan_me.app-main-70:/drawable/main_navi_planner.xml"
     },
@@ -212,16 +220,16 @@
         "source": "com.example.plan_me.app-main-70:/drawable/timer_ico_text.xml"
     },
     {
-        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_back_selector.xml.flat",
-        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_back_selector.xml"
+        "merged": "com.example.plan_me.app-merged_res-68:/font_pretendard_bold.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/pretendard_bold.ttf"
     },
     {
         "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_et.xml.flat",
         "source": "com.example.plan_me.app-main-70:/drawable/category_et.xml"
     },
     {
-        "merged": "com.example.plan_me.app-merged_res-68:/font_pretendard_bold.ttf.flat",
-        "source": "com.example.plan_me.app-main-70:/font/pretendard_bold.ttf"
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_back_selector.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_back_selector.xml"
     },
     {
         "merged": "com.example.plan_me.app-merged_res-68:/layout_item_mestory_category_open.xml.flat",
@@ -398,6 +406,10 @@
     {
         "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_background_black.xml.flat",
         "source": "com.example.plan_me.app-main-70:/drawable/mestory_background_black.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_camera_ico.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/camera_ico.xml"
     },
     {
         "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_lo_category.xml.flat",

@@ -82,6 +82,7 @@
         <activity android:name="com.example.plan_me.ui.timer.TimerFocusActivity" />
         <activity android:name="com.example.plan_me.ui.timer.TimerBreakActivity" />
         <activity android:name="com.example.plan_me.MainActivity" />
+        <activity android:name="com.example.plan_me.ui.login.InitProfileActivity" />
         <activity
             android:name="com.kakao.sdk.auth.TalkAuthCodeActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

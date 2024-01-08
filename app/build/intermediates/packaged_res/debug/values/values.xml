@@ -21,6 +21,7 @@
     <color name="transparent">#00ff0000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_gray">#919191</color>
+    <color name="white_ivory">#FDFDFD</color>
     <dimen name="design_bottom_navigation_active_text_size" ns1:override="true">10sp</dimen>
     <dimen name="design_bottom_navigation_text_size" ns1:override="true">10sp</dimen>
     <dimen name="design_fab_image_size">58sp</dimen>

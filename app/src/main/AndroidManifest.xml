@@ -52,6 +52,7 @@
         <activity android:name=".ui.timer.TimerFocusActivity"/>
         <activity android:name=".ui.timer.TimerBreakActivity"/>
         <activity android:name=".MainActivity"/>
+        <activity android:name=".ui.login.InitProfileActivity"/>
 
     </application>
 

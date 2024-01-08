@@ -23,9 +23,11 @@ color sky_blue_main
 color transparent
 color white
 color white_gray
+color white_ivory
 dimen design_bottom_navigation_active_text_size
 dimen design_bottom_navigation_text_size
 dimen design_fab_image_size
+drawable camera_ico
 drawable category_et
 drawable category_radio_color1
 drawable category_radio_color10
@@ -74,6 +76,7 @@ drawable planner_btn_menu_unfocus
 drawable planner_ico_text
 drawable planner_lo_category
 drawable profile_default
+drawable profile_et_name
 drawable public_more
 drawable radio_ico_check
 drawable radio_ico_oval
@@ -156,6 +159,16 @@ id drawer_delete_tv
 id drawer_layout
 id drawer_modify_tv
 id drawer_tv
+id init_profile_camera_iv
+id init_profile_camera_lo
+id init_profile_complet_btn
+id init_profile_first_lo
+id init_profile_image_lo
+id init_profile_image_tv
+id init_profile_imagefile_iv
+id init_profile_logo_tv
+id init_profile_name_lo
+id init_profile_name_tv
 id login_google_btn
 id login_kakao_btn
 id login_offline_tv
@@ -207,6 +220,7 @@ id settingFragment
 id terms_all_cb
 id terms_all_lo
 id terms_all_tv
+id terms_complet_btn
 id terms_info_cb
 id terms_info_lo
 id terms_info_text_lo
@@ -258,6 +272,7 @@ id todo_lo
 id todo_tv
 layout activity_dialog_terms
 layout activity_drawer
+layout activity_init_profile
 layout activity_login
 layout activity_main
 layout activity_mestory

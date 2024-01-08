@@ -1912,6 +1912,7 @@ color vector_tint_color
 color vector_tint_theme_color
 color white
 color white_gray
+color white_ivory
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -2629,6 +2630,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable camera_ico
 drawable category_et
 drawable category_radio_color1
 drawable category_radio_color10
@@ -2790,6 +2792,7 @@ drawable planner_btn_menu_unfocus
 drawable planner_ico_text
 drawable planner_lo_category
 drawable profile_default
+drawable profile_et_name
 drawable public_more
 drawable radio_ico_check
 drawable radio_ico_oval
@@ -3118,6 +3121,16 @@ id immediateStop
 id included
 id indeterminate
 id info
+id init_profile_camera_iv
+id init_profile_camera_lo
+id init_profile_complet_btn
+id init_profile_first_lo
+id init_profile_image_lo
+id init_profile_image_tv
+id init_profile_imagefile_iv
+id init_profile_logo_tv
+id init_profile_name_lo
+id init_profile_name_tv
 id inspection_slot_table_set
 id invisible
 id inward
@@ -3376,6 +3389,7 @@ id tag_window_insets_animation_callback
 id terms_all_cb
 id terms_all_lo
 id terms_all_tv
+id terms_complet_btn
 id terms_info_cb
 id terms_info_lo
 id terms_info_text_lo
@@ -3609,6 +3623,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_dialog_terms
 layout activity_drawer
+layout activity_init_profile
 layout activity_login
 layout activity_main
 layout activity_mestory
