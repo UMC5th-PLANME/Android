@@ -1,0 +1,1 @@
+/Users/gohyeoncheol/Documents/planme/Android/app/src/androidTest/java/com/example/plan_me/ExampleInstrumentedTest.kt

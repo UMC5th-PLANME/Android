@@ -75,6 +75,7 @@ drawable schedule_et_background
 drawable schedule_menu
 drawable schedule_top_shape
 drawable selector_btn_radio
+drawable splash_img
 drawable timer_clock
 drawable timer_clock_round
 drawable timer_contour
@@ -219,6 +220,7 @@ id todo_tv
 layout activity_login
 layout activity_main
 layout activity_planner
+layout activity_splash
 layout activity_timer_break
 layout activity_timer_focus
 layout dialog_add_category
@@ -244,10 +246,10 @@ string offline
 string planner
 string setting
 string timer
-style AppTheme.Splash
 style Base.Theme.Plan_Me
 style NoElevation
 style ShapeAppearanceOverlay.App.CornerCircle
+style SplashTheme
 style Theme.Plan_Me
 style pretendard_bold
 style pretendard_medium
