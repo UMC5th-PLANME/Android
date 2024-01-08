@@ -1,17 +1,17 @@
-#Mon Jan 08 20:38:59 KST 2024
-base.0=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.10=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
-base.11=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
-base.12=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes4.dex
-base.2=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
-base.3=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
-base.4=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
-base.5=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
-base.6=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
-base.7=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
-base.8=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex
-base.9=/Users/gohyeoncheol/Documents/planme/Android/app/build/intermediates/desugar_lib_dex/debug/classes1000.dex
+#Mon Jan 08 22:43:57 KST 2024
+base.0=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.10=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
+base.11=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes3.dex
+base.12=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeExtDexDebug/classes4.dex
+base.2=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
+base.3=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/14/classes.dex
+base.4=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/2/classes.dex
+base.5=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/5/classes.dex
+base.6=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/7/classes.dex
+base.7=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/8/classes.dex
+base.8=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex
+base.9=/Users/parkhyejeong/Desktop/Planme/Android/app/build/intermediates/desugar_lib_dex/debug/classes1000.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.10=classes2.dex

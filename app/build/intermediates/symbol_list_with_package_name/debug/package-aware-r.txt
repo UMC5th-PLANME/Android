@@ -2729,6 +2729,7 @@ drawable material_ic_menu_arrow_down_black_24dp
 drawable material_ic_menu_arrow_up_black_24dp
 drawable mestory_background_black
 drawable mestory_calendar
+drawable mestory_ico_text
 drawable mestory_percent_line_gray
 drawable mestory_percent_line_transparent
 drawable mestory_sharing
@@ -2786,6 +2787,7 @@ drawable notify_panel_notification_icon_bg
 drawable planner_btn_all
 drawable planner_btn_menu_focus
 drawable planner_btn_menu_unfocus
+drawable planner_ico_text
 drawable planner_lo_category
 drawable profile_default
 drawable public_more
@@ -2798,11 +2800,13 @@ drawable schedule_et_background
 drawable schedule_menu
 drawable schedule_top_shape
 drawable selector_btn_radio
+drawable setting_ico_text
 drawable splash_img
 drawable test_level_drawable
 drawable timer_clock
 drawable timer_clock_round
 drawable timer_contour
+drawable timer_ico_text
 drawable timer_menu
 drawable timer_pause_btn
 drawable timer_play_btn
@@ -3369,6 +3373,18 @@ id tag_transition_group
 id tag_unhandled_key_event_manager
 id tag_unhandled_key_listeners
 id tag_window_insets_animation_callback
+id terms_all_cb
+id terms_all_lo
+id terms_all_tv
+id terms_info_cb
+id terms_info_lo
+id terms_info_text_lo
+id terms_info_tv
+id terms_service_cb
+id terms_service_lo
+id terms_service_text_lo
+id terms_service_tv
+id terms_tv
 id text
 id text2
 id textEnd
@@ -3591,6 +3607,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_dialog_terms
 layout activity_drawer
 layout activity_login
 layout activity_main
