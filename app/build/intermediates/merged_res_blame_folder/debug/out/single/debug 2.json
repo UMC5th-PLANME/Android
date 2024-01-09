@@ -1,0 +1,490 @@
+[
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_dialog_terms.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_dialog_terms.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/menu_navi_menu.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/menu/navi_menu.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_btn_menu_unfocus.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/planner_btn_menu_unfocus.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_play_btn.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_play_btn.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_agro_medium.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/agro_medium.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_setting.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_setting.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_profile_et_name.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/profile_et_name.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_percent_line_transparent.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_percent_line_transparent.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_main.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_planner.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_planner.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_login_ico_google.png.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/login_ico_google.png"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_pretendard_regular.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/pretendard_regular.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_alarm.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_alarm.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_login_ico_kakao.png.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/login_ico_kakao.png"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_mestory.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_mestory.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_timer_focus.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_timer_focus.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_btn_all.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/planner_btn_all.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_percent_line_gray.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_percent_line_gray.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_ico_text.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/planner_ico_text.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_dialog_cancel.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_dialog_cancel.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_clock_round.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_clock_round.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color3.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color3.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_public_more.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/public_more.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_splash.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_time_up.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_time_up.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_save_focus_time.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_focus_time.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_dialog_shape.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_dialog_shape.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_btn_setting.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_btn_setting.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/anim_fab_open.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/anim/fab_open.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_agro_bold.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/agro_bold.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_mestory_white.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_mestory_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color2.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color2.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_init_profile.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_init_profile.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_planner.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_planner.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_login_btn_kakao.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/login_btn_kakao.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_timer.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_timer.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_indicator_select.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/indicator_select.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_sharing.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_sharing.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_login.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color5.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color5.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_btn_mestory.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_btn_mestory.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_splash_img.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/splash_img.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color8.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color8.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_agro_regular.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/agro_regular.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_timer_category.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_category.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_menu.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_menu.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_radio_ico_oval.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/radio_ico_oval.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_app_font.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/font/app_font.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_menu.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_menu.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_ico_text.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_ico_text.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_pretendard_bold.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/pretendard_bold.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_et.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_et.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_back_selector.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_back_selector.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_item_mestory_category_open.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/item_mestory_category_open.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color10.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color10.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_indicator_unselect.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/indicator_unselect.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/xml_backup_rules.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_login_btn_google.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/login_btn_google.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_top_shape.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_top_shape.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_btn_planner.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_btn_planner.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_setting_time.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_setting_time.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/font_pretendard_medium.ttf.flat",
+        "source": "com.example.plan_me.app-main-70:/font/pretendard_medium.ttf"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_timer_setting.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_setting.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color7.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color7.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_backarrow.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_backarrow.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_btn_timer.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_btn_timer.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_pause_btn.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_pause_btn.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_add_category.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_add_category.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_clock.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_clock.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_timer_white.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_timer_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_schedule_et_background.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/schedule_et_background.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_timerangepick.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timerangepick.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-anydpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_time_down.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_time_down.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_btn_menu_focus.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/planner_btn_menu_focus.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-anydpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_mestory.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_mestory.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_setting_ico_text.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/setting_ico_text.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_timer_break.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_timer_break.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_setting.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_setting.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color6.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color6.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_save_reset.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_reset.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_selector_btn_radio.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/selector_btn_radio.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_time_circle_default.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_time_circle_default.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/anim_fab_close.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/anim/fab_close.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_background.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_background.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_item_mestory_category_close.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/item_mestory_category_close.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_timepick.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timepick.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_calendar.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_calendar.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_btn_add.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_btn_add.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color9.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color9.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_background_black.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_background_black.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_camera_ico.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/camera_ico.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_planner_lo_category.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/planner_lo_category.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_planner_white.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_planner_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_schedule_add.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_schedule_add.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_item_todo.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/item_todo.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_navi_setting_white.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_navi_setting_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_activity_drawer.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_mestory_ico_text.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/mestory_ico_text.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_profile_default.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/profile_default.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_repeat.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_repeat.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_radio_ico_check.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/radio_ico_check.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_timer_contour.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/timer_contour.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.plan_me.app-main-70:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/layout_fragment_dialog_save_repetition_time.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_repetition_time.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color4.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color4.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_category_radio_color1.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/category_radio_color1.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_add_white.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_add_white.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-merged_res-68:/drawable_main_color_selector.xml.flat",
+        "source": "com.example.plan_me.app-main-70:/drawable/main_color_selector.xml"
+    }
+]
