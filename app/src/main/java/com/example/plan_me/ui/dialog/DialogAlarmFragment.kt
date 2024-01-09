@@ -20,5 +20,5 @@ class DialogAlarmFragment(context : Context):Dialog(context){
             dismiss()
         }
     }
-
+    //text
 }

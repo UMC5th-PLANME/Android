@@ -11,7 +11,6 @@ import com.example.plan_me.databinding.FragmentPlannerBinding
 
 class PlannerFragment : Fragment() {
     private lateinit var binding: FragmentPlannerBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
