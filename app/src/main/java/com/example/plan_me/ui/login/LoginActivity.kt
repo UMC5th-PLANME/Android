@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             try {
                 Log.d(TAG, "google 로그인 성공")
+                openTermsPopup()
             } catch (e: ApiException) {
                 Log.e(TAG, "google 로그인 실패", e)
             }
