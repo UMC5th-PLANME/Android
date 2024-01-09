@@ -39,16 +39,22 @@
             app:layout_constraintStart_toStartOf="@id/init_profile_logo_tv"
             app:layout_constraintEnd_toEndOf="@id/init_profile_logo_tv">
 
-            <ImageView
-                android:id="@+id/init_profile_imagefile_iv"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/init_profile_imagefile_lo"
                 android:layout_width="104dp"
                 android:layout_height="104dp"
-                app:tint="@color/white"
-                android:src="@drawable/indicator_select"
+                android:background="@drawable/indicator_unselect"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/init_profile_imagefile_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/profile_default"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <FrameLayout
                 android:id="@+id/init_profile_camera_lo"
@@ -122,6 +128,5 @@
         app:layout_constraintTop_toBottomOf="@id/init_profile_first_lo"
         app:layout_constraintStart_toStartOf="@id/init_profile_first_lo"
         app:layout_constraintEnd_toEndOf="@id/init_profile_first_lo"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

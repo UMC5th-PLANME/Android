@@ -101,6 +101,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 
+    // picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+
+
     // kakao
     implementation 'com.kakao.sdk:v2-user:2.12.1'
 
