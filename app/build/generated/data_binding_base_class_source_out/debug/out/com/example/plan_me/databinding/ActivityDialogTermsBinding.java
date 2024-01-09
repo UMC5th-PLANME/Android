@@ -11,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+<<<<<<< HEAD
 import androidx.constraintlayout.widget.ConstraintLayout;
+=======
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.plan_me.R;
@@ -27,7 +30,11 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final CheckBox termsAllCb;
 
   @NonNull
+<<<<<<< HEAD
   public final ConstraintLayout termsAllLo;
+=======
+  public final LinearLayout termsAllLo;
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
   @NonNull
   public final TextView termsAllTv;
@@ -51,7 +58,11 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final CheckBox termsServiceCb;
 
   @NonNull
+<<<<<<< HEAD
   public final ConstraintLayout termsServiceLo;
+=======
+  public final LinearLayout termsServiceLo;
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
   @NonNull
   public final FrameLayout termsServiceTextLo;
@@ -63,11 +74,19 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final TextView termsTv;
 
   private ActivityDialogTermsBinding(@NonNull FrameLayout rootView, @NonNull CheckBox termsAllCb,
+<<<<<<< HEAD
       @NonNull ConstraintLayout termsAllLo, @NonNull TextView termsAllTv,
       @NonNull AppCompatButton termsCompletBtn, @NonNull CheckBox termsInfoCb,
       @NonNull LinearLayout termsInfoLo, @NonNull FrameLayout termsInfoTextLo,
       @NonNull TextView termsInfoTv, @NonNull CheckBox termsServiceCb,
       @NonNull ConstraintLayout termsServiceLo, @NonNull FrameLayout termsServiceTextLo,
+=======
+      @NonNull LinearLayout termsAllLo, @NonNull TextView termsAllTv,
+      @NonNull AppCompatButton termsCompletBtn, @NonNull CheckBox termsInfoCb,
+      @NonNull LinearLayout termsInfoLo, @NonNull FrameLayout termsInfoTextLo,
+      @NonNull TextView termsInfoTv, @NonNull CheckBox termsServiceCb,
+      @NonNull LinearLayout termsServiceLo, @NonNull FrameLayout termsServiceTextLo,
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
       @NonNull TextView termsServiceTv, @NonNull TextView termsTv) {
     this.rootView = rootView;
     this.termsAllCb = termsAllCb;
@@ -119,7 +138,11 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
       }
 
       id = R.id.terms_all_lo;
+<<<<<<< HEAD
       ConstraintLayout termsAllLo = ViewBindings.findChildViewById(rootView, id);
+=======
+      LinearLayout termsAllLo = ViewBindings.findChildViewById(rootView, id);
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
       if (termsAllLo == null) {
         break missingId;
       }
@@ -167,7 +190,11 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
       }
 
       id = R.id.terms_service_lo;
+<<<<<<< HEAD
       ConstraintLayout termsServiceLo = ViewBindings.findChildViewById(rootView, id);
+=======
+      LinearLayout termsServiceLo = ViewBindings.findChildViewById(rootView, id);
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
       if (termsServiceLo == null) {
         break missingId;
       }

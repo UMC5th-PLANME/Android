@@ -4,7 +4,11 @@
             "outputFile": "com.example.plan_me.app-mergeDebugResources-66:/values-te/values-te.xml",
             "map": [
                 {
+<<<<<<< HEAD
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/27d652e53f53a38448eca1385ae28657/transformed/appcompat-1.5.1/res/values-te/values-te.xml",
+=======
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/27d652e53f53a38448eca1385ae28657/transformed/appcompat-1.5.1/res/values-te/values-te.xml",
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,6 +25,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/cb9727b59bff4830d0cbddddeb8e2494/transformed/browser-1.4.0/res/values-te/values-te.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -39,6 +44,9 @@
                 },
                 {
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/30f5ac01710d2ea5dee9f40224d679d8/transformed/ui-release/res/values-te/values-te.xml",
+=======
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/30f5ac01710d2ea5dee9f40224d679d8/transformed/ui-release/res/values-te/values-te.xml",
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,6 +63,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/res/values-te/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
@@ -107,6 +116,26 @@
                 },
                 {
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/8ebb0da31a9568bfe4ac871a8badbb9e/transformed/material-1.7.0/res/values-te/values-te.xml",
+=======
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/3bf2ed397b648252b3304a3e636e2b5a/transformed/foundation-release/res/values-te/values-te.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,143",
+                        "endColumns": "87,94",
+                        "endOffsets": "138,233"
+                    },
+                    "to": {
+                        "startLines": "138,139",
+                        "startColumns": "4,4",
+                        "startOffsets": "12757,12845",
+                        "endColumns": "87,94",
+                        "endOffsets": "12840,12935"
+                    }
+                },
+                {
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/8ebb0da31a9568bfe4ac871a8badbb9e/transformed/material-1.7.0/res/values-te/values-te.xml",
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,6 +154,7 @@
                     }
                 },
                 {
+<<<<<<< HEAD
                     "source": "/Users/gohyeoncheol/.gradle/caches/transforms-3/3bf2ed397b648252b3304a3e636e2b5a/transformed/foundation-release/res/values-te/values-te.xml",
                     "from": {
                         "startLines": "2,3",
@@ -139,6 +169,73 @@
                         "startOffsets": "12757,12845",
                         "endColumns": "87,94",
                         "endOffsets": "12840,12935"
+=======
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/f0b286f6ac5e654fe91324ae9d50d1e6/transformed/play-services-basement-18.2.0/res/values-te/values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "135",
+                        "endOffsets": "330"
+                    },
+                    "to": {
+                        "startLines": "54",
+                        "startColumns": "4",
+                        "startOffsets": "5384",
+                        "endColumns": "139",
+                        "endOffsets": "5519"
+                    }
+                },
+                {
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/957252822f55298983a91fa5e2fe7345/transformed/core-1.12.0/res/values-te/values-te.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,157,265,367,468,574,681,805",
+                        "endColumns": "101,107,101,100,105,106,123,100",
+                        "endOffsets": "152,260,362,463,569,676,800,901"
+                    },
+                    "to": {
+                        "startLines": "34,35,36,37,38,39,40,134",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "3166,3268,3376,3478,3579,3685,3792,12393",
+                        "endColumns": "101,107,101,100,105,106,123,100",
+                        "endOffsets": "3263,3371,3473,3574,3680,3787,3911,12489"
+                    }
+                },
+                {
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/cb9727b59bff4830d0cbddddeb8e2494/transformed/browser-1.4.0/res/values-te/values-te.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,166,272,383",
+                        "endColumns": "110,105,110,106",
+                        "endOffsets": "161,267,378,485"
+                    },
+                    "to": {
+                        "startLines": "64,70,71,72",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "6600,7157,7263,7374",
+                        "endColumns": "110,105,110,106",
+                        "endOffsets": "6706,7258,7369,7476"
+                    }
+                },
+                {
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/1c2f029d02bae54b6440e84d9ec8bcc3/transformed/play-services-base-18.0.1/res/values-te/values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "193,299,449,575,686,819,940,1041,1137,1282,1390,1539,1667,1814,1973,2033,2099",
+                        "endColumns": "105,149,125,110,132,120,100,95,144,107,148,127,146,158,59,65,77",
+                        "endOffsets": "298,448,574,685,818,939,1040,1136,1281,1389,1538,1666,1813,1972,2032,2098,2176"
+                    },
+                    "to": {
+                        "startLines": "46,47,48,49,50,51,52,53,55,56,57,58,59,60,61,62,63",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4408,4518,4672,4802,4917,5054,5179,5284,5524,5673,5785,5938,6070,6221,6384,6448,6518",
+                        "endColumns": "109,153,129,114,136,124,104,99,148,111,152,131,150,162,63,69,81",
+                        "endOffsets": "4513,4667,4797,4912,5049,5174,5279,5379,5668,5780,5933,6065,6216,6379,6443,6513,6595"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
                     }
                 }
             ]

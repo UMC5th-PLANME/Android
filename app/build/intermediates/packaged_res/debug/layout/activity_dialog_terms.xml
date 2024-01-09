@@ -7,10 +7,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:background="@drawable/schedule_dialog_shape"
         android:layout_marginHorizontal="20dp"
         android:paddingHorizontal="30dp"
         android:paddingBottom="40dp">
+=======
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/schedule_dialog_shape">
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
         <TextView
             android:id="@+id/terms_tv"
@@ -25,6 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
+<<<<<<< HEAD
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/terms_all_lo"
             android:layout_width="300dp"
@@ -36,6 +42,19 @@
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+=======
+        <LinearLayout
+            android:id="@+id/terms_all_lo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="34dp"
+            android:paddingStart="23dp"
+            android:paddingEnd="30dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintBottom_toTopOf="@id/terms_service_lo"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
             app:layout_constraintTop_toBottomOf="@id/terms_tv">
 
             <TextView
@@ -45,15 +64,20 @@
                 android:text="모든 이용약관에 동의합니다."
                 android:textColor="@color/black"
                 android:textSize="16dp"
+<<<<<<< HEAD
                 android:fontFamily="@font/pretendard_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+=======
+                android:fontFamily="@font/pretendard_bold"/>
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
             <CheckBox
                 android:id="@+id/terms_all_cb"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
+<<<<<<< HEAD
                 android:buttonTint="@color/transparent"
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +97,24 @@
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+=======
+                android:layout_marginStart="49dp"
+                android:buttonTint="@color/transparent"
+                android:background="@drawable/selector_btn_radio"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/terms_service_lo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintBottom_toTopOf="@id/terms_service_text_lo"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
             app:layout_constraintTop_toBottomOf="@id/terms_all_lo">
 
             <TextView
@@ -82,10 +124,14 @@
                 android:text="서비스 이용약관 동의 (필수)"
                 android:textColor="@color/black"
                 android:textSize="12dp"
+<<<<<<< HEAD
                 android:fontFamily="@font/pretendard_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+=======
+                android:fontFamily="@font/pretendard_bold"/>
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
             <CheckBox
                 android:id="@+id/terms_service_cb"
@@ -93,6 +139,7 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="99dp"
                 android:buttonTint="@color/transparent"
+<<<<<<< HEAD
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -104,6 +151,15 @@
             android:layout_width="300dp"
             android:layout_height="63dp"
             android:layout_marginHorizontal="20dp"
+=======
+                android:background="@drawable/selector_btn_radio"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/terms_service_text_lo"
+            android:layout_width="258dp"
+            android:layout_height="63dp"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
             android:background="@drawable/category_et"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +168,7 @@
 
         <LinearLayout
             android:id="@+id/terms_info_lo"
+<<<<<<< HEAD
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
@@ -121,6 +178,16 @@
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+=======
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="30dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintBottom_toTopOf="@id/terms_info_text_lo"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
             app:layout_constraintTop_toBottomOf="@id/terms_service_text_lo">
 
             <TextView
@@ -130,10 +197,14 @@
                 android:text="개인정보 수집 및 이용 동의 (필수)"
                 android:textColor="@color/black"
                 android:textSize="12dp"
+<<<<<<< HEAD
                 android:fontFamily="@font/pretendard_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+=======
+                android:fontFamily="@font/pretendard_bold"/>
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
 
             <CheckBox
                 android:id="@+id/terms_info_cb"
@@ -141,17 +212,26 @@
                 android:layout_height="20dp"
                 android:layout_marginStart="72dp"
                 android:buttonTint="@color/transparent"
+<<<<<<< HEAD
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+=======
+                android:background="@drawable/selector_btn_radio"/>
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/terms_info_text_lo"
+<<<<<<< HEAD
             android:layout_width="300dp"
             android:layout_height="63dp"
             android:layout_marginHorizontal="20dp"
+=======
+            android:layout_width="258dp"
+            android:layout_height="63dp"
+>>>>>>> f811a3f620ad69d0c3356714c18a496c2c500429
             android:background="@drawable/category_et"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
