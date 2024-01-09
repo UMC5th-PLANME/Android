@@ -11,8 +11,6 @@ import com.example.plan_me.databinding.FragmentPlannerBinding
 
 class PlannerFragment : Fragment() {
     private lateinit var binding: FragmentPlannerBinding
-    private val text= 1
-    private val text22= 1
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
