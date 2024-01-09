@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/mestory_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mestory_background_black"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="240dp">
+
+            <ImageView
+                android:id="@+id/mestory_profile_iv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:src="@drawable/profile_default"
+                android:layout_marginTop="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/mestory_profile_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="지우"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mestory_profile_iv"/>
+
+            <TextView
+                android:id="@+id/mestory_profile_date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="24. 1. 1"
+                android:textSize="18sp"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintTop_toBottomOf="@id/mestory_profile_name_tv"/>
+
+            <TextView
+                android:id="@+id/mestory_mestory_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="me story"
+                android:textSize="24sp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toBottomOf="@id/mestory_profile_date_tv"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/mestory_calendar_iv"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="18dp"
+                android:src="@drawable/mestory_calendar"
+                app:layout_constraintBottom_toTopOf="@id/mestory_percent_line_gray"
+                app:layout_constraintEnd_toStartOf="@id/mestory_sharing_iv"
+                app:layout_constraintTop_toBottomOf="@id/mestory_profile_date_tv"/>
+
+            <ImageView
+                android:id="@+id/mestory_sharing_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mestory_sharing"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/mestory_percent_line_gray"
+                app:layout_constraintTop_toBottomOf="@id/mestory_profile_date_tv"/>
+
+            <ImageView
+                android:id="@+id/mestory_percent_line_gray"
+                android:layout_width="match_parent"
+                android:layout_height="22.5dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/mestory_percent_line_gray"
+                app:layout_constraintTop_toBottomOf="@+id/mestory_mestory_tv"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/mestory_category_vp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/mestory_top_layout"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
