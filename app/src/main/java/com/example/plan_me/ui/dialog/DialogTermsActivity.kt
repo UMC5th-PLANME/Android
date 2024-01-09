@@ -17,12 +17,12 @@ class DialogTermsActivity(context: Context): Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDialogTermsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.termsCompletBtn.setOnClickListener {
             goInitProfileActivity()
         }
+        setContentView(binding.root)
     }
 
     private fun goInitProfileActivity() {

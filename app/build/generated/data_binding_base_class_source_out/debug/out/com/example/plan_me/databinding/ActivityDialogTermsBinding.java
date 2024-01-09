@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.plan_me.R;
@@ -26,7 +27,7 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final CheckBox termsAllCb;
 
   @NonNull
-  public final LinearLayout termsAllLo;
+  public final ConstraintLayout termsAllLo;
 
   @NonNull
   public final TextView termsAllTv;
@@ -50,7 +51,7 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final CheckBox termsServiceCb;
 
   @NonNull
-  public final LinearLayout termsServiceLo;
+  public final ConstraintLayout termsServiceLo;
 
   @NonNull
   public final FrameLayout termsServiceTextLo;
@@ -62,11 +63,11 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
   public final TextView termsTv;
 
   private ActivityDialogTermsBinding(@NonNull FrameLayout rootView, @NonNull CheckBox termsAllCb,
-      @NonNull LinearLayout termsAllLo, @NonNull TextView termsAllTv,
+      @NonNull ConstraintLayout termsAllLo, @NonNull TextView termsAllTv,
       @NonNull AppCompatButton termsCompletBtn, @NonNull CheckBox termsInfoCb,
       @NonNull LinearLayout termsInfoLo, @NonNull FrameLayout termsInfoTextLo,
       @NonNull TextView termsInfoTv, @NonNull CheckBox termsServiceCb,
-      @NonNull LinearLayout termsServiceLo, @NonNull FrameLayout termsServiceTextLo,
+      @NonNull ConstraintLayout termsServiceLo, @NonNull FrameLayout termsServiceTextLo,
       @NonNull TextView termsServiceTv, @NonNull TextView termsTv) {
     this.rootView = rootView;
     this.termsAllCb = termsAllCb;
@@ -118,7 +119,7 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
       }
 
       id = R.id.terms_all_lo;
-      LinearLayout termsAllLo = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout termsAllLo = ViewBindings.findChildViewById(rootView, id);
       if (termsAllLo == null) {
         break missingId;
       }
@@ -166,7 +167,7 @@ public final class ActivityDialogTermsBinding implements ViewBinding {
       }
 
       id = R.id.terms_service_lo;
-      LinearLayout termsServiceLo = ViewBindings.findChildViewById(rootView, id);
+      ConstraintLayout termsServiceLo = ViewBindings.findChildViewById(rootView, id);
       if (termsServiceLo == null) {
         break missingId;
       }
