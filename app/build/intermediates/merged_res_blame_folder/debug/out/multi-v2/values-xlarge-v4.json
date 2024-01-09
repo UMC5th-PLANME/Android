@@ -4,7 +4,7 @@
             "outputFile": "com.example.plan_me.app-mergeDebugResources-66:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
-                    "source": "/Users/parkhyejeong/.gradle/caches/transforms-3/27d652e53f53a38448eca1385ae28657/transformed/appcompat-1.5.1/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/27d652e53f53a38448eca1385ae28657/transformed/appcompat-1.5.1/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",

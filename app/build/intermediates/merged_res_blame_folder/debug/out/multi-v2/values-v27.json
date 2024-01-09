@@ -4,7 +4,7 @@
             "outputFile": "com.example.plan_me.app-mergeDebugResources-66:/values-v27/values-v27.xml",
             "map": [
                 {
-                    "source": "/Users/parkhyejeong/.gradle/caches/transforms-3/138c61a8b0a9b2f585db539d6f896e51/transformed/core-splashscreen-1.0.1/res/values-v27/values-v27.xml",
+                    "source": "/Users/seohyeonpark/.gradle/caches/transforms-3/138c61a8b0a9b2f585db539d6f896e51/transformed/core-splashscreen-1.0.1/res/values-v27/values-v27.xml",
                     "from": {
                         "startLines": "2,3,4,7",
                         "startColumns": "4,4,4,4",

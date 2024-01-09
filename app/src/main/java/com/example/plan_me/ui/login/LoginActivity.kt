@@ -154,4 +154,6 @@ class LoginActivity : AppCompatActivity() {
     private fun openTermsPopup() {
         DialogTermsActivity(this@LoginActivity).show()
     }
+
+    // hello
 }
