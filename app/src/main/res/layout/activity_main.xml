@@ -139,6 +139,5 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <include layout="@layout/activity_drawer"/>
 </androidx.drawerlayout.widget.DrawerLayout>
