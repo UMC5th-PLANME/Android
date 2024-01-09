@@ -5,37 +5,82 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.plan_me.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final ConstraintLayout rootView;
+  private final DrawerLayout rootView;
+
+  @NonNull
+  public final AppCompatButton mainAllBtn;
+
+  @NonNull
+  public final DrawerLayout mainDrawerLayout;
+
+  @NonNull
+  public final FloatingActionButton mainFabAddBtn;
+
+  @NonNull
+  public final FloatingActionButton mainFabMenuBtn;
+
+  @NonNull
+  public final FloatingActionButton mainFabMestoryBtn;
+
+  @NonNull
+  public final FloatingActionButton mainFabSettingBtn;
+
+  @NonNull
+  public final FloatingActionButton mainFabTimerBtn;
 
   @NonNull
   public final FrameLayout mainFrm;
 
   @NonNull
-  public final BottomNavigationView mainNavi;
+  public final ImageButton mainMenu;
 
-  private ActivityMainBinding(@NonNull ConstraintLayout rootView, @NonNull FrameLayout mainFrm,
-      @NonNull BottomNavigationView mainNavi) {
+  @NonNull
+  public final LinearLayout mainTopLayout;
+
+  @NonNull
+  public final TextView maintTv;
+
+  private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull AppCompatButton mainAllBtn,
+      @NonNull DrawerLayout mainDrawerLayout, @NonNull FloatingActionButton mainFabAddBtn,
+      @NonNull FloatingActionButton mainFabMenuBtn, @NonNull FloatingActionButton mainFabMestoryBtn,
+      @NonNull FloatingActionButton mainFabSettingBtn,
+      @NonNull FloatingActionButton mainFabTimerBtn, @NonNull FrameLayout mainFrm,
+      @NonNull ImageButton mainMenu, @NonNull LinearLayout mainTopLayout,
+      @NonNull TextView maintTv) {
     this.rootView = rootView;
+    this.mainAllBtn = mainAllBtn;
+    this.mainDrawerLayout = mainDrawerLayout;
+    this.mainFabAddBtn = mainFabAddBtn;
+    this.mainFabMenuBtn = mainFabMenuBtn;
+    this.mainFabMestoryBtn = mainFabMestoryBtn;
+    this.mainFabSettingBtn = mainFabSettingBtn;
+    this.mainFabTimerBtn = mainFabTimerBtn;
     this.mainFrm = mainFrm;
-    this.mainNavi = mainNavi;
+    this.mainMenu = mainMenu;
+    this.mainTopLayout = mainTopLayout;
+    this.maintTv = maintTv;
   }
 
   @Override
   @NonNull
-  public ConstraintLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -60,19 +105,71 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.main_all_btn;
+      AppCompatButton mainAllBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainAllBtn == null) {
+        break missingId;
+      }
+
+      DrawerLayout mainDrawerLayout = (DrawerLayout) rootView;
+
+      id = R.id.main_fab_add_btn;
+      FloatingActionButton mainFabAddBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainFabAddBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.main_fab_menu_btn;
+      FloatingActionButton mainFabMenuBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainFabMenuBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.main_fab_mestory_btn;
+      FloatingActionButton mainFabMestoryBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainFabMestoryBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.main_fab_setting_btn;
+      FloatingActionButton mainFabSettingBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainFabSettingBtn == null) {
+        break missingId;
+      }
+
+      id = R.id.main_fab_timer_btn;
+      FloatingActionButton mainFabTimerBtn = ViewBindings.findChildViewById(rootView, id);
+      if (mainFabTimerBtn == null) {
+        break missingId;
+      }
+
       id = R.id.main_frm;
       FrameLayout mainFrm = ViewBindings.findChildViewById(rootView, id);
       if (mainFrm == null) {
         break missingId;
       }
 
-      id = R.id.main_navi;
-      BottomNavigationView mainNavi = ViewBindings.findChildViewById(rootView, id);
-      if (mainNavi == null) {
+      id = R.id.main_menu;
+      ImageButton mainMenu = ViewBindings.findChildViewById(rootView, id);
+      if (mainMenu == null) {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, mainFrm, mainNavi);
+      id = R.id.main_top_layout;
+      LinearLayout mainTopLayout = ViewBindings.findChildViewById(rootView, id);
+      if (mainTopLayout == null) {
+        break missingId;
+      }
+
+      id = R.id.maint_tv;
+      TextView maintTv = ViewBindings.findChildViewById(rootView, id);
+      if (maintTv == null) {
+        break missingId;
+      }
+
+      return new ActivityMainBinding((DrawerLayout) rootView, mainAllBtn, mainDrawerLayout,
+          mainFabAddBtn, mainFabMenuBtn, mainFabMestoryBtn, mainFabSettingBtn, mainFabTimerBtn,
+          mainFrm, mainMenu, mainTopLayout, maintTv);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1,74 +1,98 @@
 [
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_focus_time.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_save_focus_time.xml"
-    },
-    {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_planner.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_planner.xml"
-    },
-    {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_reset.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_save_reset.xml"
-    },
-    {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timer_setting.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_setting.xml"
-    },
-    {
         "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_splash.xml",
         "source": "com.example.plan_me.app-main-70:/layout/activity_splash.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_break.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_timer_break.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_add_category.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_add_category.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/item_todo.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/item_todo.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_focus_time.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_focus_time.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timer_category.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_category.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/item_mestory_category_close.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/item_mestory_category_close.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/dialog_add_category.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/dialog_add_category.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_planner.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_planner.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_repeat.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_repeat.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_dialog_terms.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_dialog_terms.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timepick.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_timepick.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_repeat.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_repeat.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_login.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_login.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_break.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_timer_break.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_alarm.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_alarm.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/item_todo.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/item_todo.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_focus.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_timer_focus.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timer_setting.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_setting.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_schedule_add.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_schedule_add.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timer_category.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timer_category.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_repetition_time.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_save_repetition_time.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_alarm.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_alarm.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/activity_main.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/activity_main.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_repetition_time.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_repetition_time.xml"
     },
     {
-        "merged": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timerangepick.xml",
-        "source": "/Users/gohyeoncheol/.gradle/daemon/8.0/com.example.plan_me.app-main-70:/layout/fragment_dialog_timerangepick.xml"
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_login.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_drawer.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_drawer.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_timer_focus.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_timer_focus.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timerangepick.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timerangepick.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_main.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_mestory.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_mestory.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_save_reset.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_save_reset.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/item_mestory_category_open.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/item_mestory_category_open.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/activity_init_profile.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/activity_init_profile.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_dialog_timepick.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_dialog_timepick.xml"
+    },
+    {
+        "merged": "com.example.plan_me.app-mergeDebugResources-67:/layout/fragment_schedule_add.xml",
+        "source": "com.example.plan_me.app-main-70:/layout/fragment_schedule_add.xml"
     }
 ]

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_enabled="false">
-        <layer-list>
-            <item android:drawable="@drawable/planner_btn_menu_unfocus"/>
-            <item android:drawable="@drawable/main_navi_setting_white" android:top="14dp" android:width="24dp" android:height="24dp" android:gravity="center_horizontal"/>
-        </layer-list>
-    </item>
+    <item android:drawable="@drawable/main_navi_setting_white" android:top="3dp" android:width="24dp" android:height="24dp" android:gravity="center_horizontal"/>
+    <item android:drawable="@drawable/setting_ico_text" android:top="28dp" android:gravity="center_horizontal" android:width="22dp" android:height="7dp" />
 
-    <item android:state_enabled="true">
-        <layer-list>
-            <item android:drawable="@drawable/planner_btn_menu_focus"/>
-            <item android:drawable="@drawable/main_navi_setting_white" android:top="14dp" android:width="24dp" android:height="24dp" android:gravity="center_horizontal"/>
-        </layer-list>
-    </item>
-
-</selector>
+</layer-list>
