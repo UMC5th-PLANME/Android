@@ -28,7 +28,6 @@ import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
-    val NATIVE_APP_KEY = "55b1939dd22f9a5ef6176930e7a09231"
     private lateinit var binding: ActivityLoginBinding
     var nickname : String = ""
     var profile :String = ""
@@ -48,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        KakaoSdk.init(this, NATIVE_APP_KEY)
         // 카카오 로그인
         binding.loginKakaoBtn.setOnClickListener {
             login_kakao()
@@ -100,8 +98,8 @@ class LoginActivity : AppCompatActivity() {
                 Log.e(TAG, "로그인 실패 $error")
             } else if (token != null) {
                 Log.e(TAG, "로그인 성공 ${token.accessToken}")
-                openTermsPopup()
             }
+            openTermsPopup()
         }
 
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -127,7 +125,7 @@ class LoginActivity : AppCompatActivity() {
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback) // 카카오 이메일 로그인
         }
-        UserApiClient.instance.me { user, error ->
+        UserApiClient.instance.me { user, _ ->
             if (user != null) {
                 nickname = user.kakaoAccount?.profile?.nickname.toString()
                 profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
@@ -153,6 +151,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun openTermsPopup() {
-        DialogTermsActivity(this@LoginActivity).show()
+//        DialogTermsActivity(this@LoginActivity, nickname, profile).show()
+//        intent.putExtra("nickname", nickname)
+//        intent.putExtra("img", profile)
+//        startActivity(intent)
+        val dialog = DialogTermsActivity(this@LoginActivity, nickname, profile)
+        dialog.show()
+        dialog.setOnDismissListener {
+            intent.putExtra("nickname", nickname)
+            intent.putExtra("img", profile)
+            startActivity(intent)
+        }
     }
 }
