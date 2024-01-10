@@ -19,6 +19,9 @@ class SettingActivity: AppCompatActivity() {
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
 
+//    private var userName: String? = ""
+//    private var userImg: String? = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
@@ -27,7 +30,17 @@ class SettingActivity: AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
 
+//        userName = intent.getStringExtra("userName")
+//        userImg = intent.getStringExtra("userImg")
+
         clickListener()
+
+        binding.settingAccountTv.setOnClickListener {
+            val accountIntent = Intent(this@SettingActivity, AccountActivity::class.java)
+//            accountIntent.putExtra("userName", userName)
+//            accountIntent.putExtra("userImg", userImg)
+            startActivity(accountIntent)
+        }
     }
 
     private fun clickListener() {

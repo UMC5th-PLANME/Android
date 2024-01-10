@@ -1,6 +1,8 @@
 package com.example.plan_me.ui.login
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -13,16 +15,15 @@ import com.squareup.picasso.Picasso
 
 class InitProfileActivity: AppCompatActivity() {
     private lateinit var binding: ActivityInitProfileBinding
-    private var userName: String = ""
-    private var userImg: String = ""
+    private var userName: String? = ""
+    private var userImg: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityInitProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userName = intent.getStringExtra("userName")!!
-        userImg = intent.getStringExtra("userImg")!!
+        getData()
 
         binding.initProfileNameTv.text = userName
         Picasso.get().load(userImg).transform(CircleTransform()).into(binding.initProfileImagefileIv)
@@ -31,11 +32,15 @@ class InitProfileActivity: AppCompatActivity() {
         }
     }
 
+    private fun getData() {
+        // 데이터 읽어오기
+        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+        userName = sharedPreferences.getString("userName", userName)
+        userImg = sharedPreferences.getString("userImg", userImg)
+    }
+
     private fun goMainActivity() {
         val intent = Intent(this@InitProfileActivity, MainActivity::class.java)
-        // setting 화면에서 사용
-        intent.putExtra("userName", userName)
-        intent.putExtra("userImg", userImg)
         startActivity(intent)
     }
 }
