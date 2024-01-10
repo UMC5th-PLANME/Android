@@ -4,6 +4,7 @@ package com.example.plan_me.ui.login
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
@@ -31,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     var nickname : String = ""
     var profile :String = ""
+    var social: String = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -47,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         // 카카오 로그인
         binding.loginKakaoBtn.setOnClickListener {
             login_kakao()
@@ -129,7 +132,9 @@ class LoginActivity : AppCompatActivity() {
             if (user != null) {
                 nickname = user.kakaoAccount?.profile?.nickname.toString()
                 profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
+                social = "카카오"
                 Log.d("userInfo", nickname + "&&" + profile)
+                saveData()
             }
         }
     }
@@ -151,16 +156,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun openTermsPopup() {
-//        DialogTermsActivity(this@LoginActivity, nickname, profile).show()
-//        intent.putExtra("nickname", nickname)
-//        intent.putExtra("img", profile)
-//        startActivity(intent)
-        val dialog = DialogTermsActivity(this@LoginActivity, nickname, profile)
+        val dialog = DialogTermsActivity(this@LoginActivity)
         dialog.show()
-        dialog.setOnDismissListener {
-            intent.putExtra("nickname", nickname)
-            intent.putExtra("img", profile)
-            startActivity(intent)
-        }
+    }
+
+    private fun saveData() {
+        // 데이터 저장
+        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString("userName", nickname)
+        editor.putString("userImg", profile)
+        editor.putString("social", social)
+        editor.apply()
     }
 }

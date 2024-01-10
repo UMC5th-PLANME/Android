@@ -27,6 +27,7 @@ import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogRepeatFragment
 import com.example.plan_me.ui.planner.PlannerFragment
+import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -40,6 +41,9 @@ class MainActivity : AppCompatActivity() {
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
+
+    private var userName: String? = ""
+    private var userImg: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -76,6 +80,12 @@ class MainActivity : AppCompatActivity() {
             switchActivity(TimerFocusActivity())
         }
         binding.mainFabSettingBtn.setOnClickListener {
+            userName = intent.getStringExtra("userName")
+            userImg = intent.getStringExtra("userImg")
+            val settingIntent = Intent(this@MainActivity, SettingActivity::class.java)
+            settingIntent.putExtra("userName", userName)
+            settingIntent.putExtra("userImg", userImg)
+            startActivity(settingIntent)
         }
         binding.mainFabAddBtn.setOnClickListener {
             dialogAdd = DialogAddFragment(this)
