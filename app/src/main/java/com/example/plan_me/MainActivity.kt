@@ -27,6 +27,7 @@ import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogRepeatFragment
 import com.example.plan_me.ui.planner.PlannerFragment
+import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -76,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             switchActivity(TimerFocusActivity())
         }
         binding.mainFabSettingBtn.setOnClickListener {
+            switchActivity(SettingActivity())
         }
         binding.mainFabAddBtn.setOnClickListener {
             dialogAdd = DialogAddFragment(this)
