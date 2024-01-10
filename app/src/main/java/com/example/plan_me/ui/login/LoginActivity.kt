@@ -156,17 +156,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun openTermsPopup() {
-//        DialogTermsActivity(this@LoginActivity, nickname, profile).show()
-//        intent.putExtra("nickname", nickname)
-//        intent.putExtra("img", profile)
-//        startActivity(intent)
-        val dialog = DialogTermsActivity(this@LoginActivity, nickname, profile)
+        val dialog = DialogTermsActivity(this@LoginActivity)
         dialog.show()
-        dialog.setOnDismissListener {
-//            intent.putExtra("nickname", nickname)
-//            intent.putExtra("img", profile)
-            startActivity(intent)
-        }
     }
 
     private fun saveData() {

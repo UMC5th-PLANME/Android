@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.plan_me.databinding.ActivityDialogTermsBinding
 import com.example.plan_me.ui.login.InitProfileActivity
 
-class DialogTermsActivity(context: Context, private val nickname: String, private val profile: String): Dialog(context) {
+class DialogTermsActivity(context: Context): Dialog(context) {
     private lateinit var binding: ActivityDialogTermsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

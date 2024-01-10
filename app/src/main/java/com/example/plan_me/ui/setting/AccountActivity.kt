@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.databinding.ActivityAccountBinding
 import com.example.plan_me.ui.CircleTransform
+import com.example.plan_me.ui.dialog.DialogDeleteActivity
+import com.example.plan_me.ui.dialog.DialogLogoutActivity
 import com.squareup.picasso.Picasso
 
 class AccountActivity: AppCompatActivity() {
@@ -26,6 +28,16 @@ class AccountActivity: AppCompatActivity() {
 
         binding.accountBackBtn.setOnClickListener {
             finish()
+        }
+
+        binding.accountLogoutTv.setOnClickListener {
+            val dialog = DialogLogoutActivity(this@AccountActivity)
+            dialog.show()
+        }
+
+        binding.accountDeleteTv.setOnClickListener {
+            val dialog = DialogDeleteActivity(this@AccountActivity)
+            dialog.show()
         }
     }
 
