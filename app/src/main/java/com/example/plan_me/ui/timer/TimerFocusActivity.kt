@@ -11,5 +11,11 @@ class TimerFocusActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerFocusBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        clickListener()
+    }
+
+    private fun clickListener() {
+
     }
 }
