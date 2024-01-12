@@ -14,6 +14,7 @@ import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
+import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 
 class TimerFocusActivity: AppCompatActivity() {
@@ -21,6 +22,7 @@ class TimerFocusActivity: AppCompatActivity() {
 
     private var isFabOpen = false
     private lateinit var dialogAdd : DialogAddFragment
+    private lateinit var dialogSetting: DialogTimerSettingFragment
     private lateinit var drawerView: View
     private lateinit var drawerCancel: ImageView
 
@@ -50,32 +52,40 @@ class TimerFocusActivity: AppCompatActivity() {
 
     private fun clickListener() {
         binding.timerFocusFabMenuBtn.setOnClickListener {
-            Log.d("fab: timer-break","timer-break")
+            Log.d("fab: timer-focus","timer-break")
             toggleFab()
         }
         binding.timerFocusFabMestoryBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
+            Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(MestoryActivity())
         }
         binding.timerFocusFabPlannerBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
+            Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(MainActivity())
         }
         binding.timerFocusFabSettingBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
+            Log.d("fab: timer-focus", "timer-break -> mestory")
         }
         binding.timerFocusFabAddBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
+            Log.d("fab: timer-focus", "timer-break -> mestory")
             dialogAdd = DialogAddFragment(this)
             dialogAdd.show()
         }
         binding.timerFocusMenuBtn.setOnClickListener{
-            Log.d("menu: timer-break", "Open menu")
+            Log.d("menu: timer-focus", "Open menu")
             binding.timerFocusDrawerLayout.openDrawer(drawerView!!)
         }
         drawerCancel.setOnClickListener {
-            Log.d("menu: timer-break", "Close menu")
+            Log.d("menu: timer-focus", "Close menu")
             binding.timerFocusDrawerLayout.closeDrawers()
+        }
+        binding.timerFocusSettingBtn.setOnClickListener {
+            Log.d("setting: timer-focus", "Time Setting")
+
+            // Timer-Break 에 시간이 남았다면 -> 초기화 알림 문구
+
+            dialogSetting = DialogTimerSettingFragment(this)
+            dialogSetting.show()
         }
     }
 
