@@ -1,7 +1,6 @@
 
 package com.example.plan_me.ui.login
 
-import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,8 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.plan_me.MainActivity
-import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityLoginBinding
 import com.example.plan_me.ui.dialog.DialogTermsActivity
@@ -22,10 +19,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {

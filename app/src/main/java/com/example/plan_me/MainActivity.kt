@@ -3,33 +3,20 @@ package com.example.plan_me
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.RadioGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.plan_me.databinding.ActivityMainBinding
+import com.example.plan_me.ui.all.AllFragment
 import com.example.plan_me.ui.dialog.DialogAddFragment
-import com.example.plan_me.ui.dialog.DialogAlarmFragment
-import com.example.plan_me.ui.dialog.DialogRepeatFragment
-import com.example.plan_me.ui.planner.PlannerFragment
+import com.example.plan_me.ui.home.HomeFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +31,8 @@ class MainActivity : AppCompatActivity() {
 
     private var userName: String? = ""
     private var userImg: String? = ""
+
+    private var isHome : Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -55,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         drawerCancel = findViewById(R.id.drawer_cancel)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frm, PlannerFragment())
+            .replace(R.id.main_frm, HomeFragment())
             .commitAllowingStateLoss()
 
         clickListener()
@@ -96,6 +85,25 @@ class MainActivity : AppCompatActivity() {
         }
         drawerCancel.setOnClickListener {
             binding.mainDrawerLayout.closeDrawers()
+        }
+        binding.mainAllBtn.setOnClickListener{
+            if (isHome) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, AllFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_home)
+                binding.mainAllBtn.text = "HOME"
+                binding.mainAllBtn.setTextColor(Color.WHITE)
+                isHome=false
+            }else {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, HomeFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            }
         }
     }
     private fun switchActivity(activity: Activity) {
