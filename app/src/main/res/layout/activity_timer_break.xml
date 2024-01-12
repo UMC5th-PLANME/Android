@@ -117,6 +117,18 @@
             app:layout_constraintStart_toStartOf="@id/timer_break_circle_default"
             app:layout_constraintEnd_toEndOf="@id/timer_break_circle_default"/>
 
+        <TextView
+            android:id="@+id/timer_break_time_clear_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLEAR"
+            android:textSize="40sp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@+id/timer_break_circle_default"
+            app:layout_constraintBottom_toBottomOf="@id/timer_break_circle_default"
+            app:layout_constraintStart_toStartOf="@id/timer_break_circle_default"
+            app:layout_constraintEnd_toEndOf="@id/timer_break_circle_default"/>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/timer_break_play_cv"
             android:layout_width="213dp"

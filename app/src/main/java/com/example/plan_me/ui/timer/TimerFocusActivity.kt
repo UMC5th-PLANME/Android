@@ -84,6 +84,7 @@ class TimerFocusActivity: AppCompatActivity() {
 
             // Timer-Break 에 시간이 남았다면 -> 초기화 알림 문구
 
+
             dialogSetting = DialogTimerSettingFragment(this)
             dialogSetting.show()
         }
