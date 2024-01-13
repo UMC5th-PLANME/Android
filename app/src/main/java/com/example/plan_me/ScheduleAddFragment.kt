@@ -8,16 +8,20 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.plan_me.databinding.FragmentScheduleAddBinding
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
+import com.example.plan_me.ui.dialog.DialogCalenderFragment
+import com.example.plan_me.ui.dialog.DialogCalenderInterface
 import com.example.plan_me.ui.dialog.DialogRepeatFragment
 import com.example.plan_me.ui.dialog.DialogRepeatInterface
 import com.example.plan_me.ui.dialog.DialogTimePickFragment
 import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
+import java.time.LocalDate
 
 class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterface,
-    DialogTimeRangePickInerface {
+    DialogTimeRangePickInerface, DialogCalenderInterface {
     private lateinit var binding : FragmentScheduleAddBinding
+    private lateinit var dialogCalender : DialogCalenderFragment
     private lateinit var dialogAlarm : DialogAlarmFragment
     private lateinit var dialogRepeat : DialogRepeatFragment
     private lateinit var dialogTimePick : DialogTimePickFragment
@@ -36,6 +40,10 @@ class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterf
         binding.scheduleAlarmTv.setOnClickListener {
             dialogAlarm = DialogAlarmFragment(requireContext())
             dialogAlarm.show()
+        }
+        binding.scheduleDateBtn.setOnClickListener {
+            dialogCalender = DialogCalenderFragment(requireContext(), this)
+            dialogCalender.show()
         }
         binding.scheduleRepeatTv.setOnClickListener {
             dialogRepeat = DialogRepeatFragment(requireContext(), this)
@@ -90,6 +98,16 @@ class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterf
 
     override fun onRangeClickCancel() {
         dialogTimeRangePick.dismiss()
+    }
+
+    override fun onClickCalenderConfirm(start : LocalDate?, end: LocalDate?) {
+        if (end == null) {
+            binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일"
+        }
+        else {
+            binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일 - "+ end!!.monthValue.toString() +"월 " + end!!.dayOfMonth+"일"
+        }
+        dialogCalender.dismiss()
     }
 
 }
