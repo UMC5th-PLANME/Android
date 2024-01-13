@@ -58,6 +58,7 @@
         <activity android:name=".ui.setting.AccountActivity"/>
         <activity android:name=".ui.setting.ChangeNicknameActivity"/>
         <activity android:name=".ui.setting.ChangeTypeActivity"/>
+        <activity android:name=".ui.setting.ManageMestoryActivity"/>
         <activity android:name=".ui.setting.ConsumerCenterActivity"/>
         <activity android:name=".ui.setting.TermsPoliciesActivity"/>
         <activity android:name=".ui.setting.InformationActivity"/>
