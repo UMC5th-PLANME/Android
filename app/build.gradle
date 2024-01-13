@@ -80,11 +80,9 @@ dependencies {
     // desugar jdk
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
 
-    // The view calendar library
-    implementation 'com.kizitonwose.calendar:view:2.4.1'
 
-    // The compose calendar library
-    implementation 'com.kizitonwose.calendar:compose:2.5.0-beta01'
+    implementation 'com.kizitonwose.calendar:view:2.4.1'
+    implementation 'com.kizitonwose.calendar:compose:2.4.1'
 
     // timber
     implementation 'com.jakewharton.timber:timber:5.0.1'

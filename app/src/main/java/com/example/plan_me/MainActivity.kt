@@ -23,6 +23,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.plan_me.databinding.ActivityMainBinding
+import com.example.plan_me.ui.all.AllFragment
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogRepeatFragment
@@ -45,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
     private var userName: String? = ""
     private var userImg: String? = ""
+
+    private var isHome : Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -94,6 +98,25 @@ class MainActivity : AppCompatActivity() {
         }
         drawerCancel.setOnClickListener {
             binding.mainDrawerLayout.closeDrawers()
+        }
+        binding.mainAllBtn.setOnClickListener{
+            if (isHome) {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, AllFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_planner)
+                binding.mainAllBtn.text = "HOME"
+                binding.mainAllBtn.setTextColor(Color.WHITE)
+                isHome=false
+            }else {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_frm, PlannerFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            }
         }
     }
     private fun switchActivity(activity: Activity) {
