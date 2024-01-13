@@ -19,6 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/information_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/schedule_backarrow"
+        android:backgroundTint="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="@id/information_tv"
+        app:layout_constraintEnd_toStartOf="@id/information_tv"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/information_tv" />
+
     <TextView
         android:id="@+id/information_opensource_tv"
         android:layout_width="match_parent"

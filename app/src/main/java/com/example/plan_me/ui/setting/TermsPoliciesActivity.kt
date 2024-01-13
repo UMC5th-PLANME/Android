@@ -27,6 +27,15 @@ class TermsPoliciesActivity: AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         clickListener()
+
+        binding.termsPoliciesBackBtn.setOnClickListener {
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun clickListener() {

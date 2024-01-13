@@ -27,6 +27,15 @@ class ConsumerCenterActivity: AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         clickListener()
+
+        binding.consumerCenterBackBtn.setOnClickListener {
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun clickListener() {

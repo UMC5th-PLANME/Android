@@ -19,6 +19,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/terms_policies_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/schedule_backarrow"
+        android:backgroundTint="@color/dark_gray"
+        app:layout_constraintBottom_toBottomOf="@id/terms_policies_tv"
+        app:layout_constraintEnd_toStartOf="@id/terms_policies_tv"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/terms_policies_tv" />
+
     <TextView
         android:id="@+id/terms_policies_use_tv"
         android:layout_width="match_parent"
