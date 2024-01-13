@@ -83,12 +83,7 @@ class MainActivity : AppCompatActivity() {
             switchActivity(TimerFocusActivity())
         }
         binding.mainFabSettingBtn.setOnClickListener {
-            userName = intent.getStringExtra("userName")
-            userImg = intent.getStringExtra("userImg")
-            val settingIntent = Intent(this@MainActivity, SettingActivity::class.java)
-            settingIntent.putExtra("userName", userName)
-            settingIntent.putExtra("userImg", userImg)
-            startActivity(settingIntent)
+            switchActivity(SettingActivity())
         }
         binding.mainFabAddBtn.setOnClickListener {
             dialogAdd = DialogAddFragment(this)

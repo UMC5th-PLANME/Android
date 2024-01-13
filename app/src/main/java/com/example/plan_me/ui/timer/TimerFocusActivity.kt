@@ -16,6 +16,7 @@ import com.example.plan_me.databinding.ActivityTimerFocusBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
+import com.example.plan_me.ui.setting.SettingActivity
 
 class TimerFocusActivity: AppCompatActivity() {
     private lateinit var binding: ActivityTimerFocusBinding
@@ -65,6 +66,7 @@ class TimerFocusActivity: AppCompatActivity() {
         }
         binding.timerFocusFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
+            switchActivity(SettingActivity())
         }
         binding.timerFocusFabAddBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")

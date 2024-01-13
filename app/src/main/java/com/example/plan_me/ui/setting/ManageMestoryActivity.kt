@@ -10,44 +10,32 @@ import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
-import com.example.plan_me.databinding.ActivitySettingBinding
-import com.example.plan_me.ui.mestory.MestoryActivity
+import com.example.plan_me.databinding.ActivityManageMestoryBinding
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
-class SettingActivity: AppCompatActivity() {
-    private lateinit var binding: ActivitySettingBinding
+class ManageMestoryActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityManageMestoryBinding
     private var isFabOpen = false
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySettingBinding.inflate(layoutInflater)
+        binding = ActivityManageMestoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         clickListener()
 
-        binding.settingAccountTv.setOnClickListener {
-            switchActivity(AccountActivity())
+        binding.manageMestoryBackBtn.setOnClickListener {
+            finish()
         }
+    }
 
-        binding.settingMestoryTv.setOnClickListener {
-            switchActivity(ManageMestoryActivity())
-        }
-
-        binding.settingConsumerTv.setOnClickListener {
-            switchActivity(ConsumerCenterActivity())
-        }
-
-        binding.settingTermsTv.setOnClickListener {
-            switchActivity(TermsPoliciesActivity())
-        }
-
-        binding.settingInformationTv.setOnClickListener {
-            switchActivity(InformationActivity())
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun clickListener() {
@@ -56,7 +44,6 @@ class SettingActivity: AppCompatActivity() {
             toggleFab()
         }
         binding.settingFabMestoryBtn.setOnClickListener {
-            switchActivity(MestoryActivity())
         }
         binding.settingFabTimerBtn.setOnClickListener {
             switchActivity(TimerFocusActivity())

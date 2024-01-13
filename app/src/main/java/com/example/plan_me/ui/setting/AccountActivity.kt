@@ -1,5 +1,8 @@
 package com.example.plan_me.ui.setting
 
+import android.app.Activity
+import android.app.Dialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -30,15 +33,35 @@ class AccountActivity: AppCompatActivity() {
             finish()
         }
 
+        binding.accountNicknameBtn.setOnClickListener {
+            switchActivity(ChangeNicknameActivity())
+        }
+
+        binding.accountSocialBtn.setOnClickListener {
+            switchActivity(ChangeTypeActivity())
+        }
+
         binding.accountLogoutTv.setOnClickListener {
-            val dialog = DialogLogoutActivity(this@AccountActivity)
-            dialog.show()
+            showDialog(DialogLogoutActivity(this@AccountActivity))
         }
 
         binding.accountDeleteTv.setOnClickListener {
-            val dialog = DialogDeleteActivity(this@AccountActivity)
-            dialog.show()
+            showDialog(DialogDeleteActivity(this@AccountActivity))
         }
+    }
+
+    private fun showDialog(dialog: Dialog) {
+        dialog.show()
+    }
+
+    private fun switchActivity(activity: Activity) {
+        val intent = Intent(this, activity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     private fun getData() {
