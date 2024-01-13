@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivitySettingBinding
+import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
 class SettingActivity: AppCompatActivity() {
@@ -55,6 +56,7 @@ class SettingActivity: AppCompatActivity() {
             toggleFab()
         }
         binding.settingFabMestoryBtn.setOnClickListener {
+            switchActivity(MestoryActivity())
         }
         binding.settingFabTimerBtn.setOnClickListener {
             switchActivity(TimerFocusActivity())
