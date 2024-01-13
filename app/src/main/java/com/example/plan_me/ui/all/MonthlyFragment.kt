@@ -80,7 +80,7 @@ class MonthlyFragment: Fragment() {
             .map {it as TextView }
             .forEachIndexed {index, textView ->
                 val dayOfWeek = daysOfWeek[index]
-                val title = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH)
+                val title = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase()
                 textView.text = title
             }
 
