@@ -37,6 +37,10 @@ class AccountActivity: AppCompatActivity() {
             switchActivity(ChangeNicknameActivity())
         }
 
+        binding.accountSocialBtn.setOnClickListener {
+            switchActivity(ChangeTypeActivity())
+        }
+
         binding.accountLogoutTv.setOnClickListener {
             showDialog(DialogLogoutActivity(this@AccountActivity))
         }

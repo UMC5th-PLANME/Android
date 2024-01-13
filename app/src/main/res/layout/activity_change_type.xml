@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/change_type_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="연동된 소셜 계정"
+        android:textSize="24dp"
+        android:textColor="@color/dark_gray"
+        android:fontFamily="@font/pretendard_bold"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/change_type_back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_gray"
+        android:background="@drawable/schedule_backarrow"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintEnd_toStartOf="@id/change_type_tv"
+        app:layout_constraintTop_toTopOf="@id/change_type_tv"
+        app:layout_constraintBottom_toBottomOf="@id/change_type_tv"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/change_type_edit_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="소셜 계정"
+        android:textColor="@color/black"
+        android:textSize="16dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:layout_marginTop="53dp"
+        app:layout_constraintBottom_toTopOf="@id/change_type_et"
+        app:layout_constraintTop_toBottomOf="@id/change_type_tv"
+        app:layout_constraintStart_toStartOf="@id/change_type_back_btn"/>
+
+    <EditText
+        android:id="@+id/change_type_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/account_et"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginTop="11dp"
+        android:textSize="16dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_regular"
+        android:hint="소셜 계정"
+        android:paddingHorizontal="17dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/change_type_edit_tv"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/change_type_lo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/account_et"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintStart_toStartOf="@id/change_type_et"
+        app:layout_constraintEnd_toEndOf="@id/change_type_et"
+        app:layout_constraintTop_toBottomOf="@id/change_type_et">
+
+        <TextView
+            android:id="@+id/change_type_account_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="소셜 계정으로 전환"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/change_type_account_btn"
+            android:layout_width="6dp"
+            android:layout_height="10dp"
+            android:background="@drawable/account_btn_arrow"
+            android:backgroundTint="@color/dark_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
