@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/timer_focus_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timer_focus_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="77dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/timer_focus_menu_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/public_more"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/timer_focus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FOCUS"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/timer_focus_menu_btn"
+                app:layout_constraintEnd_toStartOf="@+id/timer_focus_setting_btn"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/timer_focus_setting_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/timer_setting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/timer_focus_category_cv"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            app:cardBackgroundColor="@color/deep_ivory"
+            app:cardCornerRadius="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timer_focus_cl">
+
+            <LinearLayout
+                android:id="@+id/timer_focus_category_ll"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/timer_focus_study_emoticon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="📚"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="STUDY"
+                    android:textStyle="bold"
+                    android:textSize="32sp"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    app:layout_constraintTop_toBottomOf="@+id/timer_focus_study_emoticon"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <ImageView
+            android:id="@+id/timer_focus_circle_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/timer_time_circle_default"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/timer_focus_category_cv"/>
+
+        <TextView
+            android:id="@+id/timer_focus_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0:00:00"
+            android:textSize="40sp"
+            app:layout_constraintTop_toTopOf="@+id/timer_focus_circle_default"
+            app:layout_constraintBottom_toBottomOf="@id/timer_focus_circle_default"
+            app:layout_constraintStart_toStartOf="@id/timer_focus_circle_default"
+            app:layout_constraintEnd_toEndOf="@id/timer_focus_circle_default"/>
+
+        <TextView
+            android:id="@+id/timer_focus_time_clear_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLEAR"
+            android:textSize="40sp"
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@+id/timer_focus_circle_default"
+            app:layout_constraintBottom_toBottomOf="@id/timer_focus_circle_default"
+            app:layout_constraintStart_toStartOf="@id/timer_focus_circle_default"
+            app:layout_constraintEnd_toEndOf="@id/timer_focus_circle_default"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/timer_focus_play_cv"
+            android:layout_width="213dp"
+            android:layout_height="45dp"
+            app:cardBackgroundColor="@color/dark_gray"
+            app:cardCornerRadius="30dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timer_focus_circle_default">
+
+
+            <ImageView
+                android:id="@+id/timer_focus_play_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/timer_play_btn"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_gravity="center_vertical"/>
+
+            <ImageView
+                android:id="@+id/timer_focus_pause_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/timer_pause_btn"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/timer_focus_play_cv">
+
+            <TextView
+                android:id="@+id/timer_focus_reset_btn"
+                android:text="RESET"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/timer_focus_contour_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/timer_contour"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="35dp"/>
+
+            <TextView
+                android:id="@+id/timer_focus_save_btn"
+                android:text="SAVE "
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timer_focus_fab_add_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="24dp"
+            app:tint="@color/white"
+            android:src="@drawable/main_add_white"
+            app:backgroundTint="@color/white_gray"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_focus_fab_setting_btn"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timer_focus_fab_setting_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="24dp"
+            app:tint="@color/white"
+            android:src="@drawable/main_btn_setting"
+            app:maxImageSize="35dp"
+            app:backgroundTint="@color/white_gray"
+            app:fabCustomSize="@dimen/design_fab_image_size"
+            android:visibility="gone"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_focus_fab_planner_btn"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timer_focus_fab_planner_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="24dp"
+            app:tint="@color/white"
+            android:src="@drawable/main_btn_planner"
+            app:maxImageSize="35dp"
+            app:backgroundTint="@color/white_gray"
+            android:visibility="gone"
+            app:fabCustomSize="@dimen/design_fab_image_size"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_focus_fab_mestory_btn" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timer_focus_fab_mestory_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_marginEnd="24dp"
+            app:tint="@color/white"
+            android:src="@drawable/main_btn_mestory"
+            app:maxImageSize="35dp"
+            android:visibility="gone"
+            app:fabCustomSize="@dimen/design_fab_image_size"
+            app:backgroundTint="@color/white_gray"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_focus_fab_menu_btn" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/timer_focus_fab_menu_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="56dp"
+            app:backgroundTint="@color/dark_gray"
+            app:tint="@color/white"
+            app:maxImageSize="35dp"
+            app:fabCustomSize="@dimen/design_fab_image_size"
+            android:src="@drawable/main_btn_timer"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/activity_drawer"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
