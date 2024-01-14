@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -8,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/schedule_dialog_shape"
-        android:layout_marginHorizontal="70dp"
+        android:layout_marginHorizontal="40dp"
         android:paddingHorizontal="30dp">
 
         <TextView
@@ -20,26 +21,165 @@
             android:text="카테고리 추가"
             android:textColor="@color/dark_gray"
             android:textSize="24dp"
-            app:layout_constraintBottom_toTopOf="@id/add_category_imoticon_et"
+            app:layout_constraintBottom_toTopOf="@id/add_category_emoticon_lo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/add_category_imoticon_et"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginTop="35dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/add_category_emoticon_lo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/category_et"
-            android:fontFamily="@font/pretendard_regular"
-            android:hint="이모티콘"
-            android:paddingStart="22dp"
-            android:textColor="@color/dark_gray"
-            android:textSize="12dp"
             app:layout_constraintBottom_toTopOf="@id/add_category_name_et"
-            app:layout_constraintEnd_toEndOf="@id/add_category_tv"
-            app:layout_constraintStart_toStartOf="@id/add_category_tv"
-            app:layout_constraintTop_toBottomOf="@id/add_category_tv" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/add_category_tv">
+
+            <TextView
+                android:id="@+id/add_category_emoticon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="11dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="이모티콘"
+                android:textColor="@color/white_gray"
+                android:textSize="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/emoticon_lo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="26dp"
+                android:layout_marginVertical="12dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/add_category_emoticon_tv"
+                android:gravity="center">
+
+                <RadioGroup
+                    android:id="@+id/emoticon_group1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/emoticon_1_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="📕"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_2_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="📗"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_3_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="📘"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_4_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="📊"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_5_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:text="🔍"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                </RadioGroup>
+
+                <RadioGroup
+                    android:id="@+id/emoticon_group2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/emoticon_6_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="🎬"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_7_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="🎨"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_8_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="🎵"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_9_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="⛳"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                    <RadioButton
+                        android:id="@+id/emoticon_10_btn"
+                        android:layout_width="28dp"
+                        android:layout_height="26dp"
+                        android:text="⭐"
+                        android:gravity="center"
+                        android:background="@drawable/category_radio_color0"
+                        android:button="@color/transparent" />
+
+                </RadioGroup>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/add_category_name_et"
@@ -52,9 +192,9 @@
             android:paddingStart="22dp"
             android:textColor="@color/dark_gray"
             android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="@id/add_category_imoticon_et"
-            app:layout_constraintStart_toStartOf="@id/add_category_imoticon_et"
-            app:layout_constraintTop_toBottomOf="@id/add_category_imoticon_et" />
+            app:layout_constraintEnd_toEndOf="@id/add_category_emoticon_lo"
+            app:layout_constraintStart_toStartOf="@id/add_category_emoticon_lo"
+            app:layout_constraintTop_toBottomOf="@id/add_category_emoticon_lo" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_category_color_lo"
@@ -82,16 +222,16 @@
 
             <LinearLayout
                 android:id="@+id/color_lo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="219dp"
+                android:layout_height="64dp"
                 android:layout_marginHorizontal="26dp"
                 android:layout_marginVertical="12dp"
+                android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/add_category_color_tv"
-                android:gravity="center">
+                app:layout_constraintTop_toBottomOf="@id/add_category_color_tv">
 
                 <RadioGroup
                     android:id="@+id/color_group1"
