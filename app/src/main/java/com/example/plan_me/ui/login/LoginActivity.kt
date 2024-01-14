@@ -77,6 +77,7 @@ class LoginActivity : AppCompatActivity() {
             profile = account.photoUrl.toString()
             social = "구글"
             Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social)
+            saveData()
             Log.d(TAG, "Google 로그인 성공")
             openTermsPopup()
         }
@@ -130,7 +131,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getGoogleClient(): GoogleSignInClient {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.google_client_id))
             .requestEmail() // 이메일도 요청 가능
             .build()
         Log.d("googleSignInOption", googleSignInOption.serverClientId.toString())
