@@ -30,10 +30,11 @@ class DialogAddFragment(context : Context): Dialog(context) {
             dismiss()
         }
 
+        addPopup(binding.emoticonGroup1, binding.emoticonGroup2)
+        addPopup(binding.colorGroup1, binding.colorGroup2)
+
     }
-    private fun addPopup() {
-        val radioGroup1 = binding.colorGroup1
-        val radioGroup2 = binding.colorGroup1
+    private fun addPopup(radioGroup1: RadioGroup, radioGroup2: RadioGroup) {
 
         // 라디오 그룹1 체크 상태 변경 리스너
         radioGroup1!!.setOnCheckedChangeListener { group, checkedId ->
@@ -62,6 +63,5 @@ class DialogAddFragment(context : Context): Dialog(context) {
                 ignoreCheckChange = false
             }
         }
-
     }
 }

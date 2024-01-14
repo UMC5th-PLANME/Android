@@ -1,6 +1,7 @@
 package com.example.plan_me
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,6 +18,7 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -32,21 +34,17 @@ import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
-    private lateinit var dialogAdd : DialogAddFragment
     private lateinit var drawerView:View
     private lateinit var drawerCancel:ImageView
+    private lateinit var drawerAdd: TextView
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
-
-    private var userName: String? = ""
-    private var userImg: String? = ""
 
     private var isHome : Boolean = true
 
@@ -59,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
         drawerCancel = findViewById(R.id.drawer_cancel)
+        drawerAdd = findViewById(R.id.drawer_add_tv)
+
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
@@ -99,6 +99,9 @@ class MainActivity : AppCompatActivity() {
         drawerCancel.setOnClickListener {
             binding.mainDrawerLayout.closeDrawers()
         }
+        drawerAdd.setOnClickListener {
+            showDialog(DialogAddFragment(this@MainActivity))
+        }
         binding.mainAllBtn.setOnClickListener{
             if (isHome) {
                 supportFragmentManager.beginTransaction()
@@ -118,6 +121,10 @@ class MainActivity : AppCompatActivity() {
                 isHome=true
             }
         }
+    }
+
+    private fun showDialog(dialog: Dialog) {
+        dialog.show()
     }
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
