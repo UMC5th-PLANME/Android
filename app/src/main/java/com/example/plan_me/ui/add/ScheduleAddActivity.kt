@@ -1,12 +1,9 @@
-package com.example.plan_me
+package com.example.plan_me.ui.add
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
-import com.example.plan_me.databinding.FragmentScheduleAddBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.example.plan_me.databinding.ActivityScheduleAddBinding
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogCalenderFragment
 import com.example.plan_me.ui.dialog.DialogCalenderInterface
@@ -18,44 +15,44 @@ import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
 import java.time.LocalDate
 
-class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterface,
+class ScheduleAddActivity: AppCompatActivity(), DialogTimePickInerface, DialogRepeatInterface,
     DialogTimeRangePickInerface, DialogCalenderInterface {
-    private lateinit var binding : FragmentScheduleAddBinding
+    private lateinit var binding : ActivityScheduleAddBinding
     private lateinit var dialogCalender : DialogCalenderFragment
     private lateinit var dialogAlarm : DialogAlarmFragment
     private lateinit var dialogRepeat : DialogRepeatFragment
     private lateinit var dialogTimePick : DialogTimePickFragment
     private lateinit var dialogTimeRangePick : DialogTimeRangePickFragment
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding =FragmentScheduleAddBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityScheduleAddBinding.inflate(layoutInflater)
         clickListener()
-        return binding.root
+        setContentView(binding.root)
     }
 
     private fun clickListener() {
         binding.scheduleAlarmTv.setOnClickListener {
-            dialogAlarm = DialogAlarmFragment(requireContext())
+            dialogAlarm = DialogAlarmFragment(this)
             dialogAlarm.show()
         }
         binding.scheduleDateBtn.setOnClickListener {
-            dialogCalender = DialogCalenderFragment(requireContext(), this)
+            dialogCalender = DialogCalenderFragment(this, this)
             dialogCalender.show()
         }
         binding.scheduleRepeatTv.setOnClickListener {
-            dialogRepeat = DialogRepeatFragment(requireContext(), this)
+            dialogRepeat = DialogRepeatFragment(this, this)
             dialogRepeat.show()
         }
         binding.scheduleAlarmTimeView.setOnClickListener {
-            dialogTimePick = DialogTimePickFragment(requireContext(), this)
+            dialogTimePick = DialogTimePickFragment(this, this)
             dialogTimePick.show()
         }
         binding.scheduleTimeBtn.setOnClickListener{
-            dialogTimeRangePick = DialogTimeRangePickFragment(requireContext(), this)
+            dialogTimeRangePick = DialogTimeRangePickFragment(this, this)
             dialogTimeRangePick.show()
+        }
+        binding.scheduleBackBtn.setOnClickListener {
+            finish()
         }
     }
 
@@ -92,7 +89,7 @@ class ScheduleAddFragment:Fragment(), DialogTimePickInerface, DialogRepeatInterf
             dialogTimeRangePick.dismiss()
         }
         else {
-            Toast.makeText(requireContext(), "inVaild range", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "inVaild range", Toast.LENGTH_SHORT).show()
         }
     }
 

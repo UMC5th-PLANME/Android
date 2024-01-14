@@ -23,6 +23,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.plan_me.databinding.ActivityMainBinding
+import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
@@ -90,8 +91,7 @@ class MainActivity : AppCompatActivity() {
             switchActivity(SettingActivity())
         }
         binding.mainFabAddBtn.setOnClickListener {
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
+            switchActivity(ScheduleAddActivity())
         }
         binding.mainMenu.setOnClickListener{
             binding.mainDrawerLayout.openDrawer(drawerView!!)

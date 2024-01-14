@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.plan_me.ScheduleAddFragment
+import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.databinding.FragmentAllBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -25,7 +25,7 @@ class AllFragment : Fragment() {
     private fun initViewPager() {
         val allViewPager2Adapter = AllViewPager2Adapter(requireActivity())
         allViewPager2Adapter.addFragment(DailyFragment())
-        allViewPager2Adapter.addFragment(ScheduleAddFragment())
+        allViewPager2Adapter.addFragment(WeeklyFragment())
         allViewPager2Adapter.addFragment(MonthlyFragment())
 
         binding.allVp.adapter = allViewPager2Adapter

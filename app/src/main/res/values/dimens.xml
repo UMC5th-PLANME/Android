@@ -2,5 +2,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
-    <dimen name="design_fab_image_size">58sp</dimen>
+    <dimen name="design_fab_image_size">64sp</dimen>
 </resources>

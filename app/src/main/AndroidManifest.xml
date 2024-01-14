@@ -74,6 +74,7 @@
         <activity android:name=".ui.setting.ConsumerCenterActivity"/>
         <activity android:name=".ui.setting.TermsPoliciesActivity"/>
         <activity android:name=".ui.setting.InformationActivity"/>
+        <activity android:name=".ui.add.ScheduleAddActivity"/>
 
     </application>
 
