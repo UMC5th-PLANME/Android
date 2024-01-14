@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.MainActivity
@@ -30,15 +31,15 @@ import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    var nickname : String = ""
-    var profile :String = ""
+    var nickname : String? = ""
+    var profile :String? = ""
     var social: String = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
-                Log.d(TAG, "google 로그인 성공")
-                openTermsPopup()
+                handleGoogleSignInResult(task)
             } catch (e: ApiException) {
                 Log.e(TAG, "google 로그인 실패", e)
             }
@@ -61,35 +62,28 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == R.string.google_client_id) {
-            // Google 로그인 결과 처리
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleGoogleSignInResult(task)
-        }
-    }
-
-    private fun handleGoogleSignInResult(compltedTask: Task<GoogleSignInAccount>) {
+    private fun handleGoogleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-            val account = compltedTask.getResult(ApiException::class.java)
+            val account = completedTask.getResult(ApiException::class.java)
 
             // Google 로그인 성공
             getUserInfoFromGoogle(account)
         } catch (e: ApiException) {
             // Google 로그인 실패
             Log.e(TAG, "Google 로그인 실패", e)
+            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun getUserInfoFromGoogle(account: GoogleSignInAccount?) {
         // Google 로그인 성공 시, 사용자 정보 가져오기
         if (account != null) {
-            val userId = account.id
-            val userName = account.displayName
-            Log.d("Google 사용자 정보", "id: $userId & name: $userName")
-            //goMainActivity()
+            nickname = account.givenName
+            profile = account.photoUrl.toString()
+            social = "구글"
+            Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social)
+            Log.d(TAG, "Google 로그인 성공")
+            openTermsPopup()
         }
     }
 
