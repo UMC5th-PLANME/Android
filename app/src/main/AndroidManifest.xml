@@ -20,6 +20,18 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_appkey" />
 
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/google_app_id" />
+
+        <meta-data
+            android:name="com.google.android.gms.appstate.APP_ID"
+            android:value="@string/google_app_id" />
+
+        <meta-data
+            android:name="com.google.android.gms.auth.api.signin.CLIENT_ID"
+            android:value="@string/google_client_id" />
+
         <activity
             android:name=".ui.spalsh.SplashActivity"
             android:exported="true">
