@@ -1,17 +1,13 @@
 
 package com.example.plan_me.ui.login
 
-import android.app.Dialog
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.plan_me.MainActivity
-import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityLoginBinding
 import com.example.plan_me.ui.dialog.DialogTermsActivity
@@ -23,10 +19,8 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.auth.model.OAuthToken
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
@@ -40,8 +34,9 @@ class LoginActivity : AppCompatActivity() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
             try {
                 handleGoogleSignInResult(task)
-            } catch (e: ApiException) {
+            } catch(e: ApiException) {
                 Log.e(TAG, "google 로그인 실패", e)
+                Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -135,10 +130,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getGoogleClient(): GoogleSignInClient {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestScopes(Scope("https://www.googleapis.com/auth/pubsub"))
-            .requestServerAuthCode(getString(R.string.google_client_id)) // server authCode 요청
+            .requestIdToken(getString(R.string.google_client_id))
             .requestEmail() // 이메일도 요청 가능
             .build()
+        Log.d("googleSignInOption", googleSignInOption.serverClientId.toString())
 
         return GoogleSignIn.getClient(this@LoginActivity, googleSignInOption)
     }
