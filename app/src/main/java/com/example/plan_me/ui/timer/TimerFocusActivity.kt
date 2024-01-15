@@ -13,6 +13,8 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
+import com.example.plan_me.entity.Time
+import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
@@ -40,6 +42,7 @@ class TimerFocusActivity: AppCompatActivity() {
         drawerView = findViewById(R.id.drawer_layout)
         drawerCancel = findViewById(R.id.drawer_cancel)
 
+        setTime()
         clickListener()
     }
     override fun onBackPressed() {
@@ -121,5 +124,24 @@ class TimerFocusActivity: AppCompatActivity() {
             binding.timerFocusFabAddBtn.setClickable(true)
             true
         }
+    }
+
+    private fun setTime(){
+        val timeDB = TimeDatabase.getInstance(this)!!
+        val time = timeDB.timeDao().getTime()
+
+        if (time.isNotEmpty()) return
+
+        // 기본 timer 설정 값을 Dao 에 저장
+        timeDB.timeDao().insert(
+            Time(
+                50,
+                10,
+                1
+            )
+        )
+
+        val _time = timeDB.timeDao().getTime()
+        Log.d("Default setting", "Insert time :$_time")
     }
 }
