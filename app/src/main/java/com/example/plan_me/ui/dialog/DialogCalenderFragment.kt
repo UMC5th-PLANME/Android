@@ -12,9 +12,7 @@ import android.widget.TextView
 import androidx.core.view.children
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
-import com.example.plan_me.databinding.FragmentDialogAlarmBinding
 import com.example.plan_me.databinding.FragmentDialogCalendarBinding
-import com.example.plan_me.databinding.FragmentDialogRepeatBinding
 import com.example.plan_me.ui.all.MonthViewContainer
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth

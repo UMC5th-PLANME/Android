@@ -10,7 +10,6 @@ import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
-import com.example.plan_me.databinding.FragmentAllBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
@@ -26,11 +25,7 @@ import java.util.Locale
 class DailyFragment : Fragment() {
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
 
         initDayCalendar()

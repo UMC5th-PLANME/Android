@@ -23,4 +23,5 @@
     <color name="pink">#FFB5DD</color>
     <color name="white_ivory">#FDFDFD</color>
     <color name="deep_white_gray">#B4B4B4</color>
+    <color name="transparent_gray">#80000000</color>
 </resources>
