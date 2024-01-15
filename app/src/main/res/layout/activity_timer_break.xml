@@ -46,7 +46,7 @@
                 android:id="@+id/timer_break_setting_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/timer_setting"
+                android:src="@drawable/main_navi_setting"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
