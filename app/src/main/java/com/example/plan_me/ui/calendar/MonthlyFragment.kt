@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentMonthlyBinding
@@ -38,11 +37,7 @@ class MonthlyFragment: Fragment() {
     private lateinit var startMonth :YearMonth
     private lateinit var endMonth :YearMonth
     private lateinit var firstDayOfWeek :DayOfWeek
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMonthlyBinding.inflate(layoutInflater)
         Log.d("start111", "start")
 

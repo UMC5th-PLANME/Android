@@ -91,7 +91,6 @@
                 android:id="@+id/terms_service_cb"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="99dp"
                 android:buttonTint="@color/transparent"
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +109,7 @@
             app:layout_constraintTop_toBottomOf="@id/terms_service_lo">
         </FrameLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/terms_info_lo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
@@ -139,13 +138,12 @@
                 android:id="@+id/terms_info_cb"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="72dp"
                 android:buttonTint="@color/transparent"
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:id="@+id/terms_info_text_lo"

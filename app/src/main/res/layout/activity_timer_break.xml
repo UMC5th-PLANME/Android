@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/timer_break_drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timer_time_lo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,9 +14,10 @@
             android:id="@+id/timer_break_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="77dp"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -63,6 +64,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginTop="22dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_break_circle_default"
             app:layout_constraintTop_toBottomOf="@id/timer_break_cl">
 
             <LinearLayout
@@ -100,10 +102,13 @@
 
         <ImageView
             android:id="@+id/timer_break_circle_default"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/timer_time_circle_default"
             android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="@id/timer_break_category_cv"
+            app:layout_constraintEnd_toEndOf="@id/timer_break_category_cv"
+            app:layout_constraintBottom_toTopOf="@id/timer_break_play_cv"
             app:layout_constraintTop_toBottomOf="@id/timer_break_category_cv"/>
 
         <TextView
@@ -131,13 +136,14 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/timer_break_play_cv"
-            android:layout_width="213dp"
+            android:layout_width="0dp"
             android:layout_height="45dp"
             app:cardBackgroundColor="@color/dark_gray"
             app:cardCornerRadius="30dp"
             android:layout_marginTop="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/timer_break_reset_btn"
+            app:layout_constraintStart_toStartOf="@id/timer_break_circle_default"
+            app:layout_constraintEnd_toEndOf="@id/timer_break_circle_default"
             app:layout_constraintTop_toBottomOf="@id/timer_break_circle_default">
 
             <ImageView
@@ -167,10 +173,13 @@
             android:id="@+id/timer_break_reset_btn"
             android:text="RESET"
             android:textSize="16sp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="25dp"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintStart_toStartOf="@id/timer_break_play_cv"
+            app:layout_constraintEnd_toEndOf="@id/timer_break_play_cv"
             app:layout_constraintTop_toBottomOf="@id/timer_break_play_cv"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

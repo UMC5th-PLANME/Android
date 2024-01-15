@@ -5,16 +5,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.WindowManager
-import android.widget.Button
 import android.widget.RadioGroup
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import com.example.plan_me.R
 import com.example.plan_me.databinding.FragmentDialogAddCategoryBinding
-import com.example.plan_me.databinding.FragmentDialogSaveFocusTimeBinding
 
 class DialogAddFragment(context : Context): Dialog(context) {
     private lateinit var binding : FragmentDialogAddCategoryBinding

@@ -5,12 +5,9 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.databinding.ActivityDialogMaintainProfileBinding
 import com.example.plan_me.ui.login.LoginActivity
 

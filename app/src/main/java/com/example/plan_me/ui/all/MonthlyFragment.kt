@@ -27,6 +27,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
+
 //새로운 클릭 리스너 구현해야함
 class MonthlyFragment: Fragment() {
     private lateinit var binding: FragmentMonthlyBinding
@@ -37,11 +38,7 @@ class MonthlyFragment: Fragment() {
     private lateinit var startMonth :YearMonth
     private lateinit var endMonth :YearMonth
     private lateinit var firstDayOfWeek :DayOfWeek
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMonthlyBinding.inflate(layoutInflater)
 
         clickListener()

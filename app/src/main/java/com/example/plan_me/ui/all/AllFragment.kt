@@ -6,18 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.databinding.FragmentAllBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class AllFragment : Fragment() {
     private lateinit var binding: FragmentAllBinding
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAllBinding.inflate(layoutInflater)
         initViewPager()
         return binding.root

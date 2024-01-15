@@ -43,7 +43,7 @@ class AuthCodeHandlerActivity: AppCompatActivity() {
                     }
                 }
 
-                // 로패그인 성공 부분
+                // 로그인 성공 부분
                 else if (token != null) {
                     Log.e(TAG, "로그인 성공 ${token.accessToken}")
                 }
