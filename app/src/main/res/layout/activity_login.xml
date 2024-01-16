@@ -31,43 +31,26 @@
         app:layout_constraintTop_toBottomOf="@id/login_text1_tv"
         app:layout_constraintStart_toStartOf="@id/login_text1_tv"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageView
         android:id="@+id/login_kakao_btn"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:paddingStart="92dp"
-        android:drawablePadding="12dp"
-        android:gravity="center_vertical"
-        android:text="카카오 로그인"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:background="@drawable/login_btn_kakao"
-        android:drawableStart="@drawable/login_ico_kakao"
-        android:layout_marginTop="147.43dp"
-        app:layout_constraintVertical_bias="0.25"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_text2_tv"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_kakao_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_text2_tv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageView
         android:id="@+id/login_google_btn"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:paddingStart="100dp"
-        android:drawableStart="@drawable/login_ico_google"
-        android:drawablePadding="12dp"
-        android:gravity="center_vertical"
-        android:text="구글 로그인"
-        android:textColor="@color/black"
-        android:textSize="15dp"
-        android:fontFamily="@font/pretendard_bold"
-        android:background="@drawable/login_btn_google"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="@id/login_kakao_btn"
-        app:layout_constraintEnd_toEndOf="@id/login_kakao_btn"
-        app:layout_constraintTop_toBottomOf="@id/login_kakao_btn"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_google_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_kakao_btn"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/login_offline_tv"
