@@ -1,18 +1,15 @@
 package com.example.plan_me.ui.dialog
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.ContextCompat.startActivity
 import com.example.plan_me.databinding.FragmentDialogTimerSettingBinding
 import com.example.plan_me.entity.Time
 import com.example.plan_me.entity.TimeDatabase
-import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.example.plan_me.ui.timer.TimerSettingListener
 
 class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private lateinit var binding: FragmentDialogTimerSettingBinding
@@ -23,6 +20,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private var breakTime = timeDB.timeDao().getBreakTime(1)
     private var repeatCount = timeDB.timeDao().getRepeatCount(1)
 
+    private var settingListener: TimerSettingListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,8 +82,8 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
                 // set: 2가 테이블에 없으면 삽입
                 timeDB.timeDao().insert(
                     Time(
-                        focusTime,
-                        breakTime,
+                        focusTime.toLong(),
+                        breakTime.toLong(),
                         repeatCount
                     ).apply {
                         set = changedSetNum
@@ -104,6 +102,9 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
 
             val check_time0 = timeDB.timeDao().getTime()
             Log.d("Default setting(0)", "$check_time0")
+
+            // 변경된 값을 알림
+            notifySettingConfirmed(focusTime)
 
 
             dismiss()
@@ -144,6 +145,14 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
         binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
         binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
 
+    }
+
+    fun setOnSettingConfirmedListener(listener: TimerSettingListener) {
+        this.settingListener = listener
+    }
+
+    private fun notifySettingConfirmed(focusTime: Int) {
+        settingListener?.onSettingConfirmed(focusTime)
     }
 
 }
