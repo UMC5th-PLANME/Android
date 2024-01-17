@@ -2,6 +2,7 @@ package com.example.plan_me.ui.mestory
 
 import android.app.Activity
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,9 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityMestoryBinding
+import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.squareup.picasso.Picasso
 
 class MestoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMestoryBinding
@@ -24,6 +27,8 @@ class MestoryActivity : AppCompatActivity() {
     private lateinit var dialogAdd : DialogAddFragment
     private lateinit var drawerView: View
     private lateinit var drawerCancel: ImageView
+    private var userName: String? = ""
+    private var userImg: String? = ""
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
@@ -41,6 +46,13 @@ class MestoryActivity : AppCompatActivity() {
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
+
+        getData()
+
+        binding.mestoryProfileNameTv.text = userName
+        Picasso.get().load(userImg).transform(CircleTransform())
+            .into(binding.mestoryProfileIv)
+
 
         clickListener()
     }
@@ -97,5 +109,12 @@ class MestoryActivity : AppCompatActivity() {
             binding.mestoryFabAddBtn.setClickable(true)
             true
         }
+    }
+
+    private fun getData() {
+        // 데이터 읽어오기
+        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+        userName = sharedPreferences.getString("userName", userName)
+        userImg = sharedPreferences.getString("userImg", userImg)
     }
 }
