@@ -16,6 +16,7 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
     private lateinit var dialogTimeRangePickInerface : DialogTimeRangePickInerface
     private var startTime: String = ""
     private var endTime: String = ""
+    private var isChecked : Boolean = false
     init {
         this.dialogTimeRangePickInerface = dialogTimeRangePickInerface
     }
@@ -49,6 +50,19 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
             calendar.set(Calendar.MINUTE, minute)
             endTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",endTime)
+        }
+        binding.timeRangeCheckBox.setOnClickListener {
+            if (isChecked) {
+                Log.d("isChecked" , "false")
+                isChecked = false
+                binding.dialogTimepickStart.isEnabled = true
+                binding.dialogTimepickEnd.isEnabled =  true
+            }else {
+                Log.d("isChecked" , "true")
+                isChecked = true
+                binding.dialogTimepickStart.isEnabled = false
+                binding.dialogTimepickEnd.isEnabled =  false
+            }
         }
     }
 }

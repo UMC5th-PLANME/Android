@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/schedule_dialog_shape"
         android:layout_marginHorizontal="20dp"
-        android:paddingHorizontal="30dp"
+        android:paddingHorizontal="10dp"
         android:paddingBottom="40dp">
 
         <TextView
@@ -31,8 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:layout_marginHorizontal="20dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:layout_marginHorizontal="20dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +89,6 @@
                 android:id="@+id/terms_service_cb"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="99dp"
                 android:buttonTint="@color/transparent"
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -110,14 +107,13 @@
             app:layout_constraintTop_toBottomOf="@id/terms_service_lo">
         </FrameLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/terms_info_lo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="34dp"
             android:layout_marginHorizontal="20dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingHorizontal="10dp"
             android:paddingVertical="17dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -139,13 +135,12 @@
                 android:id="@+id/terms_info_cb"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="72dp"
                 android:buttonTint="@color/transparent"
                 android:background="@drawable/selector_btn_radio"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
             android:id="@+id/terms_info_text_lo"

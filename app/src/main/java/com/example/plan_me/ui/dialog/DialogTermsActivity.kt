@@ -3,11 +3,9 @@ package com.example.plan_me.ui.dialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
 import com.example.plan_me.databinding.ActivityDialogTermsBinding
 import com.example.plan_me.ui.login.InitProfileActivity
 

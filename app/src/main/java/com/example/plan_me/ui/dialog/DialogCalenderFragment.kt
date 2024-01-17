@@ -12,9 +12,8 @@ import android.widget.TextView
 import androidx.core.view.children
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
-import com.example.plan_me.databinding.FragmentDialogAlarmBinding
+import com.example.plan_me.databinding.DialogCalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDialogCalendarBinding
-import com.example.plan_me.databinding.FragmentDialogRepeatBinding
 import com.example.plan_me.ui.all.MonthViewContainer
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
@@ -197,7 +196,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
     }
 
     inner class DayViewContainer(view: View): ViewContainer(view) {
-        val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
+        val textView = DialogCalendarDayLayoutBinding.bind(view).calendarDayText
         var isSelected : Boolean = false
         private var selectedDate: LocalDate? = null
         var canClick : Boolean = true

@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.plan_me.databinding.FragmentDialogAlarmBinding
-import com.example.plan_me.databinding.FragmentDialogRepeatBinding
 
 class DialogAlarmFragment(context : Context):Dialog(context){
     private lateinit var binding : FragmentDialogAlarmBinding

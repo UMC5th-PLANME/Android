@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import com.example.plan_me.databinding.FragmentDialogSaveFocusTimeBinding
 import com.example.plan_me.databinding.FragmentDialogSaveResetBinding
 
 class DialogSaveResetFragment(context : Context): Dialog(context) {

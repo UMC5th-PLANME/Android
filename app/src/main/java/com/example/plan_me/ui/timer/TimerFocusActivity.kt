@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.timer
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -9,12 +10,14 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
 import com.example.plan_me.entity.TimeDatabase
+import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
@@ -25,10 +28,11 @@ class TimerFocusActivity: AppCompatActivity() {
     private lateinit var binding: ActivityTimerFocusBinding
 
     private var isFabOpen = false
-    private lateinit var dialogAdd: DialogAddFragment
+
     private lateinit var dialogSetting: DialogTimerSettingFragment
     private lateinit var drawerView: View
     private lateinit var drawerCancel: ImageView
+    private lateinit var drawerAdd: TextView
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
@@ -45,6 +49,7 @@ class TimerFocusActivity: AppCompatActivity() {
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
         drawerCancel = findViewById(R.id.drawer_cancel)
+        drawerAdd = findViewById(R.id.drawer_add_tv)
 
         clickListener()
     }
@@ -77,8 +82,7 @@ class TimerFocusActivity: AppCompatActivity() {
         }
         binding.timerFocusFabAddBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
+            switchActivity(ScheduleAddActivity())
         }
         // Menu button
         binding.timerFocusMenuBtn.setOnClickListener {
@@ -89,7 +93,9 @@ class TimerFocusActivity: AppCompatActivity() {
             Log.d("menu: timer-focus", "Close menu")
             binding.timerFocusDrawerLayout.closeDrawers()
         }
-        // Setting button
+        drawerAdd.setOnClickListener {
+            showDialog(DialogAddFragment(this@TimerFocusActivity))
+        }
         binding.timerFocusSettingBtn.setOnClickListener {
             Log.d("setting: timer-focus", "Time Setting")
 
@@ -188,6 +194,9 @@ class TimerFocusActivity: AppCompatActivity() {
     }
 
 
+    private fun showDialog(dialog: Dialog) {
+        dialog.show()
+    }
 
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
