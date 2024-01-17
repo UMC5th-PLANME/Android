@@ -116,7 +116,7 @@ class InitProfileActivity : AppCompatActivity() {
     }
 
     companion object {
-        private val REQUEST_PERMISSION_CODE = 423
-        private val REQUEST_IMAGE_PICK = 826
+        val REQUEST_PERMISSION_CODE = 423
+        val REQUEST_IMAGE_PICK = 826
     }
 }
