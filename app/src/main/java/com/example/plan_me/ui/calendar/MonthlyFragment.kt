@@ -45,7 +45,7 @@ class MonthlyFragment: Fragment() {
         endMonth = currentMonth.plusMonths(100)  // Adjust as needed
         firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
 
-        Log.d("start2", "start2")
+
         binding.monthlyCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
                 container.textView.text = data.date.dayOfMonth.toString()
