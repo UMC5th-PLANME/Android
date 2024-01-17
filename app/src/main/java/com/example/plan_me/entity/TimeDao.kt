@@ -9,7 +9,7 @@ import androidx.room.Update
 @Dao
 interface TimeDao {
     @Insert
-    fun insert(time: Time)
+    fun insert(time: Time) : Long
     @Update
     fun update(time: Time)
     @Delete

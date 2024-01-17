@@ -9,5 +9,5 @@ data class Time (
     var breakTime : Int = 10,
     var repeatCount : Int = 1
 ) {
-    @PrimaryKey(autoGenerate = true) var set: Int = 0
+    @PrimaryKey var set: Int? = null
 }

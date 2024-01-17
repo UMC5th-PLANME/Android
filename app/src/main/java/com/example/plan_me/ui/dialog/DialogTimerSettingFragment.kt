@@ -30,6 +30,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        setTime()
         timeClickListener()
 
     }
@@ -37,7 +38,6 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private fun timeClickListener() {
         // 집중 시간 설정
         binding.dialogTimerFocusTimeUpIv.setOnClickListener {
-            Log.d("focusTime", focusTime.toString())
             focusTime += 10
             binding.dialogTimerFocusTimeTv.text = focusTime.toString()
         }
@@ -71,17 +71,79 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             dismiss()
         }
 
-        // (FOCUS/BREAK 타이머 설정) 확인 버튼 눌렀을 때
+        // (FOCUS/BREAK 타이머 설정) 확인 버튼 눌렀을 때 -> 바뀐 값을 set: 2 에 저장
         binding.dialogTimeSettingConfirm.setOnClickListener{
-            timeDB.timeDao().updateFocusTime(focusTime, 1)
-            timeDB.timeDao().updateBreakTime(breakTime, 1)
-            timeDB.timeDao().updateRepeatCount(repeatCount, 1)
+
+            val changedSetNum = 2
+            val existingTime = timeDB.timeDao().getSavedTime(changedSetNum)
+
+            if (existingTime != null) {
+                // set: 2가 이미 테이블에 존재하면 업데이트
+                timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, changedSetNum)
+            } else {
+                // set: 2가 테이블에 없으면 삽입
+                timeDB.timeDao().insert(
+                    Time(
+                        focusTime,
+                        breakTime,
+                        repeatCount
+                    ).apply {
+                        set = changedSetNum
+                    }
+                )
+            }
 
             // Check Setting
-            val _time = timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, 1)
-            Log.d("Update time", "$_time")
+            // set: 1을 다시 50, 10, 1 로 업데이트
+            val check_time1 = timeDB.timeDao().getSavedTime(1)
+            Log.d("Default setting(1)", "Insert time :$check_time1")
+
+            //  바뀐 focusTime, breakTime, repeatCount를 set: 2에 출력
+            val check_time2 = timeDB.timeDao().getSavedTime(2)
+            Log.d("Default setting(2)", "Insert time :$check_time2")
+
+            val check_time0 = timeDB.timeDao().getTime()
+            Log.d("Default setting(0)", "$check_time0")
+
+
             dismiss()
         }
+    }
+
+    private fun setTime(){
+
+        val defaultSetNum= 1
+
+        if (time.isNotEmpty()) return
+
+        // 기본 timer 설정 값을 Dao 에 저장 -> set: 1
+        timeDB.timeDao().insert(
+            Time(
+                50,
+                10,
+                1
+            ).apply {
+                set = defaultSetNum
+            }
+        )
+
+        val _time1 = timeDB.timeDao().getSavedTime(1)
+        Log.d("Default setting(01)", "Insert time :$_time1")
+
+        focusTime = timeDB.timeDao().getFocusTime(1)
+
+        // 집중 시간 설정
+        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+
+        // 휴식 시간 설정
+        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+
+        // 반복 횟수 설정
+        binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
+        binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
+
     }
 
 }

@@ -42,7 +42,6 @@ class TimerFocusActivity: AppCompatActivity() {
         drawerView = findViewById(R.id.drawer_layout)
         drawerCancel = findViewById(R.id.drawer_cancel)
 
-        setTime()
         clickListener()
     }
     override fun onBackPressed() {
@@ -90,7 +89,7 @@ class TimerFocusActivity: AppCompatActivity() {
             // Timer-Break 에 시간이 남았다면 -> 초기화 알림 문구
 
 
-            dialogSetting = DialogTimerSettingFragment(this)
+            dialogSetting = DialogTimerSettingFragment(context = this)
             dialogSetting.show()
         }
     }
@@ -126,22 +125,22 @@ class TimerFocusActivity: AppCompatActivity() {
         }
     }
 
-    private fun setTime(){
-        val timeDB = TimeDatabase.getInstance(this)!!
-        val time = timeDB.timeDao().getTime()
-
-        if (time.isNotEmpty()) return
-
-        // 기본 timer 설정 값을 Dao 에 저장
-        timeDB.timeDao().insert(
-            Time(
-                50,
-                10,
-                1
-            )
-        )
-
-        val _time = timeDB.timeDao().getTime()
-        Log.d("Default setting", "Insert time :$_time")
-    }
+//    private fun setTime(){
+//        val timeDB = TimeDatabase.getInstance(this)!!
+//        val time = timeDB.timeDao().getTime()
+//
+//        if (time.isNotEmpty()) return
+//
+//        // 기본 timer 설정 값을 Dao 에 저장
+//        timeDB.timeDao().insert(
+//            Time(
+//                50,
+//                10,
+//                1
+//            )
+//        )
+//
+//        val _time = timeDB.timeDao().getTime()
+//        Log.d("Default setting", "Insert time :$_time")
+//    }
 }
