@@ -44,7 +44,6 @@
                 android:id="@+id/init_profile_imagefile_lo"
                 android:layout_width="104dp"
                 android:layout_height="104dp"
-                android:background="@drawable/indicator_unselect"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

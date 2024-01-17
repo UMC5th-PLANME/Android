@@ -31,8 +31,10 @@ class InitProfileActivity : AppCompatActivity() {
         getData()
 
         binding.initProfileNameTv.text = userName
-        Picasso.get().load(userImg).transform(CircleTransform())
-            .into(binding.initProfileImagefileIv)
+        if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg") {
+            Picasso.get().load(userImg).transform(CircleTransform())
+                .into(binding.initProfileImagefileIv)
+        }
 
         binding.initProfileCameraLo.setOnClickListener {
             // 권한이 있는지 확인

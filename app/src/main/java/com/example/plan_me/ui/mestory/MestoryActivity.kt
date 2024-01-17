@@ -50,9 +50,10 @@ class MestoryActivity : AppCompatActivity() {
         getData()
 
         binding.mestoryProfileNameTv.text = userName
-        Picasso.get().load(userImg).transform(CircleTransform())
-            .into(binding.mestoryProfileIv)
-
+        if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg") {
+            Picasso.get().load(userImg).transform(CircleTransform())
+                .into(binding.mestoryProfileIv)
+        }
 
         clickListener()
     }
