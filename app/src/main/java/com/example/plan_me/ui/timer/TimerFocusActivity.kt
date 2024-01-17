@@ -14,7 +14,6 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
-import com.example.plan_me.entity.Time
 import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
@@ -101,7 +100,7 @@ class TimerFocusActivity: AppCompatActivity() {
 
             // Dialog 에서 변경된 FocusTime 값으로 변경
             dialogSetting.setOnSettingConfirmedListener(object : TimerSettingListener {
-                override fun onSettingConfirmed(focusTime: Int) {
+                override fun onSettingConfirmed(focusTime: Long) {
                     // 초를 시, 분, 초로 변환
                     val hours = focusTime / 60
                     val minutes = focusTime % 60
@@ -122,7 +121,7 @@ class TimerFocusActivity: AppCompatActivity() {
             // Timer 생성 or 이어서 실행
             var focusTimeInMinutes = timeDB.timeDao().getFocusTime(2)
             if (focusTimeInMinutes > 0){
-                startTimer((focusTimeInMinutes * 60 * 1000).toLong())      // 분을 밀리초로 변환
+                startTimer((focusTimeInMinutes * 60 * 1000))      // 분을 밀리초로 변환
             }
 
         }
@@ -159,18 +158,19 @@ class TimerFocusActivity: AppCompatActivity() {
 
     // Timer의 시간을 텍스트뷰에 업데이트하는 함수
     private fun updateTimerText() {
-        val seconds = (remainingTimeInMillis / 1000).toInt()
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val formattedTime = String.format("%02d:%02d:%02d", hours, minutes % 60, seconds % 60)
+        val seconds = (remainingTimeInMillis / 1000) % 60
+        val minutes = (remainingTimeInMillis / (1000 * 60)) % 60
+        val hours = remainingTimeInMillis / (1000 * 60 * 60)
+
+        val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
         binding.timerFocusTimeTv.text = formattedTime
     }
 
     // 포커스를 잃거나 pause 버튼이 눌린 경우에 진행된 시간을 저장하는 함수
     private fun saveElapsedTime() {
         val timeDB = TimeDatabase.getInstance(this)!!
-        val elapsedTimeInMinutes = (remainingTimeInMillis / (60 * 1000)).toInt()
-        timeDB.timeDao().updateFocusTime(elapsedTimeInMinutes, 2)
+        val elapsedTimeInMillis = remainingTimeInMillis
+        timeDB.timeDao().updateFocusTime(elapsedTimeInMillis, 2)
 
         val saveTime =  timeDB.timeDao().getTime()
         Log.d("saveElapsedTime", "TimeTable: $saveTime")

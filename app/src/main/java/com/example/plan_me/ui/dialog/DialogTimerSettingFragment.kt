@@ -75,6 +75,9 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             val changedSetNum = 2
             val existingTime = timeDB.timeDao().getSavedTime(changedSetNum)
 
+            val focusTimeMillis = convertMinutesToMilliseconds(focusTime)
+            val breakTimeMillis = convertMinutesToMilliseconds(breakTime)
+
             if (existingTime != null) {
                 // set: 2가 이미 테이블에 존재하면 업데이트
                 timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, changedSetNum)
@@ -82,8 +85,8 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
                 // set: 2가 테이블에 없으면 삽입
                 timeDB.timeDao().insert(
                     Time(
-                        focusTime.toLong(),
-                        breakTime.toLong(),
+                        focusTimeMillis,
+                        breakTimeMillis,
                         repeatCount
                     ).apply {
                         set = changedSetNum
@@ -104,7 +107,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             Log.d("Default setting(0)", "$check_time0")
 
             // 변경된 값을 알림
-            notifySettingConfirmed(focusTime)
+            notifySettingConfirmed(focusTimeMillis)
 
 
             dismiss()
@@ -120,8 +123,8 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
         // 기본 timer 설정 값을 Dao 에 저장 -> set: 1
         timeDB.timeDao().insert(
             Time(
-                50,
-                10,
+                convertMinutesToMilliseconds(50),
+                convertMinutesToMilliseconds(10),
                 1
             ).apply {
                 set = defaultSetNum
@@ -151,8 +154,12 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
         this.settingListener = listener
     }
 
-    private fun notifySettingConfirmed(focusTime: Int) {
+    private fun notifySettingConfirmed(focusTime: Long) {
         settingListener?.onSettingConfirmed(focusTime)
+    }
+
+    private fun convertMinutesToMilliseconds(minutes: Long): Long {
+        return minutes * 60 * 1000
     }
 
 }
