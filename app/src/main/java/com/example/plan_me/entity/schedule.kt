@@ -1,3 +1,10 @@
 package com.example.plan_me.entity
 
-data class schedule()
+import java.time.LocalDate
+
+data class schedule(
+    var category : Int,
+    var isDone : Boolean,
+    var content : String,
+    var date : LocalDate
+)

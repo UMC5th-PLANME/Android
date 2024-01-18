@@ -22,7 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:background="@color/red_orange"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="5dp"/>
 
     <View
         android:id="@+id/calendar_day_indicator2"
@@ -30,7 +32,8 @@
         android:layout_height="4dp"
         android:background="@color/neon_green"
         android:layout_marginTop="2dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginHorizontal="8dp"/>
 
     <View
         android:id="@+id/calendar_day_indicator3"
@@ -38,7 +41,8 @@
         android:layout_height="4dp"
         android:background="@color/sky_blue"
         android:layout_marginTop="2dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginHorizontal="8dp"/>
 
     <View
         android:id="@+id/calendar_day_indicator4"
@@ -46,7 +50,8 @@
         android:layout_height="4dp"
         android:background="@color/lemon"
         android:layout_marginTop="2dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:layout_marginHorizontal="8dp"/>
 
 
 </LinearLayout>
