@@ -107,14 +107,12 @@ class TimerFocusActivity: AppCompatActivity() {
             // Dialog 에서 변경된 FocusTime 값으로 변경
             dialogSetting.setOnSettingConfirmedListener(object : TimerSettingListener {
                 override fun onSettingConfirmed(focusTime: Long) {
-                    // 초를 시, 분, 초로 변환
-                    val hours = focusTime / 60
-                    val minutes = focusTime % 60
+                    val seconds = (focusTime / 1000) % 60
+                    val minutes = (focusTime / (1000 * 60)) % 60
+                    val hours = focusTime / (1000 * 60 * 60)
 
-                    // "hh:mm:ss" 형식으로 포맷팅
-                    var formattedTime = String.format("%d:%02d:00", hours, minutes)
-
-                    // UI에 반영
+                    val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                    Log.d("Dialog -> FocusActivity", "$hours, $minutes, $seconds")
                     binding.timerFocusTimeTv.text = formattedTime
                 }
             })
@@ -124,10 +122,10 @@ class TimerFocusActivity: AppCompatActivity() {
         binding.timerFocusPlayBtn.setOnClickListener {
             val timeDB = TimeDatabase.getInstance(this)!!
 
-            // Timer 생성 or 이어서 실행
-            var focusTimeInMinutes = timeDB.timeDao().getFocusTime(2)
-            if (focusTimeInMinutes > 0){
-                startTimer((focusTimeInMinutes * 60 * 1000))      // 분을 밀리초로 변환
+            // Timer 생성 or 이어서 실행 -> milliseconds 로 값 전달
+            var focusTime = timeDB.timeDao().getFocusTime(2)
+            if (focusTime > 0){
+                startTimer(focusTime)
             }
 
         }
@@ -138,8 +136,8 @@ class TimerFocusActivity: AppCompatActivity() {
     }
 
     // Timer를 시작하거나 이어서 실행하는 함수
-    private fun startTimer(millisInFuture: Long) {
-        timer = object : CountDownTimer(millisInFuture, 1000) {
+    private fun startTimer(millis: Long) {
+        timer = object : CountDownTimer(millis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 remainingTimeInMillis = millisUntilFinished
                 updateTimerText()
@@ -179,7 +177,7 @@ class TimerFocusActivity: AppCompatActivity() {
         timeDB.timeDao().updateFocusTime(elapsedTimeInMillis, 2)
 
         val saveTime =  timeDB.timeDao().getTime()
-        Log.d("saveElapsedTime", "TimeTable: $saveTime")
+        Log.d("saveElapsedTime", "TimeTable: $saveTime")    // 저장된 시간 확인
     }
     private fun setTimerRunning(isRunning: Boolean){
 
@@ -192,7 +190,6 @@ class TimerFocusActivity: AppCompatActivity() {
             binding.timerFocusPauseBtn.visibility = View.GONE
         }
     }
-
 
     private fun showDialog(dialog: Dialog) {
         dialog.show()

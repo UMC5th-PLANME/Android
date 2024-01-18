@@ -17,7 +17,9 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private val timeDB = TimeDatabase.getInstance(context)!!
     private val time = timeDB.timeDao().getTime()
     private var focusTime = timeDB.timeDao().getFocusTime(1)
+    private var focusTimeToMin = convertMillisecondsToMinutes(focusTime)
     private var breakTime = timeDB.timeDao().getBreakTime(1)
+    private var breakTimeToMin = convertMillisecondsToMinutes(breakTime)
     private var repeatCount = timeDB.timeDao().getRepeatCount(1)
 
     private var settingListener: TimerSettingListener? = null
@@ -36,22 +38,22 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private fun timeClickListener() {
         // 집중 시간 설정
         binding.dialogTimerFocusTimeUpIv.setOnClickListener {
-            focusTime += 10
-            binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+            focusTimeToMin += 10
+            binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
         binding.dialogTimerFocusTimeDownIv.setOnClickListener {
-            focusTime = maxOf(0, focusTime - 10)
-            binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+            focusTimeToMin = maxOf(0, focusTime - 10)
+            binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
 
         // 휴식 시간 설정
         binding.dialogTimerBreakTimeUpIv.setOnClickListener {
-            breakTime += 10
-            binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+            breakTimeToMin += 10
+            binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
         binding.dialogTimerBreakTimeDownIv.setOnClickListener {
-            breakTime = maxOf(0, breakTime - 10)
-            binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+            breakTimeToMin = maxOf(0, breakTime - 10)
+            binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
 
         // 반복 횟수 설정
@@ -75,18 +77,16 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             val changedSetNum = 2
             val existingTime = timeDB.timeDao().getSavedTime(changedSetNum)
 
-            val focusTimeMillis = convertMinutesToMilliseconds(focusTime)
-            val breakTimeMillis = convertMinutesToMilliseconds(breakTime)
-
             if (existingTime != null) {
                 // set: 2가 이미 테이블에 존재하면 업데이트
                 timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, changedSetNum)
+                Log.d("check focusTime", "$focusTime")
             } else {
                 // set: 2가 테이블에 없으면 삽입
                 timeDB.timeDao().insert(
                     Time(
-                        focusTimeMillis,
-                        breakTimeMillis,
+                        focusTime,
+                        breakTime,
                         repeatCount
                     ).apply {
                         set = changedSetNum
@@ -107,8 +107,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             Log.d("Default setting(0)", "$check_time0")
 
             // 변경된 값을 알림
-            notifySettingConfirmed(focusTimeMillis)
-
+            notifySettingConfirmed(focusTime)
 
             dismiss()
         }
@@ -137,12 +136,12 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
         focusTime = timeDB.timeDao().getFocusTime(1)
 
         // 집중 시간 설정
-        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
-        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+        binding.dialogTimerFocusTimeTv.text = convertMillisecondsToMinutes(focusTime).toString()
+        binding.dialogTimerFocusTimeTv.text = convertMillisecondsToMinutes(focusTime).toString()
 
         // 휴식 시간 설정
-        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
-        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+        binding.dialogTimerBreakTimeTv.text = convertMillisecondsToMinutes(breakTime).toString()
+        binding.dialogTimerBreakTimeTv.text = convertMillisecondsToMinutes(breakTime).toString()
 
         // 반복 횟수 설정
         binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
@@ -160,6 +159,10 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
 
     private fun convertMinutesToMilliseconds(minutes: Long): Long {
         return minutes * 60 * 1000
+    }
+
+    private fun convertMillisecondsToMinutes(mils: Long): Long {
+        return (mils / (60 * 1000))
     }
 
 }
