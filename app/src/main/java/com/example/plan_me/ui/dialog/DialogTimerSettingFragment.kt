@@ -79,14 +79,15 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
 
             if (existingTime != null) {
                 // set: 2가 이미 테이블에 존재하면 업데이트
-                timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, changedSetNum)
-                Log.d("check focusTime", "$focusTime")
+                timeDB.timeDao().updateTime(convertMinutesToMilliseconds(focusTimeToMin),
+                                            convertMinutesToMilliseconds(breakTime),
+                                            repeatCount, changedSetNum)
             } else {
                 // set: 2가 테이블에 없으면 삽입
                 timeDB.timeDao().insert(
                     Time(
-                        focusTime,
-                        breakTime,
+                        convertMinutesToMilliseconds(focusTimeToMin),
+                        convertMinutesToMilliseconds(breakTime),
                         repeatCount
                     ).apply {
                         set = changedSetNum
