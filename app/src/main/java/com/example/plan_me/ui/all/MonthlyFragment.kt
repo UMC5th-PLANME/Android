@@ -53,11 +53,11 @@ class MonthlyFragment: Fragment() {
         firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
         binding.monthlyCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.textView.text = data.date.dayOfMonth.toString()
+                container.day.calendarDayText.text = data.date.dayOfMonth.toString()
                 if (data.position == DayPosition.MonthDate) {
-                    container.textView.setTextColor(Color.BLACK)
+                    container.day.calendarDayText.setTextColor(Color.BLACK)
                 } else {
-                    container.textView.setTextColor(Color.LTGRAY)
+                    container.day.calendarDayText.setTextColor(Color.LTGRAY)
                     container.canClick = false
                 }
             }
@@ -131,7 +131,7 @@ class MonthlyFragment: Fragment() {
         }
     }
     inner class DayViewContainer(view: View): ViewContainer(view) {
-        val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
+        val day = CalendarDayLayoutBinding.bind(view)
         var isSelected : Boolean = false
         private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
@@ -141,7 +141,7 @@ class MonthlyFragment: Fragment() {
                     if (!isSelected) {
                         view.setBackgroundResource(R.drawable.calender_onclick_circle)
                         isSelected = true
-                        val text = textView.text.toString()
+                        val text = day.calendarDayText.text.toString()
                         val day = text.toInt()
                         selectedDate = pageMonth.atDay(day)
                         Log.d("selected", selectedDate.toString())
