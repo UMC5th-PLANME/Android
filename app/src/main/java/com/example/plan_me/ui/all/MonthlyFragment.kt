@@ -87,8 +87,9 @@ class MonthlyFragment: Fragment() {
                     container.canClick = false
                 }
                 val matchingSchedules = sche.filter { it.date == data.date }
-                val categoryCounts: Map<Int, Int> = sche.groupingBy { it.category }
+                val categoryCounts: Map<Int, Int> = matchingSchedules.groupingBy { it.category }
                     .eachCount()
+                Log.d("count", matchingSchedules.toString())
                 if(matchingSchedules.isNotEmpty()) {
                     val colors : ArrayList<Int> = ArrayList()
                     for (categoryIdx in categoryCounts.keys) {

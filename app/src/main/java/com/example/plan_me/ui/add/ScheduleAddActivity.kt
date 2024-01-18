@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.add
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.databinding.ActivityScheduleAddBinding
@@ -84,6 +85,8 @@ class ScheduleAddActivity: AppCompatActivity(), DialogTimePickInerface, DialogRe
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
+        Log.d("start", startTime.toString())
+        Log.d("end", endTime.toString())
         if (isVaildRange(startTime,endTime)) {
             binding.scheduleTimeTv.text = startTime + " ~ " + endTime
             dialogTimeRangePick.dismiss()
