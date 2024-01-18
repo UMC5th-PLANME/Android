@@ -42,7 +42,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
         binding.dialogTimerFocusTimeDownIv.setOnClickListener {
-            focusTimeToMin = maxOf(0, focusTime - 10)
+            focusTimeToMin = maxOf(0, focusTimeToMin - 10)
             binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
 
@@ -52,7 +52,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
         binding.dialogTimerBreakTimeDownIv.setOnClickListener {
-            breakTimeToMin = maxOf(0, breakTime - 10)
+            breakTimeToMin = maxOf(0, breakTimeToMin - 10)
             binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
 
