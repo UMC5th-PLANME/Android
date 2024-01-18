@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentMonthlyBinding
+import com.example.plan_me.entity.category
+import com.example.plan_me.entity.schedule
+import com.example.plan_me.ui.dialog.DialogCalendarBtmFragment
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -27,6 +31,7 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
+import java.util.Locale.Category
 
 //새로운 클릭 리스너 구현해야함
 class MonthlyFragment: Fragment() {
@@ -38,8 +43,28 @@ class MonthlyFragment: Fragment() {
     private lateinit var startMonth :YearMonth
     private lateinit var endMonth :YearMonth
     private lateinit var firstDayOfWeek :DayOfWeek
+
+    //예제 데이터
+    lateinit var study : category
+    lateinit var exercise : category
+
+    private  var cate : ArrayList<category> = ArrayList()
+
+    private val sche : ArrayList<schedule> = ArrayList()
+
+    private val s1 : schedule = schedule(0, false, "웹프 6-8강 복습", LocalDate.of(2024, 1, 23))
+    private val s2 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 29))
+    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMonthlyBinding.inflate(layoutInflater)
+        study = category(0, "📄STUDY", R.color.lemon)
+        exercise = category(1, "Exercise", R.color.sky_blue)
+        cate.add(study)
+        cate.add(exercise)
+        sche.add(s1)
+        sche.add(s2)
+        sche.add(s3)
 
         clickListener()
         initCalendar()
@@ -53,12 +78,51 @@ class MonthlyFragment: Fragment() {
         firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
         binding.monthlyCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.textView.text = data.date.dayOfMonth.toString()
+                container.day.calendarDayText.text = data.date.dayOfMonth.toString()
+                Log.d("data", data.toString())
                 if (data.position == DayPosition.MonthDate) {
-                    container.textView.setTextColor(Color.BLACK)
+                    container.day.calendarDayText.setTextColor(Color.BLACK)
                 } else {
-                    container.textView.setTextColor(Color.LTGRAY)
+                    container.day.calendarDayText.setTextColor(Color.LTGRAY)
                     container.canClick = false
+                }
+                val matchingSchedules = sche.filter { it.date == data.date }
+                val categoryCounts: Map<Int, Int> = sche.groupingBy { it.category }
+                    .eachCount()
+                if(matchingSchedules.isNotEmpty()) {
+                    val colors : ArrayList<Int> = ArrayList()
+                    for (categoryIdx in categoryCounts.keys) {
+                        colors.add(cate.find{it.idx == categoryIdx}!!.color)
+                    }
+                    Log.d("colors", colors.toString())
+                    if(categoryCounts.size == 1) {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                    }else if (categoryCounts.size == 2) {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                        container.day.calendarDayIndicator2.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
+
+                    }else if (categoryCounts.size == 3) {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                        container.day.calendarDayIndicator2.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
+                        container.day.calendarDayIndicator3.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator3.setBackgroundResource(colors[2])
+
+                    }else {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                        container.day.calendarDayIndicator2.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
+                        container.day.calendarDayIndicator3.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator3.setBackgroundResource(colors[2])
+                        container.day.calendarDayIndicator4.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator4.setBackgroundResource(colors[3])
+
+                    }
                 }
             }
             override fun create(view: View): DayViewContainer {
@@ -131,26 +195,20 @@ class MonthlyFragment: Fragment() {
         }
     }
     inner class DayViewContainer(view: View): ViewContainer(view) {
-        val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
+        val day = CalendarDayLayoutBinding.bind(view)
         var isSelected : Boolean = false
         private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
         init {
             view.setOnClickListener {
                 if (canClick) {
-                    if (!isSelected) {
-                        view.setBackgroundResource(R.drawable.calender_onclick_circle)
-                        isSelected = true
-                        val text = textView.text.toString()
+                        val text = day.calendarDayText.text.toString()
                         val day = text.toInt()
                         selectedDate = pageMonth.atDay(day)
-                        Log.d("selected", selectedDate.toString())
-                    } else {
-                        view.setBackgroundResource(R.color.transparent)
-                        isSelected = false
+                        val btmSheet = DialogCalendarBtmFragment()
+                        btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
                 }
             }
         }
     }
-}
