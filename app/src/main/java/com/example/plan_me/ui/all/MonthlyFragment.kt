@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
@@ -16,6 +15,8 @@ import com.example.plan_me.databinding.FragmentMonthlyBinding
 import com.example.plan_me.entity.category
 import com.example.plan_me.entity.schedule
 import com.example.plan_me.ui.dialog.DialogCalendarBtmFragment
+import com.example.plan_me.ui.dialog.DialogYMFragment
+import com.example.plan_me.ui.dialog.DialogYMPickInerface
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -31,11 +32,11 @@ import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
-import java.util.Locale.Category
 
 //새로운 클릭 리스너 구현해야함
-class MonthlyFragment: Fragment() {
+class MonthlyFragment: Fragment() , DialogYMPickInerface{
     private lateinit var binding: FragmentMonthlyBinding
+    private lateinit var dialogYMFragment: DialogYMFragment
 
     var pageMonth = YearMonth.now()
 
@@ -89,8 +90,8 @@ class MonthlyFragment: Fragment() {
                 val matchingSchedules = sche.filter { it.date == data.date }
                 val categoryCounts: Map<Int, Int> = matchingSchedules.groupingBy { it.category }
                     .eachCount()
-                Log.d("count", matchingSchedules.toString())
-                if(matchingSchedules.isNotEmpty()) {
+                Log.d("count", matchingSchedules.isNotEmpty().toString())
+                if(matchingSchedules.isNotEmpty() == true) {
                     val colors : ArrayList<Int> = ArrayList()
                     for (categoryIdx in categoryCounts.keys) {
                         colors.add(cate.find{it.idx == categoryIdx}!!.color)
@@ -194,6 +195,10 @@ class MonthlyFragment: Fragment() {
             binding.monthlyCalendarView.smoothScrollToMonth(currentMonth)
             pageMonth = currentMonth
         }
+        binding.monthlyDate.setOnClickListener {
+            dialogYMFragment = DialogYMFragment(requireContext(), pageMonth, this)
+            dialogYMFragment.show()
+        }
     }
     inner class DayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarDayLayoutBinding.bind(view)
@@ -212,4 +217,14 @@ class MonthlyFragment: Fragment() {
                 }
             }
         }
+
+    override fun onClickConfirm(year: String?, month: String?) {
+        val monthDigitsOnly = month!!.replace("\\D".toRegex(), "").toInt()
+        val yearDigitsOnly = year!!.replace("\\D".toRegex(), "").toInt()
+        pageMonth = YearMonth.of(yearDigitsOnly, monthDigitsOnly)
+        Log.d("new pageMonth", pageMonth.toString())
+        binding.monthlyCalendarView.scrollToMonth(pageMonth)
+        binding.monthlyDate.text = yearDigitsOnly.toString() + "." + month.toString()+"월"
+        dialogYMFragment.dismiss()
     }
+}
