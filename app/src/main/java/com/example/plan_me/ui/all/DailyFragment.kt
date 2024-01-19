@@ -38,7 +38,8 @@ class DailyFragment : Fragment() {
 
         binding.weekCalendarView.dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
             override fun bind(container: WeekDayViewContainer, data: WeekDay) {
-                container.textView.text = data.date.dayOfMonth.toString()
+                Log.d("binding", container.day.weekCalendarDayText.toString())
+                container.day.weekCalendarDayText.text = data.date.dayOfMonth.toString()
             }
 
             override fun create(view: View) = WeekDayViewContainer(view)
@@ -63,6 +64,6 @@ class DailyFragment : Fragment() {
 
     }
     inner class WeekDayViewContainer(view: View): ViewContainer(view) {
-        val textView = CalendarWeekDayLayoutBinding.bind(view).calendarDayText
+        val day = CalendarWeekDayLayoutBinding.bind(view)
     }
 }
