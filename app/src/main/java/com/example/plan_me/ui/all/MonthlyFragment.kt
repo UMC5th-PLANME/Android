@@ -80,6 +80,10 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
         binding.monthlyCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
                 container.day.calendarDayText.text = data.date.dayOfMonth.toString()
+                container.day.calendarDayIndicator1.visibility = View.GONE
+                container.day.calendarDayIndicator2.visibility = View.GONE
+                container.day.calendarDayIndicator3.visibility = View.GONE
+                container.day.calendarDayIndicator4.visibility = View.GONE
                 Log.d("data", data.toString())
                 if (data.position == DayPosition.MonthDate) {
                     container.day.calendarDayText.setTextColor(Color.BLACK)
