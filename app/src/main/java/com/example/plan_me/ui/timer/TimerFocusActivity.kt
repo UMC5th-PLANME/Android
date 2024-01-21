@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
+import com.example.plan_me.databinding.FragmentDialogCautionResetTimeBinding
 import com.example.plan_me.entity.SettingDatabase
 import com.example.plan_me.entity.SettingTime
 import com.example.plan_me.entity.SettingTimeDatabase
@@ -23,17 +24,19 @@ import com.example.plan_me.entity.Time
 import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.dialog.DialogAddFragment
+import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.setting.SettingActivity
 
 
-class TimerFocusActivity: AppCompatActivity() {
+class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
     private lateinit var binding: ActivityTimerFocusBinding
 
     private var isFabOpen = false
 
     private lateinit var dialogSetting: DialogTimerSettingFragment
+    private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
     private lateinit var drawerView: View
     private lateinit var drawerCancel: ImageView
     private lateinit var drawerAdd: TextView
@@ -59,6 +62,8 @@ class TimerFocusActivity: AppCompatActivity() {
         updateTimerText()
         setTime()
         clickListener()
+
+
     }
 
     override fun onBackPressed() {
@@ -178,6 +183,56 @@ class TimerFocusActivity: AppCompatActivity() {
             dialogSetting.show()
         }
 
+        // Reset 클릭 시
+        binding.timerFocusResetBtn.setOnClickListener {
+
+            val timeDB = TimeDatabase.getInstance(this)!!
+            val settingTimeDB = SettingDatabase.getInstance(this)!!
+            
+            // Dialog 타이머 초기화 경고 띄우기
+            dialogCautionResetTime = DialogCautionResetTimeFragment(this)
+            dialogCautionResetTime.setOnResetConfirmedListener(object : ResetConfirmedListener {
+                override fun onResetConfirmed(saveAndReset: Boolean) {
+                    if (saveAndReset) {
+                        // "저장 및 재설정" 버튼이 클릭된 경우
+                        // 현재 진행 상황을 "mestory"에 기록
+
+                        // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
+                        timeDB.timeDao().updateTime(0, 0, 1, 2)
+
+                        // SettingTable set:2 시간 -> 초기값으로 바꾸기
+                        settingTimeDB.SettingTimeDao().updateTime(
+                            convertMinutesToMilliseconds(50),
+                            convertMinutesToMilliseconds(50),
+                            convertMinutesToMilliseconds(10),
+                            convertMinutesToMilliseconds(10),
+                            2
+                        )
+
+                        // TimerText 업데이트
+                        binding.timerFocusTimeTv.text = "0:00:00"
+                    } else {
+                        // "취소" 버튼이 클릭된 경우
+                        // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
+                        timeDB.timeDao().updateTime(0, 0, 1, 2)
+
+                        // SettingTable set:2 시간 -> 초기값으로 바꾸기
+                        settingTimeDB.SettingTimeDao().updateTime(
+                            convertMinutesToMilliseconds(50),
+                            convertMinutesToMilliseconds(50),
+                            convertMinutesToMilliseconds(10),
+                            convertMinutesToMilliseconds(10),
+                            2
+                        )
+
+                        // TimerText 업데이트
+                        binding.timerFocusTimeTv.text = "0:00:00"
+                    }
+                }
+            })
+            dialogCautionResetTime.show()
+        }
+
     }
 
     // Timer를 시작하거나 이어서 실행하는 함수
@@ -265,6 +320,33 @@ class TimerFocusActivity: AppCompatActivity() {
             }
         )
     }
+
+    // ResetConfirmedListener 인터페이스 구현
+    override fun onResetConfirmed(isConfirmed: Boolean) {
+        val timeDB = TimeDatabase.getInstance(this)!!
+        val settingTimeDB = SettingDatabase.getInstance(this)!!
+
+        if (isConfirmed) {
+            // "저장 및 재설정"이 확인되었을 때의 동작
+            // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
+            timeDB.timeDao().updateTime(0,0,1,2)
+
+            // SettingTable set:2 시간 ->
+            settingTimeDB.SettingTimeDao().updateTime(0,0,0,0,2)
+
+            binding.timerFocusTimeTv.text = "0:00:00"
+        } else {
+            // "취소"가 확인되었을 때의 동작
+            // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
+            timeDB.timeDao().updateTime(0,0,1,2)
+
+            // SettingTable set:2 시간 ->
+            settingTimeDB.SettingTimeDao().updateTime(0,0,0,0,2)
+
+            binding.timerFocusTimeTv.text = "0:00:00"
+        }
+    }
+
     private fun convertMinutesToMilliseconds(minutes: Long): Long {
         return minutes * 60 * 1000
     }
@@ -306,3 +388,4 @@ class TimerFocusActivity: AppCompatActivity() {
 
 
 }
+
