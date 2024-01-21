@@ -15,6 +15,9 @@ interface TimeDao {
     @Delete
     fun delete(time: Time)
 
+    @Query("DELETE FROM TimeTable WHERE `set` = :set")
+    fun deleteTimeBySet(set: Int): Int
+
     @Query("SELECT * FROM TimeTable")
     fun getTime() : List<Time>
 
