@@ -116,7 +116,7 @@
             android:id="@+id/timer_focus_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0:50:00"
+            android:text="0:00:00"
             android:textSize="40sp"
             app:layout_constraintTop_toTopOf="@+id/timer_focus_circle_default"
             app:layout_constraintBottom_toBottomOf="@id/timer_focus_circle_default"
