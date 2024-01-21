@@ -6,19 +6,19 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [SettingTime::class], version = 1)
-abstract class SettingTimeDatabase: RoomDatabase(){
+abstract class SettingDatabase: RoomDatabase(){
     abstract fun SettingTimeDao(): SettingTimeDao
 
     companion object {
-        private var instance: SettingTimeDatabase? = null
+        private var instance: SettingDatabase? = null
 
         @Synchronized
-        fun getInstance(context: Context): SettingTimeDatabase? {
+        fun getInstance(context: Context): SettingDatabase? {
             if (instance == null) {
-                synchronized(SettingTimeDatabase::class){
+                synchronized(SettingDatabase::class){
                     instance = Room.databaseBuilder(
                         context.applicationContext,
-                        SettingTimeDatabase::class.java,
+                        SettingDatabase::class.java,
                         "focus-time-database"
                     ).allowMainThreadQueries().build()
                 }

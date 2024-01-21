@@ -7,8 +7,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import com.example.plan_me.databinding.FragmentDialogTimerSettingBinding
+import com.example.plan_me.entity.SettingDatabase
 import com.example.plan_me.entity.SettingTime
-import com.example.plan_me.entity.SettingTimeDatabase
 import com.example.plan_me.entity.Time
 import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.ui.timer.TimerSettingListener
@@ -23,7 +23,7 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private var breakTimeToMin = convertMillisecondsToMinutes(breakTime)
     private var repeatCount = timeDB.timeDao().getRepeatCount(1)
 
-    private val settingTimeDB = SettingTimeDatabase.getInstance(context)!!
+    private val settingTimeDB = SettingDatabase.getInstance(context)!!
     private var baseFocusTime = timeDB.timeDao().getFocusTime(2)
     private var remainingFocusTime = settingTimeDB.SettingTimeDao().getBaseFocusTime(1)
     private var baseBreakTime = timeDB.timeDao().getBreakTime(2)

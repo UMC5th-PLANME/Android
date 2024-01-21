@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
+import com.example.plan_me.entity.SettingDatabase
 import com.example.plan_me.entity.SettingTime
 import com.example.plan_me.entity.SettingTimeDatabase
 import com.example.plan_me.entity.Time
@@ -129,15 +130,12 @@ class TimerFocusActivity: AppCompatActivity() {
 
         binding.timerFocusPlayBtn.setOnClickListener {
 
-            val settingTimeDB = SettingTimeDatabase.getInstance(this)!!
+            val settingTimeDB = SettingDatabase.getInstance(this)!!
             var remainingFocusTime = settingTimeDB.SettingTimeDao().getRemainingFocusTime(2)
 
             remainingTimeInMillis = remainingFocusTime
 
-            // remainingFocusTime이 0이거나 null이면 버튼 동작 안 함
-            if (remainingFocusTime == null || remainingFocusTime == 0L) {
-                return@setOnClickListener
-            }
+            if (remainingFocusTime == 0L) return@setOnClickListener
 
             val time = settingTimeDB.SettingTimeDao().getTime()
             Log.d("TimerFocusActivity", "$time")
@@ -219,7 +217,7 @@ class TimerFocusActivity: AppCompatActivity() {
 
     // 포커스를 잃거나 pause 버튼이 눌린 경우에 진행된 시간을 저장하는 함수
     private fun saveElapsedTime() {
-        val settingTimeDB = SettingTimeDatabase.getInstance(this)!!
+        val settingTimeDB = SettingDatabase.getInstance(this)!!
         val elapsedTimeInMillis = remainingTimeInMillis
         settingTimeDB.SettingTimeDao().updateRemainingFocusTime(elapsedTimeInMillis, 2)
 
@@ -254,7 +252,7 @@ class TimerFocusActivity: AppCompatActivity() {
             }
         )
 
-        val settingTimeDB = SettingTimeDatabase.getInstance(this)!!
+        val settingTimeDB = SettingDatabase.getInstance(this)!!
 
         settingTimeDB.SettingTimeDao().insert(
             SettingTime(
