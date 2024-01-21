@@ -15,5 +15,7 @@
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
-
+    <style name="NumberPickerStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>
