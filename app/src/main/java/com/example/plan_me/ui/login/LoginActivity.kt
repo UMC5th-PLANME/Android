@@ -144,6 +144,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openTermsPopup() {
         val dialog = DialogTermsActivity(this@LoginActivity)
+        dialog.setCancelable(false)
         dialog.show()
     }
 
