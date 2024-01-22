@@ -204,7 +204,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
             view.setOnClickListener {
                 if (canClick) {
                     if (!isSelected) {
-                        view.setBackgroundResource(R.drawable.calender_onclick_circle)
+                        textView.setBackgroundResource(R.drawable.calender_onclick_circle)
                         isSelected = true
                         val text = textView.text.toString()
                         val day = text.toInt()
