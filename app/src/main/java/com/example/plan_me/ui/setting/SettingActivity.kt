@@ -64,8 +64,6 @@ class SettingActivity: AppCompatActivity() {
         binding.settingFabPlannerBtn.setOnClickListener {
             switchActivity(MainActivity())
         }
-        binding.settingFabAddBtn.setOnClickListener {
-        }
     }
 
     private fun switchActivity(activity: Activity) {
@@ -78,23 +76,19 @@ class SettingActivity: AppCompatActivity() {
             binding.settingFabMestoryBtn.startAnimation(fab_close)
             binding.settingFabTimerBtn.startAnimation(fab_close)
             binding.settingFabPlannerBtn.startAnimation(fab_close)
-            binding.settingFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.settingFabMestoryBtn.startAnimation(fab_open)
             binding.settingFabTimerBtn.startAnimation(fab_open)
             binding.settingFabPlannerBtn.startAnimation(fab_open)
-            binding.settingFabAddBtn.startAnimation(fab_open)
 
             binding.settingFabMestoryBtn.visibility = View.VISIBLE
             binding.settingFabTimerBtn.visibility = View.VISIBLE
             binding.settingFabPlannerBtn.visibility = View.VISIBLE
-            binding.settingFabAddBtn.visibility = View.VISIBLE
 
             binding.settingFabMestoryBtn.setClickable(true)
             binding.settingFabTimerBtn.setClickable(true)
             binding.settingFabPlannerBtn.setClickable(true)
-            binding.settingFabAddBtn.setClickable(true)
             true
         }
     }

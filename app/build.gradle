@@ -138,6 +138,5 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
     implementation 'me.tankery.lib:circularSeekBar:1.4.2'
 
-    implementation 'com.michalsvec:single-row-calednar:1.0.0'
 }
 
