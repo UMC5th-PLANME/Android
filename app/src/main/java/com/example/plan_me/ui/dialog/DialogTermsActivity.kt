@@ -1,5 +1,3 @@
-
-
 package com.example.plan_me.ui.dialog
 
 import android.app.Dialog
