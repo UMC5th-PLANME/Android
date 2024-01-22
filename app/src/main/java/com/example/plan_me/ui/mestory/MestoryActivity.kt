@@ -75,10 +75,6 @@ class MestoryActivity : AppCompatActivity() {
             Log.d("fab: mestory", "mestory -> setting")
             switchActivity(SettingActivity())
         }
-        binding.mestoryFabAddBtn.setOnClickListener {
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
-        }
     }
 
     private fun switchActivity(activity: Activity) {
@@ -91,23 +87,19 @@ class MestoryActivity : AppCompatActivity() {
             binding.mestoryFabPlannerBtn.startAnimation(fab_close)
             binding.mestoryFabTimerBtn.startAnimation(fab_close)
             binding.mestoryFabSettingBtn.startAnimation(fab_close)
-            binding.mestoryFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.mestoryFabPlannerBtn.startAnimation(fab_open)
             binding.mestoryFabTimerBtn.startAnimation(fab_open)
             binding.mestoryFabSettingBtn.startAnimation(fab_open)
-            binding.mestoryFabAddBtn.startAnimation(fab_open)
 
             binding.mestoryFabPlannerBtn.visibility = View.VISIBLE
             binding.mestoryFabTimerBtn.visibility = View.VISIBLE
             binding.mestoryFabSettingBtn.visibility = View.VISIBLE
-            binding.mestoryFabAddBtn.visibility = View.VISIBLE
 
             binding.mestoryFabPlannerBtn.setClickable(true)
             binding.mestoryFabTimerBtn.setClickable(true)
             binding.mestoryFabSettingBtn.setClickable(true)
-            binding.mestoryFabAddBtn.setClickable(true)
             true
         }
     }

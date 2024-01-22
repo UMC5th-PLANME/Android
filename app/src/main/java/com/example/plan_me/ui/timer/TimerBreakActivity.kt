@@ -67,11 +67,6 @@ class TimerBreakActivity : AppCompatActivity() {
         binding.timerBreakFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
         }
-        binding.timerBreakFabAddBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
-        }
         binding.timerBreakMenuBtn.setOnClickListener{
             Log.d("menu: timer-break", "Open menu")
             binding.timerBreakDrawerLayout.openDrawer(drawerView!!)
@@ -100,23 +95,19 @@ class TimerBreakActivity : AppCompatActivity() {
             binding.timerBreakFabMestoryBtn.startAnimation(fab_close)
             binding.timerBreakFabPlannerBtn.startAnimation(fab_close)
             binding.timerBreakFabSettingBtn.startAnimation(fab_close)
-            binding.timerBreakFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.timerBreakFabMestoryBtn.startAnimation(fab_open)
             binding.timerBreakFabPlannerBtn.startAnimation(fab_open)
             binding.timerBreakFabSettingBtn.startAnimation(fab_open)
-            binding.timerBreakFabAddBtn.startAnimation(fab_open)
 
             binding.timerBreakFabMestoryBtn.visibility = View.VISIBLE
             binding.timerBreakFabPlannerBtn.visibility = View.VISIBLE
             binding.timerBreakFabSettingBtn.visibility = View.VISIBLE
-            binding.timerBreakFabAddBtn.visibility = View.VISIBLE
 
             binding.timerBreakFabMestoryBtn.setClickable(true)
             binding.timerBreakFabPlannerBtn.setClickable(true)
             binding.timerBreakFabSettingBtn.setClickable(true)
-            binding.timerBreakFabAddBtn.setClickable(true)
             true
         }
     }

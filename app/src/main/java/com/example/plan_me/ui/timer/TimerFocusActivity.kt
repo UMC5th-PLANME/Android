@@ -93,10 +93,6 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(SettingActivity())
         }
-        binding.timerFocusFabAddBtn.setOnClickListener {
-            Log.d("fab: timer-focus", "timer-break -> mestory")
-            switchActivity(ScheduleAddActivity())
-        }
         // Menu button
         binding.timerFocusMenuBtn.setOnClickListener {
             Log.d("menu: timer-focus", "Open menu")
@@ -314,23 +310,19 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
             binding.timerFocusFabMestoryBtn.startAnimation(fab_close)
             binding.timerFocusFabPlannerBtn.startAnimation(fab_close)
             binding.timerFocusFabSettingBtn.startAnimation(fab_close)
-            binding.timerFocusFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.timerFocusFabMestoryBtn.startAnimation(fab_open)
             binding.timerFocusFabPlannerBtn.startAnimation(fab_open)
             binding.timerFocusFabSettingBtn.startAnimation(fab_open)
-            binding.timerFocusFabAddBtn.startAnimation(fab_open)
 
             binding.timerFocusFabMestoryBtn.visibility = View.VISIBLE
             binding.timerFocusFabPlannerBtn.visibility = View.VISIBLE
             binding.timerFocusFabSettingBtn.visibility = View.VISIBLE
-            binding.timerFocusFabAddBtn.visibility = View.VISIBLE
 
             binding.timerFocusFabMestoryBtn.setClickable(true)
             binding.timerFocusFabPlannerBtn.setClickable(true)
             binding.timerFocusFabSettingBtn.setClickable(true)
-            binding.timerFocusFabAddBtn.setClickable(true)
             true
         }
     }

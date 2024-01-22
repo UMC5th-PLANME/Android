@@ -80,21 +80,6 @@
         android:fontFamily="@font/pretendard_regular"
         app:layout_constraintTop_toBottomOf="@id/setting_terms_tv"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/setting_fab_add_btn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="24dp"
-        app:tint="@color/white"
-        android:src="@drawable/main_add_white"
-        app:backgroundTint="@color/white_gray"
-        app:fabCustomSize="@dimen/design_fab_image_size"
-        android:visibility="gone"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/setting_fab_planner_btn"/>
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/setting_fab_planner_btn"
