@@ -25,21 +25,28 @@ import java.util.Locale
 class DailyFragment : Fragment() {
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
+    private val currentWeek = LocalDate.now()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
 
         initDayCalendar()
+        clickListener()
 
         return binding.root
     }
+
+    private fun clickListener() {
+        binding.dailyToday.setOnClickListener {
+            binding.weekCalendarView.smoothScrollToWeek(currentWeek)
+            binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
+        }
+    }
     private fun initDayCalendar() {
-
-        val daysOfWeek = daysOfWeek()
-
         binding.weekCalendarView.dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
             override fun bind(container: WeekDayViewContainer, data: WeekDay) {
-                Log.d("binding", container.day.weekCalendarDayText.toString())
+                Log.d("data", data.date.toString())
                 container.day.weekCalendarDayText.text = data.date.dayOfMonth.toString()
+                container.day.weekCalendarDay.text = data.date.dayOfWeek.toString().substring(0,3)
             }
 
             override fun create(view: View) = WeekDayViewContainer(view)
@@ -51,17 +58,11 @@ class DailyFragment : Fragment() {
         Log.d("days", week_daysOfWeek.toString())
         binding.weekCalendarView.setup(week_startDate, week_endDate, week_daysOfWeek.first())
         binding.weekCalendarView.scrollToWeek(week_currentDate)
-
-        val week_titlesContainer = binding.root.findViewById<ViewGroup>(R.id.weektitlesContainer)
-        week_titlesContainer.children
-            .map { it as TextView }
-            .forEachIndexed { index, textView ->
-                val dayOfWeek = daysOfWeek[index]
-                Log.d("days", dayOfWeek.toString())
-                val title = dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.ENGLISH).uppercase()
-                textView.text = title
-            }
-
+        binding.weekCalendarView.weekScrollListener = {
+            val year = it.days.first().date.year.toString()
+            val month = it.days.first().date.monthValue
+            binding.dailyDate.text = year+"."+month+"월"
+        }
     }
     inner class WeekDayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarWeekDayLayoutBinding.bind(view)

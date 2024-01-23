@@ -59,10 +59,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/weektitlesContainer"
-        layout="@layout/calendar_week_titles_container" />
-
     <com.kizitonwose.calendar.view.WeekCalendarView
         android:id="@+id/week_calendar_view"
         android:layout_width="match_parent"
