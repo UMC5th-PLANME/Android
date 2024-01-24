@@ -73,15 +73,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/terms_all_lo">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/terms_serivce_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mestory_category_down"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
             <TextView
                 android:id="@+id/terms_service_tv"
                 android:layout_width="wrap_content"
@@ -90,8 +81,7 @@
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toEndOf="@id/terms_serivce_btn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -109,10 +99,9 @@
         <ScrollView
             android:id="@+id/terms_service_text_lo"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/category_et"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/terms_service_lo">
@@ -123,7 +112,7 @@
                 android:padding="10dp"
                 android:text="@string/use_terms"
                 android:textColor="@color/black"
-                android:textSize="12dp"
+                android:textSize="8dp"
                 android:fontFamily="@font/pretendard_regular"
                 android:gravity="center"/>
         </ScrollView>
@@ -140,15 +129,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/terms_service_text_lo">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/terms_info_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/mestory_category_down"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
             <TextView
                 android:id="@+id/terms_info_tv"
                 android:layout_width="wrap_content"
@@ -157,8 +137,7 @@
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toEndOf="@id/terms_info_btn"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -176,10 +155,9 @@
         <ScrollView
             android:id="@+id/terms_info_text_lo"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/category_et"
-            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/terms_complete_btn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -191,7 +169,7 @@
                 android:padding="10dp"
                 android:text="@string/personal_use_consent"
                 android:textColor="@color/black"
-                android:textSize="12dp"
+                android:textSize="8dp"
                 android:fontFamily="@font/pretendard_regular"
                 android:gravity="center"/>
         </ScrollView>

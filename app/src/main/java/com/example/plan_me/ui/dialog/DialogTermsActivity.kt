@@ -19,32 +19,8 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(binding.root)
 
-        clickBtn()
-
         binding.termsCompleteBtn.setOnClickListener {
             goInitProfileActivity()
-        }
-    }
-
-    private fun clickBtn() {
-        binding.termsSerivceBtn.setOnClickListener {
-            if (binding.termsServiceTextLo.visibility == View.GONE) {
-                binding.termsServiceTextLo.visibility = View.VISIBLE
-                binding.termsSerivceBtn.setBackgroundResource(R.drawable.mestory_category_up)
-            } else {
-                binding.termsServiceTextLo.visibility = View.GONE
-                binding.termsSerivceBtn.setBackgroundResource(R.drawable.mestory_category_down)
-            }
-        }
-
-        binding.termsInfoBtn.setOnClickListener {
-            if (binding.termsInfoTextLo.visibility == View.GONE) {
-                binding.termsInfoTextLo.visibility = View.VISIBLE
-                binding.termsInfoBtn.setBackgroundResource(R.drawable.mestory_category_up)
-            } else {
-                binding.termsInfoTextLo.visibility = View.GONE
-                binding.termsInfoBtn.setBackgroundResource(R.drawable.mestory_category_down)
-            }
         }
     }
 
