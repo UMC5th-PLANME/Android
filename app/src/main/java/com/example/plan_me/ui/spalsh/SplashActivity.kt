@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivitySplashBinding
 import com.example.plan_me.ui.login.LoginActivity
 
@@ -12,6 +13,7 @@ class SplashActivity : AppCompatActivity() {
     lateinit var binding:ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)

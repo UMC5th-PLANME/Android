@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityChangeNicknameBinding
 
 class ChangeNicknameActivity: AppCompatActivity() {
@@ -14,6 +15,7 @@ class ChangeNicknameActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangeNicknameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
 
@@ -21,6 +23,7 @@ class ChangeNicknameActivity: AppCompatActivity() {
 
         binding.changeNicknameBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.changeNicknameBtn.setOnClickListener {
@@ -33,6 +36,7 @@ class ChangeNicknameActivity: AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun getData() {

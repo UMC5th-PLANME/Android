@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityScheduleAddBinding
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
 import com.example.plan_me.ui.dialog.DialogCalenderFragment
@@ -29,6 +30,13 @@ class ScheduleAddActivity: AppCompatActivity(), DialogTimePickInerface, DialogRe
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
         clickListener()
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun clickListener() {
@@ -54,6 +62,7 @@ class ScheduleAddActivity: AppCompatActivity(), DialogTimePickInerface, DialogRe
         }
         binding.scheduleBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
 

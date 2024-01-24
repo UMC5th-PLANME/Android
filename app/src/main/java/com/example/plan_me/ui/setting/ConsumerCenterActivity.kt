@@ -23,6 +23,7 @@ class ConsumerCenterActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityConsumerCenterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -30,12 +31,14 @@ class ConsumerCenterActivity: AppCompatActivity() {
 
         binding.consumerCenterBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun clickListener() {
@@ -55,6 +58,7 @@ class ConsumerCenterActivity: AppCompatActivity() {
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun toggleFab() {

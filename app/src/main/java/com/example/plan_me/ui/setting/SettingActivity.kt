@@ -24,6 +24,7 @@ class SettingActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -31,23 +32,33 @@ class SettingActivity: AppCompatActivity() {
 
         binding.settingAccountTv.setOnClickListener {
             switchActivity(AccountActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.settingMestoryTv.setOnClickListener {
             switchActivity(ManageMestoryActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.settingConsumerTv.setOnClickListener {
             switchActivity(ConsumerCenterActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.settingTermsTv.setOnClickListener {
             switchActivity(TermsPoliciesActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.settingInformationTv.setOnClickListener {
             switchActivity(InformationActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun clickListener() {
@@ -69,6 +80,7 @@ class SettingActivity: AppCompatActivity() {
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun toggleFab() {
