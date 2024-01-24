@@ -34,6 +34,7 @@ class TimerBreakActivity : AppCompatActivity() {
         binding = ActivityTimerBreakBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
@@ -58,10 +59,12 @@ class TimerBreakActivity : AppCompatActivity() {
         binding.timerBreakFabMestoryBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
             switchActivity(MestoryActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerBreakFabPlannerBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
             switchActivity(MainActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerBreakFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")

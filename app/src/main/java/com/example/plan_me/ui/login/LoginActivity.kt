@@ -41,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Base_Theme_Plan_Me)
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
