@@ -37,7 +37,6 @@ class TimerBreakActivity : AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
-        drawerCancel = findViewById(R.id.drawer_cancel)
 
         clickListener()
     }
