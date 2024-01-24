@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
     private lateinit var drawerView:View
-    private lateinit var drawerCancel:ImageView
     private lateinit var drawerAdd: TextView
 
     private var fab_open: Animation? = null
@@ -43,7 +42,6 @@ class MainActivity : AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
-        drawerCancel = findViewById(R.id.drawer_cancel)
         drawerAdd = findViewById(R.id.drawer_add_tv)
 
 
@@ -82,9 +80,6 @@ class MainActivity : AppCompatActivity() {
         }
         binding.mainMenu.setOnClickListener{
             binding.mainDrawerLayout.openDrawer(drawerView!!)
-        }
-        drawerCancel.setOnClickListener {
-            binding.mainDrawerLayout.closeDrawers()
         }
         drawerAdd.setOnClickListener {
             showDialog(DialogAddFragment(this@MainActivity))
