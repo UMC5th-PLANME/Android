@@ -18,11 +18,13 @@ class ChangeTypeActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangeTypeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
 
         binding.changeTypeBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.changeTypeEt.setText(social)
@@ -44,6 +46,7 @@ class ChangeTypeActivity: AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun showDialog(dialog: Dialog) {

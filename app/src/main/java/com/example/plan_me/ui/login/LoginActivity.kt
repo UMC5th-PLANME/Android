@@ -29,18 +29,19 @@ class LoginActivity : AppCompatActivity() {
     var social: String = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                handleGoogleSignInResult(task)
-            } catch(e: ApiException) {
-                Log.e(TAG, "google 로그인 실패", e)
-                Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
-            }
+        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            handleGoogleSignInResult(task)
+        } catch(e: ApiException) {
+            Log.e(TAG, "google 로그인 실패", e)
+            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
         }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Base_Theme_Plan_Me)
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -144,6 +145,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun openTermsPopup() {
         val dialog = DialogTermsActivity(this@LoginActivity)
+        dialog.setCancelable(false)
         dialog.show()
     }
 

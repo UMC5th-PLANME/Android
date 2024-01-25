@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
     private lateinit var drawerView:View
-    private lateinit var drawerCancel:ImageView
     private lateinit var drawerAdd: TextView
 
     private var fab_open: Animation? = null
@@ -40,10 +39,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
+
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
-        drawerCancel = findViewById(R.id.drawer_cancel)
         drawerAdd = findViewById(R.id.drawer_add_tv)
 
 
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
         else {
             super.onBackPressed()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
     private fun clickListener() {
@@ -70,21 +72,22 @@ class MainActivity : AppCompatActivity() {
         binding.mainFabMestoryBtn.setOnClickListener {
             Log.d("mestory", "mestory")
             switchActivity(MestoryActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainFabTimerBtn.setOnClickListener {
             switchActivity(TimerFocusActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainFabSettingBtn.setOnClickListener {
             switchActivity(SettingActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainFabAddBtn.setOnClickListener {
             switchActivity(ScheduleAddActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainMenu.setOnClickListener{
             binding.mainDrawerLayout.openDrawer(drawerView!!)
-        }
-        drawerCancel.setOnClickListener {
-            binding.mainDrawerLayout.closeDrawers()
         }
         drawerAdd.setOnClickListener {
             showDialog(DialogAddFragment(this@MainActivity))

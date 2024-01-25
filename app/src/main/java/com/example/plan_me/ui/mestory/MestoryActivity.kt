@@ -43,6 +43,7 @@ class MestoryActivity : AppCompatActivity() {
         // RecyclerView 레이아웃 매니저 설정
         binding.mestoryCategoryRv.adapter = mestoryRVAdapter
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -56,6 +57,12 @@ class MestoryActivity : AppCompatActivity() {
         }
 
         clickListener()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun clickListener() {
@@ -75,15 +82,12 @@ class MestoryActivity : AppCompatActivity() {
             Log.d("fab: mestory", "mestory -> setting")
             switchActivity(SettingActivity())
         }
-        binding.mestoryFabAddBtn.setOnClickListener {
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
-        }
     }
 
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun toggleFab() {
@@ -91,23 +95,19 @@ class MestoryActivity : AppCompatActivity() {
             binding.mestoryFabPlannerBtn.startAnimation(fab_close)
             binding.mestoryFabTimerBtn.startAnimation(fab_close)
             binding.mestoryFabSettingBtn.startAnimation(fab_close)
-            binding.mestoryFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.mestoryFabPlannerBtn.startAnimation(fab_open)
             binding.mestoryFabTimerBtn.startAnimation(fab_open)
             binding.mestoryFabSettingBtn.startAnimation(fab_open)
-            binding.mestoryFabAddBtn.startAnimation(fab_open)
 
             binding.mestoryFabPlannerBtn.visibility = View.VISIBLE
             binding.mestoryFabTimerBtn.visibility = View.VISIBLE
             binding.mestoryFabSettingBtn.visibility = View.VISIBLE
-            binding.mestoryFabAddBtn.visibility = View.VISIBLE
 
             binding.mestoryFabPlannerBtn.setClickable(true)
             binding.mestoryFabTimerBtn.setClickable(true)
             binding.mestoryFabSettingBtn.setClickable(true)
-            binding.mestoryFabAddBtn.setClickable(true)
             true
         }
     }

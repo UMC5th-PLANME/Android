@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.plan_me.MainActivity
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
 import com.squareup.picasso.Picasso
@@ -27,6 +28,7 @@ class InitProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInitProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
 
@@ -49,6 +51,7 @@ class InitProfileActivity : AppCompatActivity() {
 
         binding.initProfileCompletBtn.setOnClickListener {
             goMainActivity()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
 
@@ -90,6 +93,12 @@ class InitProfileActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+    }
+
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, REQUEST_IMAGE_PICK)
@@ -115,6 +124,7 @@ class InitProfileActivity : AppCompatActivity() {
     private fun goMainActivity() {
         val intent = Intent(this@InitProfileActivity, MainActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     companion object {

@@ -23,6 +23,7 @@ class InformationActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInformationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
@@ -30,12 +31,22 @@ class InformationActivity: AppCompatActivity() {
 
         binding.informationBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+        }
+
+        binding.informationOpensourceTv.setOnClickListener {
+            switchActivity(OpenSourceLisenceActivity())
+        }
+
+        binding.informationProducerTv.setOnClickListener {
+            switchActivity(ProducerActivity())
         }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun clickListener() {
@@ -51,12 +62,11 @@ class InformationActivity: AppCompatActivity() {
         binding.settingFabPlannerBtn.setOnClickListener {
             switchActivity(MainActivity())
         }
-        binding.settingFabAddBtn.setOnClickListener {
-        }
     }
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     private fun toggleFab() {
@@ -64,23 +74,19 @@ class InformationActivity: AppCompatActivity() {
             binding.settingFabMestoryBtn.startAnimation(fab_close)
             binding.settingFabTimerBtn.startAnimation(fab_close)
             binding.settingFabPlannerBtn.startAnimation(fab_close)
-            binding.settingFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.settingFabMestoryBtn.startAnimation(fab_open)
             binding.settingFabTimerBtn.startAnimation(fab_open)
             binding.settingFabPlannerBtn.startAnimation(fab_open)
-            binding.settingFabAddBtn.startAnimation(fab_open)
 
             binding.settingFabMestoryBtn.visibility = View.VISIBLE
             binding.settingFabTimerBtn.visibility = View.VISIBLE
             binding.settingFabPlannerBtn.visibility = View.VISIBLE
-            binding.settingFabAddBtn.visibility = View.VISIBLE
 
             binding.settingFabMestoryBtn.setClickable(true)
             binding.settingFabTimerBtn.setClickable(true)
             binding.settingFabPlannerBtn.setClickable(true)
-            binding.settingFabAddBtn.setClickable(true)
             true
         }
     }

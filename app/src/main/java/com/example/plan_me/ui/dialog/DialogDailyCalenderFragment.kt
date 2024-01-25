@@ -14,6 +14,7 @@ import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.DialogCalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDialogCalendarBinding
+import com.example.plan_me.databinding.FragmentDialogDailyCalenderBinding
 import com.example.plan_me.ui.all.MonthViewContainer
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
@@ -31,11 +32,8 @@ import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 
-class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogCalenderInterface):Dialog(context){
-    private lateinit var binding : FragmentDialogCalendarBinding
-    private var selectedStartDate: LocalDate? = null
-    private var selectedEndDate: LocalDate? = null
-    private var rangeRe : Boolean = false
+class DialogDailyCalenderFragment(context : Context, dialogDailyCalenderInterface: DialogDailyCalenderInterface):Dialog(context){
+    private lateinit var binding : FragmentDialogDailyCalenderBinding
     var pageMonth = YearMonth.now()
 
 
@@ -45,15 +43,15 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
     private lateinit var firstDayOfWeek : DayOfWeek
 
 
-    private var dialogCalenderInterface : DialogCalenderInterface
+    private var dialogDailyCalenderInterface : DialogDailyCalenderInterface
 
     init {
-        this.dialogCalenderInterface = dialogCalenderInterface
+        this.dialogDailyCalenderInterface = dialogDailyCalenderInterface
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentDialogCalendarBinding.inflate(layoutInflater)
+        binding = FragmentDialogDailyCalenderBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -61,29 +59,9 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
         endMonth = currentMonth.plusMonths(100)  // Adjust as needed
         firstDayOfWeek = firstDayOfWeekFromLocale() // Available from the library
 
-        binding.dialogCalenderCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+        binding.dialogDailyCalenderCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
                 container.textView.text = data.date.dayOfMonth.toString()
-                if (rangeRe) {
-                    Log.d("true", "true")
-                    container.textView.background = null
-                    if (data.date == selectedStartDate) { //선택한 날짜와 현재 날짜가 같고, 끝라인 리아면
-                        container.textView.setBackgroundResource(R.drawable.calender_onclick_circle)
-                    }
-                }
-                else{
-                    if (isDateInRange(data.date)) {
-                        container.textView.setBackgroundResource(R.drawable.calender_box_2)
-                    } else if (data.date == selectedStartDate) {
-                        // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.calender_box_1)
-                    } else if (data.date == selectedEndDate) {
-                        // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.calender_box_3)
-                    } else {
-                        container.textView.background = null
-                    }
-                }
                 if (data.position == DayPosition.MonthDate) {
                     container.textView.setTextColor(Color.BLACK)
                 } else {
@@ -97,12 +75,12 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
                 return DayViewContainer(view)
             }  // this refers to DaySelectionListener
         }
-        binding.dialogCalenderCalendarView.setup(startMonth, endMonth, firstDayOfWeek)
-        binding.dialogCalenderCalendarView.scrollToMonth(currentMonth)
+        binding.dialogDailyCalenderCalendarView.setup(startMonth, endMonth, firstDayOfWeek)
+        binding.dialogDailyCalenderCalendarView.scrollToMonth(currentMonth)
 
         val daysOfWeek = daysOfWeek()
 
-        val titlesContainer = findViewById<ViewGroup>(R.id.dialog_calender_titlesContainer)
+        val titlesContainer = findViewById<ViewGroup>(R.id.dialog_daily_calender_titlesContainer)
         titlesContainer.children
             .map {it as TextView }
             .forEachIndexed {index, textView ->
@@ -111,7 +89,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
                 textView.text = title
             }
 
-        binding.dialogCalenderCalendarView.monthHeaderBinder = object :
+        binding.dialogDailyCalenderCalendarView.monthHeaderBinder = object :
             MonthHeaderFooterBinder<MonthViewContainer> {
             override fun create(view: View) = MonthViewContainer(view)
             override fun bind(container: MonthViewContainer, data: CalendarMonth) {
@@ -140,80 +118,43 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
     }
     private fun clickListener() {
 
-        binding.dialogCalenderCalendarView.monthScrollListener = { calendarMonth ->
+        binding.dialogDailyCalenderCalendarView.monthScrollListener = { calendarMonth ->
             val pageMonth = calendarMonth.yearMonth
             val year = pageMonth.year.toString()
             val month = pageMonth.month.value
-            binding.dialogCalenderDialogDate.text = year +"." + month + "월"
+            binding.dialogDailyCalenderDialogDate.text = year +"." + month + "월"
         }
-        binding.dialogCalenderDialogRight.setOnClickListener {
+        binding.dialogDailyCalenderDialogRight.setOnClickListener {
             val nextMonth = pageMonth.nextMonth
             pageMonth = pageMonth.nextMonth
             Log.d("month", pageMonth.toString())
-            binding.dialogCalenderCalendarView.smoothScrollToMonth(nextMonth)
+            binding.dialogDailyCalenderCalendarView.smoothScrollToMonth(nextMonth)
         }
-        binding.dialogCalenderDialogLeft.setOnClickListener {
+        binding.dialogDailyCalenderDialogLeft.setOnClickListener {
             val preMonth = pageMonth.previousMonth
             pageMonth = pageMonth.previousMonth
             Log.d("month", pageMonth.toString())
-            binding.dialogCalenderCalendarView.smoothScrollToMonth(preMonth)
+            binding.dialogDailyCalenderCalendarView.smoothScrollToMonth(preMonth)
         }
-        binding.dialogCalenderDialogToday.setOnClickListener{
-            binding.dialogCalenderCalendarView.smoothScrollToMonth(currentMonth)
+        binding.dialogDailyCalenderDialogToday.setOnClickListener{
+            binding.dialogDailyCalenderCalendarView.smoothScrollToMonth(currentMonth)
             pageMonth = currentMonth
         }
-        binding.dialogCalenderCancel.setOnClickListener {
-            dismiss()
-        }
-        binding.dialogCalenderConfirm.setOnClickListener {
-            dialogCalenderInterface!!.onClickCalenderConfirm(selectedStartDate, selectedEndDate)
-        }
     }
 
-    private fun onDaySelected(date: LocalDate) {
-        rangeRe=false
-        if (selectedStartDate == null) {
-            // 시작 날짜를 선택한 경우
-            selectedStartDate = date
-            selectedEndDate = null
-        } else if (selectedEndDate == null && date.isAfter(selectedStartDate)) {
-            // 끝 날짜를 선택한 경우
-            selectedEndDate = date
-            Log.d("month", selectedEndDate.toString())
-            binding.dialogCalenderCalendarView.notifyCalendarChanged()
-        } else {
-            // 다시 시작 날짜부터 선택한 경우
-            selectedStartDate = date
-            selectedEndDate = null
-            rangeRe=true
-            binding.dialogCalenderCalendarView.notifyCalendarChanged()
-        }
-    }
-
-    private fun isDateInRange(date: LocalDate): Boolean {
-        return selectedStartDate != null && selectedEndDate != null &&
-                (date.isAfter(selectedStartDate) && date.isBefore(selectedEndDate))
-    }
 
     inner class DayViewContainer(view: View): ViewContainer(view) {
         val textView = DialogCalendarDayLayoutBinding.bind(view).calendarDayText
-        var isSelected : Boolean = false
-        private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
+        private var selectedDate: LocalDate? = null
         init {
             view.setOnClickListener {
                 if (canClick) {
-                    if (!isSelected) {
-                        textView.setBackgroundResource(R.drawable.calender_onclick_circle)
-                        isSelected = true
-                        val text = textView.text.toString()
-                        val day = text.toInt()
-                        selectedDate = pageMonth.atDay(day)
-                        Log.d("selected", selectedDate.toString())
-                        onDaySelected(selectedDate!!)
-                    } else {
-                        isSelected = false
-                    }
+                    val text = textView.text.toString()
+                    val day = text.toInt()
+                    selectedDate = pageMonth.atDay(day)
+                    dialogDailyCalenderInterface.onClickCalender(selectedDate)
+                    dismiss()
                 }
             }
         }

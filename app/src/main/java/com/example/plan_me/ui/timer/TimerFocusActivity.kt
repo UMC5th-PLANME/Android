@@ -37,7 +37,6 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
     private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private lateinit var drawerView: View
-    private lateinit var drawerCancel: ImageView
     private lateinit var drawerAdd: TextView
 
     private var fab_open: Animation? = null
@@ -51,11 +50,11 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
         super.onCreate(savedInstanceState)
         binding = ActivityTimerFocusBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
-        drawerCancel = findViewById(R.id.drawer_cancel)
         drawerAdd = findViewById(R.id.drawer_add_tv)
 
         updateTimerText()
@@ -70,6 +69,7 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
             binding.timerFocusDrawerLayout.closeDrawers()
         } else {
             super.onBackPressed()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
 
@@ -82,27 +82,22 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
         binding.timerFocusFabMestoryBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(MestoryActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerFocusFabPlannerBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(MainActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerFocusFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
             switchActivity(SettingActivity())
-        }
-        binding.timerFocusFabAddBtn.setOnClickListener {
-            Log.d("fab: timer-focus", "timer-break -> mestory")
-            switchActivity(ScheduleAddActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         // Menu button
         binding.timerFocusMenuBtn.setOnClickListener {
             Log.d("menu: timer-focus", "Open menu")
             binding.timerFocusDrawerLayout.openDrawer(drawerView!!)
-        }
-        drawerCancel.setOnClickListener {
-            Log.d("menu: timer-focus", "Close menu")
-            binding.timerFocusDrawerLayout.closeDrawers()
         }
         drawerAdd.setOnClickListener {
             showDialog(DialogAddFragment(this@TimerFocusActivity))
@@ -312,23 +307,19 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
             binding.timerFocusFabMestoryBtn.startAnimation(fab_close)
             binding.timerFocusFabPlannerBtn.startAnimation(fab_close)
             binding.timerFocusFabSettingBtn.startAnimation(fab_close)
-            binding.timerFocusFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.timerFocusFabMestoryBtn.startAnimation(fab_open)
             binding.timerFocusFabPlannerBtn.startAnimation(fab_open)
             binding.timerFocusFabSettingBtn.startAnimation(fab_open)
-            binding.timerFocusFabAddBtn.startAnimation(fab_open)
 
             binding.timerFocusFabMestoryBtn.visibility = View.VISIBLE
             binding.timerFocusFabPlannerBtn.visibility = View.VISIBLE
             binding.timerFocusFabSettingBtn.visibility = View.VISIBLE
-            binding.timerFocusFabAddBtn.visibility = View.VISIBLE
 
             binding.timerFocusFabMestoryBtn.setClickable(true)
             binding.timerFocusFabPlannerBtn.setClickable(true)
             binding.timerFocusFabSettingBtn.setClickable(true)
-            binding.timerFocusFabAddBtn.setClickable(true)
             true
         }
     }

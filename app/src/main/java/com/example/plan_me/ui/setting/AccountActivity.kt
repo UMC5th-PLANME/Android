@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityAccountBinding
 import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.ui.dialog.DialogDeleteActivity
@@ -32,6 +33,7 @@ class AccountActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAccountBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
 
@@ -44,6 +46,7 @@ class AccountActivity: AppCompatActivity() {
 
         binding.accountBackBtn.setOnClickListener {
             finish()
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 
         binding.accountCameraLo.setOnClickListener {
@@ -81,6 +84,7 @@ class AccountActivity: AppCompatActivity() {
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     override fun onBackPressed() {

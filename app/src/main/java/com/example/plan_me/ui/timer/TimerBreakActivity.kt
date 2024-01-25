@@ -34,10 +34,10 @@ class TimerBreakActivity : AppCompatActivity() {
         binding = ActivityTimerBreakBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
+        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
-        drawerCancel = findViewById(R.id.drawer_cancel)
 
         clickListener()
     }
@@ -59,18 +59,15 @@ class TimerBreakActivity : AppCompatActivity() {
         binding.timerBreakFabMestoryBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
             switchActivity(MestoryActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerBreakFabPlannerBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
             switchActivity(MainActivity())
+            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerBreakFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
-        }
-        binding.timerBreakFabAddBtn.setOnClickListener {
-            Log.d("fab: timer-break", "timer-break -> mestory")
-            dialogAdd = DialogAddFragment(this)
-            dialogAdd.show()
         }
         binding.timerBreakMenuBtn.setOnClickListener{
             Log.d("menu: timer-break", "Open menu")
@@ -100,23 +97,19 @@ class TimerBreakActivity : AppCompatActivity() {
             binding.timerBreakFabMestoryBtn.startAnimation(fab_close)
             binding.timerBreakFabPlannerBtn.startAnimation(fab_close)
             binding.timerBreakFabSettingBtn.startAnimation(fab_close)
-            binding.timerBreakFabAddBtn.startAnimation(fab_close)
             false
         } else {
             binding.timerBreakFabMestoryBtn.startAnimation(fab_open)
             binding.timerBreakFabPlannerBtn.startAnimation(fab_open)
             binding.timerBreakFabSettingBtn.startAnimation(fab_open)
-            binding.timerBreakFabAddBtn.startAnimation(fab_open)
 
             binding.timerBreakFabMestoryBtn.visibility = View.VISIBLE
             binding.timerBreakFabPlannerBtn.visibility = View.VISIBLE
             binding.timerBreakFabSettingBtn.visibility = View.VISIBLE
-            binding.timerBreakFabAddBtn.visibility = View.VISIBLE
 
             binding.timerBreakFabMestoryBtn.setClickable(true)
             binding.timerBreakFabPlannerBtn.setClickable(true)
             binding.timerBreakFabSettingBtn.setClickable(true)
-            binding.timerBreakFabAddBtn.setClickable(true)
             true
         }
     }

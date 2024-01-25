@@ -65,7 +65,7 @@
             android:id="@+id/terms_service_lo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="14dp"
             android:layout_marginHorizontal="20dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="17dp"
@@ -96,22 +96,32 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
+        <ScrollView
             android:id="@+id/terms_service_text_lo"
-            android:layout_width="300dp"
-            android:layout_height="63dp"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/category_et"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/terms_service_lo">
-        </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="@string/use_terms"
+                android:textColor="@color/black"
+                android:textSize="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center"/>
+        </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/terms_info_lo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="14dp"
             android:layout_marginHorizontal="20dp"
             android:paddingHorizontal="10dp"
             android:paddingVertical="17dp"
@@ -142,19 +152,30 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
+        <ScrollView
             android:id="@+id/terms_info_text_lo"
-            android:layout_width="300dp"
-            android:layout_height="63dp"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
             android:layout_marginHorizontal="20dp"
             android:background="@drawable/category_et"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/terms_complete_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/terms_info_lo">
-        </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="@string/personal_use_consent"
+                android:textColor="@color/black"
+                android:textSize="8dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="center"/>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/terms_complet_btn"
+            android:id="@+id/terms_complete_btn"
             android:layout_width="0dp"
             android:layout_height="43dp"
             android:layout_marginTop="42dp"
@@ -165,9 +186,10 @@
             android:textColor="@color/white"
             android:fontFamily="@font/pretendard_bold"
             android:background="@drawable/category_et"
+            android:layout_marginHorizontal="20dp"
             app:layout_constraintTop_toBottomOf="@id/terms_info_text_lo"
-            app:layout_constraintStart_toStartOf="@id/terms_info_text_lo"
-            app:layout_constraintEnd_toEndOf="@id/terms_info_text_lo"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
