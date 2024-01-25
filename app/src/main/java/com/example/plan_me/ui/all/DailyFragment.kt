@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
+import com.example.plan_me.ui.dialog.DialogCalenderFragment
+import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
+import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.daysOfWeek
@@ -18,14 +19,13 @@ import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
 import java.time.LocalDate
 import java.time.YearMonth
-import java.time.format.TextStyle
-import java.util.Locale
 
 //클릭 이벤트 및 ui수정 필요
-class DailyFragment : Fragment() {
+class DailyFragment : Fragment(), DialogDailyCalenderInterface {
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
     private val currentWeek = LocalDate.now()
+    private lateinit var dialogDailyCalenderFragment :DialogDailyCalenderFragment
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
 
@@ -39,6 +39,10 @@ class DailyFragment : Fragment() {
         binding.dailyToday.setOnClickListener {
             binding.weekCalendarView.smoothScrollToWeek(currentWeek)
             binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
+        }
+        binding.dailyDialogCalendar.setOnClickListener {
+            dialogDailyCalenderFragment = DialogDailyCalenderFragment(requireContext(), this)
+            dialogDailyCalenderFragment.show()
         }
     }
     private fun initDayCalendar() {
@@ -66,5 +70,23 @@ class DailyFragment : Fragment() {
     }
     inner class WeekDayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarWeekDayLayoutBinding.bind(view)
+        var isSelcted = false
+        init {
+            view.setOnClickListener {
+                if (isSelcted) {
+                    day.weekDayLayout.setBackgroundResource(R.color.transparent)
+                    isSelcted = false
+                }
+                else {
+                    day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
+                    isSelcted = true
+                }
+            }
+        }
+    }
+
+    override fun onClickCalender(date: LocalDate?) {
+        binding.weekCalendarView.scrollToWeek(date!!)
+        binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
     }
 }

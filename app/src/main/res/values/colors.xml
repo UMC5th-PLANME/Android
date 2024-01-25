@@ -24,4 +24,5 @@
     <color name="white_ivory">#FDFDFD</color>
     <color name="deep_white_gray">#B4B4B4</color>
     <color name="transparent_gray">#99000000</color>
+    <color name="calendar_gray">#F5F5F5</color>
 </resources>
