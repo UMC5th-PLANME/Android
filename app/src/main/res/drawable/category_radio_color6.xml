@@ -14,6 +14,7 @@
                     <corners android:radius="5.45dp"/>
                     <size android:width="28dp" android:height="26dp"/>
                     <solid android:color="@color/green"/>
+                    <stroke android:color="@color/dark_gray" android:width="2dp"/>
                 </shape>
             </item>
             <item android:drawable="@drawable/radio_ico_check" android:width="9dp" android:height="6dp" android:gravity="center"/>

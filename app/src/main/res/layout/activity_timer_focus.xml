@@ -142,7 +142,7 @@
             app:cardBackgroundColor="@color/dark_gray"
             app:cardCornerRadius="30dp"
             android:layout_marginTop="40dp"
-            app:layout_constraintBottom_toTopOf="@id/timer_focus_tv_lo"
+            app:layout_constraintBottom_toTopOf="@id/timer_focus_reset_btn"
             app:layout_constraintStart_toStartOf="@id/timer_focus_circle_default"
             app:layout_constraintEnd_toEndOf="@id/timer_focus_circle_default"
             app:layout_constraintTop_toBottomOf="@id/timer_focus_circle_default">
@@ -171,40 +171,19 @@
 
         </androidx.cardview.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/timer_focus_tv_lo"
-            android:layout_width="0dp"
+
+        <TextView
+            android:id="@+id/timer_focus_reset_btn"
+            android:text="RESET"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="30dp"
             app:layout_constraintStart_toStartOf="@id/timer_focus_play_cv"
             app:layout_constraintEnd_toEndOf="@id/timer_focus_play_cv"
-            app:layout_constraintTop_toBottomOf="@id/timer_focus_play_cv">
-
-            <TextView
-                android:id="@+id/timer_focus_reset_btn"
-                android:text="RESET"
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/timer_focus_contour_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/timer_contour"
-                android:layout_marginStart="35dp"
-                android:layout_marginEnd="35dp"/>
-
-            <TextView
-                android:id="@+id/timer_focus_save_btn"
-                android:text="SAVE "
-                android:textSize="16sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/timer_focus_play_cv"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/timer_focus_fab_add_btn"

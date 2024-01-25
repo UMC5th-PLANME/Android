@@ -10,17 +10,19 @@ import com.example.plan_me.entity.SettingDatabase
 import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.ui.timer.ResetConfirmedListener
 
-class DialogCautionResetTimeFragment(context : Context): Dialog(context) {
+class DialogCautionResetTimeFragment(context : Context, resetConfirmedListener: ResetConfirmedListener): Dialog(context) {
     lateinit var binding: FragmentDialogCautionResetTimeBinding
 
     private val timeDB = TimeDatabase.getInstance(context)!!
     private val settingTimeDB = SettingDatabase.getInstance(context)!!
 
-    private var resetConfirmedListener: ResetConfirmedListener? = null
+    private lateinit var resetConfirmedListener: ResetConfirmedListener
 
-    fun setOnResetConfirmedListener(listener: ResetConfirmedListener) {
-        resetConfirmedListener = listener
+    init {
+        this.resetConfirmedListener = resetConfirmedListener
     }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentDialogCautionResetTimeBinding.inflate(layoutInflater)
@@ -39,18 +41,14 @@ class DialogCautionResetTimeFragment(context : Context): Dialog(context) {
 
             // SettingTable set:2 시간 ->
             settingTimeDB.SettingTimeDao().updateTime(0,0,0,0,2)
+            resetConfirmedListener.onResetConfirmed(true)
 
             dismiss()
         }
 
         binding.timerDialogCautionSaveCancelTimeTv.setOnClickListener {
             // mestory 에 기록 X
-
-            // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
-            timeDB.timeDao().updateTime(0,0,1,2)
-
-            // SettingTable set:2 시간 ->
-            settingTimeDB.SettingTimeDao().updateTime(0,0,0,0,2)
+            resetConfirmedListener.onResetConfirmed(false)
 
             dismiss()
         }
