@@ -25,7 +25,7 @@ class AllFragment : Fragment() {
 
         binding.allVp.adapter = allViewPager2Adapter
         binding.allVp.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
+        binding.allVp.isUserInputEnabled = false
         TabLayoutMediator(binding.allTb, binding.allVp) {tab, position ->
             when(position) {
                 0->tab.text = "daily"
