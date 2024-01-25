@@ -64,10 +64,14 @@
         </activity>
 
         <activity android:name=".ui.mestory.MestoryActivity"/>
+
         <activity android:name=".ui.timer.TimerFocusActivity"/>
         <activity android:name=".ui.timer.TimerBreakActivity"/>
+
         <activity android:name=".MainActivity"/>
+
         <activity android:name=".ui.login.InitProfileActivity"/>
+
         <activity android:name=".ui.setting.SettingActivity"/>
         <activity android:name=".ui.setting.AccountActivity"/>
         <activity android:name=".ui.setting.ChangeNicknameActivity"/>
@@ -76,6 +80,11 @@
         <activity android:name=".ui.setting.ConsumerCenterActivity"/>
         <activity android:name=".ui.setting.TermsPoliciesActivity"/>
         <activity android:name=".ui.setting.InformationActivity"/>
+        <activity android:name=".ui.setting.OpenSourceLisenceActivity"/>
+        <activity android:name=".ui.setting.ProcessPoliciesActivity"/>
+        <activity android:name=".ui.setting.ProducerActivity"/>
+        <activity android:name=".ui.setting.UseTermsActivity"/>
+        
         <activity android:name=".ui.add.ScheduleAddActivity"/>
 
     </application>

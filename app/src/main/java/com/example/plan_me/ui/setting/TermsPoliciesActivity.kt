@@ -33,6 +33,14 @@ class TermsPoliciesActivity: AppCompatActivity() {
             finish()
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
+
+        binding.termsPoliciesUseTv.setOnClickListener {
+            switchActivity(UseTermsActivity())
+        }
+
+        binding.termsPoliciesPersonalTv.setOnClickListener {
+            switchActivity(ProcessPoliciesActivity())
+        }
     }
 
     override fun onBackPressed() {
