@@ -1,4 +1,4 @@
-package com.example.plan_me
+package com.example.plan_me.ui.main
 
 import android.app.Activity
 import android.app.Dialog
@@ -10,9 +10,9 @@ import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment

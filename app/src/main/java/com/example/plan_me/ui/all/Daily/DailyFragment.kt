@@ -1,4 +1,4 @@
-package com.example.plan_me.ui.all
+package com.example.plan_me.ui.all.Daily
 
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,6 @@ import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.example.plan_me.data.local.entity.category
 import com.example.plan_me.data.local.entity.schedule
-import com.example.plan_me.ui.dialog.DialogCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
 import com.kizitonwose.calendar.core.WeekDay
@@ -31,7 +30,7 @@ class DailyFragment : Fragment(), DialogDailyCalenderInterface {
     private lateinit var dialogDailyCalenderFragment :DialogDailyCalenderFragment
 
     //예제 데이터
-    lateinit var study : category
+   /* lateinit var study : category
     lateinit var exercise : category
 
     private  var cate : ArrayList<category> = ArrayList()
@@ -40,24 +39,24 @@ class DailyFragment : Fragment(), DialogDailyCalenderInterface {
 
     private val s1 : schedule = schedule(0, false, "웹프 6-8강 복습", LocalDate.of(2024, 1, 23))
     private val s2 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 29))
-    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))
+    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
         //예제 데이터
-        study = category(0, "📄 STUDY", R.color.lemon)
+        /*study = category(0, "📄 STUDY", R.color.lemon)
         exercise = category(1, "\uD83D\uDCAA Exercise", R.color.sky_blue)
         cate.add(study)
         cate.add(exercise)
         sche.add(s1)
         sche.add(s2)
-        sche.add(s3)
+        sche.add(s3)*/
 
         initDayCalendar()
         clickListener()
-
-        val dailyRVAdapter = DailyRVAdapter(cate, sche)
+        //Recycler view
+        /*val dailyRVAdapter = DailyRVAdapter(cate, sche)
         binding.dailyScheduleList.adapter = dailyRVAdapter
-        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)*/
 
         return binding.root
     }

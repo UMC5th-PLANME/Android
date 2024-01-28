@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.plan_me.data.remote.dto.auth.LoginRes
 import com.example.plan_me.data.remote.retrofit.AuthRetrofitInterface
 import com.example.plan_me.data.remote.view.auth.LoginView
-import com.example.plan_me.getRetrofit
+import com.example.plan_me.utils.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
