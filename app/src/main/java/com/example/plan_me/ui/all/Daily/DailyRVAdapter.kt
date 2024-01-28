@@ -1,7 +1,5 @@
-package com.example.plan_me.ui.all
+package com.example.plan_me.ui.all.Daily
 
-import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +9,12 @@ import com.example.plan_me.data.local.entity.category
 import com.example.plan_me.data.local.entity.schedule
 
 class DailyRVAdapter(private val categoryList : ArrayList<category>, private val scheduleList : ArrayList<schedule>) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyRVAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleBinding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DailyRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(categoryList[position])
     }
 

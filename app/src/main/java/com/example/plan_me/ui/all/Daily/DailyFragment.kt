@@ -1,4 +1,4 @@
-package com.example.plan_me.ui.all
+package com.example.plan_me.ui.all.Daily
 
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,6 @@ import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.example.plan_me.data.local.entity.category
 import com.example.plan_me.data.local.entity.schedule
-import com.example.plan_me.ui.dialog.DialogCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
 import com.kizitonwose.calendar.core.WeekDay

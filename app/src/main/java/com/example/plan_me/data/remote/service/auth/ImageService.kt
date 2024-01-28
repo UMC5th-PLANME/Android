@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.retrofit.AuthRetrofitInterface
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
-import com.example.plan_me.getRetrofit
+import com.example.plan_me.utils.getRetrofit
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback

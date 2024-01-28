@@ -1,4 +1,4 @@
-package com.example.plan_me.ui.all
+package com.example.plan_me.ui.all.Weekly
 
 import android.graphics.Color
 import android.os.Bundle

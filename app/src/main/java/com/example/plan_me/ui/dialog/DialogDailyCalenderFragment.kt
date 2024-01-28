@@ -11,11 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
 import com.example.plan_me.R
-import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.DialogCalendarDayLayoutBinding
-import com.example.plan_me.databinding.FragmentDialogCalendarBinding
 import com.example.plan_me.databinding.FragmentDialogDailyCalenderBinding
-import com.example.plan_me.ui.all.MonthViewContainer
+import com.example.plan_me.ui.all.Weekly.MonthViewContainer
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition

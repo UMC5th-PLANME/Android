@@ -1,4 +1,4 @@
-package com.example.plan_me
+package com.example.plan_me.utils
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
