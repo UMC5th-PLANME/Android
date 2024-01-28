@@ -1,4 +1,4 @@
-package com.example.plan_me.entity
+package com.example.plan_me.data.local.entity
 
 import java.time.LocalDate
 

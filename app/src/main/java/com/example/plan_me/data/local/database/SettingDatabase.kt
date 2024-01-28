@@ -1,9 +1,11 @@
-package com.example.plan_me.entity
+package com.example.plan_me.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.plan_me.data.local.entity.SettingTime
+import com.example.plan_me.data.local.dao.SettingTimeDao
 
 @Database(entities = [SettingTime::class], version = 1)
 abstract class SettingDatabase: RoomDatabase(){

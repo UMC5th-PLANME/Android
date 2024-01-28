@@ -7,8 +7,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import com.example.plan_me.databinding.FragmentDialogTimerSettingBinding
-import com.example.plan_me.entity.Time
-import com.example.plan_me.entity.TimeDatabase
+import com.example.plan_me.data.local.entity.Time
+import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.ui.timer.TimerSettingListener
 
 class DialogTimerSettingFragment(context : Context): Dialog(context) {

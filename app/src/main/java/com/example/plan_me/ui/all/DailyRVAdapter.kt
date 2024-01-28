@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemScheduleBinding
-import com.example.plan_me.entity.category
-import com.example.plan_me.entity.schedule
+import com.example.plan_me.data.local.entity.category
+import com.example.plan_me.data.local.entity.schedule
 
 class DailyRVAdapter(private val categoryList : ArrayList<category>, private val scheduleList : ArrayList<schedule>) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyRVAdapter.ViewHolder {
