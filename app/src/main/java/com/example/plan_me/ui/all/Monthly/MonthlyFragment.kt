@@ -1,4 +1,4 @@
-package com.example.plan_me.ui.all.Weekly
+package com.example.plan_me.ui.all.Monthly
 
 import android.graphics.Color
 import android.os.Bundle
@@ -46,7 +46,7 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
     private lateinit var firstDayOfWeek :DayOfWeek
 
     //예제 데이터
-    lateinit var study : category
+   /* lateinit var study : category
     lateinit var exercise : category
 
     private  var cate : ArrayList<category> = ArrayList()
@@ -55,17 +55,17 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
 
     private val s1 : schedule = schedule(0, false, "웹프 6-8강 복습", LocalDate.of(2024, 1, 23))
     private val s2 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 29))
-    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))
+    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))*/
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMonthlyBinding.inflate(layoutInflater)
-        study = category(0, "📄STUDY", R.color.lemon)
+        /*study = category(0, "📄STUDY", R.color.lemon)
         exercise = category(1, "Exercise", R.color.sky_blue)
         cate.add(study)
         cate.add(exercise)
         sche.add(s1)
         sche.add(s2)
-        sche.add(s3)
+        sche.add(s3)*/
 
         clickListener()
         initCalendar()
@@ -94,7 +94,7 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
                     container.canClick = false
                 }
 
-                val matchingSchedules = sche.filter { it.date == data.date }
+                /*val matchingSchedules = sche.filter { it.date == data.date }
                 val categoryCounts: Map<Int, Int> = matchingSchedules.groupingBy { it.category }
                     .eachCount()
                 Log.d("count", matchingSchedules.isNotEmpty().toString())
@@ -131,8 +131,7 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
                         container.day.calendarDayIndicator4.visibility = View.VISIBLE
                         container.day.calendarDayIndicator4.setBackgroundResource(colors[3])
 
-                    }
-                }
+                    }*/
             }
             override fun create(view: View): DayViewContainer {
                 Log.d("pageMonth", pageMonth.toString())

@@ -1,4 +1,4 @@
-package com.example.plan_me.ui.all.Weekly
+package com.example.plan_me.ui.all.Monthly
 
 import android.view.View
 import android.view.ViewGroup

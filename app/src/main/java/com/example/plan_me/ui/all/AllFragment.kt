@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.plan_me.databinding.FragmentAllBinding
 import com.example.plan_me.ui.all.Daily.DailyFragment
 import com.example.plan_me.ui.all.Monthly.WeeklyFragment
-import com.example.plan_me.ui.all.Weekly.MonthlyFragment
+import com.example.plan_me.ui.all.Monthly.MonthlyFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 
