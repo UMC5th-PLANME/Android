@@ -1,3 +1,4 @@
+/*
 package com.example.plan_me.ui.planner
 
 import android.view.LayoutInflater
@@ -32,4 +33,4 @@ class PlannerRVAdapter: RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = dataList.size
-}
+}*/

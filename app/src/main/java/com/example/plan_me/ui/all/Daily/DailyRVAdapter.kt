@@ -21,7 +21,7 @@ class DailyRVAdapter(private val categoryList : ArrayList<category>, private val
     override fun getItemCount(): Int = categoryList.size
     inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind(category: category) {
-            binding.itemScheduleTv.text = category.title
+            binding.itemScheduleTv.text = category.name
             binding.itemScheduleDetail.text = "!!!"
 
             binding.itemScheduleFlip.setOnClickListener {
