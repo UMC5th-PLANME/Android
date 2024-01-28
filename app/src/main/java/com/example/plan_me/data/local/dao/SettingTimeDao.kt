@@ -1,10 +1,12 @@
-package com.example.plan_me.entity
+package com.example.plan_me.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import com.example.plan_me.data.local.entity.SettingTime
+
 @Dao
 interface SettingTimeDao {
     @Insert

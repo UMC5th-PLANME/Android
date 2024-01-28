@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
-import com.example.plan_me.entity.category
-import com.example.plan_me.entity.schedule
+import com.example.plan_me.data.local.entity.category
+import com.example.plan_me.data.local.entity.schedule
 import com.example.plan_me.ui.dialog.DialogCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface

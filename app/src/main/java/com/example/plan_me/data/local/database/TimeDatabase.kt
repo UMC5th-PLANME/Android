@@ -1,10 +1,11 @@
-package com.example.plan_me.entity
+package com.example.plan_me.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.example.plan_me.data.local.entity.Time
+import com.example.plan_me.data.local.dao.TimeDao
 
 @Database(entities = [Time::class], version = 1)
 abstract class TimeDatabase: RoomDatabase() {

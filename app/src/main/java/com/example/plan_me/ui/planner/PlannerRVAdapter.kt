@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemTodoBinding
-import com.example.plan_me.entity.schedule
+import com.example.plan_me.data.local.entity.schedule
 import java.time.LocalDate
 
 class PlannerRVAdapter: RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>() {
