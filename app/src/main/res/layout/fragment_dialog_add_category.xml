@@ -66,9 +66,10 @@
 
                 <RadioGroup
                     android:id="@+id/emoticon_group1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <RadioButton
                         android:id="@+id/emoticon_1_btn"
@@ -123,10 +124,11 @@
 
                 <RadioGroup
                     android:id="@+id/emoticon_group2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <RadioButton
                         android:id="@+id/emoticon_6_btn"
@@ -235,9 +237,10 @@
 
                 <RadioGroup
                     android:id="@+id/color_group1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <RadioButton
                         android:id="@+id/color_1_btn"
@@ -282,10 +285,11 @@
 
                 <RadioGroup
                     android:id="@+id/color_group2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <RadioButton
                         android:id="@+id/color_6_btn"
