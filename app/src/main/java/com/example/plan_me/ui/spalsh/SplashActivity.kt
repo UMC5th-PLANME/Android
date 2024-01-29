@@ -17,6 +17,7 @@ class SplashActivity : AppCompatActivity() {
 
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.statusBarColor = resources.getColor(R.color.dark_gray)
 
         Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)

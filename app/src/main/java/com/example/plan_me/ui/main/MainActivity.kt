@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         drawerAdd = findViewById(R.id.drawer_add_tv)
 
 
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
