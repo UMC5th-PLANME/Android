@@ -11,11 +11,16 @@
         <item name="android:windowBackground">@drawable/splash_img</item>
     </style>
     <style name="tab_text" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="NumberPickerStyle">
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="TimePicker_Custom" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorControlNormal">@android:color/transparent</item>
+    </style>
+
 </resources>

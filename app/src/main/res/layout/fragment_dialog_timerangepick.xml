@@ -74,7 +74,9 @@
                 android:id="@+id/dialog_timepick_start"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:timePickerMode="spinner"/>
+                android:timePickerMode="spinner"
+                android:theme="@style/TimePicker_Custom"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -94,7 +96,8 @@
                 android:id="@+id/dialog_timepick_end"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:timePickerMode="spinner"/>
+                android:timePickerMode="spinner"
+                android:theme="@style/TimePicker_Custom"/>
         </LinearLayout>
 
         <LinearLayout
