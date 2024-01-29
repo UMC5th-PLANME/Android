@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/schedule_backarrow"
         android:backgroundTint="@color/dark_gray"
-        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/account_tv"
         app:layout_constraintTop_toTopOf="@id/account_tv"

@@ -18,4 +18,9 @@
     <style name="NumberPickerStyle">
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="TimePicker_Custom" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorControlNormal">@android:color/transparent</item>
+    </style>
+
 </resources>
