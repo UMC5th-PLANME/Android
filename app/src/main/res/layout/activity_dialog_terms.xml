@@ -112,9 +112,9 @@
                 android:padding="10dp"
                 android:text="@string/use_terms"
                 android:textColor="@color/black"
-                android:textSize="8dp"
+                android:textSize="10dp"
                 android:fontFamily="@font/pretendard_regular"
-                android:gravity="center"/>
+                android:gravity="start"/>
         </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -169,9 +169,9 @@
                 android:padding="10dp"
                 android:text="@string/personal_use_consent"
                 android:textColor="@color/black"
-                android:textSize="8dp"
+                android:textSize="10dp"
                 android:fontFamily="@font/pretendard_regular"
-                android:gravity="center"/>
+                android:gravity="start"/>
         </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
