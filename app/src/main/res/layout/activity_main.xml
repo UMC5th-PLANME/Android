@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/transparent"
-                android:padding="6dp"
+                android:padding="10dp"
                 android:src="@drawable/public_more" />
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/pretendard_bold"
-                android:text="planner"
+                android:text="PLANNER"
                 android:textColor="@color/dark_gray"
                 android:textSize="20dp" />
 
@@ -43,16 +43,22 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/main_all_btn"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/planner_btn_all"
-                android:fontFamily="@font/pretendard_bold"
-                android:gravity="center_horizontal"
-                android:text="ALL"
-                android:textColor="@color/dark_gray"
-                android:textSize="12dp" />
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/main_all_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/planner_btn_all"
+                    android:fontFamily="@font/pretendard_bold"
+                    android:gravity="center"
+                    android:text="ALL"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="12dp" />
+            </LinearLayout>
         </LinearLayout>
 
         <FrameLayout

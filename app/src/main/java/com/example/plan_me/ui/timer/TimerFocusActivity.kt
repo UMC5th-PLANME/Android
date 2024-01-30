@@ -9,11 +9,10 @@ import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.example.plan_me.MainActivity
+import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
 import com.example.plan_me.entity.SettingDatabase

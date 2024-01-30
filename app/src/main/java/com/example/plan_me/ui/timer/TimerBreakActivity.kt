@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import com.example.plan_me.MainActivity
+import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerBreakBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment

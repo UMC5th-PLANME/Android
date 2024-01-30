@@ -70,9 +70,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="취소"
-                android:textSize="18sp"
-                android:fontFamily="@font/pretendard_bold"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:gravity="center"/>
 
@@ -81,9 +81,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:fontFamily="@font/pretendard_medium"
                 android:text="확인"
-                android:textSize="18sp"
-                android:fontFamily="@font/pretendard_bold"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:gravity="center"/>
         </LinearLayout>

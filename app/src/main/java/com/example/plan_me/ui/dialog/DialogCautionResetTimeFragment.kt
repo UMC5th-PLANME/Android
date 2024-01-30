@@ -6,8 +6,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.plan_me.databinding.FragmentDialogCautionResetTimeBinding
-import com.example.plan_me.entity.SettingDatabase
-import com.example.plan_me.entity.TimeDatabase
+import com.example.plan_me.data.local.database.SettingDatabase
+import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.ui.timer.ResetConfirmedListener
 
 class DialogCautionResetTimeFragment(context : Context, resetConfirmedListener: ResetConfirmedListener): Dialog(context) {

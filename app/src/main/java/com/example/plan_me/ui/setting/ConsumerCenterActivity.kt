@@ -8,7 +8,7 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import com.example.plan_me.MainActivity
+import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityConsumerCenterBinding
 import com.example.plan_me.ui.timer.TimerFocusActivity
