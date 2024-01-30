@@ -15,10 +15,11 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
-import com.example.plan_me.data.local.database.SettingDatabase
-import com.example.plan_me.data.local.entity.SettingTime
-import com.example.plan_me.data.local.entity.Time
-import com.example.plan_me.data.local.database.TimeDatabase
+import com.example.plan_me.entity.SettingDatabase
+import com.example.plan_me.entity.SettingTime
+import com.example.plan_me.entity.Time
+import com.example.plan_me.entity.TimeDatabase
+import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
@@ -105,24 +106,9 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
 
             // Timer-Break 에 시간이 남았다면 -> 초기화 알림 문구
 
-
-            dialogSetting = DialogTimerSettingFragment(this)
-
-            // Dialog 에서 변경된 FocusTime 값으로 변경
-            dialogSetting.setOnSettingConfirmedListener(object : TimerSettingListener {
-                override fun onSettingConfirmed(focusTime: Long) {
-                    Log.d("Dialog -> FocusActivity", "onSettingConfirmed: $focusTime")
-
-                    val seconds = (focusTime / 1000) % 60
-                    val minutes = (focusTime / (1000 * 60)) % 60
-                    val hours = focusTime / (1000 * 60 * 60)
-
-                    val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-                    Log.d("Dialog -> FocusActivity", "$hours, $minutes, $seconds")
-                    binding.timerFocusTimeTv.text = formattedTime
-                }
-            })
-            dialogSetting.show()
+            // Navigate to TimerSettingActivity
+            val intent = Intent(this, TimerSettingActivity::class.java)
+            startActivity(intent)
         }
 
         binding.timerFocusPlayBtn.setOnClickListener {
@@ -324,4 +310,3 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
 
 
 }
-

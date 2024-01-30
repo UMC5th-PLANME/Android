@@ -7,6 +7,10 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import com.example.plan_me.databinding.FragmentDialogTimerSettingBinding
+import com.example.plan_me.entity.SettingDatabase
+import com.example.plan_me.entity.SettingTime
+import com.example.plan_me.entity.Time
+import com.example.plan_me.entity.TimeDatabase
 import com.example.plan_me.data.local.entity.Time
 import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.ui.timer.TimerSettingListener
@@ -15,10 +19,17 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private lateinit var binding: FragmentDialogTimerSettingBinding
 
     private val timeDB = TimeDatabase.getInstance(context)!!
-    private val time = timeDB.timeDao().getTime()
     private var focusTime = timeDB.timeDao().getFocusTime(1)
+    private var focusTimeToMin = convertMillisecondsToMinutes(focusTime)
     private var breakTime = timeDB.timeDao().getBreakTime(1)
+    private var breakTimeToMin = convertMillisecondsToMinutes(breakTime)
     private var repeatCount = timeDB.timeDao().getRepeatCount(1)
+
+    private val settingTimeDB = SettingDatabase.getInstance(context)!!
+    private var baseFocusTime = timeDB.timeDao().getFocusTime(2)
+    private var remainingFocusTime = settingTimeDB.SettingTimeDao().getBaseFocusTime(1)
+    private var baseBreakTime = timeDB.timeDao().getBreakTime(2)
+    private var remainingBreakTime = settingTimeDB.SettingTimeDao().getBaseBreakTime(1)
 
     private var settingListener: TimerSettingListener? = null
 
@@ -36,22 +47,22 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private fun timeClickListener() {
         // 집중 시간 설정
         binding.dialogTimerFocusTimeUpIv.setOnClickListener {
-            focusTime += 10
-            binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+            focusTimeToMin += 10
+            binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
         binding.dialogTimerFocusTimeDownIv.setOnClickListener {
-            focusTime = maxOf(0, focusTime - 10)
-            binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+            focusTimeToMin = maxOf(0, focusTimeToMin - 10)
+            binding.dialogTimerFocusTimeTv.text = focusTimeToMin.toString()
         }
 
         // 휴식 시간 설정
         binding.dialogTimerBreakTimeUpIv.setOnClickListener {
-            breakTime += 10
-            binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+            breakTimeToMin += 10
+            binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
         binding.dialogTimerBreakTimeDownIv.setOnClickListener {
-            breakTime = maxOf(0, breakTime - 10)
-            binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+            breakTimeToMin = maxOf(0, breakTimeToMin - 10)
+            binding.dialogTimerBreakTimeTv.text = breakTimeToMin.toString()
         }
 
         // 반복 횟수 설정
@@ -75,40 +86,61 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
             val changedSetNum = 2
             val existingTime = timeDB.timeDao().getSavedTime(changedSetNum)
 
-            val focusTimeMillis = convertMinutesToMilliseconds(focusTime)
-            val breakTimeMillis = convertMinutesToMilliseconds(breakTime)
-
             if (existingTime != null) {
-                // set: 2가 이미 테이블에 존재하면 업데이트
-                timeDB.timeDao().updateTime(focusTime, breakTime, repeatCount, changedSetNum)
+                // set: 2가 이미 테이블에 존재하면 TimeTable 에 업데이트
+                timeDB.timeDao().updateTime(convertMinutesToMilliseconds(focusTimeToMin),
+                                            convertMinutesToMilliseconds(breakTimeToMin),
+                                            repeatCount, changedSetNum)
+
+                // SettingTimeTable 에 업데이트
+                settingTimeDB.SettingTimeDao().updateTime(convertMinutesToMilliseconds(focusTimeToMin),
+                                                    convertMinutesToMilliseconds(focusTimeToMin),
+                                                    convertMinutesToMilliseconds(breakTimeToMin),
+                                                    convertMinutesToMilliseconds(breakTimeToMin),
+                                                    changedSetNum)
             } else {
-                // set: 2가 테이블에 없으면 삽입
+                // set: 2가 테이블에 없으면 TimeTable 에 삽입
                 timeDB.timeDao().insert(
                     Time(
-                        focusTimeMillis,
-                        breakTimeMillis,
+                        convertMinutesToMilliseconds(focusTimeToMin),
+                        convertMinutesToMilliseconds(breakTimeToMin),
                         repeatCount
+                    ).apply {
+                        set = changedSetNum
+                    }
+                )
+
+                // SettingTimeTable 에 업데이트
+                settingTimeDB.SettingTimeDao().insert(
+                    SettingTime(
+                        convertMinutesToMilliseconds(focusTimeToMin),
+                        convertMinutesToMilliseconds(focusTimeToMin),
+                        convertMinutesToMilliseconds(breakTimeToMin),
+                        convertMinutesToMilliseconds(breakTimeToMin)
                     ).apply {
                         set = changedSetNum
                     }
                 )
             }
 
+
             // Check Setting
             // set: 1을 다시 50, 10, 1 로 업데이트
             val check_time1 = timeDB.timeDao().getSavedTime(1)
-            Log.d("Default setting(1)", "Insert time :$check_time1")
+            Log.d("DialogTimerSettingFrag: confirmBtn", "Time: $check_time1")
 
             //  바뀐 focusTime, breakTime, repeatCount를 set: 2에 출력
             val check_time2 = timeDB.timeDao().getSavedTime(2)
-            Log.d("Default setting(2)", "Insert time :$check_time2")
+            Log.d("DialogTimerSettingFrag: confirmBtn", "Time: $check_time2")
 
             val check_time0 = timeDB.timeDao().getTime()
-            Log.d("Default setting(0)", "$check_time0")
+            Log.d("DialogTimerSettingFrag: confirmBtn", "Time: $check_time0")
+
+            val check_setting_time = settingTimeDB.SettingTimeDao().getTime()
+            Log.d("DialogTimerSettingFrag: confirmBtn", "Setting Time: $check_setting_time")
 
             // 변경된 값을 알림
-            notifySettingConfirmed(focusTimeMillis)
-
+            notifySettingConfirmed(convertMinutesToMilliseconds(focusTimeToMin))
 
             dismiss()
         }
@@ -116,33 +148,37 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
 
     private fun setTime(){
 
-        val defaultSetNum= 1
+        /*// 기본 timer 설정 값을 TimeDao 에 저장 -> set: 1
+        timeDB.timeDao().updateTime(
+            convertMinutesToMilliseconds(50),
+            convertMinutesToMilliseconds(10),
+            1,
+            1
+        )*/
 
-        if (time.isNotEmpty()) return
-
-        // 기본 timer 설정 값을 Dao 에 저장 -> set: 1
-        timeDB.timeDao().insert(
-            Time(
-                convertMinutesToMilliseconds(50),
-                convertMinutesToMilliseconds(10),
-                1
-            ).apply {
-                set = defaultSetNum
-            }
-        )
-
-        val _time1 = timeDB.timeDao().getSavedTime(1)
+        /*val _time1 = timeDB.timeDao().getSavedTime(1)
         Log.d("Default setting(01)", "Insert time :$_time1")
 
-        focusTime = timeDB.timeDao().getFocusTime(1)
+        focusTime = timeDB.timeDao().getFocusTime(1)*/
+
+        /*settingTimeDB.SettingTimeDao().updateTime(
+            convertMinutesToMilliseconds(50),
+            convertMinutesToMilliseconds(50),
+            convertMinutesToMilliseconds(10),
+            convertMinutesToMilliseconds(10),
+            1
+        )*/
+
+        val _time2 = settingTimeDB.SettingTimeDao().getTime()
+        Log.d("DialogTimerSettingFrag", "SettingTime: $_time2")
 
         // 집중 시간 설정
-        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
-        binding.dialogTimerFocusTimeTv.text = focusTime.toString()
+        binding.dialogTimerFocusTimeTv.text = convertMillisecondsToMinutes(focusTime).toString()
+        binding.dialogTimerFocusTimeTv.text = convertMillisecondsToMinutes(focusTime).toString()
 
         // 휴식 시간 설정
-        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
-        binding.dialogTimerBreakTimeTv.text = breakTime.toString()
+        binding.dialogTimerBreakTimeTv.text = convertMillisecondsToMinutes(breakTime).toString()
+        binding.dialogTimerBreakTimeTv.text = convertMillisecondsToMinutes(breakTime).toString()
 
         // 반복 횟수 설정
         binding.dialogTimerRepetitionNumTv.text = repeatCount.toString()
@@ -161,6 +197,11 @@ class DialogTimerSettingFragment(context : Context): Dialog(context) {
     private fun convertMinutesToMilliseconds(minutes: Long): Long {
         return minutes * 60 * 1000
     }
+
+    private fun convertMillisecondsToMinutes(mils: Long): Long {
+        return (mils / (60 * 1000))
+    }
+
 
 }
 
