@@ -4,7 +4,6 @@ import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.local.entity.Terms
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
-import com.example.plan_me.data.remote.dto.auth.LoginRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
@@ -14,9 +13,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface AuthRetrofitInterface {
-    // 카카오, 구글로 로그인하기
-    @GET("/oauth2/authorization/{provider}")
-    fun getSocialLogin(@Path("provider") provider: String): Call<LoginRes>
 
     // 회원가입
     @PATCH("/api/member")

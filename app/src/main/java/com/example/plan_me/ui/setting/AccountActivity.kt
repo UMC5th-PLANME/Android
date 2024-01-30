@@ -21,6 +21,10 @@ import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.ui.dialog.DialogDeleteActivity
 import com.example.plan_me.ui.dialog.DialogLogoutActivity
 import com.example.plan_me.ui.login.InitProfileActivity
+import com.example.plan_me.ui.login.LoginActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.squareup.picasso.Picasso
 
 class AccountActivity: AppCompatActivity() {
@@ -69,7 +73,7 @@ class AccountActivity: AppCompatActivity() {
         }
 
         binding.accountLogoutTv.setOnClickListener {
-            showDialog(DialogLogoutActivity(this@AccountActivity))
+            showDialog(DialogLogoutActivity(this@AccountActivity, social))
         }
 
         binding.accountDeleteTv.setOnClickListener {
