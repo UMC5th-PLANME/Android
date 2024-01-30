@@ -17,12 +17,13 @@
             <NumberPicker
                 android:id="@+id/timer_break_numberPicker_min"
                 android:layout_width="wrap_content"
-                android:layout_height="140dp"
+                android:layout_height="200dp"
                 android:keepScreenOn="false"
                 android:solidColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/NumberPickerSetting" />
 
             <TextView
                 android:layout_width="wrap_content"
