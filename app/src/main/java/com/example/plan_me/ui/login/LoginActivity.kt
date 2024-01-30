@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
     var nickname : String? = ""
     var profile :String? = ""
     var email: String? = ""
+    var accessToken: String? =""
     var social: String = ""
     var googleIdToken: String? = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
@@ -81,6 +82,7 @@ class LoginActivity : AppCompatActivity() {
             profile = account.photoUrl.toString()
             email = account.email
             social = "구글"
+            accessToken = idToken
             Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social + " & " + email)
             Log.d("Google idToken", idToken.toString())
             saveData()
@@ -97,6 +99,19 @@ class LoginActivity : AppCompatActivity() {
                 Log.e(TAG, "로그인 실패 $error")
             } else if (token != null) {
                 Log.e(TAG, "로그인 성공 ${token.accessToken}")
+
+                UserApiClient.instance.me { user, _ ->
+                    if (user != null) {
+                        nickname = user.kakaoAccount?.profile?.nickname.toString()
+                        profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
+                        email = user.kakaoAccount?.email
+                        social = "카카오"
+                        accessToken = token.accessToken
+                        Log.d("userInfo", nickname + "&&" + profile + "&&" + email)
+                        saveData()
+                        Log.d("kakao", accessToken.toString())
+                    }
+                }
             }
             openTermsPopup()
         }
@@ -123,16 +138,6 @@ class LoginActivity : AppCompatActivity() {
             }
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback) // 카카오 이메일 로그인
-        }
-        UserApiClient.instance.me { user, _ ->
-            if (user != null) {
-                nickname = user.kakaoAccount?.profile?.nickname.toString()
-                profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
-                email = user.kakaoAccount?.email
-                social = "카카오"
-                Log.d("userInfo", nickname + "&&" + profile + "&&" + email)
-                saveData()
-            }
         }
     }
 
@@ -165,6 +170,8 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("userName", nickname)
         editor.putString("userImg", profile)
         editor.putString("social", social)
+        editor.putString("email", email)
+        editor.putString("accessToken", accessToken)
         editor.apply()
     }
 }

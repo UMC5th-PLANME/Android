@@ -15,14 +15,21 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.SignUpRes
+import com.example.plan_me.data.remote.service.auth.MemberService
+import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
 import com.squareup.picasso.Picasso
 
-class InitProfileActivity : AppCompatActivity() {
+class InitProfileActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityInitProfileBinding
     private var userName: String? = ""
     private var userImg: String? = ""
+    private var userEmail: String? = ""
+    private var userType: String? = ""
+    private var accessToken: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +57,16 @@ class InitProfileActivity : AppCompatActivity() {
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            goMainActivity()
+            setSignUp()
+//            goMainActivity()
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
+    }
+
+    private fun setSignUp() {
+        val setMemberService = MemberService()
+        setMemberService.setSignUpView(this@InitProfileActivity)
+        setMemberService.setSignUp(accessToken!!, Member(userEmail!!, userName!!, userImg!!, userType!!))
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -111,6 +125,7 @@ class InitProfileActivity : AppCompatActivity() {
             // 이미지를 선택한 경우, 이미지뷰에 설정
             val selectedImageUri = data?.data
             binding.initProfileImagefileIv.setImageURI(selectedImageUri)
+            Picasso.get().load(selectedImageUri).transform(CircleTransform()).into(binding.initProfileImagefileIv)
         }
     }
 
@@ -119,6 +134,9 @@ class InitProfileActivity : AppCompatActivity() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
         userName = sharedPreferences.getString("userName", userName)
         userImg = sharedPreferences.getString("userImg", userImg)
+        userEmail = sharedPreferences.getString("email", userEmail)
+        userType = sharedPreferences.getString("type", userType)
+        accessToken = sharedPreferences.getString("accessToken", accessToken)
     }
 
     private fun goMainActivity() {
@@ -130,5 +148,14 @@ class InitProfileActivity : AppCompatActivity() {
     companion object {
         val REQUEST_PERMISSION_CODE = 423
         val REQUEST_IMAGE_PICK = 826
+    }
+
+    override fun onSetSignUpSuccess(response: SignUpRes) {
+        Log.d("회원가입", response.message)
+        goMainActivity()
+    }
+
+    override fun onSetSignUpFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("회원가입 실패", message)
     }
 }
