@@ -150,11 +150,7 @@ class AccountActivity: AppCompatActivity() {
             // 이미지를 선택한 경우, 이미지뷰에 설정
             val selectedImageUri = data?.data
             binding.accountImageIv.setImageURI(selectedImageUri)
+            Picasso.get().load(selectedImageUri).transform(CircleTransform()).into(binding.accountImageIv)
         }
-    }
-
-    companion object {
-        private val REQUEST_PERMISSION_CODE = 423
-        private val REQUEST_IMAGE_PICK = 826
     }
 }
