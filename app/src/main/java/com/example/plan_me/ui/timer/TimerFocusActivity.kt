@@ -15,11 +15,10 @@ import androidx.core.view.GravityCompat
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
-import com.example.plan_me.entity.SettingDatabase
-import com.example.plan_me.entity.SettingTime
-import com.example.plan_me.entity.Time
-import com.example.plan_me.entity.TimeDatabase
-import com.example.plan_me.ui.add.ScheduleAddActivity
+import com.example.plan_me.data.local.database.SettingDatabase
+import com.example.plan_me.data.local.entity.SettingTime
+import com.example.plan_me.data.local.entity.Time
+import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
