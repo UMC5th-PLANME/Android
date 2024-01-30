@@ -7,6 +7,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -66,6 +67,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun clickListener() {
+        //다른 화면 클릭시 fab 닫기
+        binding.root.setOnTouchListener { _, event ->
+            if (isFabOpen && event.action == MotionEvent.ACTION_DOWN) {
+                toggleFab()
+                return@setOnTouchListener true
+            }
+            return@setOnTouchListener false
+        }
         binding.mainFabMenuBtn.setOnClickListener {
             Log.d("fab","fab")
             toggleFab()
