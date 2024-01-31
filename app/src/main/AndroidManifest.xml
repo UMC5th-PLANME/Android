@@ -67,6 +67,7 @@
 
         <activity android:name=".ui.timer.TimerFocusActivity"/>
         <activity android:name=".ui.timer.TimerBreakActivity"/>
+        <activity android:name=".ui.timer.TimerSettingActivity" />
 
         <activity android:name=".ui.main.MainActivity"/>
 

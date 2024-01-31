@@ -26,7 +26,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     var nickname : String? = ""
     var profile :String? = ""
+    var email: String? = ""
+    var accessToken: String? =""
     var social: String = ""
+    var googleIdToken: String? = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -56,12 +59,15 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() { }
+
     private fun handleGoogleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
             // Google 로그인 성공
-            getUserInfoFromGoogle(account)
+            googleIdToken = account?.idToken
+            getUserInfoFromGoogle(account, googleIdToken)
         } catch (e: ApiException) {
             // Google 로그인 실패
             Log.e(TAG, "Google 로그인 실패", e)
@@ -69,13 +75,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getUserInfoFromGoogle(account: GoogleSignInAccount?) {
+    private fun getUserInfoFromGoogle(account: GoogleSignInAccount?, idToken: String?) {
         // Google 로그인 성공 시, 사용자 정보 가져오기
         if (account != null) {
             nickname = account.givenName
             profile = account.photoUrl.toString()
+            email = account.email
             social = "구글"
-            Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social)
+            accessToken = idToken
+            Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social + " & " + email)
+            Log.d("Google idToken", idToken.toString())
             saveData()
             Log.d(TAG, "Google 로그인 성공")
             openTermsPopup()
@@ -90,6 +99,19 @@ class LoginActivity : AppCompatActivity() {
                 Log.e(TAG, "로그인 실패 $error")
             } else if (token != null) {
                 Log.e(TAG, "로그인 성공 ${token.accessToken}")
+
+                UserApiClient.instance.me { user, _ ->
+                    if (user != null) {
+                        nickname = user.kakaoAccount?.profile?.nickname.toString()
+                        profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
+                        email = user.kakaoAccount?.email
+                        social = "카카오"
+                        accessToken = token.accessToken
+                        Log.d("userInfo", nickname + "&&" + profile + "&&" + email)
+                        saveData()
+                        Log.d("kakao", accessToken.toString())
+                    }
+                }
             }
             openTermsPopup()
         }
@@ -117,20 +139,12 @@ class LoginActivity : AppCompatActivity() {
         } else {
             UserApiClient.instance.loginWithKakaoAccount(this, callback = mCallback) // 카카오 이메일 로그인
         }
-        UserApiClient.instance.me { user, _ ->
-            if (user != null) {
-                nickname = user.kakaoAccount?.profile?.nickname.toString()
-                profile = user.kakaoAccount?.profile?.profileImageUrl.toString()
-                social = "카카오"
-                Log.d("userInfo", nickname + "&&" + profile)
-                saveData()
-            }
-        }
     }
 
     private fun getGoogleClient(): GoogleSignInClient {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail() // 이메일도 요청 가능
+            .requestIdToken(getString(R.string.default_web_client_id))
             .build()
         Log.d("googleSignInOption", googleSignInOption.serverClientId.toString())
 
@@ -156,6 +170,8 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("userName", nickname)
         editor.putString("userImg", profile)
         editor.putString("social", social)
+        editor.putString("email", email)
+        editor.putString("accessToken", accessToken)
         editor.apply()
     }
 }
