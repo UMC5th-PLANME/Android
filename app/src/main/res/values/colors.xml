@@ -26,4 +26,5 @@
     <color name="transparent_gray">#99000000</color>
     <color name="calendar_gray">#F5F5F5</color>
     <color name="very_white_gray">#DCDCDC</color>
+    <color name="toast_gray">#99000000</color>
 </resources>
