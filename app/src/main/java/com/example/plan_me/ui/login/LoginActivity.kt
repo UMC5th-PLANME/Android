@@ -9,6 +9,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.SignUpRes
+import com.example.plan_me.data.remote.service.auth.MemberService
+import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityLoginBinding
 import com.example.plan_me.ui.dialog.DialogTermsActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,13 +25,15 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
     var nickname : String? = ""
     var profile :String? = ""
     var email: String? = ""
-    var accessToken: String? =""
+    var accessToken: String? = ""
     var social: String = ""
     var googleIdToken: String? = ""
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
@@ -83,11 +89,10 @@ class LoginActivity : AppCompatActivity() {
             email = account.email
             social = "구글"
             accessToken = idToken
-            Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social + " & " + email)
-            Log.d("Google idToken", idToken.toString())
             saveData()
             Log.d(TAG, "Google 로그인 성공")
-            openTermsPopup()
+            //openTermsPopup()
+            setSignUp()
         }
     }
 
@@ -107,13 +112,13 @@ class LoginActivity : AppCompatActivity() {
                         email = user.kakaoAccount?.email
                         social = "카카오"
                         accessToken = token.accessToken
-                        Log.d("userInfo", nickname + "&&" + profile + "&&" + email)
                         saveData()
-                        Log.d("kakao", accessToken.toString())
+                        setSignUp()
                     }
                 }
             }
-            openTermsPopup()
+            //openTermsPopup()
+            //setSignUp()
         }
 
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -173,5 +178,26 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("email", email)
         editor.putString("accessToken", accessToken)
         editor.apply()
+    }
+
+    private fun setSignUp() {
+        val setMemberService = MemberService()
+        setMemberService.setSignUpView(this@LoginActivity)
+        val member = Member(nickname!!, profile!!, social!!, email!!)
+//        val json = convertMemberToJson(member)
+        setMemberService.setSignUp(accessToken!!, member)
+    }
+
+//    private fun convertMemberToJson(member: Member): String {
+//        return Json.encodeToString(member)
+//    }
+
+    override fun onSetSignUpSuccess(response: SignUpRes) {
+        Log.d("회원가입", response.message)
+        openTermsPopup()
+    }
+
+    override fun onSetSignUpFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("회원가입 실패", message)
     }
 }

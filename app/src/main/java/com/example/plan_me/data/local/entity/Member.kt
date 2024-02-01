@@ -1,12 +1,13 @@
 package com.example.plan_me.data.local.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@Entity(tableName = "Member")
+@Serializable
+@SerialName("Member")
 data class Member(
-    @PrimaryKey val email: String,
     val name: String,
     val profile_image: String,
-    val login_type: String
+    val login_type: String,
+    val email: String
 )

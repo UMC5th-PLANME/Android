@@ -8,6 +8,7 @@ import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.dto.auth.TermsRes
+import kotlinx.serialization.json.Json
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -15,8 +16,8 @@ import retrofit2.http.*
 interface AuthRetrofitInterface {
 
     // 회원가입
-    @PATCH("/api/member")
-    fun patchSignUp(@Header("accessToken") accessToken: String, @Body member: Member): Call<SignUpRes>
+    @POST("/api/member/login")
+    fun postSignUp(@Header("accessToken") accessToken: String, @Body member: Member): Call<SignUpRes>
 
     // 약관 동의
     @POST("/api/member/terms")

@@ -10,5 +10,8 @@ data class SignUpRes(
 )
 
 data class MemberId(
-    @SerializedName("member_id") val member_id: Int
+    @SerializedName("member_id") val member_id: Int,
+    @SerializedName("created_at") val created_at: String,
+    @SerializedName("accessToken") val accessToken: String,
+    @SerializedName("refreshToken") val refreshToken: String
 )

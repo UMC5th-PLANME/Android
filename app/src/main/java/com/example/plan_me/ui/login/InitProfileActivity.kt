@@ -4,26 +4,40 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.drawToBitmap
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
+import com.example.plan_me.data.remote.service.auth.ImageService
 import com.example.plan_me.data.remote.service.auth.MemberService
+import com.example.plan_me.data.remote.view.auth.ProfileImageView
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
+import com.example.plan_me.utils.ImageUtils
 import com.squareup.picasso.Picasso
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
-class InitProfileActivity : AppCompatActivity(), SignUpView {
+class InitProfileActivity : AppCompatActivity(), ProfileImageView {
     private lateinit var binding: ActivityInitProfileBinding
     private var userName: String? = ""
     private var userImg: String? = ""
@@ -57,16 +71,10 @@ class InitProfileActivity : AppCompatActivity(), SignUpView {
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            setSignUp()
+            //setSignUp()
 //            goMainActivity()
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
-    }
-
-    private fun setSignUp() {
-        val setMemberService = MemberService()
-        setMemberService.setSignUpView(this@InitProfileActivity)
-        setMemberService.setSignUp(accessToken!!, Member(userEmail!!, userName!!, userImg!!, userType!!))
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -118,6 +126,12 @@ class InitProfileActivity : AppCompatActivity(), SignUpView {
         startActivityForResult(intent, REQUEST_IMAGE_PICK)
     }
 
+    // 이미지 파일을 MultipartBody.Part로 변환하는 함수
+    private fun createImagePart(file: File): MultipartBody.Part {
+        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+        return MultipartBody.Part.createFormData("image", file.name, requestFile)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -126,6 +140,25 @@ class InitProfileActivity : AppCompatActivity(), SignUpView {
             val selectedImageUri = data?.data
             binding.initProfileImagefileIv.setImageURI(selectedImageUri)
             Picasso.get().load(selectedImageUri).transform(CircleTransform()).into(binding.initProfileImagefileIv)
+
+            val drawable = binding.initProfileImagefileIv.drawable
+            if (drawable is BitmapDrawable) {
+                val bitmap: Bitmap = drawable.bitmap
+
+                // 추출한 비트맵을 파일로 변환
+                val imageFile = ImageUtils.bitmapToFile(this, bitmap)
+
+                // 파일을 MultipartBody.Part로 변환
+                val imagePart = createImagePart(imageFile)
+
+                // setImageService 호출
+                val setImageService = ImageService()
+                setImageService.setImageView(this@InitProfileActivity)
+                setImageService.setProfileImg(accessToken!!, imagePart)
+            } else {
+                // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
+                Log.e("Image Conversion", "Drawable is not a BitmapDrawable")
+            }
         }
     }
 
@@ -135,7 +168,7 @@ class InitProfileActivity : AppCompatActivity(), SignUpView {
         userName = sharedPreferences.getString("userName", userName)
         userImg = sharedPreferences.getString("userImg", userImg)
         userEmail = sharedPreferences.getString("email", userEmail)
-        userType = sharedPreferences.getString("type", userType)
+        userType = sharedPreferences.getString("social", userType)
         accessToken = sharedPreferences.getString("accessToken", accessToken)
     }
 
@@ -150,12 +183,11 @@ class InitProfileActivity : AppCompatActivity(), SignUpView {
         val REQUEST_IMAGE_PICK = 826
     }
 
-    override fun onSetSignUpSuccess(response: SignUpRes) {
-        Log.d("회원가입", response.message)
-        goMainActivity()
+    override fun onSetImgSuccess(response: ProfileImageRes) {
+        Log.d("이미지 등록", response.message)
     }
 
-    override fun onSetSignUpFailure(isSuccess: Boolean, code: String, message: String) {
-        Log.d("회원가입 실패", message)
+    override fun onSetImgFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("이미지 등록 실패", message)
     }
 }
