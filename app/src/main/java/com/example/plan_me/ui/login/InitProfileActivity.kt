@@ -71,8 +71,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            //setSignUp()
-//            goMainActivity()
+            goMainActivity()
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }

@@ -1,6 +1,7 @@
 package com.example.plan_me.data.remote.dto.auth
 
 import com.google.gson.annotations.SerializedName
+import java.time.LocalTime
 
 data class SignUpRes(
     @SerializedName("isSuccess") val isSuccess: Boolean,
@@ -11,7 +12,7 @@ data class SignUpRes(
 
 data class MemberId(
     @SerializedName("member_id") val member_id: Int,
-    @SerializedName("created_at") val created_at: String,
+    @SerializedName("created_at") val created_at: LocalTime,
     @SerializedName("accessToken") val accessToken: String,
     @SerializedName("refreshToken") val refreshToken: String
 )

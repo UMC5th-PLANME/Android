@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.MemberId
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.SignUpView
@@ -25,8 +26,7 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import java.time.LocalTime
 
 class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
@@ -36,6 +36,12 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     var accessToken: String? = ""
     var social: String = ""
     var googleIdToken: String? = ""
+
+    var member_id: Int? = 0
+    var created_at: LocalTime? = LocalTime.now()
+    var getAccessToken: String? = ""
+    var getRefreshToken: String? = ""
+
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -180,20 +186,30 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         editor.apply()
     }
 
+    private fun saveResponse() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("member_id", member_id!!)
+        editor.putString("created_at", created_at.toString())
+        editor.putString("getAccessToken", getAccessToken!!)
+        editor.putString("getRefreshToken", getRefreshToken!!)
+    }
+
     private fun setSignUp() {
         val setMemberService = MemberService()
         setMemberService.setSignUpView(this@LoginActivity)
         val member = Member(nickname!!, profile!!, social!!, email!!)
-//        val json = convertMemberToJson(member)
         setMemberService.setSignUp(accessToken!!, member)
     }
 
-//    private fun convertMemberToJson(member: Member): String {
-//        return Json.encodeToString(member)
-//    }
-
     override fun onSetSignUpSuccess(response: SignUpRes) {
-        Log.d("회원가입", response.message)
+        Log.d("회원가입", response.result.toString())
+        member_id = response.result.member_id
+        created_at = response.result.created_at
+        getAccessToken = response.result.accessToken
+        getRefreshToken = response.result.refreshToken
+        saveResponse()
         openTermsPopup()
     }
 
