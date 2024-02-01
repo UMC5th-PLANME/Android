@@ -19,6 +19,7 @@ class ImageService {
 
     fun setProfileImg(accessToken: String, image: MultipartBody.Part) {
         val profileImgService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("dddaaa", "$accessToken, $image")
         profileImgService.postImage(accessToken, image).enqueue(object : Callback<ProfileImageRes> {
             override fun onResponse(call: Call<ProfileImageRes>, response: Response<ProfileImageRes>) {
                 Log.d("PROFILE-IMG-SUCCESS", response.toString())

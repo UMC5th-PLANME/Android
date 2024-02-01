@@ -15,6 +15,7 @@ import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.data.remote.view.auth.TermsView
 import com.example.plan_me.utils.getRetrofit
+import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,13 +49,12 @@ class MemberService {
 
     fun setSignUp(accessToken: String, member: Member) {
         val signUpService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        signUpService.patchSignUp(accessToken, member).enqueue(object : Callback<SignUpRes> {
+        signUpService.postSignUp(accessToken, member).enqueue(object : Callback<SignUpRes> {
             override fun onResponse(call: Call<SignUpRes>, response: Response<SignUpRes>) {
                 Log.d("SIGNUP-SUCCESS", response.toString())
                 val resp: SignUpRes = response.body()!!
                 when(resp.code) {
-                    // 코드 미정 (임시 설정)
-                    "sign-up" -> signUpView.onSetSignUpSuccess(resp)
+                    "MEMBER2005" -> signUpView.onSetSignUpSuccess(resp)
                     else -> signUpView.onSetSignUpFailure(resp.isSuccess, resp.code, resp.message)
                 }
             }

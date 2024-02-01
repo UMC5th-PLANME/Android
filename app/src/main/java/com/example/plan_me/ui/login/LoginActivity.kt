@@ -9,6 +9,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.MemberId
+import com.example.plan_me.data.remote.dto.auth.SignUpRes
+import com.example.plan_me.data.remote.service.auth.MemberService
+import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityLoginBinding
 import com.example.plan_me.ui.dialog.DialogTermsActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -21,15 +26,22 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import java.time.LocalTime
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
     var nickname : String? = ""
     var profile :String? = ""
     var email: String? = ""
-    var accessToken: String? =""
+    var accessToken: String? = ""
     var social: String = ""
     var googleIdToken: String? = ""
+
+    var member_id: Int? = 0
+    var created_at: LocalTime? = LocalTime.now()
+    var getAccessToken: String? = ""
+    var getRefreshToken: String? = ""
+
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -83,11 +95,10 @@ class LoginActivity : AppCompatActivity() {
             email = account.email
             social = "구글"
             accessToken = idToken
-            Log.d("Google 사용자 정보", nickname + " & " + profile + " & " + social + " & " + email)
-            Log.d("Google idToken", idToken.toString())
             saveData()
             Log.d(TAG, "Google 로그인 성공")
-            openTermsPopup()
+            //openTermsPopup()
+            setSignUp()
         }
     }
 
@@ -107,13 +118,13 @@ class LoginActivity : AppCompatActivity() {
                         email = user.kakaoAccount?.email
                         social = "카카오"
                         accessToken = token.accessToken
-                        Log.d("userInfo", nickname + "&&" + profile + "&&" + email)
                         saveData()
-                        Log.d("kakao", accessToken.toString())
+                        setSignUp()
                     }
                 }
             }
-            openTermsPopup()
+            //openTermsPopup()
+            //setSignUp()
         }
 
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -173,5 +184,36 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("email", email)
         editor.putString("accessToken", accessToken)
         editor.apply()
+    }
+
+    private fun saveResponse() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("member_id", member_id!!)
+        editor.putString("created_at", created_at.toString())
+        editor.putString("getAccessToken", getAccessToken!!)
+        editor.putString("getRefreshToken", getRefreshToken!!)
+    }
+
+    private fun setSignUp() {
+        val setMemberService = MemberService()
+        setMemberService.setSignUpView(this@LoginActivity)
+        val member = Member(nickname!!, profile!!, social!!, email!!)
+        setMemberService.setSignUp(accessToken!!, member)
+    }
+
+    override fun onSetSignUpSuccess(response: SignUpRes) {
+        Log.d("회원가입", response.result.toString())
+        member_id = response.result.member_id
+        created_at = response.result.created_at
+        getAccessToken = response.result.accessToken
+        getRefreshToken = response.result.refreshToken
+        saveResponse()
+        openTermsPopup()
+    }
+
+    override fun onSetSignUpFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("회원가입 실패", message)
     }
 }
