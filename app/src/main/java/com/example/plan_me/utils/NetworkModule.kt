@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 const val BASE_URL = "http://www.planme.click"
 
@@ -13,6 +14,7 @@ val gson : Gson = GsonBuilder()
 
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+        .addConverterFactory(ScalarsConverterFactory.create() )
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 

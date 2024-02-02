@@ -51,11 +51,18 @@ class MemberService {
         val signUpService = getRetrofit().create(AuthRetrofitInterface::class.java)
         signUpService.postSignUp(accessToken, member).enqueue(object : Callback<SignUpRes> {
             override fun onResponse(call: Call<SignUpRes>, response: Response<SignUpRes>) {
-                Log.d("SIGNUP-SUCCESS", response.toString())
-                val resp: SignUpRes = response.body()!!
-                when(resp.code) {
-                    "MEMBER2005" -> signUpView.onSetSignUpSuccess(resp)
-                    else -> signUpView.onSetSignUpFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: SignUpRes? = response.body()
+                    if (resp != null) {
+                        when (resp.code) {
+                            "MEMBER2005" -> signUpView.onSetSignUpSuccess(resp)
+                            else -> signUpView.onSetSignUpFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("SIGNUP-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("SIGNUP-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 
@@ -123,13 +130,13 @@ class MemberService {
 
     fun setTerms(authorizationToken: String, terms: Terms) {
         val termsService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("termsData", "$authorizationToken, ${terms.member_id}, ${terms.agreeTermIds}, ${terms.disagreeTermIds}")
         termsService.postAgreeTerms(authorizationToken, terms).enqueue(object : Callback<TermsRes> {
             override fun onResponse(call: Call<TermsRes>, response: Response<TermsRes>) {
                 Log.d("AGREE-TERMS-SUCCESS", response.toString())
                 val resp: TermsRes = response.body()!!
                 when(resp.code) {
-                    // 코드 미정 (임시 설정)
-                    "agree-terms" -> termsView.onSetTermsSuccess(resp)
+                    "MEMBER2002" -> termsView.onSetTermsSuccess(resp)
                     else -> termsView.onSetTermsFailure(resp.isSuccess, resp.code, resp.message)
                 }
             }
