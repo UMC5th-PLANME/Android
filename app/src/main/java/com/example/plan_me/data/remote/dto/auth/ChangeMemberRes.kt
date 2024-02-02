@@ -14,5 +14,5 @@ data class ChangeProfile(
     @SerializedName("member_id") val member_id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("image_url") val image_url: String,
-    @SerializedName("updated_at") val updated_at: LocalTime
+    @SerializedName("updated_at") val updated_at: String
 )
