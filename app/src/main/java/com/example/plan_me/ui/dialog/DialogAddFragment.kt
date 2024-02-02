@@ -5,10 +5,16 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
+import com.example.plan_me.data.local.entity.Category_input
+import com.example.plan_me.data.remote.dto.category.AddCategoryRes
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.view.category.AddCategoryView
 import com.example.plan_me.databinding.FragmentDialogAddCategoryBinding
 
-class DialogAddFragment(context : Context): Dialog(context) {
+class DialogAddFragment(context : Context): Dialog(context), AddCategoryView {
     private lateinit var binding : FragmentDialogAddCategoryBinding
     private var ignoreCheckChange = false
 
@@ -20,6 +26,15 @@ class DialogAddFragment(context : Context): Dialog(context) {
 
         binding.addCategoryCancelBtn.setOnClickListener {
             dismiss()
+        }
+        binding.addCategorySaveBtn.setOnClickListener {//연결 완료
+            val spf = context.getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
+            val access_token = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpZDNuMzNnIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3MDY3OTc3NDAsImV4cCI6MTcwNjgwNDk0MH0.lJjN5qkRoJxBORE84qctyp4g3L_1t7IcJ_6usraaXpI"
+            Log.d("access token", access_token)
+            val setCategoryService = CategoryService()
+            setCategoryService.setAddCategoryView(this)
+            val categoryInput = Category_input("Study", "note", 2131034742)
+            setCategoryService.addCategoryFun(access_token!!, categoryInput)
         }
 
         addPopup(binding.emoticonGroup1, binding.emoticonGroup2)
@@ -55,5 +70,15 @@ class DialogAddFragment(context : Context): Dialog(context) {
                 ignoreCheckChange = false
             }
         }
+    }
+
+    override fun onAddCategorySuccess(response: AddCategoryRes) {
+        Log.d("response", response.toString())
+        dismiss()
+    }
+
+    override fun onAddCategoryFailure(response: AddCategoryRes) {
+        Log.d("response", response.toString())
+        dismiss()
     }
 }

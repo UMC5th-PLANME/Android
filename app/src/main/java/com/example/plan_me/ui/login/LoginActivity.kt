@@ -146,6 +146,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.e(TAG, "로그인 성공 ${token.accessToken}")
+                    setSignUp()
                 }
             }
         } else {
@@ -195,6 +196,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         editor.putString("created_at", created_at.toString())
         editor.putString("getAccessToken", getAccessToken!!)
         editor.putString("getRefreshToken", getRefreshToken!!)
+        editor.apply()
     }
 
     private fun setSignUp() {
@@ -208,7 +210,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         Log.d("회원가입", response.result.toString())
         member_id = response.result.member_id
         created_at = response.result.created_at
-        getAccessToken = response.result.accessToken
+        getAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbjMzZyIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzA2Nzk2MzE3LCJleHAiOjE3MDY4MDM1MTd9.tvpvoBAAFhOOhO_WREFQW1wIN2c4lmcwIOCj9JfymiU"
         getRefreshToken = response.result.refreshToken
         saveResponse()
         openTermsPopup()

@@ -14,6 +14,10 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.GravityCompat
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.Category_input
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
@@ -23,7 +27,7 @@ import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AllCategoryView {
 
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-
+        getCategoryList()
         setContentView(binding.root)
 
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
@@ -49,11 +53,9 @@ class MainActivity : AppCompatActivity() {
         drawerAdd = findViewById(R.id.drawer_add_tv)
 
 
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
-
         clickListener()
     }
 
@@ -65,6 +67,13 @@ class MainActivity : AppCompatActivity() {
             super.onBackPressed()
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
+    }
+    private fun getCategoryList() {  //연결 성공
+        val access_token = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzM2ciLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcwNjc5OTI1OSwiZXhwIjoxNzA2ODA2NDU5fQ.yJgA0WwKU07UXqYgvfob7dLR7Ew-e5gSDugSZz0yFwo"
+        Log.d("access token", access_token)
+        val setCategoryService = CategoryService()
+        setCategoryService.setAllCategoryView(this)
+        setCategoryService.getCategoryAllFun(access_token!!)
     }
     private fun clickListener() {
         //다른 화면 클릭시 fab 닫기
@@ -156,5 +165,13 @@ class MainActivity : AppCompatActivity() {
             binding.mainFabAddBtn.setClickable(true)
             true
         }
+    }
+
+    override fun onAllCategorySuccess(response: AllCategoryRes) {
+        Log.d("all category", response.result.toString())
+    }
+
+    override fun onAllCategoryFailure(response: AllCategoryRes) {
+        TODO("Not yet implemented")
     }
 }

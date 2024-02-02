@@ -4,7 +4,7 @@ import com.example.plan_me.data.remote.dto.category.AddCategoryRes
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 
 
-interface AddCategoryView {
-    fun onAddCategorySuccess(response: AddCategoryRes)
-    fun onAddCategoryFailure(response: AddCategoryRes)
+interface AllCategoryView {
+    fun onAllCategorySuccess(response: AllCategoryRes)
+    fun onAllCategoryFailure(response: AllCategoryRes)
 }

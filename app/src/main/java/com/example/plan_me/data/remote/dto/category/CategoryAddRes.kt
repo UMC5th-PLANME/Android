@@ -7,10 +7,10 @@ data class AddCategoryRes(
     @SerializedName("isSuccess") val isSuccess: Boolean,
     @SerializedName("code") val code: String,
     @SerializedName("message") val message: String,
-    @SerializedName("result") val result: category_info
+    @SerializedName("result") val result: add_category_info
 )
 
-data class category_info(
+data class add_category_info(
     @SerializedName("categoryId") val categoryId: Int,
     @SerializedName("created_at") val created_at: LocalTime,
 )
