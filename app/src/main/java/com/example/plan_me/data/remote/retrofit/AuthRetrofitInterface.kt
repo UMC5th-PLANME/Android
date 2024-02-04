@@ -8,7 +8,6 @@ import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.dto.auth.TermsRes
-import kotlinx.serialization.json.Json
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*

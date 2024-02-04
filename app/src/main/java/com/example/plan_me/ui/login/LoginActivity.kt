@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Base_Theme_Plan_Me)
         super.onCreate(savedInstanceState)
+        Log.d("color", R.color.sky_blue.toString())
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -145,6 +146,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.e(TAG, "로그인 성공 ${token.accessToken}")
+                    setSignUp()
                 }
             }
         } else {
@@ -194,6 +196,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         editor.putString("created_at", created_at.toString())
         editor.putString("getAccessToken", getAccessToken!!)
         editor.putString("getRefreshToken", getRefreshToken!!)
+        editor.apply()
     }
 
     private fun setSignUp() {

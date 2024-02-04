@@ -71,7 +71,7 @@ class DialogTermsActivity(context: Context) : Dialog(context), TermsView {
         isCheck()
         Log.d("consent", "$member_id, $agree, $notAgree")
         val terms = Terms(member_id!!, agree, notAgree)
-        setTermsService.setTerms(accessToken!!, terms)
+        goInitProfileActivity()
     }
 
     private fun goInitProfileActivity() {
