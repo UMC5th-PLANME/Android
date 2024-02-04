@@ -15,7 +15,6 @@ import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.data.remote.view.auth.TermsView
 import com.example.plan_me.utils.getRetrofit
-import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -123,14 +122,21 @@ class MemberService {
 
     fun setTerms(authorizationToken: String, terms: Terms) {
         val termsService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        Log.d("termsData", "$authorizationToken, ${terms.member_id}, ${terms.agreeTermIds}, ${terms.disagreeTermIds}")
         termsService.postAgreeTerms(authorizationToken, terms).enqueue(object : Callback<TermsRes> {
             override fun onResponse(call: Call<TermsRes>, response: Response<TermsRes>) {
-                Log.d("AGREE-TERMS-SUCCESS", response.toString())
-                val resp: TermsRes = response.body()!!
-                when(resp.code) {
-                    // 코드 미정 (임시 설정)
-                    "agree-terms" -> termsView.onSetTermsSuccess(resp)
-                    else -> termsView.onSetTermsFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: TermsRes = response.body()!!
+                    if (resp != null) {
+                        when(resp.code) {
+                            "MEMBER2002" -> termsView.onSetTermsSuccess(resp)
+                            else -> termsView.onSetTermsFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("AGREE-TERMS-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("AGREE-TERMS-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 

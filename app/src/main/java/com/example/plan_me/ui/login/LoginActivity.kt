@@ -194,6 +194,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         editor.putString("created_at", created_at.toString())
         editor.putString("getAccessToken", getAccessToken!!)
         editor.putString("getRefreshToken", getRefreshToken!!)
+        editor.apply()
     }
 
     private fun setSignUp() {
