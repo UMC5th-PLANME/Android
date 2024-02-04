@@ -43,6 +43,7 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
             binding.termsAllCb.isChecked = true
             binding.termsCompleteBtn.isEnabled = true
         }
+
     }
 
     private fun goInitProfileActivity() {
