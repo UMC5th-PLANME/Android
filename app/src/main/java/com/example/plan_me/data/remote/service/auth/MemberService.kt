@@ -15,7 +15,6 @@ import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.data.remote.view.auth.TermsView
 import com.example.plan_me.utils.getRetrofit
-import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
