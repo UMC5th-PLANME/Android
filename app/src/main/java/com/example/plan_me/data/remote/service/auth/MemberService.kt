@@ -2,7 +2,6 @@ package com.example.plan_me.data.remote.service.auth
 
 import android.util.Log
 import com.example.plan_me.data.local.entity.Member
-import com.example.plan_me.data.local.entity.Terms
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
@@ -13,7 +12,6 @@ import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.DeleteMemberView
 import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.auth.SignUpView
-import com.example.plan_me.data.remote.view.auth.TermsView
 import com.example.plan_me.utils.getRetrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +22,6 @@ class MemberService {
     private lateinit var changeProfileView: ChangeProfileView
     private lateinit var lookUpMemberView: LookUpMemberView
     private lateinit var deleteMemberView: DeleteMemberView
-    private lateinit var termsView: TermsView
 
     fun setSignUpView(signUpView: SignUpView) {
         this.signUpView = signUpView
@@ -40,10 +37,6 @@ class MemberService {
 
     fun setDeleteMemberView(deleteMemberView: DeleteMemberView) {
         this.deleteMemberView = deleteMemberView
-    }
-
-    fun setTermsView(termsView: TermsView) {
-        this.termsView = termsView
     }
 
     fun setSignUp(accessToken: String, member: Member) {
@@ -144,32 +137,6 @@ class MemberService {
 
             override fun onFailure(call: Call<DeleteMemberRes>, t: Throwable) {
                 Log.d("DELETE-MEMBER-FAILURE", t.toString())
-            }
-        })
-    }
-
-    fun setTerms(authorizationToken: String, terms: Terms) {
-        val termsService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        Log.d("termsData", "$authorizationToken, ${terms.member_id}, ${terms.agreeTermIds}, ${terms.disagreeTermIds}")
-        termsService.postAgreeTerms(authorizationToken, terms).enqueue(object : Callback<TermsRes> {
-            override fun onResponse(call: Call<TermsRes>, response: Response<TermsRes>) {
-                if (response.isSuccessful) {
-                    val resp: TermsRes = response.body()!!
-                    if (resp != null) {
-                        when(resp.code) {
-                            "MEMBER2002" -> termsView.onSetTermsSuccess(resp)
-                            else -> termsView.onSetTermsFailure(resp.isSuccess, resp.code, resp.message)
-                        }
-                    } else {
-                        Log.e("AGREE-TERMS-SUCCESS", "Response body is null")
-                    }
-                } else {
-                    Log.e("AGREE-TERMS-SUCCESS", "Response not successful: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<TermsRes>, t: Throwable) {
-                Log.d("AGREE-TERMS-FAILURE", t.toString())
             }
         })
     }

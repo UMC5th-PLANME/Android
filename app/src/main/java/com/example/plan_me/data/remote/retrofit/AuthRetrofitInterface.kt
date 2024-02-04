@@ -1,7 +1,6 @@
 package com.example.plan_me.data.remote.retrofit
 
 import com.example.plan_me.data.local.entity.Member
-import com.example.plan_me.data.local.entity.Terms
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
@@ -17,10 +16,6 @@ interface AuthRetrofitInterface {
     // 회원가입
     @POST("/api/member/login")
     fun postSignUp(@Header("accessToken") accessToken: String, @Body member: Member): Call<SignUpRes>
-
-    // 약관 동의
-    @POST("/api/member/terms")
-    fun postAgreeTerms(@Header("authorizationToken") authorizationToken: String, @Body terms: Terms): Call<TermsRes>
 
     // 프로필 이미지 등록
     @Multipart // form-data 사용
