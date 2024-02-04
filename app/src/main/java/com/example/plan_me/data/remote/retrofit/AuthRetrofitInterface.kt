@@ -1,5 +1,6 @@
 package com.example.plan_me.data.remote.retrofit
 
+import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
@@ -24,7 +25,7 @@ interface AuthRetrofitInterface {
 
     // 프로필 변경
     @PATCH("/api/member")
-    fun patchChangeProfile(@Header("accessToken") accessToken: String, @Body member: Member): Call<ChangeMemberRes>
+    fun patchChangeProfile(@Header("accessToken") accessToken: String, @Body member: EditProfile): Call<ChangeMemberRes>
 
     // 회원 조회
     @GET("/api/member")

@@ -5,31 +5,26 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.drawToBitmap
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
-import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.ImageService
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
-import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.utils.ImageUtils
@@ -73,7 +68,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            goMainActivity()
+            setEditProfileService()
         }
     }
 
@@ -150,7 +145,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
                 // setImageService 호출
                 val setImageService = ImageService()
                 setImageService.setImageView(this@InitProfileActivity)
-                setImageService.setProfileImg(accessToken!!, imagePart)
+                setImageService.setProfileImg("Bearer " + accessToken!!, imagePart)
             } else {
                 // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
                 Log.e("Image Conversion", "Drawable is not a BitmapDrawable")
@@ -178,8 +173,8 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
     private fun setEditProfileService() {
         val setEditProfileService = MemberService()
         setEditProfileService.setChangeProfileView(this@InitProfileActivity)
-        val member = Member(userName!!, userImg!!, userType!!, userEmail!!)
-        setEditProfileService.setChangeProfile(accessToken!!, member)
+        val member = EditProfile(userName!!, userImg!!)
+        setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
     }
 
     companion object {
