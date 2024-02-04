@@ -26,15 +26,38 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(binding.root)
 
-        binding.termsAllCb.setOnCheckedChangeListener { buttonView, isChecked ->
+//        allCheck()
+
+        binding.termsInfoCb.setOnCheckedChangeListener { _, _ ->
+            allCheck()
+        }
+
+        binding.termsServiceCb.setOnCheckedChangeListener { _, _ ->
+            allCheck()
+        }
+
+        binding.termsAllCb.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 binding.termsInfoCb.isChecked = true
                 binding.termsServiceCb.isChecked = true
+                binding.termsCompleteBtn.isEnabled = true
+            } else {
+                binding.termsInfoCb.isChecked = false
+                binding.termsServiceCb.isChecked = false
+                binding.termsCompleteBtn.isEnabled = false
             }
         }
 
+
         binding.termsCompleteBtn.setOnClickListener {
             goInitProfileActivity()
+        }
+    }
+
+    private fun allCheck() {
+        if(binding.termsInfoCb.isChecked && binding.termsServiceCb.isChecked) {
+            binding.termsAllCb.isChecked = true
+            binding.termsCompleteBtn.isEnabled = true
         }
     }
 
