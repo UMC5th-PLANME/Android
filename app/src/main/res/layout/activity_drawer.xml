@@ -22,15 +22,16 @@
             android:layout_marginTop="120dp"
             android:layout_marginStart="20dp"/>
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/drawer_rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drawer_tv"
             app:layout_constraintHeight_max="400dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginHorizontal="20dp"/>
 
         <FrameLayout

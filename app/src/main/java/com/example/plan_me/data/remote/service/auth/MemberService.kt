@@ -50,11 +50,18 @@ class MemberService {
         val signUpService = getRetrofit().create(AuthRetrofitInterface::class.java)
         signUpService.postSignUp(accessToken, member).enqueue(object : Callback<SignUpRes> {
             override fun onResponse(call: Call<SignUpRes>, response: Response<SignUpRes>) {
-                Log.d("SIGNUP-SUCCESS", response.toString())
-                val resp: SignUpRes = response.body()!!
-                when(resp.code) {
-                    "MEMBER2005" -> signUpView.onSetSignUpSuccess(resp)
-                    else -> signUpView.onSetSignUpFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: SignUpRes? = response.body()
+                    if (resp != null) {
+                        when (resp.code) {
+                            "MEMBER2005" -> signUpView.onSetSignUpSuccess(resp)
+                            else -> signUpView.onSetSignUpFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("SIGNUP-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("SIGNUP-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 
@@ -68,11 +75,18 @@ class MemberService {
         val changeProfileService = getRetrofit().create(AuthRetrofitInterface::class.java)
         changeProfileService.patchChangeProfile(accessToken, member).enqueue(object : Callback<ChangeMemberRes> {
             override fun onResponse(call: Call<ChangeMemberRes>, response: Response<ChangeMemberRes>) {
-                Log.d("UPDATE-PROFILE-SUCCESS", response.toString())
-                val resp: ChangeMemberRes = response.body()!!
-                when(resp.code) {
-                    "MEMBER2003" -> changeProfileView.onSetChangeProfileSuccess(resp)
-                    else -> changeProfileView.onSetChangeProfileFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: ChangeMemberRes = response.body()!!
+                    if (resp != null) {
+                        when(resp.code) {
+                            "MEMBER2003" -> changeProfileView.onSetChangeProfileSuccess(resp)
+                            else -> changeProfileView.onSetChangeProfileFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("UPDATE-PROFILE-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("UPDATE-PROFILE-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 
@@ -86,12 +100,19 @@ class MemberService {
         val lookUpMemberService = getRetrofit().create(AuthRetrofitInterface::class.java)
         lookUpMemberService.getMember().enqueue(object : Callback<MemberRes> {
             override fun onResponse(call: Call<MemberRes>, response: Response<MemberRes>) {
-                Log.d("LOOK-UP-MEMBER-SUCCESS", response.toString())
-                val resp: MemberRes = response.body()!!
-                when(resp.code) {
-                    // 코드 미정 (임시 설정)
-                    "look-up" -> lookUpMemberView.onGetMemberSuccess(resp)
-                    else -> lookUpMemberView.onGetMemberFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: MemberRes = response.body()!!
+                    if (resp != null) {
+                        when(resp.code) {
+                            // 코드 미정 (임시 설정)
+                            "look-up" -> lookUpMemberView.onGetMemberSuccess(resp)
+                            else -> lookUpMemberView.onGetMemberFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("LOOK-UP-MEMBER-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("LOOK-UP-MEMBER-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 
@@ -105,12 +126,19 @@ class MemberService {
         val deleteMemberService = getRetrofit().create(AuthRetrofitInterface::class.java)
         deleteMemberService.deleteMember(accessToken).enqueue(object : Callback<DeleteMemberRes> {
             override fun onResponse(call: Call<DeleteMemberRes>, response: Response<DeleteMemberRes>) {
-                Log.d("DELETE-MEMBER-SUCCESS", response.toString())
-                val resp: DeleteMemberRes = response.body()!!
-                when(resp.code) {
-                    // 코드 미정 (임시 설정)
-                    "delete" -> deleteMemberView.onDelMemberSuccess(resp)
-                    else -> deleteMemberView.onDelMemberFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: DeleteMemberRes = response.body()!!
+                    if (resp != null) {
+                        when(resp.code) {
+                            // 코드 미정 (임시 설정)
+                            "delete" -> deleteMemberView.onDelMemberSuccess(resp)
+                            else -> deleteMemberView.onDelMemberFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("DELETE-MEMBER-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("DELETE-MEMBER-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 

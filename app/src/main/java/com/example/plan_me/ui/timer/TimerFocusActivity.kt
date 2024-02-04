@@ -97,9 +97,6 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener {
             Log.d("menu: timer-focus", "Open menu")
             binding.timerFocusDrawerLayout.openDrawer(drawerView!!)
         }
-        drawerAdd.setOnClickListener {
-            showDialog(DialogAddFragment(this@TimerFocusActivity))
-        }
         binding.timerFocusSettingBtn.setOnClickListener {
             Log.d("setting: timer-focus", "Time Setting")
 

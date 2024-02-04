@@ -11,6 +11,6 @@ data class TermsRes(
 
 data class AgreeTerm(
     @SerializedName("member_id") val member_id: Int,
-    @SerializedName("agreeTermIds") val agreeTermIds: Array<Int>,
-    @SerializedName("disagreeTermIds") val disagreeTermIds: Array<Int>
+    @SerializedName("agreeTermIds") val agreeTermIds: List<Int>,
+    @SerializedName("disagreeTermIds") val disagreeTermIds: List<Int>
 )

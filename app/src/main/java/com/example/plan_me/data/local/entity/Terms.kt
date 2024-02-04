@@ -1,10 +1,12 @@
 package com.example.plan_me.data.local.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
+@SerialName("Terms")
 data class Terms(
     val member_id: Int,
-    val agreeTermIds: IntArray,
-    val disagreeTermIds: IntArray
+    val agreeTermIds: List<Int>,
+    val disagreeTermIds: List<Int>
 )

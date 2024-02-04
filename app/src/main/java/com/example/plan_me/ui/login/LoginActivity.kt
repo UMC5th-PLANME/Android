@@ -10,7 +10,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Member
-import com.example.plan_me.data.remote.dto.auth.MemberId
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.SignUpView
@@ -27,6 +26,7 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import java.time.LocalTime
+import java.util.Date
 
 class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     var googleIdToken: String? = ""
 
     var member_id: Int? = 0
-    var created_at: LocalTime? = LocalTime.now()
+    var created_at: String? = ""
     var getAccessToken: String? = ""
     var getRefreshToken: String? = ""
 
@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Base_Theme_Plan_Me)
         super.onCreate(savedInstanceState)
+        Log.d("color", R.color.sky_blue.toString())
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -97,7 +98,6 @@ class LoginActivity : AppCompatActivity(), SignUpView {
             accessToken = idToken
             saveData()
             Log.d(TAG, "Google 로그인 성공")
-            //openTermsPopup()
             setSignUp()
         }
     }
@@ -123,8 +123,6 @@ class LoginActivity : AppCompatActivity(), SignUpView {
                     }
                 }
             }
-            //openTermsPopup()
-            //setSignUp()
         }
 
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
@@ -145,6 +143,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
                 // 로그인 성공 부분
                 else if (token != null) {
                     Log.e(TAG, "로그인 성공 ${token.accessToken}")
+                    setSignUp()
                 }
             }
         } else {
