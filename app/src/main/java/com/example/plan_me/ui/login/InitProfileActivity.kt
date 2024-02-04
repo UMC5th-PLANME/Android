@@ -73,7 +73,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            setEditProfileService()
+            goMainActivity()
         }
     }
 
