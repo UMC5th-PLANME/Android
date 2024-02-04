@@ -22,10 +22,12 @@ import androidx.core.view.drawToBitmap
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.ImageService
 import com.example.plan_me.data.remote.service.auth.MemberService
+import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
@@ -37,7 +39,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class InitProfileActivity : AppCompatActivity(), ProfileImageView {
+class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfileView {
     private lateinit var binding: ActivityInitProfileBinding
     private var userName: String? = ""
     private var userImg: String? = ""
@@ -53,7 +55,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
 
         getData()
 
-        binding.initProfileNameTv.text = userName
+        binding.initProfileNameTv.setText(userName)
         if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
             Picasso.get().load(userImg).transform(CircleTransform())
                 .into(binding.initProfileImagefileIv)
@@ -71,8 +73,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            goMainActivity()
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            setEditProfileService()
         }
     }
 
@@ -114,11 +115,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-    }
+    override fun onBackPressed() {}
 
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -177,6 +174,13 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
+    private fun setEditProfileService() {
+        val setEditProfileService = MemberService()
+        setEditProfileService.setChangeProfileView(this@InitProfileActivity)
+        val member = Member(userName!!, userImg!!, userType!!, userEmail!!)
+        setEditProfileService.setChangeProfile(accessToken!!, member)
+    }
+
     companion object {
         val REQUEST_PERMISSION_CODE = 423
         val REQUEST_IMAGE_PICK = 826
@@ -188,5 +192,15 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView {
 
     override fun onSetImgFailure(isSuccess: Boolean, code: String, message: String) {
         Log.d("이미지 등록 실패", message)
+    }
+
+    override fun onSetChangeProfileSuccess(response: ChangeMemberRes) {
+        Log.d("프로필 변경", response.result.toString())
+        goMainActivity()
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+    }
+
+    override fun onSetChangeProfileFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("프로필 변경 실패", message)
     }
 }

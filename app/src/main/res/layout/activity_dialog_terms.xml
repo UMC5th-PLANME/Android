@@ -187,6 +187,7 @@
             android:fontFamily="@font/pretendard_bold"
             android:background="@drawable/category_et"
             android:layout_marginHorizontal="20dp"
+            android:enabled="false"
             app:layout_constraintTop_toBottomOf="@id/terms_info_text_lo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
