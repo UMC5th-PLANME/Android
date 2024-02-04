@@ -26,16 +26,32 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(binding.root)
 
-        //allCheck()
+//        allCheck()
+
+        binding.termsInfoCb.setOnCheckedChangeListener { _, _ ->
+            allCheck()
+        }
+
+        binding.termsServiceCb.setOnCheckedChangeListener { _, _ ->
+            allCheck()
+        }
+
+        binding.termsAllCb.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.termsInfoCb.isChecked = true
+                binding.termsServiceCb.isChecked = true
+                binding.termsCompleteBtn.isEnabled = true
+            } else {
+                binding.termsInfoCb.isChecked = false
+                binding.termsServiceCb.isChecked = false
+                binding.termsCompleteBtn.isEnabled = false
+            }
+        }
+
 
         binding.termsCompleteBtn.setOnClickListener {
             goInitProfileActivity()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        allCheck()
     }
 
     private fun allCheck() {
@@ -43,7 +59,6 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
             binding.termsAllCb.isChecked = true
             binding.termsCompleteBtn.isEnabled = true
         }
-
     }
 
     private fun goInitProfileActivity() {
