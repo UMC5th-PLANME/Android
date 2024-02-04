@@ -1,20 +1,19 @@
-package com.example.plan_me.ui.main
+package com.example.plan_me.ui.dialog
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
-import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 
-class MainDrawerRVAdapter(private val categoryList : List<CategoryList>): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MainDrawerRVAdapter.ViewHolder {
+class DeleteCategoryRVAdapter(private val context: Context, private val categoryList : List<CategoryList>,private val sendDeleteMessage: DialogDeleteCategoryCheckFragment.SendDeleteMessage ): RecyclerView.Adapter<DeleteCategoryRVAdapter.ViewHolder>(){
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DeleteCategoryRVAdapter.ViewHolder {
         val binding: ItemDrawerBinding = ItemDrawerBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: MainDrawerRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DeleteCategoryRVAdapter.ViewHolder, position: Int) {
         holder.bind(position)
     }
 
@@ -24,6 +23,15 @@ class MainDrawerRVAdapter(private val categoryList : List<CategoryList>): Recycl
         fun bind (position: Int) {
             val categoryText = categoryList[position].emoticon +" "+categoryList[position].name
             binding.itemDrawerTv.text = categoryText
+
+            binding.root.setOnClickListener {
+                showCheckDialog(categoryList[position].categoryId)
+            }
         }
+    }
+
+    private fun showCheckDialog(categoryId : Int) {
+        val checkDialog = DialogDeleteCategoryCheckFragment(context, categoryId, sendDeleteMessage)
+        checkDialog.show()
     }
 }

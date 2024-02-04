@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/schedule_dialog_shape"
+        android:layout_marginHorizontal="20dp"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="40dp">
+
+        <TextView
+            android:id="@+id/terms_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약관 동의"
+            android:textSize="24dp"
+            android:textColor="@color/dark_gray"
+            android:layout_marginTop="43dp"
+            android:fontFamily="@font/pretendard_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/terms_all_lo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/terms_tv">
+
+            <TextView
+                android:id="@+id/terms_all_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="모든 이용약관에 동의합니다."
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <CheckBox
+                android:id="@+id/terms_all_cb"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:buttonTint="@color/transparent"
+                android:background="@drawable/selector_btn_radio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/terms_service_lo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/terms_all_lo">
+
+            <TextView
+                android:id="@+id/terms_service_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="서비스 이용약관 동의 (필수)"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <CheckBox
+                android:id="@+id/terms_service_cb"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:buttonTint="@color/transparent"
+                android:background="@drawable/selector_btn_radio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/terms_service_text_lo"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/category_et"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/terms_service_lo">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="@string/use_terms"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="start"/>
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/terms_info_lo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="17dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/terms_service_text_lo">
+
+            <TextView
+                android:id="@+id/terms_info_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="개인정보 수집 및 이용 동의 (필수)"
+                android:textColor="@color/black"
+                android:textSize="12dp"
+                android:fontFamily="@font/pretendard_bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <CheckBox
+                android:id="@+id/terms_info_cb"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:buttonTint="@color/transparent"
+                android:background="@drawable/selector_btn_radio"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:id="@+id/terms_info_text_lo"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/category_et"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/terms_complete_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/terms_info_lo">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:text="@string/personal_use_consent"
+                android:textColor="@color/black"
+                android:textSize="10dp"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="start"/>
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/terms_complete_btn"
+            android:layout_width="0dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="42dp"
+            android:backgroundTint="@color/dark_gray"
+            android:text="완료"
+            android:gravity="center"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/pretendard_bold"
+            android:background="@drawable/category_et"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@id/terms_info_text_lo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

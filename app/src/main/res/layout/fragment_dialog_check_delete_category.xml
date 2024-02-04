@@ -6,8 +6,8 @@
 
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/schedule_dialog_shape"
         android:orientation="vertical"
         android:gravity="center"
@@ -22,7 +22,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="휴식 종료"
+            android:text="삭제"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,41 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="10dp"
-            android:text="휴식 시간이 종료되었습니다."
+            android:text="삭제 시, 해당 데이터가 모두 삭제됩니다.\n삭제하시겠습니까?"
             android:fontFamily="@font/pretendard_medium"
             android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="10dp"
-            android:text="이어서 집중 타이머를 시작하시려면"
-            android:fontFamily="@font/pretendard_medium"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="확인 버튼을 눌러주세요."
-            android:fontFamily="@font/pretendard_medium"
-            android:textSize="16dp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_dialog_focus_time_tv" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:gravity="center"/>
 
         <LinearLayout
             android:layout_width="300dp"
@@ -78,7 +51,7 @@
             android:weightSum="2" >
 
             <TextView
-                android:id="@+id/timer_dialog_not_focus_time_tv"
+                android:id="@+id/dialog_delete_category_check_cancel_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -89,7 +62,7 @@
                 android:gravity="center"/>
 
             <TextView
-                android:id="@+id/timer_dialog_start_focus_time_tv"
+                android:id="@+id/dialog_delete_category_check_confirm_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
