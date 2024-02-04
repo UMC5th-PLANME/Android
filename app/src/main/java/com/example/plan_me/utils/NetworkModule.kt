@@ -1,21 +1,16 @@
 package com.example.plan_me.utils
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 const val BASE_URL = "http://www.planme.click"
 
-val gson : Gson = GsonBuilder()
-    .setLenient()
-    .create()
-
 fun getRetrofit(): Retrofit {
     val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
-        .addConverterFactory(ScalarsConverterFactory.create() )
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)).build())
         .build()
 
     return retrofit

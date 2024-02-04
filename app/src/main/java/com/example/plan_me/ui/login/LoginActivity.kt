@@ -166,7 +166,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     }
 
     private fun openTermsPopup() {
-        val dialog = DialogTermsActivity(this@LoginActivity, getAccessToken!!, member_id!!)
+        val dialog = DialogTermsActivity(this@LoginActivity)
         dialog.setCancelable(false)
         dialog.show()
     }

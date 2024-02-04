@@ -18,77 +18,42 @@ import com.example.plan_me.data.remote.view.auth.TermsView
 import com.example.plan_me.databinding.ActivityDialogTermsBinding
 import com.example.plan_me.ui.login.InitProfileActivity
 
-class DialogTermsActivity(context: Context, val accessToken: String, val memberId: Int) : Dialog(context), TermsView {
+class DialogTermsActivity(context: Context) : Dialog(context) {
     private lateinit var binding: ActivityDialogTermsBinding
-    private var agree: List<Int> = listOf(0, 0)
-    private var notAgree: List<Int> = listOf(0, 0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDialogTermsBinding.inflate(layoutInflater)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(binding.root)
 
-        if(binding.termsAllCb.isChecked) {
-            binding.termsInfoCb.isChecked = true
-            binding.termsServiceCb.isChecked = true
-        }
+        //allCheck()
 
         binding.termsCompleteBtn.setOnClickListener {
-            setTermsService()
+            goInitProfileActivity()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        allCheck()
     }
 
     private fun allCheck() {
         if(binding.termsInfoCb.isChecked && binding.termsServiceCb.isChecked) {
             binding.termsAllCb.isChecked = true
+            binding.termsCompleteBtn.isEnabled = true
         }
 
         if(binding.termsAllCb.isChecked) {
             binding.termsInfoCb.isChecked = true
             binding.termsServiceCb.isChecked = true
+            binding.termsCompleteBtn.isEnabled = true
         }
-    }
-
-    private fun isCheck() {
-        if(binding.termsServiceCb.isChecked) {
-            if(binding.termsInfoCb.isChecked) {
-                binding.termsAllCb.isChecked = true
-                agree = listOf(1, 2)
-            } else {
-                binding.termsAllCb.isChecked = false
-                agree = listOf(1)
-                notAgree = listOf(2)
-            }
-        } else if (binding.termsInfoCb.isChecked) {
-            if (!binding.termsServiceCb.isChecked) {
-                binding.termsAllCb.isChecked = false
-                agree = listOf(2)
-                notAgree = listOf(1)
-            }
-        }
-    }
-
-    private fun setTermsService() {
-        val setTermsService = MemberService()
-        setTermsService.setTermsView(this@DialogTermsActivity)
-        isCheck()
-
-        val terms = Terms(memberId, agree, notAgree)
-        setTermsService.setTerms(accessToken, terms)
     }
 
     private fun goInitProfileActivity() {
         val intent = Intent(context, InitProfileActivity::class.java)
         context.startActivity(intent)
-    }
-
-    override fun onSetTermsSuccess(response: TermsRes) {
-        Log.d("약관 동의", response.message)
-        goInitProfileActivity()
-    }
-
-    override fun onSetTermsFailure(isSuccess: Boolean, code: String, message: String) {
-        Log.d("약관 동의 실패", message)
     }
 
     companion object {
