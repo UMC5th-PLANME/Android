@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
         }
     }
     private fun getCategoryList() {  //연결 성공
-        val access_token = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWt1blRlc3QiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcwNzA0NDA4NCwiZXhwIjoxNzA3MDUxMjg0fQ.hQe_ChRIMBDhkIhcpx7H0vo53aUSdxAAE11ZUuoaZVs"
+        val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
         Log.d("access token", access_token)
         val setCategoryService = CategoryService()
         setCategoryService.setAllCategoryView(this)

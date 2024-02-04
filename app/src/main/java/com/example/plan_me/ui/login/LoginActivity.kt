@@ -210,7 +210,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         Log.d("회원가입", response.result.toString())
         member_id = response.result.member_id
         created_at = response.result.created_at
-        getAccessToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWt1blRlc3QiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcwNzA0NDA4NCwiZXhwIjoxNzA3MDUxMjg0fQ.hQe_ChRIMBDhkIhcpx7H0vo53aUSdxAAE11ZUuoaZVs"
+        getAccessToken = response.result.accessToken
         getRefreshToken = response.result.refreshToken
         saveResponse()
         openTermsPopup()

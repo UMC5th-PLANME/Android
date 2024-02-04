@@ -32,8 +32,7 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
             dismiss()
         }
         binding.addCategorySaveBtn.setOnClickListener {//연결 완료
-            val spf = context.getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
-            val access_token = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWt1blRlc3QiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcwNzA0NDA4NCwiZXhwIjoxNzA3MDUxMjg0fQ.hQe_ChRIMBDhkIhcpx7H0vo53aUSdxAAE11ZUuoaZVs"
+            val access_token = "Bearer " + context.getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE).getString("getAccessToken", "")
             Log.d("access token", access_token)
             val setCategoryService = CategoryService()
             setCategoryService.setAddCategoryView(this)

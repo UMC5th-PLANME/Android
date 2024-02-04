@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.data.remote.dto.category.DeleteCategoryRes
 import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.DeleteCategoryView
@@ -33,7 +34,12 @@ class DialogDeleteCategoryCheckFragment(context: Context, private val categoryId
         }
     }
     private fun DeleteCategory() {
-        val access_token = "Bearer " + "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyYWt1blRlc3QiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcwNzA0NDA4NCwiZXhwIjoxNzA3MDUxMjg0fQ.hQe_ChRIMBDhkIhcpx7H0vo53aUSdxAAE11ZUuoaZVs"
+        val access_token = "Bearer " + context.getSharedPreferences("getRes",
+            AppCompatActivity.MODE_PRIVATE
+        ).getString("getAccessToken", "")
+
+        Log.d("accessToken", access_token)
+
         val setCategoryService = CategoryService()
         setCategoryService.setDeleteCategoryView(this)
         setCategoryService.deleteCategoryFun(access_token!!, categoryId)
