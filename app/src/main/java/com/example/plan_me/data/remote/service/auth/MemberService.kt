@@ -1,6 +1,7 @@
 package com.example.plan_me.data.remote.service.auth
 
 import android.util.Log
+import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
@@ -64,7 +65,7 @@ class MemberService {
         })
     }
 
-    fun setChangeProfile(accessToken: String, member: Member) {
+    fun setChangeProfile(accessToken: String, member: EditProfile) {
         val changeProfileService = getRetrofit().create(AuthRetrofitInterface::class.java)
         changeProfileService.patchChangeProfile(accessToken, member).enqueue(object : Callback<ChangeMemberRes> {
             override fun onResponse(call: Call<ChangeMemberRes>, response: Response<ChangeMemberRes>) {
