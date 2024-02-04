@@ -73,7 +73,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         }
 
         binding.initProfileCompletBtn.setOnClickListener {
-            setEditProfileService()
+            goMainActivity()
         }
     }
 
@@ -170,6 +170,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
 
     private fun goMainActivity() {
         val intent = Intent(this@InitProfileActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
