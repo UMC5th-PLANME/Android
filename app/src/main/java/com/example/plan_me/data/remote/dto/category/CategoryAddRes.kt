@@ -12,5 +12,5 @@ data class AddCategoryRes(
 
 data class add_category_info(
     @SerializedName("categoryId") val categoryId: Int,
-    @SerializedName("created_at") val created_at: LocalTime,
+    @SerializedName("created_at") val created_at: String,
 )
