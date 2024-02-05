@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
-import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.service.auth.ImageService
@@ -49,6 +48,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
+        getRemoteData()
 
         binding.initProfileNameTv.setText(userName)
         if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
@@ -146,6 +146,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
                 // setImageService 호출
                 val setImageService = ImageService()
                 setImageService.setImageView(this@InitProfileActivity)
+                Log.d("img_access", accessToken.toString())
                 setImageService.setProfileImg("Bearer " + accessToken!!, imagePart)
             } else {
                 // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
@@ -161,7 +162,11 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         userImg = sharedPreferences.getString("userImg", userImg)
         userEmail = sharedPreferences.getString("email", userEmail)
         userType = sharedPreferences.getString("social", userType)
-        accessToken = sharedPreferences.getString("accessToken", accessToken)
+    }
+
+    private fun getRemoteData() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        accessToken = sharedPreferences.getString("getAccessToken", accessToken)
     }
 
     private fun goMainActivity() {
@@ -175,6 +180,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         val setEditProfileService = MemberService()
         setEditProfileService.setChangeProfileView(this@InitProfileActivity)
         val member = EditProfile(userName!!, userImg!!)
+        Log.d("access", accessToken.toString())
         setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
     }
 

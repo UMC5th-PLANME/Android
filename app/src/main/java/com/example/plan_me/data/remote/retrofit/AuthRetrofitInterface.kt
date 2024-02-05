@@ -25,7 +25,7 @@ interface AuthRetrofitInterface {
 
     // 프로필 변경
     @PATCH("/api/member")
-    fun patchChangeProfile(@Header("accessToken") accessToken: String, @Body member: EditProfile): Call<ChangeMemberRes>
+    fun patchChangeProfile(@Header("Authorization") Authorization: String, @Body member: EditProfile): Call<ChangeMemberRes>
 
     // 회원 조회
     @GET("/api/member")
