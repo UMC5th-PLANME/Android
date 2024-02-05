@@ -5,31 +5,37 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Category_input
+import com.example.plan_me.data.local.entity.category
 import com.example.plan_me.data.remote.dto.category.AddCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.category.ModifyCategoryRes
 import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.AddCategoryView
+import com.example.plan_me.data.remote.view.category.ModifyCategoryView
 import com.example.plan_me.databinding.FragmentDialogAddCategoryBinding
 import java.lang.Integer.max
 
-class DialogAddFragment(context : Context, private val sendSignalToMain: SendSignalToMain): Dialog(context), AddCategoryView {
+class DialogModifyFragment(context : Context, private val category:CategoryList, private val sendModidyMessage :SendModifyMessage): Dialog(context), ModifyCategoryView {
     private lateinit var binding : FragmentDialogAddCategoryBinding
     private var ignoreCheckChange = false
     private var isFirst = true
 
-    interface SendSignalToMain {
-        fun sendSuccessSignal()
+    interface SendModifyMessage {
+        fun sendModifySuccessSignal()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentDialogAddCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        init()
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.addCategoryCancelBtn.setOnClickListener {
@@ -55,18 +61,25 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
                 ).getString("getAccessToken", "")
                 Log.d("access token", access_token)
                 val setCategoryService = CategoryService()
-                setCategoryService.setAddCategoryView(this)
+                setCategoryService.setModifyCategoryView(this)
                 val categoryInput = Category_input(name, emoticon, color)
-                setCategoryService.addCategoryFun(access_token!!, categoryInput)
+                setCategoryService.modifyCategoryFun(access_token!!, category.categoryId, categoryInput)
             }
         }
 
         addPopup(binding.emoticonGroup1, binding.emoticonGroup2)
         addPopup(binding.colorGroup1, binding.colorGroup2)
     }
+
+    private fun init() {
+        binding.addCategoryTv.text = "카테고리 수정"
+        binding.addCategoryNameEt.text = Editable.Factory.getInstance().newEditable(category.name)
+
+    }
+
     private fun findEmoticon(itemId:Int):String {
         val id = if (isFirst) itemId - binding.emoticonGroup1.getChildAt(0).id
-                else itemId - binding.emoticonGroup2.getChildAt(0).id  + 5
+        else itemId - binding.emoticonGroup2.getChildAt(0).id  + 5
         return when (id) {
             0 -> "\uD83D\uDCD5"
             1 -> "\uD83D\uDCD7"
@@ -84,7 +97,6 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
     private fun findColor(itemId:Int):Int {
         val id = if (isFirst) itemId - binding.colorGroup1.getChildAt(0).id
         else itemId - binding.colorGroup2.getChildAt(0).id  + 5
-        Log.d("item id", itemId.toString())
         return when(id) {
             0-> R.color.sky_blue_main
             1-> R.color.sky_blue
@@ -102,12 +114,11 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
     private fun findCheckItemId(radioGroup1: RadioGroup, radioGroup2: RadioGroup):Int {
         val checkedRadioButtonId1 = radioGroup1.checkedRadioButtonId
         val checkedRadioButtonId2 = radioGroup2.checkedRadioButtonId
-        Log.d("select1",checkedRadioButtonId1.toString() )
-        Log.d("select2",checkedRadioButtonId2.toString() )
         isFirst =
-            checkedRadioButtonId1 > checkedRadioButtonId2
+            if(max(checkedRadioButtonId1, checkedRadioButtonId2) == checkedRadioButtonId1) true
+            else false
 
-        Log.d("select",isFirst.toString() )
+        Log.d("select",max(checkedRadioButtonId1, checkedRadioButtonId2).toString() )
         return max(checkedRadioButtonId1, checkedRadioButtonId2)
     }
     private fun addPopup(radioGroup1: RadioGroup, radioGroup2: RadioGroup) {
@@ -141,13 +152,13 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
         }
     }
 
-    override fun onAddCategorySuccess(response: AddCategoryRes) {
+    override fun onModifyCategorySuccess(response: ModifyCategoryRes) {
         Log.d("response", response.toString())
-        sendSignalToMain.sendSuccessSignal()
+        sendModidyMessage.sendModifySuccessSignal()
         dismiss()
     }
 
-    override fun onAddCategoryFailure(response: AddCategoryRes) {
+    override fun onModifyCategoryFailure(response: ModifyCategoryRes) {
         Log.d("response", response.toString())
         dismiss()
     }
