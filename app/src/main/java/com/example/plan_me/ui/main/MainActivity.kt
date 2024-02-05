@@ -12,18 +12,14 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
-import com.example.plan_me.data.local.entity.Category_input
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
-import com.example.plan_me.data.remote.dto.category.DeleteCategoryRes
 import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.AllCategoryView
-import com.example.plan_me.data.remote.view.category.DeleteCategoryView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
@@ -32,12 +28,19 @@ import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
+import com.example.plan_me.ui.login.SendCategoryToPlannerFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
-class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.SendSignalToMain, DialogDeleteCategoryCheckFragment.SendDeleteMessage, DialogModifyFragment.SendModifyMessage{
+class MainActivity :
+    AppCompatActivity(),
+    AllCategoryView,
+    DialogAddFragment.SendSignalToMain,
+    DialogDeleteCategoryCheckFragment.SendDeleteMessage,
+    DialogModifyFragment.SendModifyMessage ,
+    MainDrawerRVAdapter.SendClickCategory {
 
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
@@ -58,6 +61,7 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
 
     private lateinit var categorys : List<CategoryList>
 
+    private lateinit var sendCategoryToPlannerFragment: SendCategoryToPlannerFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -84,7 +88,7 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
         Log.d("init", categorys.toString())
         val layoutManager = LinearLayoutManager(this)
         val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
-        drawerAdapter = MainDrawerRVAdapter(categorys)
+        drawerAdapter = MainDrawerRVAdapter(categorys, this)
         drawer.layoutManager = layoutManager
         drawer.adapter = drawerAdapter
         drawerAdapter.notifyDataSetChanged()
@@ -230,5 +234,17 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
         getCategoryList()
     }
 
-
+    override fun sendClickCategory(category: CategoryList) {
+        if (isHome) {
+            val bundle = Bundle()
+            bundle.putString("name", category.name)
+            bundle.putString("emoticon", category.emoticon)
+            bundle.putInt("color", category.color)
+            val plannerFragment = PlannerFragment()
+            plannerFragment.arguments = bundle
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.main_frm, plannerFragment)
+                .commitAllowingStateLoss()
+        }
+    }
 }

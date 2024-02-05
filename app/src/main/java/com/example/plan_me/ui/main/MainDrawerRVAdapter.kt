@@ -7,7 +7,11 @@ import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
 import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 
-class MainDrawerRVAdapter(private val categoryList : List<CategoryList>): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
+class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private val sendClickCategory: SendClickCategory): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
+
+    interface SendClickCategory{
+        fun sendClickCategory(category:CategoryList)
+    }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MainDrawerRVAdapter.ViewHolder {
         val binding: ItemDrawerBinding = ItemDrawerBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -24,6 +28,10 @@ class MainDrawerRVAdapter(private val categoryList : List<CategoryList>): Recycl
         fun bind (position: Int) {
             val categoryText = categoryList[position].emoticon +" "+categoryList[position].name
             binding.itemDrawerTv.text = categoryText
+
+            binding.root.setOnClickListener {
+                sendClickCategory.sendClickCategory(categoryList[position])
+            }
         }
     }
 }
