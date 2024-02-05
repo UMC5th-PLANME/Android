@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
@@ -205,7 +206,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
         val setChangeImgService = MemberService()
         setChangeImgService.setChangeProfileView(this@AccountActivity)
-        val member = Member(userName!!, userImg!!, social!!, userEmail!!)
+        val member = EditProfile(userName!!, userImg!!)
         setChangeImgService.setChangeProfile(accessToken!!, member)
     }
 

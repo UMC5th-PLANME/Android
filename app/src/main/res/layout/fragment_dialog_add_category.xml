@@ -196,7 +196,8 @@
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="@id/add_category_emoticon_lo"
             app:layout_constraintStart_toStartOf="@id/add_category_emoticon_lo"
-            app:layout_constraintTop_toBottomOf="@id/add_category_emoticon_lo" />
+            app:layout_constraintTop_toBottomOf="@id/add_category_emoticon_lo"
+            android:singleLine="true"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_category_color_lo"
@@ -334,18 +335,33 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+            android:id="@+id/add_category_error_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="error message"
+            android:fontFamily="@font/pretendard_regular"
+            android:textSize="11sp"
+            android:textColor="@color/red"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/add_category_btn_lo"
+            app:layout_constraintTop_toBottomOf="@+id/add_category_color_lo"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"/>
+
         <LinearLayout
             android:id="@+id/add_category_btn_lo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="63dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="25dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_category_color_lo">
+            app:layout_constraintTop_toBottomOf="@id/add_category_error_tv">
 
             <Button
                 android:id="@+id/add_category_cancel_btn"

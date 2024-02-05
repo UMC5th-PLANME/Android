@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.service.auth.MemberService
@@ -75,7 +76,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView {
     private fun setEditName() {
         val setChangeProfileService = MemberService()
         setChangeProfileService.setChangeProfileView(this@ChangeNicknameActivity)
-        val member = Member(userName!!, userImg!!, userType!!, userEmail!!)
+        val member = EditProfile(userName!!, userImg!!)
         setChangeProfileService.setChangeProfile(accessToken!!, member)
     }
 
