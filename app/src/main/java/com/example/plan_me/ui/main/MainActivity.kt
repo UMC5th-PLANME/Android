@@ -30,12 +30,14 @@ import com.example.plan_me.ui.all.AllFragment
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
+import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
+import com.example.plan_me.ui.dialog.DialogModifyFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
-class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.SendSignalToMain, DialogDeleteCategoryCheckFragment.SendDeleteMessage{
+class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.SendSignalToMain, DialogDeleteCategoryCheckFragment.SendDeleteMessage, DialogModifyFragment.SendModifyMessage{
 
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
     private lateinit var drawerModify: TextView
 
     private lateinit var category_delete : DialogDeleteCategoryFragment
+    private lateinit var category_modify : DialogModifyCategoryFragment
 
     private var fab_open: Animation? = null
     private var fab_close: Animation? = null
@@ -143,6 +146,10 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
             category_delete = DialogDeleteCategoryFragment(this, categorys, this)
             category_delete.show()
         }
+        drawerModify.setOnClickListener {
+            category_modify = DialogModifyCategoryFragment(this, categorys ,this)
+            category_modify.show()
+        }
         binding.mainAllBtn.setOnClickListener{
             if (isHome) {
                 supportFragmentManager.beginTransaction()
@@ -215,6 +222,11 @@ class MainActivity : AppCompatActivity(), AllCategoryView, DialogAddFragment.Sen
 
     override fun sendDeleteMessage() {
         category_delete.dismiss()
+        getCategoryList()
+    }
+
+    override fun sendModifySuccessSignal() {
+        category_modify.dismiss()
         getCategoryList()
     }
 

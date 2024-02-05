@@ -45,7 +45,7 @@ class CategoryService  {
         this.oneCategoryView = oneCategoryView
     }
 
-    fun setModifyCategoryView(allCategoryView: AllCategoryView) {
+    fun setModifyCategoryView(modifyCategoryView: ModifyCategoryView) {
         this.modifyCategoryView = modifyCategoryView
     }
 
@@ -135,7 +135,7 @@ class CategoryService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> modifyCategoryView.onModifyCategorySuccess(resp)
+                    "CATEGORY2003" -> modifyCategoryView.onModifyCategorySuccess(resp)
                     else -> modifyCategoryView.onModifyCategoryFailure(resp)
                 }
             }
