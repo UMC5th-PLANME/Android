@@ -124,8 +124,7 @@ class MemberService {
                     val resp: DeleteMemberRes = response.body()!!
                     if (resp != null) {
                         when(resp.code) {
-                            // 코드 미정 (임시 설정)
-                            "delete" -> deleteMemberView.onDelMemberSuccess(resp)
+                            "MEMBER2004" -> deleteMemberView.onDelMemberSuccess(resp)
                             else -> deleteMemberView.onDelMemberFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {

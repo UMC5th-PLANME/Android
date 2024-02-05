@@ -33,5 +33,5 @@ interface AuthRetrofitInterface {
 
     // 회원 탈퇴
     @DELETE("/api/member")
-    fun deleteMember(@Header("accessToken") accessToken: String): Call<DeleteMemberRes>
+    fun deleteMember(@Header("Authorization") Authorization: String): Call<DeleteMemberRes>
 }

@@ -35,7 +35,7 @@ class DialogDeleteActivity(context: Context, val accessToken: String): Dialog(co
     private fun setDeleteService() {
         val setDeleteService = MemberService()
         setDeleteService.setDeleteMemberView(this@DialogDeleteActivity)
-        setDeleteService.delMember(accessToken)
+        setDeleteService.delMember("Bearer " + accessToken)
     }
 
     private fun navigateToFirstScreen() {
