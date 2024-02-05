@@ -29,7 +29,7 @@ interface AuthRetrofitInterface {
 
     // 회원 조회
     @GET("/api/member")
-    fun getMember(): Call<MemberRes>
+    fun getMember(@Header("Authorization") Authorization: String): Call<MemberRes>
 
     // 회원 탈퇴
     @DELETE("/api/member")
