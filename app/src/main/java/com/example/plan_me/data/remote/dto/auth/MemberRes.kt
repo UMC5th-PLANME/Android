@@ -16,7 +16,7 @@ data class LookUpMember(
     @SerializedName("profile_image") val profile_image: String,
     @SerializedName("login_type") val login_type: String,
     @SerializedName("email") val email: String,
-    @SerializedName("created_at") val created_at: LocalTime,
-    @SerializedName("updated_at") val updated_at: LocalTime,
+    @SerializedName("created_at") val created_at: String,
+    @SerializedName("updated_at") val updated_at: String,
     @SerializedName("status") val status: Int
 )

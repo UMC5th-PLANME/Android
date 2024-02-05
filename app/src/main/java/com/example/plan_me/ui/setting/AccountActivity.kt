@@ -47,7 +47,7 @@ import java.io.File
 class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView, LookUpMemberView {
     private lateinit var binding: ActivityAccountBinding
     private var userName: String? = ""
-    private var userImg: String? = ""
+    private var userImg: String? = DEFAULT_IMG
     private var social: String? = ""
     private var userEmail: String? = ""
     private var accessToken: String? = ""
@@ -58,17 +58,10 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         setContentView(binding.root)
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
+        getData2()
         setLookUpService()
 
-        getData1()
-        getData2()
-
-        binding.accountNameTv.text = userName
-        if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
-            Picasso.get().load(userImg).transform(CircleTransform())
-                .into(binding.accountImageIv)
-        }
-        binding.accountSocialTypeTv.text = social
+        updateUI()
 
         binding.accountBackBtn.setOnClickListener {
             finish()
@@ -86,11 +79,11 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
             }
         }
 
-        binding.accountNicknameBtn.setOnClickListener {
+        binding.accountNicknameLo.setOnClickListener {
             switchActivity(ChangeNicknameActivity())
         }
 
-        binding.accountSocialBtn.setOnClickListener {
+        binding.accountSocialLo.setOnClickListener {
             switchActivity(ChangeTypeActivity())
         }
 
@@ -173,9 +166,9 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private fun getData1() {
         // 데이터 읽어오기
         val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
-//        userName = sharedPreferences.getString("userName", userName)
-//        userImg = sharedPreferences.getString("userImg", userImg)
-//        social = sharedPreferences.getString("social", social)
+        userName = sharedPreferences.getString("userName", userName)
+        userImg = sharedPreferences.getString("userImg", userImg)
+        social = sharedPreferences.getString("social", social)
         userEmail = sharedPreferences.getString("email", userEmail)
     }
 
@@ -219,7 +212,16 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private fun setLookUpService() {
         val setLookUpService = MemberService()
         setLookUpService.setLookUpMemberView(this@AccountActivity)
-        setLookUpService.getLookUpMember()
+        setLookUpService.getLookUpMember("Bearer " + accessToken)
+    }
+
+    private fun updateUI() {
+        binding.accountNameTv.text = userName
+        if (userImg != DEFAULT_IMG && userImg != "null") {
+            Picasso.get().load(userImg).transform(CircleTransform())
+                .into(binding.accountImageIv)
+        }
+        binding.accountSocialTypeTv.text = social
     }
 
     override fun onSetChangeProfileSuccess(response: ChangeMemberRes) {
@@ -243,9 +245,16 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         userName = response.result.nickname
         userImg = response.result.profile_image
         social = response.result.login_type
+
+        // UI 업데이트
+        updateUI()
     }
 
     override fun onGetMemberFailure(isSuccess: Boolean, code: String, message: String) {
         Log.d("회원 조회 실패", message)
+    }
+
+    companion object {
+        val DEFAULT_IMG = "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg"
     }
 }

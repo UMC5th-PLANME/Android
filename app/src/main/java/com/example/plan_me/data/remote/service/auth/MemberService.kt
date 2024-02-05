@@ -90,13 +90,14 @@ class MemberService {
         })
     }
 
-    fun getLookUpMember() {
+    fun getLookUpMember(token: String) {
         val lookUpMemberService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        lookUpMemberService.getMember().enqueue(object : Callback<MemberRes> {
+        lookUpMemberService.getMember(token).enqueue(object : Callback<MemberRes> {
             override fun onResponse(call: Call<MemberRes>, response: Response<MemberRes>) {
                 if (response.isSuccessful) {
                     val resp: MemberRes = response.body()!!
                     if (resp != null) {
+                        Log.d("LOOK-UP-MEMBER-SUCCESS", resp.result.toString())
                         when(resp.code) {
                             "MEMBER2001" -> lookUpMemberView.onGetMemberSuccess(resp)
                             else -> lookUpMemberView.onGetMemberFailure(resp.isSuccess, resp.code, resp.message)
