@@ -49,7 +49,6 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private var userName: String? = ""
     private var userImg: String? = DEFAULT_IMG
     private var social: String? = ""
-    private var userEmail: String? = ""
     private var accessToken: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,15 +160,6 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
             setEditImg()
         }
-    }
-
-    private fun getData1() {
-        // 데이터 읽어오기
-        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
-        userName = sharedPreferences.getString("userName", userName)
-        userImg = sharedPreferences.getString("userImg", userImg)
-        social = sharedPreferences.getString("social", social)
-        userEmail = sharedPreferences.getString("email", userEmail)
     }
 
     private fun getData2() {

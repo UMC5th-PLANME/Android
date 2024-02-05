@@ -12,5 +12,5 @@ data class DeleteMemberRes(
 
 data class DeleteMember(
     @SerializedName("member_id") val member_id: Int,
-    @SerializedName("deleted_at") val deleted_at: LocalTime
+    @SerializedName("deleted_at") val deleted_at: String
 )
