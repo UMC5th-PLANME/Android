@@ -98,8 +98,7 @@ class MemberService {
                     val resp: MemberRes = response.body()!!
                     if (resp != null) {
                         when(resp.code) {
-                            // 코드 미정 (임시 설정)
-                            "look-up" -> lookUpMemberView.onGetMemberSuccess(resp)
+                            "MEMBER2001" -> lookUpMemberView.onGetMemberSuccess(resp)
                             else -> lookUpMemberView.onGetMemberFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {
