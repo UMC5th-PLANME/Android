@@ -61,7 +61,8 @@ class MainActivity :
 
     private lateinit var categorys : List<CategoryList>
 
-    private lateinit var sendCategoryToPlannerFragment: SendCategoryToPlannerFragment
+    private lateinit var currentCategory : CategoryList
+    private var currentCategoryPosition : Int = -1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -86,6 +87,7 @@ class MainActivity :
 
     private fun initActivity() {
         Log.d("init", categorys.toString())
+        startFragment(currentCategory)
         val layoutManager = LinearLayoutManager(this)
         val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
         drawerAdapter = MainDrawerRVAdapter(categorys, this)
@@ -213,6 +215,11 @@ class MainActivity :
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         Log.d("all category", response.result.toString())
         categorys = response.result.categoryList
+        if (currentCategoryPosition == -1) {
+            currentCategory = categorys[0]
+        }else {
+            currentCategory = categorys[currentCategoryPosition]
+        }
         initActivity()
     }
 
@@ -226,25 +233,32 @@ class MainActivity :
 
     override fun sendDeleteMessage() {
         category_delete.dismiss()
+        currentCategoryPosition = 0
         getCategoryList()
     }
 
-    override fun sendModifySuccessSignal() {
+    override fun sendModifySuccessSignal(position : Int) {
         category_modify.dismiss()
+        currentCategoryPosition = position
         getCategoryList()
     }
 
     override fun sendClickCategory(category: CategoryList) {
         if (isHome) {
-            val bundle = Bundle()
-            bundle.putString("name", category.name)
-            bundle.putString("emoticon", category.emoticon)
-            bundle.putInt("color", category.color)
-            val plannerFragment = PlannerFragment()
-            plannerFragment.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, plannerFragment)
-                .commitAllowingStateLoss()
+            startFragment(category)
         }
+    }
+
+    private fun startFragment(category: CategoryList) {
+        Log.d("startFragment", category.toString())
+        val bundle = Bundle()
+        bundle.putString("name", category.name)
+        bundle.putString("emoticon", category.emoticon)
+        bundle.putInt("color", category.color)
+        val plannerFragment = PlannerFragment()
+        plannerFragment.arguments = bundle
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, plannerFragment)
+            .commitAllowingStateLoss()
     }
 }

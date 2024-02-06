@@ -7,12 +7,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.category.DeleteCategoryRes
 import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.DeleteCategoryView
 import com.example.plan_me.databinding.FragmentDialogCheckDeleteCategoryBinding
 
-class DialogDeleteCategoryCheckFragment(context: Context, private val categoryId : Int, private val sendDeleteMessage: SendDeleteMessage): Dialog(context), DeleteCategoryView{
+class DialogDeleteCategoryCheckFragment(context: Context, private val category: CategoryList, private val sendDeleteMessage: SendDeleteMessage): Dialog(context), DeleteCategoryView{
     private lateinit var binding: FragmentDialogCheckDeleteCategoryBinding
 
     interface SendDeleteMessage {
@@ -42,7 +43,7 @@ class DialogDeleteCategoryCheckFragment(context: Context, private val categoryId
 
         val setCategoryService = CategoryService()
         setCategoryService.setDeleteCategoryView(this)
-        setCategoryService.deleteCategoryFun(access_token!!, categoryId)
+        setCategoryService.deleteCategoryFun(access_token!!, category.categoryId)
     }
 
     override fun onDeleteCategorySuccess(response: DeleteCategoryRes) {

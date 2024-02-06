@@ -31,7 +31,7 @@ class ModifyCategoryRVAdapter(private val context: Context, private val category
     }
 
     private fun showCheckDialog(position : Int) {
-        val checkDialog = DialogModifyFragment(context, categoryList[position], sendModidyMessage)
+        val checkDialog = DialogModifyFragment(context, categoryList[position], sendModidyMessage, position)
         checkDialog.show()
     }
 }
