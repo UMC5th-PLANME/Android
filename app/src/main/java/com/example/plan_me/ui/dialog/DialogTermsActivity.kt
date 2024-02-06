@@ -64,10 +64,6 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
     private fun goInitProfileActivity() {
         val intent = Intent(context, InitProfileActivity::class.java)
         context.startActivity(intent)
-    }
-
-    companion object {
-        private const val DEFAULT_MEMBER_ID = 0 // 초기값 설정
-        private const val DEFAULT_ACCESS_TOKEN = "" // 초기값 설정
+        dismiss()
     }
 }

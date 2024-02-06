@@ -12,5 +12,5 @@ data class ModifyCategoryRes(
 
 data class modify_category_info(
     @SerializedName("categoryId") val categoryId: Int,
-    @SerializedName("updatedAt") val deletedAt: LocalTime,
+    @SerializedName("updatedAt") val deletedAt: String,
 )

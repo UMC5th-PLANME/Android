@@ -90,16 +90,16 @@ class MemberService {
         })
     }
 
-    fun getLookUpMember() {
+    fun getLookUpMember(token: String) {
         val lookUpMemberService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        lookUpMemberService.getMember().enqueue(object : Callback<MemberRes> {
+        lookUpMemberService.getMember(token).enqueue(object : Callback<MemberRes> {
             override fun onResponse(call: Call<MemberRes>, response: Response<MemberRes>) {
                 if (response.isSuccessful) {
                     val resp: MemberRes = response.body()!!
                     if (resp != null) {
+                        Log.d("LOOK-UP-MEMBER-SUCCESS", resp.result.toString())
                         when(resp.code) {
-                            // 코드 미정 (임시 설정)
-                            "look-up" -> lookUpMemberView.onGetMemberSuccess(resp)
+                            "MEMBER2001" -> lookUpMemberView.onGetMemberSuccess(resp)
                             else -> lookUpMemberView.onGetMemberFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {
@@ -124,8 +124,7 @@ class MemberService {
                     val resp: DeleteMemberRes = response.body()!!
                     if (resp != null) {
                         when(resp.code) {
-                            // 코드 미정 (임시 설정)
-                            "delete" -> deleteMemberView.onDelMemberSuccess(resp)
+                            "MEMBER2004" -> deleteMemberView.onDelMemberSuccess(resp)
                             else -> deleteMemberView.onDelMemberFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {

@@ -3,4 +3,5 @@
     <dimen name="design_bottom_navigation_text_size" tools:override="true">10sp</dimen>
     <dimen name="design_bottom_navigation_active_text_size" tools:override="true">10sp</dimen>
     <dimen name="design_fab_image_size">64dp</dimen>
+    <dimen name="planner_corner_raidus">10dp</dimen>
 </resources>

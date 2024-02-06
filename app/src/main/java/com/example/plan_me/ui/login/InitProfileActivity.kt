@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -18,7 +20,6 @@ import androidx.core.content.ContextCompat
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
-import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.service.auth.ImageService
@@ -49,12 +50,29 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
         getData()
+        getRemoteData()
 
         binding.initProfileNameTv.setText(userName)
         if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
             Picasso.get().load(userImg).transform(CircleTransform())
                 .into(binding.initProfileImagefileIv)
         }
+
+        binding.initProfileNameTv.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // 입력 전에 호출되는 메서드
+            }
+
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // 텍스트가 변경될 때 호출되는 메서드
+                userName = charSequence.toString()
+                // 여기에서 변경된 텍스트에 대한 처리를 수행할 수 있습니다.
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                // 입력이 완료된 후에 호출되는 메서드
+            }
+        })
 
         binding.initProfileCameraLo.setOnClickListener {
             // 권한이 있는지 확인
@@ -145,6 +163,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
                 // setImageService 호출
                 val setImageService = ImageService()
                 setImageService.setImageView(this@InitProfileActivity)
+                Log.d("img_access", accessToken.toString())
                 setImageService.setProfileImg("Bearer " + accessToken!!, imagePart)
             } else {
                 // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
@@ -160,7 +179,11 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         userImg = sharedPreferences.getString("userImg", userImg)
         userEmail = sharedPreferences.getString("email", userEmail)
         userType = sharedPreferences.getString("social", userType)
-        accessToken = sharedPreferences.getString("accessToken", accessToken)
+    }
+
+    private fun getRemoteData() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        accessToken = sharedPreferences.getString("getAccessToken", accessToken)
     }
 
     private fun goMainActivity() {
@@ -174,6 +197,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         val setEditProfileService = MemberService()
         setEditProfileService.setChangeProfileView(this@InitProfileActivity)
         val member = EditProfile(userName!!, userImg!!)
+        Log.d("access", accessToken.toString())
         setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
     }
 

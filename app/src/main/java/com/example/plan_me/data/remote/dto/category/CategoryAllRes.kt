@@ -15,7 +15,6 @@ data class AllCategoryRes(
 data class CategoryListResponse(
     @SerializedName("categoryList") val categoryList: List<CategoryList>
 )
-
 data class CategoryList(
     @SerializedName("categoryId") val categoryId: Int,
     @SerializedName("name") val name: String,

@@ -14,9 +14,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="category"
-            android:fontFamily="@font/agro_bold"
+            android:fontFamily="@font/pretendard_bold"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="120dp"
@@ -31,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/drawer_tv"
             app:layout_constraintHeight_max="400dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="20dp"/>
 
         <FrameLayout

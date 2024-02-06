@@ -4,8 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("EditProfile")
-data class EditProfile(
-    val name: String,
-    val image_url: String
+@SerialName("Terms")
+data class Terms(
+    val member_id: Int,
+    val agreeTermIds: List<Int>,
+    val disagreeTermIds: List<Int>
 )

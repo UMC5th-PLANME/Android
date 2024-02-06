@@ -25,13 +25,13 @@ interface AuthRetrofitInterface {
 
     // 프로필 변경
     @PATCH("/api/member")
-    fun patchChangeProfile(@Header("accessToken") accessToken: String, @Body member: EditProfile): Call<ChangeMemberRes>
+    fun patchChangeProfile(@Header("Authorization") Authorization: String, @Body member: EditProfile): Call<ChangeMemberRes>
 
     // 회원 조회
     @GET("/api/member")
-    fun getMember(): Call<MemberRes>
+    fun getMember(@Header("Authorization") Authorization: String): Call<MemberRes>
 
     // 회원 탈퇴
     @DELETE("/api/member")
-    fun deleteMember(@Header("accessToken") accessToken: String): Call<DeleteMemberRes>
+    fun deleteMember(@Header("Authorization") Authorization: String): Call<DeleteMemberRes>
 }

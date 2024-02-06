@@ -1,24 +1,19 @@
-package com.example.plan_me.ui.main
+package com.example.plan_me.ui.dialog
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
-import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 
-class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private val sendClickCategory: SendClickCategory): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
-
-    interface SendClickCategory{
-        fun sendClickCategory(category:CategoryList)
-    }
-
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MainDrawerRVAdapter.ViewHolder {
+class ModifyCategoryRVAdapter(private val context: Context, private val categoryList : List<CategoryList>, private val sendModidyMessage :DialogModifyFragment.SendModifyMessage): RecyclerView.Adapter<ModifyCategoryRVAdapter.ViewHolder>(){
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ModifyCategoryRVAdapter.ViewHolder {
         val binding: ItemDrawerBinding = ItemDrawerBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: MainDrawerRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ModifyCategoryRVAdapter.ViewHolder, position: Int) {
         holder.bind(position)
     }
 
@@ -30,8 +25,13 @@ class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private
             binding.itemDrawerTv.text = categoryText
 
             binding.root.setOnClickListener {
-                sendClickCategory.sendClickCategory(categoryList[position])
+                showCheckDialog(position)
             }
         }
+    }
+
+    private fun showCheckDialog(position : Int) {
+        val checkDialog = DialogModifyFragment(context, categoryList[position], sendModidyMessage)
+        checkDialog.show()
     }
 }
