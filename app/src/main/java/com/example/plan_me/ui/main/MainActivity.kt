@@ -139,7 +139,11 @@ class MainActivity :
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainFabAddBtn.setOnClickListener {
-            switchActivity(ScheduleAddActivity())
+            val intent = Intent(this, ScheduleAddActivity::class.java)
+            val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
+            intent.putExtra("category", currentCategory)
+            intent.putExtra("categoryList", categoryArraList)
+            startActivity(intent)
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainMenu.setOnClickListener{
@@ -215,12 +219,14 @@ class MainActivity :
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         Log.d("previousCategoryPosition", currentCategoryPosition.toString())
         categorys = response.result.categoryList
-        if (currentCategoryPosition == -1) {
-            currentCategory = categorys[0]
-        }else {
-            currentCategory = categorys[currentCategoryPosition]
+        if(categorys.isNotEmpty()) {
+            if (currentCategoryPosition == -1) {
+                currentCategory = categorys[0]
+            } else {
+                currentCategory = categorys[currentCategoryPosition]
+            }
+            initActivity()
         }
-        initActivity()
     }
 
     override fun onAllCategoryFailure(response: AllCategoryRes) {
@@ -235,8 +241,12 @@ class MainActivity :
         category_delete.dismiss()
         Log.d("position", position.toString())
         Log.d("previousCategoryPosition", currentCategoryPosition.toString())
-        if (currentCategoryPosition == position) currentCategoryPosition = -1
-        else if (currentCategoryPosition > position) currentCategoryPosition -= 1
+        if (currentCategoryPosition == position) {
+            currentCategoryPosition = -1
+        }
+        else if (currentCategoryPosition > position) {
+            currentCategoryPosition -= 1
+        }
         Log.d("currentCategoryPosition", currentCategoryPosition.toString())
         getCategoryList()
     }
@@ -251,6 +261,7 @@ class MainActivity :
         if (isHome) {
             startFragment(category)
             currentCategoryPosition =position
+            currentCategory = categorys[currentCategoryPosition]
         }
     }
 
