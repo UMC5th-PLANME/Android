@@ -13,11 +13,11 @@ import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.DeleteCategoryView
 import com.example.plan_me.databinding.FragmentDialogCheckDeleteCategoryBinding
 
-class DialogDeleteCategoryCheckFragment(context: Context, private val category: CategoryList, private val sendDeleteMessage: SendDeleteMessage): Dialog(context), DeleteCategoryView{
+class DialogDeleteCategoryCheckFragment(context: Context, private val category: CategoryList, private val sendDeleteMessage: SendDeleteMessage, private val position: Int): Dialog(context), DeleteCategoryView{
     private lateinit var binding: FragmentDialogCheckDeleteCategoryBinding
 
     interface SendDeleteMessage {
-        fun sendDeleteMessage()
+        fun sendDeleteMessage(position : Int)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class DialogDeleteCategoryCheckFragment(context: Context, private val category: 
 
     override fun onDeleteCategorySuccess(response: DeleteCategoryRes) {
         dismiss()
-        sendDeleteMessage.sendDeleteMessage()
+        sendDeleteMessage.sendDeleteMessage(position)
     }
 
     override fun onDeleteCategoryFailure(response: DeleteCategoryRes) {

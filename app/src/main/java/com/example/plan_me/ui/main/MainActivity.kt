@@ -213,7 +213,7 @@ class MainActivity :
     }
 
     override fun onAllCategorySuccess(response: AllCategoryRes) {
-        Log.d("all category", response.result.toString())
+        Log.d("previousCategoryPosition", currentCategoryPosition.toString())
         categorys = response.result.categoryList
         if (currentCategoryPosition == -1) {
             currentCategory = categorys[0]
@@ -231,9 +231,13 @@ class MainActivity :
         getCategoryList()
     }
 
-    override fun sendDeleteMessage() {
+    override fun sendDeleteMessage(position : Int) {
         category_delete.dismiss()
-        currentCategoryPosition = 0
+        Log.d("position", position.toString())
+        Log.d("previousCategoryPosition", currentCategoryPosition.toString())
+        if (currentCategoryPosition == position) currentCategoryPosition = -1
+        else if (currentCategoryPosition > position) currentCategoryPosition -= 1
+        Log.d("currentCategoryPosition", currentCategoryPosition.toString())
         getCategoryList()
     }
 
@@ -243,9 +247,10 @@ class MainActivity :
         getCategoryList()
     }
 
-    override fun sendClickCategory(category: CategoryList) {
+    override fun sendClickCategory(category: CategoryList, position: Int) {
         if (isHome) {
             startFragment(category)
+            currentCategoryPosition =position
         }
     }
 

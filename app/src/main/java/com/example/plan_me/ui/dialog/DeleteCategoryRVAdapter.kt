@@ -25,13 +25,13 @@ class DeleteCategoryRVAdapter(private val context: Context, private val category
             binding.itemDrawerTv.text = categoryText
 
             binding.root.setOnClickListener {
-                showCheckDialog(categoryList[position])
+                showCheckDialog(categoryList[position], position)
             }
         }
     }
 
-    private fun showCheckDialog(category : CategoryList) {
-        val checkDialog = DialogDeleteCategoryCheckFragment(context, category, sendDeleteMessage)
+    private fun showCheckDialog(category : CategoryList, position: Int) {
+        val checkDialog = DialogDeleteCategoryCheckFragment(context, category, sendDeleteMessage, position)
         checkDialog.show()
     }
 }
