@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @SerialName("EditProfile")
 data class EditProfile(
     val name: String,
-    val image_url: String
+    val profile_image: String
 )
