@@ -22,13 +22,13 @@ import com.example.plan_me.data.remote.view.category.ModifyCategoryView
 import com.example.plan_me.databinding.FragmentDialogAddCategoryBinding
 import java.lang.Integer.max
 
-class DialogModifyFragment(context : Context, private val category:CategoryList, private val sendModidyMessage :SendModifyMessage): Dialog(context), ModifyCategoryView {
+class DialogModifyFragment(context : Context, private val category:CategoryList, private val sendModidyMessage :SendModifyMessage, private val position : Int): Dialog(context), ModifyCategoryView {
     private lateinit var binding : FragmentDialogAddCategoryBinding
     private var ignoreCheckChange = false
     private var isFirst = true
 
     interface SendModifyMessage {
-        fun sendModifySuccessSignal()
+        fun sendModifySuccessSignal(position: Int)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,7 +154,7 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
 
     override fun onModifyCategorySuccess(response: ModifyCategoryRes) {
         Log.d("response", response.toString())
-        sendModidyMessage.sendModifySuccessSignal()
+        sendModidyMessage.sendModifySuccessSignal(position)
         dismiss()
     }
 
