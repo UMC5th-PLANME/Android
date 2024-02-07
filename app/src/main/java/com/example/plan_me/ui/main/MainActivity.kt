@@ -18,12 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
-import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
-import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.category.CategoryService
-import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.category.AllCategoryView
-import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment

@@ -13,14 +13,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
-import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
-import com.example.plan_me.ui.login.SendCategoryToPlannerFragment
-import com.example.plan_me.ui.main.MainActivity
 
 
 
