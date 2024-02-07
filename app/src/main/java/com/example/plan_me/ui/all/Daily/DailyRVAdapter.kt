@@ -2,14 +2,12 @@ package com.example.plan_me.ui.all.Daily
 
 import android.content.Context
 import android.graphics.PorterDuff
-import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.plan_me.R
 import com.example.plan_me.databinding.ItemScheduleBinding
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
