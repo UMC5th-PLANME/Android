@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="true">
+        <layer-list>
+            <item android:drawable="@drawable/radio_ico_oval_schedule"/>
+            <item android:drawable="@drawable/radio_ico_check_schedule"
+                android:width="9dp" android:height="6dp" android:gravity="center"/>
+        </layer-list>
+    </item>
+    <item android:state_checked="false" android:drawable="@drawable/radio_ico_oval_schedule"/>
+</selector>

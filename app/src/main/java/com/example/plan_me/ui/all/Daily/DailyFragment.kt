@@ -5,8 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.service.schedule.ScheduleService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
+import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
@@ -20,40 +30,24 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 //클릭 이벤트 및 ui수정 필요
-class DailyFragment : Fragment(), DialogDailyCalenderInterface {
+class DailyFragment : Fragment(),
+    DialogDailyCalenderInterface,
+    AllScheduleView,
+    AllCategoryView{
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
     private val currentWeek = LocalDate.now()
     private lateinit var dialogDailyCalenderFragment :DialogDailyCalenderFragment
+    private lateinit var categoryList : List<CategoryList>
+    private lateinit var scheduleList : List<ScheduleList>
+    val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
 
-    //예제 데이터
-   /* lateinit var study : category
-    lateinit var exercise : category
-
-    private  var cate : ArrayList<category> = ArrayList()
-
-    private val sche : ArrayList<schedule> = ArrayList()
-
-    private val s1 : schedule = schedule(0, false, "웹프 6-8강 복습", LocalDate.of(2024, 1, 23))
-    private val s2 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 29))
-    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))*/
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
-        //예제 데이터
-        /*study = category(0, "📄 STUDY", R.color.lemon)
-        exercise = category(1, "\uD83D\uDCAA Exercise", R.color.sky_blue)
-        cate.add(study)
-        cate.add(exercise)
-        sche.add(s1)
-        sche.add(s2)
-        sche.add(s3)*/
 
+        getCategoryList()
         initDayCalendar()
         clickListener()
-        //Recycler view
-        /*val dailyRVAdapter = DailyRVAdapter(cate, sche)
-        binding.dailyScheduleList.adapter = dailyRVAdapter
-        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)*/
 
         return binding.root
     }
@@ -108,8 +102,61 @@ class DailyFragment : Fragment(), DialogDailyCalenderInterface {
         }
     }
 
+    private fun getScheduleAll() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
+            AppCompatActivity.MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val scheduleService = ScheduleService()
+        scheduleService.setAllScheduleView(this)
+        scheduleService.getScheduleAllFun(access_token)
+    }
+
+    private fun getCategoryList() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
+            AppCompatActivity.MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val setCategoryService = CategoryService()
+        setCategoryService.setAllCategoryView(this)
+        setCategoryService.getCategoryAllFun(access_token!!)
+    }
+
+    private fun filteringSchedule() {
+        // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
+        for (schedule in scheduleList) {
+            val categoryId = schedule.category_id
+            if (!groupedSchedules.containsKey(categoryId)) {
+                groupedSchedules[categoryId] = mutableListOf()
+            }
+            groupedSchedules[categoryId]?.add(schedule)
+        }
+        Log.d("groupedSchedule", groupedSchedules.toString())
+    }
+
     override fun onClickCalender(date: LocalDate?) {
         binding.weekCalendarView.scrollToWeek(date!!)
         binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
     }
+
+    override fun onAllCategorySuccess(response: AllCategoryRes) {
+        categoryList = response.result.categoryList
+        getScheduleAll()
+    }
+
+    override fun onAllCategoryFailure(response: AllCategoryRes) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAllScheduleSuccess(response: AllScheduleRes) {
+        scheduleList = response.result.scheduleList
+        filteringSchedule()
+        val dailyRVAdapter = DailyRVAdapter(categoryList, groupedSchedules, requireContext())
+        binding.dailyScheduleList.adapter = dailyRVAdapter
+        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    }
+
+    override fun onAllScheduleFailure(response: AllScheduleRes) {
+        TODO("Not yet implemented")
+    }
+
+
 }
