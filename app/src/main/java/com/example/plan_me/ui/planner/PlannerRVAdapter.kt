@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemTodoBinding
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
-import java.time.LocalDate
 
 class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>() {
     inner class ViewHolder(val binding: ItemTodoBinding): RecyclerView.ViewHolder(binding.root) {

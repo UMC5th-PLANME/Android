@@ -95,6 +95,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.9.0"
     implementation "com.squareup.retrofit2:converter-scalars:2.9.0"
+    implementation "com.google.code.gson:gson:2.9.0"
 
 
     // Glide
@@ -121,10 +122,10 @@ dependencies {
 
     //floating button
     implementation 'com.google.android.material:material:1.4.0'
-    
+
     // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
-    
+
     // Circle indicator
     implementation 'me.relex:circleindicator:2.1.6'
 

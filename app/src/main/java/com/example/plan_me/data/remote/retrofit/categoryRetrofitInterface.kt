@@ -8,13 +8,7 @@ import com.example.plan_me.data.remote.dto.category.ModifyCategoryRes
 import com.example.plan_me.data.remote.dto.category.ModifyStatusCategoryRes
 import com.example.plan_me.data.remote.dto.category.OneCategoryRes
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.PATCH
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface categoryRetrofitInterface {
     @POST("/api/category")

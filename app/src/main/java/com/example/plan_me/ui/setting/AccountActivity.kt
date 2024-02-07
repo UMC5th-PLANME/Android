@@ -3,23 +3,25 @@ package com.example.plan_me.ui.setting
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
-import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
@@ -33,11 +35,6 @@ import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.ui.dialog.DialogDeleteActivity
 import com.example.plan_me.ui.dialog.DialogLogoutActivity
 import com.example.plan_me.ui.login.InitProfileActivity
-import com.example.plan_me.ui.login.LoginActivity
-import com.example.plan_me.utils.ImageUtils
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -50,6 +47,8 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private var userImg: String? = DEFAULT_IMG
     private var social: String? = ""
     private var accessToken: String? = ""
+    private lateinit var imageResult: ActivityResultLauncher<Intent>
+    private var newImgUrl: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +60,34 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         setLookUpService()
 
         updateUI()
+
+        imageResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){ result ->
+            Log.d("result", result.toString())
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageUrl = result.data?.data ?: return@registerForActivityResult
+
+                // 이미지를 선택한 경우, 이미지뷰에 설정
+                binding.accountImageIv.setImageURI(imageUrl)
+                Picasso.get().load(imageUrl).transform(CircleTransform()).into(binding.accountImageIv)
+
+                val file = File(absolutelyPath(imageUrl, this@AccountActivity))
+                val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+                val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+                binding.accountImageIv.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                    // 이미지 변경 감지 시 처리할 로직을 여기에 작성
+                    // 예를 들어, 이미지 변경 후에 어떤 작업을 수행할 수 있습니다.
+                    // 변경된 이미지 정보를 사용하여 추가적인 작업을 수행할 수 있습니다.
+                    Log.d("test-image", file.name)
+                    setImageService(body)
+                }
+
+                Log.d("imageUrl", imageUrl.toString())
+                binding.accountImageIv.setImageURI(imageUrl)
+            }
+        }
 
         binding.accountBackBtn.setOnClickListener {
             finish()
@@ -110,6 +137,18 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         finish()
     }
 
+    // 절대경로 변환
+    private fun absolutelyPath(path: Uri?, context : Context): String {
+        var proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        var c: Cursor? = context.contentResolver.query(path!!, proj, null, null, null)
+        var index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c?.moveToFirst()
+
+        var result = c?.getString(index!!)
+
+        return result!!
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkPermission(): Boolean {
         Log.d("checkPermission", "check")
@@ -146,20 +185,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, InitProfileActivity.REQUEST_IMAGE_PICK)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == InitProfileActivity.REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-            // 이미지를 선택한 경우, 이미지뷰에 설정
-            val selectedImageUri = data?.data
-            binding.accountImageIv.setImageURI(selectedImageUri)
-            Picasso.get().load(selectedImageUri).transform(CircleTransform()).into(binding.accountImageIv)
-
-            setEditImg()
-        }
+        imageResult.launch(intent)
     }
 
     private fun getData2() {
@@ -167,36 +193,19 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         accessToken = sharedPreferences.getString("getAccessToken", accessToken)
     }
 
-    private fun setEditImg() {
-        val drawable = binding.accountImageIv.drawable
-        if (drawable is BitmapDrawable) {
-            val bitmap: Bitmap = drawable.bitmap
-
-            // 추출한 비트맵을 파일로 변환
-            val imageFile = ImageUtils.bitmapToFile(this, bitmap)
-
-            // 파일을 MultipartBody.Part로 변환
-            val imagePart = createImagePart(imageFile)
-
-            // setImageService 호출
-            val setImageService = ImageService()
-            setImageService.setImageView(this@AccountActivity)
-            setImageService.setProfileImg(accessToken!!, imagePart)
-        } else {
-            // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
-            Log.e("Image Conversion", "Drawable is not a BitmapDrawable")
-        }
-
-        val setChangeImgService = MemberService()
-        setChangeImgService.setChangeProfileView(this@AccountActivity)
-        val member = EditProfile(userName!!, userImg!!)
-        setChangeImgService.setChangeProfile(accessToken!!, member)
+    private fun setImageService(image: MultipartBody.Part) {
+        val setImageService = ImageService()
+        setImageService.setImageView(this@AccountActivity)
+        setImageService.setProfileImg("Bearer " + accessToken, image)
     }
 
-    // 이미지 파일을 MultipartBody.Part로 변환하는 함수
-    private fun createImagePart(file: File): MultipartBody.Part {
-        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-        return MultipartBody.Part.createFormData("image", file.name, requestFile)
+    private fun setEditProfileService() {
+        val setEditProfileService = MemberService()
+        setEditProfileService.setChangeProfileView(this@AccountActivity)
+
+        Log.d("revise-image", "이미지 변경 O")
+        val member = EditProfile(userName!!, newImgUrl!!)
+        setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
     }
 
     private fun setLookUpService() {
@@ -208,8 +217,13 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private fun updateUI() {
         binding.accountNameTv.text = userName
         if (userImg != DEFAULT_IMG && userImg != "null") {
-            Picasso.get().load(userImg).transform(CircleTransform())
-                .into(binding.accountImageIv)
+            if (newImgUrl == "") {
+                Picasso.get().load(userImg).transform(CircleTransform())
+                    .into(binding.accountImageIv)
+            } else {
+                Picasso.get().load(newImgUrl).transform(CircleTransform())
+                    .into(binding.accountImageIv)
+            }
         }
         binding.accountSocialTypeTv.text = social
     }
@@ -224,6 +238,8 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
     override fun onSetImgSuccess(response: ProfileImageRes) {
         Log.d("이미지 등록", response.result.toString())
+        newImgUrl = response.result.imageUrl
+        setEditProfileService()
     }
 
     override fun onSetImgFailure(isSuccess: Boolean, code: String, message: String) {
