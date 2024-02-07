@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.add
 
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -27,6 +28,7 @@ import com.example.plan_me.ui.dialog.DialogTimePickFragment
 import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
+import com.example.plan_me.ui.main.MainActivity
 import java.time.LocalDate
 
 class ScheduleAddActivity():
@@ -183,11 +185,16 @@ class ScheduleAddActivity():
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         val customToast = CustomToast
         customToast.createToast(this,"일정이 생성되었습니다.", 300)
+        /*val intent = Intent (this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)*/
         finish()
     }
+
 
     override fun onAddScheduleFailure(response: AddScheduleRes) {
         TODO("Not yet implemented")
     }
+
 
 }

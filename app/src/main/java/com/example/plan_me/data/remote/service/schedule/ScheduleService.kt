@@ -83,7 +83,7 @@ class ScheduleService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> allScheduleView.onAllScheduleSuccess(resp)
+                    "SCHEDULE2002" -> allScheduleView.onAllScheduleSuccess(resp)
                     else -> allScheduleView.onAllScheduleFailure(resp)
                 }
             }
