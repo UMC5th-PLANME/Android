@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
-import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 
 class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private val sendClickCategory: SendClickCategory): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
 
