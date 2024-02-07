@@ -289,8 +289,4 @@ class MainActivity :
             initActivity()
         }
     }
-
-
-
-
 }

@@ -7,7 +7,6 @@ import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
-import com.example.plan_me.data.remote.dto.auth.TermsRes
 import com.example.plan_me.data.remote.retrofit.AuthRetrofitInterface
 import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.DeleteMemberView

@@ -19,8 +19,6 @@ import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
 
-
-
 class PlannerFragment : Fragment() ,
     AllScheduleView{
     private lateinit var binding: FragmentPlannerBinding

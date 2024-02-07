@@ -7,7 +7,6 @@ import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.ProfileImageRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
-import com.example.plan_me.data.remote.dto.auth.TermsRes
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -21,7 +20,7 @@ interface AuthRetrofitInterface {
     // 프로필 이미지 등록
     @Multipart // form-data 사용
     @POST("/api/image")
-    fun postImage(@Header("accessToken") accessToken: String, @Part image: MultipartBody.Part): Call<ProfileImageRes>
+    fun postImage(@Header("Authorization") Authorization: String, @Part image: MultipartBody.Part): Call<ProfileImageRes>
 
     // 프로필 변경
     @PATCH("/api/member")
