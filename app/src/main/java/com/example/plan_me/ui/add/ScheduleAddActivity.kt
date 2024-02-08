@@ -167,8 +167,8 @@ class ScheduleAddActivity():
             if (st.toInt() < et.toInt()) return true
             else return false
         }
-        else if (startTime.substring(0 ,2) == "AM" && endTime.substring(0 ,2) == "PM") return true
-        else if (startTime.substring(0 ,2) == "PM" && endTime.substring(0 , 2) == "AM") return false
+        else if (startTime.substring(0 ,2) == "오전" && endTime.substring(0 ,2) == "오후") return true
+        else if (startTime.substring(0 ,2) == "오후" && endTime.substring(0 , 2) == "오전") return false
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
@@ -181,7 +181,8 @@ class ScheduleAddActivity():
             dialogTimeRangePick.dismiss()
         }
         else {
-            Toast.makeText(this, "inVaild range", Toast.LENGTH_SHORT).show()
+            val customToast = CustomToast
+            customToast.createToast(this,"올바른 시간을 설정해주세요", 500, false)
         }
     }
 

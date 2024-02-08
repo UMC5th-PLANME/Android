@@ -58,7 +58,8 @@ class DailyFragment : Fragment(),
 
     override fun onResume() {
         super.onResume()
-        getScheduleAll()
+        Log.d("Daily Resume", "resume")
+        getCategoryList()
     }
 
     private fun clickListener() {
@@ -196,7 +197,6 @@ class DailyFragment : Fragment(),
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         scheduleList = response.result.scheduleList
-
         filteringSchedule()
         initRV()
     }

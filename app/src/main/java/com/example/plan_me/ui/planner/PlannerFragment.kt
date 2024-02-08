@@ -36,8 +36,10 @@ class PlannerFragment : Fragment() ,
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onResume() {
         super.onResume()
+        Log.d("Resume", "resume")
         getScheduleAll()
     }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -70,6 +72,7 @@ class PlannerFragment : Fragment() ,
 
     private fun filteringSchedule() {
         // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
+        groupedSchedules.clear()
         for (schedule in schedules) {
             val categoryId = schedule.category_id
             if (!groupedSchedules.containsKey(categoryId)) {

@@ -14,7 +14,7 @@ object CustomToast {
         val binding: ToastLayoutBinding = ToastLayoutBinding.inflate(inflater)
 
         binding.toastMessageTv.text = message
-        if(isOK) binding.toastImg.setImageResource(R.drawable.toast_confrim)
+        if(isOK) binding.toastImg.setImageResource(R.drawable.toast_confirm)
         else binding.toastImg.setImageResource(R.drawable.toast_error)
 
         Toast(context).apply {
