@@ -184,13 +184,14 @@ class ScheduleAddActivity():
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         val customToast = CustomToast
-        customToast.createToast(this,"일정이 생성되었습니다.", 300)
+        customToast.createToast(this,"일정이 생성되었습니다", 300, true)
         finish()
     }
 
 
     override fun onAddScheduleFailure(response: AddScheduleRes) {
-        TODO("Not yet implemented")
+        val customToast = CustomToast
+        customToast.createToast(this,"일정이 생성에 실패했습니다", 300, false)
     }
 
 
