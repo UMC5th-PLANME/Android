@@ -26,10 +26,10 @@ import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
+import kotlinx.coroutines.selects.select
 import java.time.LocalDate
 import java.time.YearMonth
 
-//클릭 이벤트 및 ui수정 필요
 class DailyFragment : Fragment(),
     DialogDailyCalenderInterface,
     AllScheduleView,
@@ -42,8 +42,12 @@ class DailyFragment : Fragment(),
     private lateinit var scheduleList : List<ScheduleList>
     val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
 
+    private lateinit var selectDate: LocalDate
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
+        selectDate = currentWeek
+
 
         getCategoryList()
         initDayCalendar()
@@ -56,6 +60,11 @@ class DailyFragment : Fragment(),
         binding.dailyToday.setOnClickListener {
             binding.weekCalendarView.smoothScrollToWeek(currentWeek)
             binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
+            selectDate = currentWeek
+
+            binding.weekCalendarView.notifyCalendarChanged()
+            filteringSchedule()
+            initRV()
         }
         binding.dailyDialogCalendar.setOnClickListener {
             dialogDailyCalenderFragment = DialogDailyCalenderFragment(requireContext(), this)
@@ -66,6 +75,21 @@ class DailyFragment : Fragment(),
         binding.weekCalendarView.dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
             override fun bind(container: WeekDayViewContainer, data: WeekDay) {
                 Log.d("data", data.date.toString())
+                if (selectDate == data.date) {
+                    container.day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
+                }else {
+                    container.day.weekDayLayout.setBackgroundResource(R.color.transparent)
+                }
+
+                container.day.weekDayLayout.setOnClickListener {
+                    selectDate = data.date
+                    Log.d("selected", selectDate.toString())
+                    container.day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
+                    binding.weekCalendarView.notifyCalendarChanged()
+
+                    filteringSchedule()
+                    initRV()
+                }
                 container.day.weekCalendarDayText.text = data.date.dayOfMonth.toString()
                 container.day.weekCalendarDay.text = data.date.dayOfWeek.toString().substring(0,3)
             }
@@ -87,19 +111,6 @@ class DailyFragment : Fragment(),
     }
     inner class WeekDayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarWeekDayLayoutBinding.bind(view)
-        var isSelcted = false
-        init {
-            view.setOnClickListener {
-                if (isSelcted) {
-                    day.weekDayLayout.setBackgroundResource(R.color.transparent)
-                    isSelcted = false
-                }
-                else {
-                    day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
-                    isSelcted = true
-                }
-            }
-        }
     }
 
     private fun getScheduleAll() {
@@ -122,19 +133,51 @@ class DailyFragment : Fragment(),
 
     private fun filteringSchedule() {
         // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
+        // 날짜까지 확인
+        groupedSchedules.clear()
         for (schedule in scheduleList) {
             val categoryId = schedule.category_id
-            if (!groupedSchedules.containsKey(categoryId)) {
-                groupedSchedules[categoryId] = mutableListOf()
+            val startDate = LocalDate.parse(schedule.startDate)
+            val endDate = LocalDate.parse(schedule.endDate)
+
+            if (selectDate.isEqual(startDate) || selectDate.isEqual(endDate) ||
+                (selectDate.isAfter(startDate) && selectDate.isBefore(endDate))) {
+                if (!groupedSchedules.containsKey(categoryId)) {
+                    groupedSchedules[categoryId] = mutableListOf()
+                }
+                groupedSchedules[categoryId]?.add(schedule)
             }
-            groupedSchedules[categoryId]?.add(schedule)
         }
         Log.d("groupedSchedule", groupedSchedules.toString())
+    }
+
+    private fun filteringCategory(): List<CategoryList> {
+        val filteringCategory = mutableListOf<CategoryList>()
+
+        for ((categoryId, _) in groupedSchedules) {
+            val category = categoryList.find { it.categoryId == categoryId }
+            category?.let {
+                filteringCategory.add(it)
+            }
+        }
+
+        return filteringCategory
+    }
+
+    private fun initRV() {
+        val dailyRVAdapter = DailyRVAdapter(filteringCategory(), groupedSchedules, requireContext())
+        binding.dailyScheduleList.adapter = dailyRVAdapter
+        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onClickCalender(date: LocalDate?) {
         binding.weekCalendarView.scrollToWeek(date!!)
         binding.dailyDate.text = currentWeek.year.toString()+"."+currentWeek.monthValue+"월"
+        selectDate = date
+
+        binding.weekCalendarView.notifyCalendarChanged()
+        filteringSchedule()
+        initRV()
     }
 
     override fun onAllCategorySuccess(response: AllCategoryRes) {
@@ -148,10 +191,9 @@ class DailyFragment : Fragment(),
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         scheduleList = response.result.scheduleList
+
         filteringSchedule()
-        val dailyRVAdapter = DailyRVAdapter(categoryList, groupedSchedules, requireContext())
-        binding.dailyScheduleList.adapter = dailyRVAdapter
-        binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        initRV()
     }
 
     override fun onAllScheduleFailure(response: AllScheduleRes) {

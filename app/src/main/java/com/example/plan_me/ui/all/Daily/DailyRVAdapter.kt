@@ -2,6 +2,7 @@ package com.example.plan_me.ui.all.Daily
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,24 +20,25 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (!scheduleMap[categoryList[position].categoryId].isNullOrEmpty()) {
+        if (!scheduleMap.isNullOrEmpty()) {
             holder.bind(categoryList[position], scheduleMap)
         }
     }
 
-    override fun getItemCount(): Int = scheduleMap.size
+    override fun getItemCount(): Int = categoryList.size
+
     inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoryList, scheduleMap: MutableMap<Int, MutableList<ScheduleList>>) {
-            binding.itemScheduleTv.text = category.emoticon + " " + category.name
-            binding.itemScheduleDetail.text = "0 completed • 5 not yet"  //수정해야함
-            val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
-            binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
-
             if (!scheduleMap[category.categoryId].isNullOrEmpty()) {
-                val dailyRVAdapter = DailyScheduleRVAdapter(scheduleMap[category.categoryId])
-                binding.itemScheduleRv.adapter = dailyRVAdapter
-                binding.itemScheduleRv.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.itemScheduleTv.text = category.emoticon + " " + category.name
+                binding.itemScheduleDetail.text = "0 completed • 5 not yet"  //수정해야함
+                val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
+                binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+                    val dailyRVAdapter = DailyScheduleRVAdapter(scheduleMap[category.categoryId])
+                    binding.itemScheduleRv.adapter = dailyRVAdapter
+                    binding.itemScheduleRv.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             }
 
             binding.itemScheduleMore.setOnClickListener {

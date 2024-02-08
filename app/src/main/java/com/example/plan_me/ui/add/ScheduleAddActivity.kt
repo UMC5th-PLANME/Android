@@ -171,7 +171,7 @@ class ScheduleAddActivity():
         else {
             binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일 - "+ end!!.monthValue.toString() +"월 " + end!!.dayOfMonth+"일"
             this.startDate = start!!
-            this.endDate = start!!
+            this.endDate = end!!
         }
         dialogCalender.dismiss()
     }
