@@ -56,6 +56,11 @@ class DailyFragment : Fragment(),
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getScheduleAll()
+    }
+
     private fun clickListener() {
         binding.dailyToday.setOnClickListener {
             binding.weekCalendarView.smoothScrollToWeek(currentWeek)

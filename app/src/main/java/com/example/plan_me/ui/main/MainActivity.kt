@@ -90,7 +90,9 @@ class MainActivity :
         super.onResume()
         if (isAdd) {
             isAdd = false
-            startFragment(currentCategory)
+            if (isHome) {  //calendar
+                startFragment(currentCategory)
+            }
         }
     }
 

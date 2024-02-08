@@ -165,6 +165,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
             dismiss()
         }
         binding.dialogCalenderConfirm.setOnClickListener {
+            if (selectedEndDate == null) selectedEndDate = selectedStartDate
             dialogCalenderInterface!!.onClickCalenderConfirm(selectedStartDate, selectedEndDate)
         }
     }
@@ -183,7 +184,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
         } else {
             // 다시 시작 날짜부터 선택한 경우
             selectedStartDate = date
-            selectedEndDate = null
+            selectedEndDate = date
             rangeRe=true
             binding.dialogCalenderCalendarView.notifyCalendarChanged()
         }

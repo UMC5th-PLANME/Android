@@ -35,6 +35,11 @@ class PlannerFragment : Fragment() ,
         return binding.root
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        getScheduleAll()
+    }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
         if (arguments != null) {
