@@ -1,40 +1,59 @@
 package com.example.plan_me.ui.all.Daily
 
+import android.content.Context
+import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemScheduleBinding
-import com.example.plan_me.data.local.entity.category
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 
-class DailyRVAdapter(private val categoryList : ArrayList<category>) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
+class DailyRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableMap<Int, MutableList<ScheduleList>>, private val context: Context) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleBinding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(categoryList[position])
+        if (!scheduleMap.isNullOrEmpty()) {
+            holder.bind(categoryList[position], scheduleMap)
+        }
     }
 
     override fun getItemCount(): Int = categoryList.size
-    inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
-        fun bind(category: category) {
-            binding.itemScheduleTv.text = category.name
-            binding.itemScheduleDetail.text = "!!!"
 
-            binding.itemScheduleFlip.setOnClickListener {
+    inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
+        fun bind(category: CategoryList, scheduleMap: MutableMap<Int, MutableList<ScheduleList>>) {
+            if (!scheduleMap[category.categoryId].isNullOrEmpty()) {
+                binding.itemScheduleTv.text = category.emoticon + " " + category.name
+                binding.itemScheduleDetail.text = "0 completed • 5 not yet"  //수정해야함
+                val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
+                binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
+
+                    val dailyRVAdapter = DailyScheduleRVAdapter(scheduleMap[category.categoryId])
+                    binding.itemScheduleRv.adapter = dailyRVAdapter
+                    binding.itemScheduleRv.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            }
+
+            binding.itemScheduleMore.setOnClickListener {
                 binding.itemScheduleRv.visibility = View.VISIBLE
-                binding.itemScheduleMore.visibility = View.VISIBLE
-                binding.itemScheduleFlip.visibility = View.GONE
+                binding.itemScheduleFlip.visibility = View.VISIBLE
+                binding.itemScheduleMore.visibility = View.GONE
                 binding.itemScheduleDetail.visibility = View.GONE
             }
-                binding.itemScheduleMore.setOnClickListener {
-                    binding.itemScheduleRv.visibility = View.GONE
-                    binding.itemScheduleMore.visibility = View.GONE
-                    binding.itemScheduleFlip.visibility = View.VISIBLE
-                    binding.itemScheduleDetail.visibility = View.VISIBLE
-                }
+            binding.itemScheduleFlip.setOnClickListener {
+                binding.itemScheduleRv.visibility = View.GONE
+                binding.itemScheduleFlip.visibility = View.GONE
+                binding.itemScheduleMore.visibility = View.VISIBLE
+                binding.itemScheduleDetail.visibility = View.VISIBLE
+            }
+
         }
     }
 }

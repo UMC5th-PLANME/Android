@@ -219,6 +219,10 @@ class MainActivity :
             binding.mainFabTimerBtn.startAnimation(fab_close)
             binding.mainFabSettingBtn.startAnimation(fab_close)
             binding.mainFabAddBtn.startAnimation(fab_close)
+            binding.mainFabMestoryBtn.isClickable = false
+            binding.mainFabTimerBtn.isClickable = false
+            binding.mainFabSettingBtn.isClickable = false
+            binding.mainFabAddBtn.isClickable = false
             false
         } else {
             binding.mainFabMestoryBtn.startAnimation(fab_open)
