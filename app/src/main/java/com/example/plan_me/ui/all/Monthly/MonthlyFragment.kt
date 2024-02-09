@@ -7,9 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.service.schedule.ScheduleService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
+import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentMonthlyBinding
 import com.example.plan_me.ui.dialog.DialogCalendarBtmFragment
@@ -32,7 +41,10 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 //새로운 클릭 리스너 구현해야함
-class MonthlyFragment: Fragment() , DialogYMPickInerface{
+class MonthlyFragment: Fragment(),
+    DialogYMPickInerface,
+    AllScheduleView,
+    AllCategoryView{
     private lateinit var binding: FragmentMonthlyBinding
     private lateinit var dialogYMFragment: DialogYMFragment
 
@@ -43,33 +55,20 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
     private lateinit var endMonth :YearMonth
     private lateinit var firstDayOfWeek :DayOfWeek
 
-    //예제 데이터
-   /* lateinit var study : category
-    lateinit var exercise : category
 
-    private  var cate : ArrayList<category> = ArrayList()
-
-    private val sche : ArrayList<schedule> = ArrayList()
-
-    private val s1 : schedule = schedule(0, false, "웹프 6-8강 복습", LocalDate.of(2024, 1, 23))
-    private val s2 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 29))
-    private val s3 : schedule = schedule(1, false, "축구하기", LocalDate.of(2024, 1, 23))*/
+    private lateinit var categoryList : List<CategoryList>
+    private lateinit var scheduleList : List<ScheduleList>
+    val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentMonthlyBinding.inflate(layoutInflater)
-        /*study = category(0, "📄STUDY", R.color.lemon)
-        exercise = category(1, "Exercise", R.color.sky_blue)
-        cate.add(study)
-        cate.add(exercise)
-        sche.add(s1)
-        sche.add(s2)
-        sche.add(s3)*/
 
+        getCategoryList()
         clickListener()
-        initCalendar()
 
         return binding.root
     }
+
 
     private fun initCalendar() {
         startMonth = currentMonth.minusMonths(100)  // Adjust as needed
@@ -92,44 +91,47 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
                     container.canClick = false
                 }
 
-                /*val matchingSchedules = sche.filter { it.date == data.date }
-                val categoryCounts: Map<Int, Int> = matchingSchedules.groupingBy { it.category }
-                    .eachCount()
-                Log.d("count", matchingSchedules.isNotEmpty().toString())
-                if(matchingSchedules.isNotEmpty() == true) {
-                    val colors : ArrayList<Int> = ArrayList()
-                    for (categoryIdx in categoryCounts.keys) {
-                        colors.add(cate.find{it.idx == categoryIdx}!!.color)
+                filteringSchedule(data.date)
+                val categoryList = filteringCategory()
+
+                container.day.monthyDayLayout.setOnClickListener {
+                    if (container.canClick) {
+                        filteringSchedule(data.date)
+                        val btmSheet = DialogCalendarBtmFragment(categoryList, groupedSchedules, requireContext())
+                        btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
-                    Log.d("colors", colors.toString())
-                    if(categoryCounts.size == 1) {
-                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
-                    }else if (categoryCounts.size == 2) {
-                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
-                        container.day.calendarDayIndicator2.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
+                }
 
-                    }else if (categoryCounts.size == 3) {
+                if(groupedSchedules.isNotEmpty() && categoryList.isNotEmpty()) {
+                    if (groupedSchedules.size == 1) {
                         container.day.calendarDayIndicator1.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                        container.day.calendarDayIndicator1.setBackgroundResource(categoryList[0].color)
+                    } else if (groupedSchedules.size == 2) {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(categoryList[0].color)
                         container.day.calendarDayIndicator2.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
-                        container.day.calendarDayIndicator3.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator3.setBackgroundResource(colors[2])
+                        container.day.calendarDayIndicator2.setBackgroundResource(categoryList[1].color)
 
-                    }else {
+                    } else if (groupedSchedules.size == 3) {
                         container.day.calendarDayIndicator1.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator1.setBackgroundResource(colors[0])
+                        container.day.calendarDayIndicator1.setBackgroundResource(categoryList[0].color)
                         container.day.calendarDayIndicator2.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator2.setBackgroundResource(colors[1])
+                        container.day.calendarDayIndicator2.setBackgroundResource(categoryList[1].color)
                         container.day.calendarDayIndicator3.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator3.setBackgroundResource(colors[2])
+                        container.day.calendarDayIndicator3.setBackgroundResource(categoryList[2].color)
+
+                    } else {
+                        container.day.calendarDayIndicator1.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator1.setBackgroundResource(categoryList[0].color)
+                        container.day.calendarDayIndicator2.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator2.setBackgroundResource(categoryList[1].color)
+                        container.day.calendarDayIndicator3.visibility = View.VISIBLE
+                        container.day.calendarDayIndicator3.setBackgroundResource(categoryList[2].color)
                         container.day.calendarDayIndicator4.visibility = View.VISIBLE
-                        container.day.calendarDayIndicator4.setBackgroundResource(colors[3])
+                        container.day.calendarDayIndicator4.setBackgroundResource(categoryList[3].color)
 
-                    }*/
+                    }
+                }
             }
             override fun create(view: View): DayViewContainer {
                 Log.d("pageMonth", pageMonth.toString())
@@ -176,6 +178,11 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        getCategoryList()
+    }
     private fun clickListener() {
         binding.monthlyCalendarView.monthScrollListener = { calendarMonth ->
             val pageMonth = calendarMonth.yearMonth
@@ -206,21 +213,26 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
     }
     inner class DayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarDayLayoutBinding.bind(view)
-        var isSelected : Boolean = false
-        private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
-        init {
-            view.setOnClickListener {
-                if (canClick) {
-                        val text = day.calendarDayText.text.toString()
-                        val day = text.toInt()
-                        selectedDate = pageMonth.atDay(day)
-                        val btmSheet = DialogCalendarBtmFragment()
-                        btmSheet.show(parentFragmentManager, btmSheet.tag)
-                    }
-                }
-            }
         }
+
+    private fun getScheduleAll() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
+            AppCompatActivity.MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val scheduleService = ScheduleService()
+        scheduleService.setAllScheduleView(this)
+        scheduleService.getScheduleAllFun(access_token)
+    }
+
+    private fun getCategoryList() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
+            AppCompatActivity.MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val setCategoryService = CategoryService()
+        setCategoryService.setAllCategoryView(this)
+        setCategoryService.getCategoryAllFun(access_token!!)
+    }
 
     override fun onClickConfirm(year: String?, month: String?) {
         val monthDigitsOnly = month!!.replace("\\D".toRegex(), "").toInt()
@@ -230,5 +242,55 @@ class MonthlyFragment: Fragment() , DialogYMPickInerface{
         binding.monthlyCalendarView.scrollToMonth(pageMonth)
         binding.monthlyDate.text = yearDigitsOnly.toString() + "." + month.toString()+"월"
         dialogYMFragment.dismiss()
+    }
+
+
+    private fun filteringSchedule(currentDate:LocalDate) {
+        groupedSchedules.clear()
+        for (schedule in scheduleList) {
+            val categoryId = schedule.category_id
+            val startDate = LocalDate.parse(schedule.startDate)
+            val endDate = LocalDate.parse(schedule.endDate)
+
+            if (currentDate.isEqual(startDate) || currentDate.isEqual(endDate) ||
+                (currentDate.isAfter(startDate) && currentDate.isBefore(endDate))) {
+                if (!groupedSchedules.containsKey(categoryId)) {
+                    groupedSchedules[categoryId] = mutableListOf()
+                }
+                groupedSchedules[categoryId]?.add(schedule)
+            }
+        }
+        Log.d("group", groupedSchedules.toString())
+    }
+
+    private fun filteringCategory(): List<CategoryList> {
+        val filteringCategory = mutableListOf<CategoryList>()
+
+        for ((categoryId, _) in groupedSchedules) {
+            val category = categoryList.find { it.categoryId == categoryId }
+            category?.let {
+                filteringCategory.add(it)
+            }
+        }
+
+        return filteringCategory
+    }
+
+    override fun onAllCategorySuccess(response: AllCategoryRes) {
+        categoryList = response.result.categoryList
+        getScheduleAll()
+    }
+
+    override fun onAllCategoryFailure(response: AllCategoryRes) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAllScheduleSuccess(response: AllScheduleRes) {
+        scheduleList = response.result.scheduleList
+        initCalendar()
+    }
+
+    override fun onAllScheduleFailure(response: AllScheduleRes) {
+        TODO("Not yet implemented")
     }
 }

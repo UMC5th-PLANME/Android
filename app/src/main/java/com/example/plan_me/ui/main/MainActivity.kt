@@ -90,7 +90,6 @@ class MainActivity :
         super.onResume()
         if (isAdd) {
             isAdd = false
-            startFragment(currentCategory)
         }
     }
 
@@ -193,9 +192,7 @@ class MainActivity :
                 binding.mainAllBtn.setTextColor(Color.WHITE)
                 isHome=false
             }else {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, PlannerFragment())
-                    .commitAllowingStateLoss()
+                startFragment(currentCategory)
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
                 binding.mainAllBtn.text = "ALL"
                 binding.mainAllBtn.setTextColor(Color.BLACK)

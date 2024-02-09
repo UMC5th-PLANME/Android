@@ -56,6 +56,12 @@ class DailyFragment : Fragment(),
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("Daily Resume", "resume")
+        getCategoryList()
+    }
+
     private fun clickListener() {
         binding.dailyToday.setOnClickListener {
             binding.weekCalendarView.smoothScrollToWeek(currentWeek)
@@ -191,7 +197,6 @@ class DailyFragment : Fragment(),
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         scheduleList = response.result.scheduleList
-
         filteringSchedule()
         initRV()
     }

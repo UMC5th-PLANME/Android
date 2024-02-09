@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.databinding.ItemScheduleListBinding
 
-class DailyScheduleRVAdapter(private val scheduleMap: MutableList<ScheduleList>?) : RecyclerView.Adapter<DailyScheduleRVAdapter.ViewHolder>(){
+class ScheduleRVAdapter(private val scheduleMap: MutableList<ScheduleList>?) : RecyclerView.Adapter<ScheduleRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleListBinding = ItemScheduleListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)

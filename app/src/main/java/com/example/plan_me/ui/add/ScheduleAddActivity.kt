@@ -107,15 +107,41 @@ class ScheduleAddActivity():
             dialogDetail.show()
         }
         binding.scheduleEditCompleteBtn.setOnClickListener {
+
+            val customToast = CustomToast
             val name = binding.scheduleNameEt.text.toString()
             val alarm = binding.scheduleAlarmTimeTv.text.toString()
-            val scheduleInput = Schedule_input(true, currentCategory.categoryId, "NONE",name, startTime.substring(3), endTime.substring(3), true,alarm.substring(3), startDate.toString(), endDate.toString())
+            if (name == "") {
+                customToast.createToast(this,"일정 제목을 입력해주세요", 300, false)
+            } else if (startTime.isEmpty()) {
+                customToast.createToast(this,"날짜를 설정해주세요", 300, false)
+            } else if (startTime.isEmpty()) {
+                customToast.createToast(this,"시간을 설정해주세요", 300, false)
+            } else if (alarm == "") {
+                customToast.createToast(this,"알람 시간을 설정해주세요", 300, false)
+            }else {
+                val scheduleInput = Schedule_input(
+                    true,
+                    currentCategory.categoryId,
+                    "NONE",
+                    name,
+                    startTime.substring(3),
+                    endTime.substring(3),
+                    true,
+                    alarm.substring(3),
+                    startDate.toString(),
+                    endDate.toString()
+                )
 
-            Log.d("schedule", scheduleInput.toString())
-            val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
-            val setScheduleService = ScheduleService()
-            setScheduleService.setAddScheduleView(this)
-            setScheduleService.addScheduleFun(access_token!!, scheduleInput)
+                Log.d("schedule", scheduleInput.toString())
+                val access_token = "Bearer " + getSharedPreferences(
+                    "getRes",
+                    MODE_PRIVATE
+                ).getString("getAccessToken", "")
+                val setScheduleService = ScheduleService()
+                setScheduleService.setAddScheduleView(this)
+                setScheduleService.addScheduleFun(access_token!!, scheduleInput)
+            }
         }
     }
     override fun onClickConfirm(time:String) {
@@ -141,8 +167,8 @@ class ScheduleAddActivity():
             if (st.toInt() < et.toInt()) return true
             else return false
         }
-        else if (startTime.substring(0 ,2) == "AM" && endTime.substring(0 ,2) == "PM") return true
-        else if (startTime.substring(0 ,2) == "PM" && endTime.substring(0 , 2) == "AM") return false
+        else if (startTime.substring(0 ,2) == "오전" && endTime.substring(0 ,2) == "오후") return true
+        else if (startTime.substring(0 ,2) == "오후" && endTime.substring(0 , 2) == "오전") return false
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
@@ -155,7 +181,8 @@ class ScheduleAddActivity():
             dialogTimeRangePick.dismiss()
         }
         else {
-            Toast.makeText(this, "inVaild range", Toast.LENGTH_SHORT).show()
+            val customToast = CustomToast
+            customToast.createToast(this,"올바른 시간을 설정해주세요", 500, false)
         }
     }
 
@@ -164,9 +191,10 @@ class ScheduleAddActivity():
     }
 
     override fun onClickCalenderConfirm(start : LocalDate?, end: LocalDate?) {
-        if (end == null) {
+        if (end == start) {
             binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일"
             this.startDate = start!!
+            this.endDate = end!!
         }
         else {
             binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일 - "+ end!!.monthValue.toString() +"월 " + end!!.dayOfMonth+"일"
@@ -184,13 +212,14 @@ class ScheduleAddActivity():
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         val customToast = CustomToast
-        customToast.createToast(this,"일정이 생성되었습니다.", 300)
+        customToast.createToast(this,"일정이 생성되었습니다", 300, true)
         finish()
     }
 
 
     override fun onAddScheduleFailure(response: AddScheduleRes) {
-        TODO("Not yet implemented")
+        val customToast = CustomToast
+        customToast.createToast(this,"일정이 생성에 실패했습니다", 300, false)
     }
 
 
