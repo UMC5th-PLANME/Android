@@ -32,6 +32,7 @@ import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
 import com.example.plan_me.databinding.ActivityAccountBinding
 import com.example.plan_me.ui.CircleTransform
+import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogDeleteActivity
 import com.example.plan_me.ui.dialog.DialogLogoutActivity
 import com.example.plan_me.ui.login.InitProfileActivity
@@ -43,6 +44,7 @@ import java.io.File
 
 class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView, LookUpMemberView {
     private lateinit var binding: ActivityAccountBinding
+    private var customToast = CustomToast
     private var userName: String? = ""
     private var userImg: String? = DEFAULT_IMG
     private var social: String? = ""
@@ -177,7 +179,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
                 openImagePicker()
             } else {
                 // 권한이 거부된 경우
-                Toast.makeText(this@AccountActivity, "사진 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+                customToast.createToast(this@AccountActivity,"사진 권한이 거부되었습니다.", 300, false)
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

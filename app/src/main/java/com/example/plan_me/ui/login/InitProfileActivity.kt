@@ -32,6 +32,7 @@ import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
+import com.example.plan_me.ui.dialog.CustomToast
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -47,6 +48,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
     private var accessToken: String? = ""
     private lateinit var imageResult: ActivityResultLauncher<Intent>
     private var newImgUrl: String? = ""
+    private var customToast = CustomToast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,7 +169,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
                 openImagePicker()
             } else {
                 // 권한이 거부된 경우
-                Toast.makeText(this@InitProfileActivity, "사진 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+                customToast.createToast(this@InitProfileActivity,"사진 권한이 거부되었습니다.", 300, false)
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
