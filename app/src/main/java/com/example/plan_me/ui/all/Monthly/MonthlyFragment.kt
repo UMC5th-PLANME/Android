@@ -97,6 +97,9 @@ class MonthlyFragment: Fragment(),
                 container.day.monthyDayLayout.setOnClickListener {
                     if (container.canClick) {
                         filteringSchedule(data.date)
+                        val categoryList = filteringCategory()
+                        Log.d("filter", categoryList.toString())
+                        Log.d("filter", groupedSchedules.toString())
                         val btmSheet = DialogCalendarBtmFragment(categoryList, groupedSchedules, requireContext())
                         btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
@@ -260,7 +263,7 @@ class MonthlyFragment: Fragment(),
                 groupedSchedules[categoryId]?.add(schedule)
             }
         }
-        Log.d("group", groupedSchedules.toString())
+        Log.d(currentDate.toString(), groupedSchedules.toString())
     }
 
     private fun filteringCategory(): List<CategoryList> {
@@ -287,6 +290,7 @@ class MonthlyFragment: Fragment(),
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         scheduleList = response.result.scheduleList
+        Log.d("scheduleList", scheduleList.toString())
         initCalendar()
     }
 
