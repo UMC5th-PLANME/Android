@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<View android:id="@+id/calendar_day_indicator"
-    android:layout_width="match_parent"
-    android:layout_height="4dp"
-    android:layout_marginTop="2dp"
-    android:layout_marginHorizontal="8dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
