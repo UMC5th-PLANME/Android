@@ -26,6 +26,7 @@
                     android:layout_height="wrap_content"
                     android:text="📝 Exercise"
                     android:textSize="20sp"
+                    android:textAppearance="@style/AppTextAppearance"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/black"/>

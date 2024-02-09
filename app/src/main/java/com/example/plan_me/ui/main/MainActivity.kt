@@ -182,7 +182,7 @@ class MainActivity :
             category_modify = DialogModifyCategoryFragment(this, categorys ,this)
             category_modify.show()
         }
-        binding.mainAllBtn.setOnClickListener{
+        binding.mainAllBtnLayout.setOnClickListener{
             if (isHome) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.main_frm, AllFragment())
