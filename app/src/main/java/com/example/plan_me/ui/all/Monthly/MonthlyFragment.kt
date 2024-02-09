@@ -69,6 +69,7 @@ class MonthlyFragment: Fragment(),
         return binding.root
     }
 
+
     private fun initCalendar() {
         startMonth = currentMonth.minusMonths(100)  // Adjust as needed
         endMonth = currentMonth.plusMonths(100)  // Adjust as needed
@@ -92,6 +93,14 @@ class MonthlyFragment: Fragment(),
 
                 filteringSchedule(data.date)
                 val categoryList = filteringCategory()
+
+                container.day.monthyDayLayout.setOnClickListener {
+                    if (container.canClick) {
+                        filteringSchedule(data.date)
+                        val btmSheet = DialogCalendarBtmFragment(categoryList, groupedSchedules, requireContext())
+                        btmSheet.show(parentFragmentManager, btmSheet.tag)
+                    }
+                }
 
                 if(groupedSchedules.isNotEmpty() && categoryList.isNotEmpty()) {
                     if (groupedSchedules.size == 1) {
@@ -169,6 +178,11 @@ class MonthlyFragment: Fragment(),
             }
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        getCategoryList()
+    }
     private fun clickListener() {
         binding.monthlyCalendarView.monthScrollListener = { calendarMonth ->
             val pageMonth = calendarMonth.yearMonth
@@ -199,20 +213,7 @@ class MonthlyFragment: Fragment(),
     }
     inner class DayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarDayLayoutBinding.bind(view)
-        var isSelected : Boolean = false
-        private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
-        init {
-            view.setOnClickListener {
-                if (canClick) {
-                        val text = day.calendarDayText.text.toString()
-                        val day = text.toInt()
-                        selectedDate = pageMonth.atDay(day)
-                        val btmSheet = DialogCalendarBtmFragment()
-                        btmSheet.show(parentFragmentManager, btmSheet.tag)
-                    }
-                }
-            }
         }
 
     private fun getScheduleAll() {
@@ -243,6 +244,7 @@ class MonthlyFragment: Fragment(),
         dialogYMFragment.dismiss()
     }
 
+
     private fun filteringSchedule(currentDate:LocalDate) {
         groupedSchedules.clear()
         for (schedule in scheduleList) {
@@ -258,7 +260,7 @@ class MonthlyFragment: Fragment(),
                 groupedSchedules[categoryId]?.add(schedule)
             }
         }
-        Log.d(currentDate.toString(), groupedSchedules.toString())
+        Log.d("group", groupedSchedules.toString())
     }
 
     private fun filteringCategory(): List<CategoryList> {
