@@ -23,7 +23,7 @@ interface scheduleRetrofitInterface {
     fun getScheduleOne(@Path("schedule_id") schedule_id: Int,@Header("Authorization") Authorization:String) :Call<OneScheduleRes>
 
     @PATCH("/api/schedule/{schedule_id}")
-    fun modifySchedule(@Path("schedule_id") schedule_id: Int,@Header("Authorization") Authorization:String, schedule_input: Schedule_input) :Call<ModifyScheduleRes>
+    fun modifySchedule(@Path("schedule_id") schedule_id: Int,@Header("Authorization") Authorization:String, @Body schedule_input: Schedule_input) :Call<ModifyScheduleRes>
 
 
 }

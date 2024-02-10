@@ -89,7 +89,7 @@ class PlannerFragment : Fragment() ,
 
     private fun setRvAdapter() {
         if (!selectedSchedule.isNullOrEmpty()) {
-            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!)
+            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext())
             binding.plannerTodoRv.layoutManager = LinearLayoutManager(requireContext())
             binding.plannerTodoRv.adapter = plannerRVAdapter
         }

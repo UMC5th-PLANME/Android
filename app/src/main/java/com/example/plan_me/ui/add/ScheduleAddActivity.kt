@@ -121,7 +121,7 @@ class ScheduleAddActivity():
                 customToast.createToast(this,"알람 시간을 설정해주세요", 300, false)
             }else {
                 val scheduleInput = Schedule_input(
-                    true,
+                    false,
                     currentCategory.categoryId,
                     "NONE",
                     name,

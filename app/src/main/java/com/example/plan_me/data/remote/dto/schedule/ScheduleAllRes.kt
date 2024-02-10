@@ -19,7 +19,7 @@ data class ScheduleListResponse(
 
 data class ScheduleList(
     @SerializedName("id") val id: Int,
-    @SerializedName("status") val status: Boolean,
+    @SerializedName("status") var status: Boolean,
     @SerializedName("category_id") val category_id: Int,
     @SerializedName("repeat_period") val repeat_period: String,
     @SerializedName("title") val title: String,

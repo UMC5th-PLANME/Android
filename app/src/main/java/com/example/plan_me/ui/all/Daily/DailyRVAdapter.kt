@@ -34,7 +34,7 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
                 val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
                 binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
-                    val dailyRVAdapter = ScheduleRVAdapter(scheduleMap[category.categoryId])
+                    val dailyRVAdapter = ScheduleRVAdapter(scheduleMap[category.categoryId], context)
                     binding.itemScheduleRv.adapter = dailyRVAdapter
                     binding.itemScheduleRv.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
