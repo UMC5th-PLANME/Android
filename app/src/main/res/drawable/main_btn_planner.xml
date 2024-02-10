@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/main_navi_planner_white" android:top="2dp" android:width="36dp" android:height="28dp" android:gravity="center_horizontal"/>
-    <item android:drawable="@drawable/planner_ico_text" android:top="32dp" android:gravity="center_horizontal" android:width="30dp" android:height="8dp" />
-</layer-list>
