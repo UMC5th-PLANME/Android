@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/week_day_layout"
+    android:layout_width="45dp"
+    android:layout_height="60dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/week_calendar_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Tue"
+            android:textColor="@color/black"
+            android:fontFamily="@font/pretendard_bold"
+            android:textSize="12sp"
+            android:layout_marginTop="13dp"/>
+
+        <TextView
+            android:id="@+id/week_calendarDayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/black"
+            tools:text="22"
+            android:paddingTop="3dp"
+            android:fontFamily="@font/pretendard_medium"/>
+    </LinearLayout>
