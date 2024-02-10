@@ -16,6 +16,7 @@ import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityLoginBinding
+import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogTermsActivity
 import com.example.plan_me.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -33,6 +34,7 @@ import java.time.LocalTime
 
 class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
+    private var customToast = CustomToast
     var nickname : String? = ""
     var profile :String? = ""
     var email: String? = ""
@@ -54,7 +56,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
             handleGoogleSignInResult(task)
         } catch(e: ApiException) {
             Log.e(TAG, "google 로그인 실패", e)
-            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@LoginActivity,"로그인에 실패하였습니다.", 300, false)
         }
     }
 
@@ -89,7 +91,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         } catch (e: ApiException) {
             // Google 로그인 실패
             Log.e(TAG, "Google 로그인 실패", e)
-            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@LoginActivity,"로그인에 실패하였습니다.", 300, false)
         }
     }
 

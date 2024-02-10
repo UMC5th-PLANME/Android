@@ -17,9 +17,11 @@ import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.databinding.ActivityChangeNicknameBinding
+import com.example.plan_me.ui.dialog.CustomToast
 
 class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemberView {
     private lateinit var binding: ActivityChangeNicknameBinding
+    private var customToast = CustomToast
     private var userName : String? = ""
     private var accessToken: String? = ""
     private var userImg: String? = ""
@@ -61,7 +63,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
 
         binding.changeNicknameBtn.setOnClickListener {
             setEditName()
-            Toast.makeText(this@ChangeNicknameActivity, "변경되었습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@ChangeNicknameActivity,"닉네임이 변경되었습니다.", 300, false)
         }
     }
 
