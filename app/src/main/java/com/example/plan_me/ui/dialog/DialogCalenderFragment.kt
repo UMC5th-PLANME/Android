@@ -140,7 +140,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
     private fun clickListener() {
 
         binding.dialogCalenderCalendarView.monthScrollListener = { calendarMonth ->
-            val pageMonth = calendarMonth.yearMonth
+            pageMonth = calendarMonth.yearMonth
             val year = pageMonth.year.toString()
             val month = pageMonth.month.value
             binding.dialogCalenderDialogDate.text = year +"." + month + "월"

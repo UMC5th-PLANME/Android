@@ -142,7 +142,7 @@ class MonthlyFragment: Fragment(),
             }  // this refers to DaySelectionListener
         }
         binding.monthlyCalendarView.setup(startMonth, endMonth, firstDayOfWeek)
-        binding.monthlyCalendarView.scrollToMonth(currentMonth)
+        binding.monthlyCalendarView.scrollToMonth(pageMonth)
 
         val daysOfWeek = daysOfWeek()
 
@@ -188,7 +188,7 @@ class MonthlyFragment: Fragment(),
     }
     private fun clickListener() {
         binding.monthlyCalendarView.monthScrollListener = { calendarMonth ->
-            val pageMonth = calendarMonth.yearMonth
+            pageMonth = calendarMonth.yearMonth
             val year = pageMonth.year.toString()
             val month = pageMonth.month.value
             binding.monthlyDate.text = year +"." + month + "월"
