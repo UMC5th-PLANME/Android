@@ -39,7 +39,7 @@ class DialogTimePickFragment(context : Context, dialogTimePickInerface: DialogTi
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             calendar.set(Calendar.MINUTE, minute)
-            time = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
+            time = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",time)
         }
     }

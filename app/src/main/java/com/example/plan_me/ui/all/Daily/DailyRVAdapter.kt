@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemScheduleBinding
@@ -29,8 +30,10 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
     inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoryList, scheduleMap: MutableMap<Int, MutableList<ScheduleList>>) {
             if (!scheduleMap[category.categoryId].isNullOrEmpty()) {
+                val count = scheduleMap[category.categoryId]!!.count { it.status }
+                val notyet = scheduleMap[category.categoryId]!!.size - count
                 binding.itemScheduleTv.text = category.emoticon + " " + category.name
-                binding.itemScheduleDetail.text = "0 completed • 5 not yet"  //수정해야함
+                binding.itemScheduleDetail.text = count.toString() + " completed • "+notyet.toString() + " not yet"  //수정해야함
                 val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
                 binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 

@@ -24,8 +24,8 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
         super.onCreate(savedInstanceState)
         binding = FragmentDialogTimerangepickBinding.inflate(layoutInflater)
         val calendar = Calendar.getInstance()
-        startTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
-        endTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
+        startTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
+        endTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         clickListener()
@@ -41,14 +41,14 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             calendar.set(Calendar.MINUTE, minute)
-            startTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
+            startTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",startTime)
         }
         binding.dialogTimepickEnd.setOnTimeChangedListener { view, hourOfDay, minute ->
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
             calendar.set(Calendar.MINUTE, minute)
-            endTime = SimpleDateFormat("a hh:mm", Locale.getDefault()).format(calendar.time)
+            endTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",endTime)
         }
         binding.timeRangeCheckBox.setOnClickListener {

@@ -69,7 +69,7 @@ class ScheduleAddActivity():
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
-
+        decide()
         init()
         clickListener()
         setContentView(binding.root)
@@ -82,34 +82,37 @@ class ScheduleAddActivity():
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
-    private fun init(){
+    private fun decide() {
         if (intent.hasExtra("schedule") && intent.hasExtra("schedule_category")) {
             isModify = true
             schedule = intent.getParcelableExtra("schedule")!!
             currentCategory = intent.getParcelableExtra("schedule_category")!!
+            startTime = schedule.start_time
+            endTime = schedule.end_time
+            startDate = LocalDate.parse(schedule.startDate)
+            endDate = LocalDate.parse(schedule.endDate)
             Log.d("schedule","schedule")
             binding.scheduleCategoryDetail.visibility = View.GONE
             binding.scheduleCategoryDelete.visibility = View.VISIBLE
 
             binding.scheduleNameEt.setText(schedule.title.toString())
             binding.scheduleDateTv.text =
-                if(schedule.startDate == schedule.endDate) schedule.startDate.toString()
-                else schedule.startDate.toString() + " ~ " + schedule.endDate.toString()
+                if(schedule.startDate == schedule.endDate) startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일"
+                else startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일 - "+ endDate.monthValue.toString() +"월 " + endDate.dayOfMonth+"일"
             binding.scheduleTimeTv.text = schedule.start_time.toString() + " ~ " + schedule.end_time.toString()
             binding.scheduleRepeatTv.text = schedule.repeat_period
             binding.scheduleAlarmTv.text = schedule.alarm.toString()
             binding.scheduleAlarmTimeTv.text = schedule.alarm_time
 
-            startTime = schedule.start_time
-            endTime = schedule.end_time
-            startDate = LocalDate.parse(schedule.startDate)
-            endDate = LocalDate.parse(schedule.endDate)
-
-        }else {
+        }else if (intent.hasExtra("category") && intent.hasExtra("categoryList")){
             isModify = false
+            Log.d("dd", "dd")
             currentCategory = intent.getParcelableExtra("category")!!
             categoryList = intent.getParcelableArrayListExtra("categoryList")!!
         }
+    }
+
+    private fun init(){
         val newColor = ContextCompat.getColor(this, currentCategory.color) // Replace with your desired color resource
         binding.scheduleCategoryEmoticon.text = currentCategory.emoticon
         binding.scheduleCategoryName.text = currentCategory.name
@@ -179,10 +182,10 @@ class ScheduleAddActivity():
                         schedule.category_id,
                         schedule.repeat_period,
                         name,
-                        startTime.substring(3), //시간 예외
-                        endTime.substring(3),
+                        startTime, //시간 예외
+                        endTime,
                         schedule.alarm,
-                        alarm.substring(3),  //시간 예외 추가해야함
+                        alarm,  //시간 예외 추가해야함
                         startDate.toString(),
                         endDate.toString())
 
@@ -194,10 +197,10 @@ class ScheduleAddActivity():
                         currentCategory.categoryId,
                         "NONE",
                         name,
-                        startTime.substring(3),
-                        endTime.substring(3),
+                        startTime,
+                        endTime,
                         true,
-                        alarm.substring(3),
+                        alarm,
                         startDate.toString(),
                         endDate.toString()
                     )
@@ -224,14 +227,18 @@ class ScheduleAddActivity():
         dialogRepeat.dismiss()
     }
     private fun isVaildRange(startTime: String, endTime: String) :Boolean{  //조건 더 있어야할듯함
-        if (startTime.substring(0,2) == endTime.substring(0,2)) {
-            val st = startTime.substring(3 , 5)+startTime.substring(6,8)
-            val et = endTime.substring(3 , 5)+endTime.substring(6,8)
-            if (st.toInt() < et.toInt()) return true
+        val startHour = startTime.substring(0,2)
+        val endHour = endTime.substring(0,2)
+        val startMinute = startTime.substring(3,5)
+        val endMinute = endTime.substring(3,5)
+        if (startHour.toInt() > endHour.toInt()) {
+            return false
+        }
+        else if (startHour.toInt()==endHour.toInt())  {
+            if (startMinute.toInt() < endMinute.toInt()) return true
             else return false
         }
-        else if (startTime.substring(0 ,2) == "오전" && endTime.substring(0 ,2) == "오후") return true
-        else if (startTime.substring(0 ,2) == "오후" && endTime.substring(0 , 2) == "오전") return false
+        else if (startHour.toInt() < endHour.toInt()) return true
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {

@@ -209,7 +209,7 @@
                     android:id="@+id/schedule_alarm_time_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="am 09:00"
+                    android:text="시간 선택"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"
