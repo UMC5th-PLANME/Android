@@ -68,6 +68,19 @@
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="10dp"/>
 
+            <ImageView
+                android:id="@+id/schedule_category_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/schedule_add_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/dark_gray"
+                android:visibility="gone"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="10dp"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -196,7 +209,7 @@
                     android:id="@+id/schedule_alarm_time_tv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="am 09:00"
+                    android:text="시간 선택"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/white"

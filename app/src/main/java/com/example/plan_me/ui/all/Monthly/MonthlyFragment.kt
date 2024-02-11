@@ -97,6 +97,9 @@ class MonthlyFragment: Fragment(),
                 container.day.monthyDayLayout.setOnClickListener {
                     if (container.canClick) {
                         filteringSchedule(data.date)
+                        val categoryList = filteringCategory()
+                        Log.d("filter", categoryList.toString())
+                        Log.d("filter", groupedSchedules.toString())
                         val btmSheet = DialogCalendarBtmFragment(categoryList, groupedSchedules, requireContext())
                         btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
@@ -139,7 +142,7 @@ class MonthlyFragment: Fragment(),
             }  // this refers to DaySelectionListener
         }
         binding.monthlyCalendarView.setup(startMonth, endMonth, firstDayOfWeek)
-        binding.monthlyCalendarView.scrollToMonth(currentMonth)
+        binding.monthlyCalendarView.scrollToMonth(pageMonth)
 
         val daysOfWeek = daysOfWeek()
 
@@ -185,7 +188,7 @@ class MonthlyFragment: Fragment(),
     }
     private fun clickListener() {
         binding.monthlyCalendarView.monthScrollListener = { calendarMonth ->
-            val pageMonth = calendarMonth.yearMonth
+            pageMonth = calendarMonth.yearMonth
             val year = pageMonth.year.toString()
             val month = pageMonth.month.value
             binding.monthlyDate.text = year +"." + month + "월"
@@ -260,7 +263,7 @@ class MonthlyFragment: Fragment(),
                 groupedSchedules[categoryId]?.add(schedule)
             }
         }
-        Log.d("group", groupedSchedules.toString())
+        Log.d(currentDate.toString(), groupedSchedules.toString())
     }
 
     private fun filteringCategory(): List<CategoryList> {
@@ -287,6 +290,7 @@ class MonthlyFragment: Fragment(),
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         scheduleList = response.result.scheduleList
+        Log.d("scheduleList", scheduleList.toString())
         initCalendar()
     }
 

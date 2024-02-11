@@ -31,12 +31,14 @@ class DialogCalendarBtmRVAdapter(private val categoryList : List<CategoryList>, 
     inner class ViewHolder(val binding: ItemScheduleBinding) :RecyclerView.ViewHolder(binding.root) {
         fun bind(category: CategoryList, scheduleMap: MutableMap<Int, MutableList<ScheduleList>>) {
             if (!scheduleMap[category.categoryId].isNullOrEmpty()) {
+                val count = scheduleMap[category.categoryId]!!.count { it.status }
+                val notyet = scheduleMap[category.categoryId]!!.size - count
                 binding.itemScheduleTv.text = category.emoticon + " " + category.name
-                binding.itemScheduleDetail.text = "0 completed • 5 not yet"  //수정해야함
+                binding.itemScheduleDetail.text = count.toString() + " completed • "+notyet.toString() + " not yet"  //수정해야함
                 val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
                 binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
-                    val dailyRVAdapter = ScheduleRVAdapter(scheduleMap[category.categoryId])
+                    val dailyRVAdapter = ScheduleRVAdapter(categoryList, scheduleMap[category.categoryId], context)
                     binding.itemScheduleRv.adapter = dailyRVAdapter
                     binding.itemScheduleRv.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
