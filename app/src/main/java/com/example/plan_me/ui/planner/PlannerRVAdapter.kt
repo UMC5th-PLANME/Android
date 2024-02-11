@@ -2,12 +2,14 @@
 package com.example.plan_me.ui.planner
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.local.entity.Schedule_input
+import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.ModifyScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.OneScheduleRes
 import com.example.plan_me.databinding.ItemTodoBinding
@@ -16,6 +18,7 @@ import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
 import com.example.plan_me.data.remote.view.schedule.OneScheduleView
+import com.example.plan_me.ui.add.ScheduleAddActivity
 
 class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>, private val context: Context): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>(),
     ModifyScheduleView{
