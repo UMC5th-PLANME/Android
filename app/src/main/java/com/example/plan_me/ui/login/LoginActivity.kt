@@ -1,7 +1,9 @@
 
 package com.example.plan_me.ui.login
 
+import android.app.Activity
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +16,9 @@ import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.SignUpView
 import com.example.plan_me.databinding.ActivityLoginBinding
+import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogTermsActivity
+import com.example.plan_me.ui.main.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,11 +29,12 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import java.time.LocalDateTime
 import java.time.LocalTime
-import java.util.Date
 
 class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
+    private var customToast = CustomToast
     var nickname : String? = ""
     var profile :String? = ""
     var email: String? = ""
@@ -42,6 +47,8 @@ class LoginActivity : AppCompatActivity(), SignUpView {
     var getAccessToken: String? = ""
     var getRefreshToken: String? = ""
 
+    var localTime: LocalDateTime = LocalDateTime.now()
+
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
     private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -49,7 +56,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
             handleGoogleSignInResult(task)
         } catch(e: ApiException) {
             Log.e(TAG, "google 로그인 실패", e)
-            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@LoginActivity,"로그인에 실패하였습니다.", 300, false)
         }
     }
 
@@ -84,7 +91,7 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         } catch (e: ApiException) {
             // Google 로그인 실패
             Log.e(TAG, "Google 로그인 실패", e)
-            Toast.makeText(this@LoginActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@LoginActivity,"로그인에 실패하였습니다.", 300, false)
         }
     }
 
@@ -210,7 +217,18 @@ class LoginActivity : AppCompatActivity(), SignUpView {
         getAccessToken = response.result.accessToken
         getRefreshToken = response.result.refreshToken
         saveResponse()
-        openTermsPopup()
+
+        if (created_at != localTime.toString()) { // 기존 회원 로그인
+            switchActivity(MainActivity())
+        } else { // 신규 회원 가입
+            openTermsPopup()
+        }
+    }
+
+    private fun switchActivity(activity: Activity) {
+        val intent = Intent(this, activity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
     override fun onSetSignUpFailure(isSuccess: Boolean, code: String, message: String) {

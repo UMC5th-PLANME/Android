@@ -52,12 +52,12 @@ class ScheduleService  {
         this.deleteScheduleView = deleteScheduleView
     }
 
-    fun setOneScheduleView(modifyScheduleView: ModifyScheduleView) {
+    fun setOneScheduleView(oneScheduleView: OneScheduleView) {
         this.modifyScheduleView = modifyScheduleView
     }
 
-    fun setModifyScheduleView(oneScheduleView: OneScheduleView) {
-        this.oneScheduleView = oneScheduleView
+    fun setModifyScheduleView(modifyScheduleView: ModifyScheduleView) {
+        this.modifyScheduleView = modifyScheduleView
     }
     fun addScheduleFun(accessToken: String, schedule_input: Schedule_input) {
         ScheduleService.addSchedule(accessToken, schedule_input).enqueue(object : Callback<AddScheduleRes> {
@@ -102,7 +102,7 @@ class ScheduleService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> deleteScheduleView.onDeleteScheduleSuccess(resp)
+                    "SCHEDULE2004" -> deleteScheduleView.onDeleteScheduleSuccess(resp)
                     else -> deleteScheduleView.onDeleteScheduleFailure(resp)
                 }
             }
@@ -121,7 +121,7 @@ class ScheduleService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> oneScheduleView.onOneScheduleSuccess(resp)
+                    "SCHEDULE2003" -> oneScheduleView.onOneScheduleSuccess(resp)
                     else -> oneScheduleView.onOneScheduleFailure(resp)
                 }
             }
@@ -140,7 +140,7 @@ class ScheduleService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> modifyScheduleView.onModifyScheduleSuccess(resp)
+                    "SCHEDULE2003" -> modifyScheduleView.onModifyScheduleSuccess(resp)
                     else -> modifyScheduleView.onModifyScheduleFailure(resp)
                 }
             }

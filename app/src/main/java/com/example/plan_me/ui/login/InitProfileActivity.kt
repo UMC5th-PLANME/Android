@@ -1,11 +1,13 @@
 package com.example.plan_me.ui.login
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
+import android.database.Cursor
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -13,6 +15,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -28,7 +32,7 @@ import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.ProfileImageView
 import com.example.plan_me.databinding.ActivityInitProfileBinding
 import com.example.plan_me.ui.CircleTransform
-import com.example.plan_me.utils.ImageUtils
+import com.example.plan_me.ui.dialog.CustomToast
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -42,6 +46,9 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
     private var userEmail: String? = ""
     private var userType: String? = ""
     private var accessToken: String? = ""
+    private lateinit var imageResult: ActivityResultLauncher<Intent>
+    private var newImgUrl: String? = ""
+    private var customToast = CustomToast
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +58,34 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
 
         getData()
         getRemoteData()
+
+        imageResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ){ result ->
+            Log.d("result", result.toString())
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageUrl = result.data?.data ?: return@registerForActivityResult
+
+                // 이미지를 선택한 경우, 이미지뷰에 설정
+                binding.initProfileImagefileIv.setImageURI(imageUrl)
+                Picasso.get().load(imageUrl).transform(CircleTransform()).into(binding.initProfileImagefileIv)
+
+                val file = File(absolutelyPath(imageUrl, this@InitProfileActivity))
+                val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+                val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
+
+                binding.initProfileImagefileIv.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                    // 이미지 변경 감지 시 처리할 로직을 여기에 작성
+                    // 예를 들어, 이미지 변경 후에 어떤 작업을 수행할 수 있습니다.
+                    // 변경된 이미지 정보를 사용하여 추가적인 작업을 수행할 수 있습니다.
+                    Log.d("test-image", file.name)
+                    setImageService(body)
+                }
+
+                Log.d("imageUrl", imageUrl.toString())
+                binding.initProfileImagefileIv.setImageURI(imageUrl)
+            }
+        }
 
         binding.initProfileNameTv.setText(userName)
         if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
@@ -90,6 +125,18 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
         }
     }
 
+    // 절대경로 변환
+    private fun absolutelyPath(path: Uri?, context : Context): String {
+        var proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        var c: Cursor? = context.contentResolver.query(path!!, proj, null, null, null)
+        var index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c?.moveToFirst()
+
+        var result = c?.getString(index!!)
+
+        return result!!
+    }
+
     @RequiresApi(Build.VERSION_CODES.M)
     private fun checkPermission(): Boolean {
         Log.d("checkPermission", "check")
@@ -122,7 +169,7 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
                 openImagePicker()
             } else {
                 // 권한이 거부된 경우
-                Toast.makeText(this@InitProfileActivity, "사진 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show()
+                customToast.createToast(this@InitProfileActivity,"사진 권한이 거부되었습니다.", 300, false)
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -132,44 +179,13 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
 
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, REQUEST_IMAGE_PICK)
+        imageResult.launch(intent)
     }
 
-    // 이미지 파일을 MultipartBody.Part로 변환하는 함수
-    private fun createImagePart(file: File): MultipartBody.Part {
-        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
-        return MultipartBody.Part.createFormData("image", file.name, requestFile)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-            // 이미지를 선택한 경우, 이미지뷰에 설정
-            val selectedImageUri = data?.data
-            binding.initProfileImagefileIv.setImageURI(selectedImageUri)
-            Picasso.get().load(selectedImageUri).transform(CircleTransform()).into(binding.initProfileImagefileIv)
-
-            val drawable = binding.initProfileImagefileIv.drawable
-            if (drawable is BitmapDrawable) {
-                val bitmap: Bitmap = drawable.bitmap
-
-                // 추출한 비트맵을 파일로 변환
-                val imageFile = ImageUtils.bitmapToFile(this, bitmap)
-
-                // 파일을 MultipartBody.Part로 변환
-                val imagePart = createImagePart(imageFile)
-
-                // setImageService 호출
-                val setImageService = ImageService()
-                setImageService.setImageView(this@InitProfileActivity)
-                Log.d("img_access", accessToken.toString())
-                setImageService.setProfileImg("Bearer " + accessToken!!, imagePart)
-            } else {
-                // BitmapDrawable로 변환할 수 없는 경우에 대한 처리
-                Log.e("Image Conversion", "Drawable is not a BitmapDrawable")
-            }
-        }
+    private fun setImageService(image: MultipartBody.Part) {
+        val setImageService = ImageService()
+        setImageService.setImageView(this@InitProfileActivity)
+        setImageService.setProfileImg("Bearer " + accessToken, image)
     }
 
     private fun getData() {
@@ -196,18 +212,25 @@ class InitProfileActivity : AppCompatActivity(), ProfileImageView, ChangeProfile
     private fun setEditProfileService() {
         val setEditProfileService = MemberService()
         setEditProfileService.setChangeProfileView(this@InitProfileActivity)
-        val member = EditProfile(userName!!, userImg!!)
-        Log.d("access", accessToken.toString())
-        setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
+
+        if (newImgUrl == "") { // 이미지 변경 안 했을 경우
+            Log.d("revise-not-image", "이미지 변경 X")
+            val member = EditProfile(userName!!, userImg!!)
+            setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
+        } else { // 이미지 변경 했을 경우
+            Log.d("revise-image", "이미지 변경 O")
+            val member = EditProfile(userName!!, newImgUrl!!)
+            setEditProfileService.setChangeProfile("Bearer " + accessToken!!, member)
+        }
     }
 
     companion object {
         val REQUEST_PERMISSION_CODE = 423
-        val REQUEST_IMAGE_PICK = 826
     }
 
     override fun onSetImgSuccess(response: ProfileImageRes) {
-        Log.d("이미지 등록", response.message)
+        Log.d("이미지 등록", response.result.toString())
+        newImgUrl = response.result.imageUrl
     }
 
     override fun onSetImgFailure(isSuccess: Boolean, code: String, message: String) {

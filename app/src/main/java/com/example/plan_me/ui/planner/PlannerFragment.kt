@@ -36,6 +36,13 @@ class PlannerFragment : Fragment() ,
         return binding.root
 
     }
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    override fun onResume() {
+        super.onResume()
+        Log.d("Resume", "resume")
+        getScheduleAll()
+    }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
         if (arguments != null) {
@@ -66,6 +73,7 @@ class PlannerFragment : Fragment() ,
 
     private fun filteringSchedule() {
         // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
+        groupedSchedules.clear()
         for (schedule in schedules) {
             val categoryId = schedule.category_id
             if (!groupedSchedules.containsKey(categoryId)) {
@@ -82,7 +90,7 @@ class PlannerFragment : Fragment() ,
 
     private fun setRvAdapter() {
         if (!selectedSchedule.isNullOrEmpty()) {
-            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!)
+            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext())
             binding.plannerTodoRv.layoutManager = LinearLayoutManager(requireContext())
             binding.plannerTodoRv.adapter = plannerRVAdapter
         }

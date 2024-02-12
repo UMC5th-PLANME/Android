@@ -10,5 +10,5 @@ data class ProfileImageRes(
 )
 
 data class ProfileImg(
-    @SerializedName("profile_image") val profile_image: String
+    @SerializedName("imageUrl") val imageUrl: String
 )

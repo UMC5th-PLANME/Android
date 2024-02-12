@@ -25,4 +25,8 @@
     <style name="TimePicker_Custom" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorControlNormal">@android:color/transparent</item>
     </style>
+    <style name="AppTextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/pretendard_bold</item>
+    </style>
 </resources>

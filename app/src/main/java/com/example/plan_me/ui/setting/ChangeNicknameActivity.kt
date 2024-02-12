@@ -11,18 +11,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
-import com.example.plan_me.data.local.entity.Member
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.databinding.ActivityChangeNicknameBinding
-import com.example.plan_me.ui.CircleTransform
-import com.squareup.picasso.Picasso
+import com.example.plan_me.ui.dialog.CustomToast
 
 class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemberView {
     private lateinit var binding: ActivityChangeNicknameBinding
+    private var customToast = CustomToast
     private var userName : String? = ""
     private var accessToken: String? = ""
     private var userImg: String? = ""
@@ -33,7 +32,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
         setContentView(binding.root)
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
-        getData1()
+        //getData1()
         getData2()
         setLookUpService()
 
@@ -64,7 +63,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
 
         binding.changeNicknameBtn.setOnClickListener {
             setEditName()
-            Toast.makeText(this@ChangeNicknameActivity, "변경되었습니다.", Toast.LENGTH_SHORT).show()
+            customToast.createToast(this@ChangeNicknameActivity,"닉네임이 변경되었습니다.", 300, false)
         }
     }
 
@@ -74,11 +73,11 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
 
-    private fun getData1() {
-        // 데이터 읽어오기
-        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
-        userImg = sharedPreferences.getString("userImg", userImg)
-    }
+//    private fun getData1() {
+//        // 데이터 읽어오기
+//        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+//        userImg = sharedPreferences.getString("userImg", userImg)
+//    }
 
     private fun getData2() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
@@ -120,7 +119,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
     override fun onGetMemberSuccess(response: MemberRes) {
         Log.d("닉네임 조회", response.result.toString())
         userName = response.result.nickname
-
+        userImg = response.result.profile_image
         // UI 업데이트
         updateUI()
     }

@@ -19,14 +19,20 @@ class ImageService {
 
     fun setProfileImg(accessToken: String, image: MultipartBody.Part) {
         val profileImgService = getRetrofit().create(AuthRetrofitInterface::class.java)
-        Log.d("dddaaa", "$accessToken, $image")
         profileImgService.postImage(accessToken, image).enqueue(object : Callback<ProfileImageRes> {
             override fun onResponse(call: Call<ProfileImageRes>, response: Response<ProfileImageRes>) {
-                Log.d("PROFILE-IMG-SUCCESS", response.toString())
-                val resp: ProfileImageRes = response.body()!!
-                when(resp.code) {
-                    "IMAGE2001" -> imageView.onSetImgSuccess(resp)
-                    else -> imageView.onSetImgFailure(resp.isSuccess, resp.code, resp.message)
+                if (response.isSuccessful) {
+                    val resp: ProfileImageRes? = response.body()
+                    if (resp != null) {
+                        when (resp.code) {
+                            "IMAGE2001" -> imageView.onSetImgSuccess(resp)
+                            else -> imageView.onSetImgFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("PROFILE-IMG-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("PROFILE-IMG-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 

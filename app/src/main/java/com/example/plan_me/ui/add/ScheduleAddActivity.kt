@@ -5,6 +5,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,9 +13,14 @@ import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Schedule_input
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.AddScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.DeleteScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.ModifyScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AddScheduleView
+import com.example.plan_me.data.remote.view.schedule.DeleteScheduleView
+import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
 import com.example.plan_me.databinding.ActivityScheduleAddBinding
 import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogAlarmFragment
@@ -29,6 +35,7 @@ import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
 import com.example.plan_me.ui.main.MainActivity
+import org.jetbrains.annotations.Async.Schedule
 import java.time.LocalDate
 
 class ScheduleAddActivity():
@@ -38,7 +45,9 @@ class ScheduleAddActivity():
     DialogTimeRangePickInerface,
     DialogCalenderInterface,
     DialogSelectCategoryInerface ,
-    AddScheduleView{
+    AddScheduleView,
+    ModifyScheduleView,
+    DeleteScheduleView{
     private lateinit var binding : ActivityScheduleAddBinding
     private lateinit var dialogCalender : DialogCalenderFragment
     private lateinit var dialogAlarm : DialogAlarmFragment
@@ -52,12 +61,15 @@ class ScheduleAddActivity():
     private lateinit var endDate: LocalDate
     private lateinit var startTime: String
     private lateinit var endTime: String
+    private val customToast = CustomToast
 
+    private lateinit var schedule : ScheduleList
+
+    private var isModify : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
-        currentCategory = intent.getParcelableExtra("category")!!
-        categoryList = intent.getParcelableArrayListExtra("categoryList")!!
+        decide()
         init()
         clickListener()
         setContentView(binding.root)
@@ -68,6 +80,36 @@ class ScheduleAddActivity():
         super.onBackPressed()
         finish()
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+    }
+
+    private fun decide() {
+        if (intent.hasExtra("schedule") && intent.hasExtra("schedule_category")) {
+            isModify = true
+            schedule = intent.getParcelableExtra("schedule")!!
+            currentCategory = intent.getParcelableExtra("schedule_category")!!
+            startTime = schedule.start_time
+            endTime = schedule.end_time
+            startDate = LocalDate.parse(schedule.startDate)
+            endDate = LocalDate.parse(schedule.endDate)
+            Log.d("schedule","schedule")
+            binding.scheduleCategoryDetail.visibility = View.GONE
+            binding.scheduleCategoryDelete.visibility = View.VISIBLE
+
+            binding.scheduleNameEt.setText(schedule.title.toString())
+            binding.scheduleDateTv.text =
+                if(schedule.startDate == schedule.endDate) startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일"
+                else startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일 - "+ endDate.monthValue.toString() +"월 " + endDate.dayOfMonth+"일"
+            binding.scheduleTimeTv.text = schedule.start_time.toString() + " ~ " + schedule.end_time.toString()
+            binding.scheduleRepeatTv.text = schedule.repeat_period
+            binding.scheduleAlarmTv.text = schedule.alarm.toString()
+            binding.scheduleAlarmTimeTv.text = schedule.alarm_time
+
+        }else if (intent.hasExtra("category") && intent.hasExtra("categoryList")){
+            isModify = false
+            Log.d("dd", "dd")
+            currentCategory = intent.getParcelableExtra("category")!!
+            categoryList = intent.getParcelableArrayListExtra("categoryList")!!
+        }
     }
 
     private fun init(){
@@ -106,16 +148,66 @@ class ScheduleAddActivity():
             dialogDetail = DialogSelectCategoryFragment(this, categoryList, this)
             dialogDetail.show()
         }
+        binding.scheduleCategoryDelete.setOnClickListener {
+            val access_token = "Bearer " + getSharedPreferences(
+                "getRes",
+                MODE_PRIVATE
+            ).getString("getAccessToken", "")
+            val setScheduleService = ScheduleService()
+            setScheduleService.setDeleteScheduleView(this)
+            setScheduleService.deleteScheduleFun(access_token, schedule.id)
+        }
         binding.scheduleEditCompleteBtn.setOnClickListener {
+
             val name = binding.scheduleNameEt.text.toString()
             val alarm = binding.scheduleAlarmTimeTv.text.toString()
-            val scheduleInput = Schedule_input(true, currentCategory.categoryId, "NONE",name, startTime.substring(3), endTime.substring(3), true,alarm.substring(3), startDate.toString(), endDate.toString())
+            if (name == "") {
+                customToast.createToast(this,"일정 제목을 입력해주세요", 300, false)
+            } else if (!::startDate.isInitialized) {
+                customToast.createToast(this,"날짜를 설정해주세요", 300, false)
+            } else if (startTime.isEmpty()) {
+                customToast.createToast(this,"시간을 설정해주세요", 300, false)
+            } else if (alarm == "") {
+                customToast.createToast(this,"알람 시간을 설정해주세요", 300, false)
+            }else {
+                val access_token = "Bearer " + getSharedPreferences(
+                    "getRes",
+                    MODE_PRIVATE
+                ).getString("getAccessToken", "")
+                val setScheduleService = ScheduleService()
 
-            Log.d("schedule", scheduleInput.toString())
-            val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
-            val setScheduleService = ScheduleService()
-            setScheduleService.setAddScheduleView(this)
-            setScheduleService.addScheduleFun(access_token!!, scheduleInput)
+                if (isModify) {
+                    val schedule_input = Schedule_input(
+                        schedule.status,
+                        schedule.category_id,
+                        schedule.repeat_period,
+                        name,
+                        startTime, //시간 예외
+                        endTime,
+                        schedule.alarm,
+                        alarm,  //시간 예외 추가해야함
+                        startDate.toString(),
+                        endDate.toString())
+
+                    setScheduleService.setModifyScheduleView(this)
+                    setScheduleService.modifyScheduleFun(access_token, schedule.id, schedule_input)
+                }else {
+                    val scheduleInput = Schedule_input(
+                        false,
+                        currentCategory.categoryId,
+                        "NONE",
+                        name,
+                        startTime,
+                        endTime,
+                        true,
+                        alarm,
+                        startDate.toString(),
+                        endDate.toString()
+                    )
+                    setScheduleService.setAddScheduleView(this)
+                    setScheduleService.addScheduleFun(access_token!!, scheduleInput)
+                }
+            }
         }
     }
     override fun onClickConfirm(time:String) {
@@ -135,14 +227,18 @@ class ScheduleAddActivity():
         dialogRepeat.dismiss()
     }
     private fun isVaildRange(startTime: String, endTime: String) :Boolean{  //조건 더 있어야할듯함
-        if (startTime.substring(0,2) == endTime.substring(0,2)) {
-            val st = startTime.substring(3 , 5)+startTime.substring(6,8)
-            val et = endTime.substring(3 , 5)+endTime.substring(6,8)
-            if (st.toInt() < et.toInt()) return true
+        val startHour = startTime.substring(0,2)
+        val endHour = endTime.substring(0,2)
+        val startMinute = startTime.substring(3,5)
+        val endMinute = endTime.substring(3,5)
+        if (startHour.toInt() > endHour.toInt()) {
+            return false
+        }
+        else if (startHour.toInt()==endHour.toInt())  {
+            if (startMinute.toInt() < endMinute.toInt()) return true
             else return false
         }
-        else if (startTime.substring(0 ,2) == "AM" && endTime.substring(0 ,2) == "PM") return true
-        else if (startTime.substring(0 ,2) == "PM" && endTime.substring(0 , 2) == "AM") return false
+        else if (startHour.toInt() < endHour.toInt()) return true
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
@@ -155,7 +251,8 @@ class ScheduleAddActivity():
             dialogTimeRangePick.dismiss()
         }
         else {
-            Toast.makeText(this, "inVaild range", Toast.LENGTH_SHORT).show()
+            val customToast = CustomToast
+            customToast.createToast(this,"올바른 시간을 설정해주세요", 500, false)
         }
     }
 
@@ -164,14 +261,15 @@ class ScheduleAddActivity():
     }
 
     override fun onClickCalenderConfirm(start : LocalDate?, end: LocalDate?) {
-        if (end == null) {
+        if (end == start) {
             binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일"
             this.startDate = start!!
+            this.endDate = end!!
         }
         else {
             binding.scheduleDateTv.text = start!!.monthValue.toString() +"월 " + start!!.dayOfMonth+"일 - "+ end!!.monthValue.toString() +"월 " + end!!.dayOfMonth+"일"
             this.startDate = start!!
-            this.endDate = start!!
+            this.endDate = end!!
         }
         dialogCalender.dismiss()
     }
@@ -183,17 +281,31 @@ class ScheduleAddActivity():
     }
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
-        val customToast = CustomToast
-        customToast.createToast(this,"일정이 생성되었습니다.", 300)
-        /*val intent = Intent (this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)*/
+        customToast.createToast(this,"일정이 생성되었습니다", 300, true)
         finish()
     }
 
 
     override fun onAddScheduleFailure(response: AddScheduleRes) {
-        TODO("Not yet implemented")
+        customToast.createToast(this,"일정이 생성에 실패했습니다", 300, false)
+    }
+
+    override fun onModifyScheduleSuccess(response: ModifyScheduleRes) {
+        customToast.createToast(this,"일정이 수정되었습니다", 300, true)
+        finish()
+    }
+
+    override fun onModifyScheduleFailure(response: ModifyScheduleRes) {
+        customToast.createToast(this,"일정 수정에 실패했습니다", 300, false)
+    }
+
+    override fun onDeleteScheduleSuccess(response: DeleteScheduleRes) {
+        customToast.createToast(this,"일정이 삭제되었습니다", 300, false)
+        finish()
+    }
+
+    override fun onDeleteScheduleFailure(response: DeleteScheduleRes) {
+        customToast.createToast(this,"일정 삭제에 실패했니다", 300, false)
     }
 
 

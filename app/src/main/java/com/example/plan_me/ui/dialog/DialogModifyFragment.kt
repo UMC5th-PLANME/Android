@@ -74,7 +74,39 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
     private fun init() {
         binding.addCategoryTv.text = "카테고리 수정"
         binding.addCategoryNameEt.text = Editable.Factory.getInstance().newEditable(category.name)
+        checkGroup(binding.colorGroup1, binding.colorGroup2, initColor(category.color))
+        checkGroup(binding.emoticonGroup1, binding.emoticonGroup2, initEmoticon(category.emoticon))
+    }
 
+    private fun initEmoticon(emoticon :String):Int {
+        return when (emoticon) {
+            "\uD83D\uDCD5"->0
+            "\uD83D\uDCD7"->1
+            "\uD83D\uDCD8"->2
+            "\uD83D\uDCCA"->3
+            "\uD83D\uDD0D"->4
+            "\uD83C\uDFAC"->5
+            "\uD83C\uDFA8"->6
+            "\uD83C\uDFB5"->7
+            "⛳"->8
+            "⭐"->-1
+            else -> -200 //예외처리
+        }
+    }
+    private fun initColor(color:Int):Int {
+        return when(color) {
+            R.color.sky_blue_main->0
+            R.color.sky_blue->1
+            R.color.red_orange->2
+            R.color.lemon->3
+            R.color.neon_green->4
+            R.color.green->5
+            R.color.red_pink->6
+            R.color.purple_pink->7
+            R.color.pink->8
+            R.color.blue_gray->-1
+            else ->-200  //예외처리
+        }
     }
 
     private fun findEmoticon(itemId:Int):String {
@@ -149,6 +181,17 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
                 }
                 ignoreCheckChange = false
             }
+        }
+    }
+
+    private fun checkGroup(radioGroup1: RadioGroup, radioGroup2: RadioGroup, idx : Int) {
+        Log.d("idx", idx.toString())
+        if (idx in 0..4) {
+            val index = radioGroup1.getChildAt(0).id + idx
+            radioGroup1.check(index)
+        }else {
+            val index = radioGroup2.getChildAt(0).id -5 + idx
+            radioGroup2.check(index)
         }
     }
 

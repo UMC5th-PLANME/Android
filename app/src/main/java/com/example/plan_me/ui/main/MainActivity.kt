@@ -18,15 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
-import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
-import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.category.CategoryService
-import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.category.AllCategoryView
-import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
+import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
@@ -36,6 +33,8 @@ import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.example.plan_me.utils.alarm.AlarmFunctions
+import com.example.plan_me.utils.alarm.AlarmService
 
 class MainActivity :
     AppCompatActivity(),
@@ -88,13 +87,14 @@ class MainActivity :
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
         clickListener()
+/*
+        AlarmFunctions(this).callAlarm("2024-02-10 21:05:10",  1, "asdf")*/
     }
 
     override fun onResume() {
         super.onResume()
         if (isAdd) {
             isAdd = false
-            startFragment(currentCategory)
         }
     }
 
@@ -114,8 +114,16 @@ class MainActivity :
             binding.mainDrawerLayout.closeDrawers()
         }
         else {
-            super.onBackPressed()
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            if (!isHome) {
+                startFragment(currentCategory)
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            }else {
+                super.onBackPressed()
+                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            }
         }
     }
     private fun getCategoryList() {
@@ -134,6 +142,7 @@ class MainActivity :
         val plannerFragment = PlannerFragment()
         plannerFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
             .replace(R.id.main_frm, plannerFragment)
             .commitAllowingStateLoss()
     }
@@ -187,9 +196,10 @@ class MainActivity :
             category_modify = DialogModifyCategoryFragment(this, categorys ,this)
             category_modify.show()
         }
-        binding.mainAllBtn.setOnClickListener{
+        binding.mainAllBtnLayout.setOnClickListener{
             if (isHome) {
                 supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                     .replace(R.id.main_frm, AllFragment())
                     .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_planner)
@@ -197,9 +207,7 @@ class MainActivity :
                 binding.mainAllBtn.setTextColor(Color.WHITE)
                 isHome=false
             }else {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.main_frm, PlannerFragment())
-                    .commitAllowingStateLoss()
+                startFragment(currentCategory)
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
                 binding.mainAllBtn.text = "ALL"
                 binding.mainAllBtn.setTextColor(Color.BLACK)
@@ -223,6 +231,10 @@ class MainActivity :
             binding.mainFabTimerBtn.startAnimation(fab_close)
             binding.mainFabSettingBtn.startAnimation(fab_close)
             binding.mainFabAddBtn.startAnimation(fab_close)
+            binding.mainFabMestoryBtn.isClickable = false
+            binding.mainFabTimerBtn.isClickable = false
+            binding.mainFabSettingBtn.isClickable = false
+            binding.mainFabAddBtn.isClickable = false
             false
         } else {
             binding.mainFabMestoryBtn.startAnimation(fab_open)
@@ -273,12 +285,20 @@ class MainActivity :
         }
         else if (currentCategoryPosition > position) {
             currentCategoryPosition -= 1
+            getCategoryList()
+        }else {
+
+            getCategoryList()
         }
+        val customToast = CustomToast
+        customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
     }
 
     override fun sendModifySuccessSignal(position : Int) {  //modify
         category_modify.dismiss()
         currentCategoryPosition = position
+        val customToast = CustomToast
+        customToast.createToast(this, "카테고리가 수정되었습니다", 300, true)
         getCategoryList()
     }
 
@@ -289,8 +309,4 @@ class MainActivity :
             initActivity()
         }
     }
-
-
-
-
 }
