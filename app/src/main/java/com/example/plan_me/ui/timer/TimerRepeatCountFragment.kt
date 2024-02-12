@@ -35,6 +35,11 @@ class TimerRepeatCountFragment: Fragment() {
 
         // 값 설정 (string)
         count.displayedValues = arrayOf("1", "2", "3", "4", "5", "6", "7", "8", "9")
+    }
+
+    fun getRepeatCount(): Int {
+        // NumberPicker에서 설정된 값을 반환
+        return binding.timerRepeatNumberPickerTime.value
 
     }
 }

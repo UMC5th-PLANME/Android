@@ -37,4 +37,9 @@ class TimerBreakFragment: Fragment() {
         min.displayedValues = arrayOf("10", "15", "20", "25", "30", "35", "40", "45", "50")
     }
 
+    fun getBreakTime(): Int {
+        // NumberPicker에서 설정된 값을 초로 변환하여 반환
+        val min = binding.timerBreakNumberPickerMin.value * 10
+        return min
+    }
 }
