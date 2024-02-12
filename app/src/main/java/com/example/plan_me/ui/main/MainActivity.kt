@@ -134,6 +134,7 @@ class MainActivity :
         val plannerFragment = PlannerFragment()
         plannerFragment.arguments = bundle
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
             .replace(R.id.main_frm, plannerFragment)
             .commitAllowingStateLoss()
     }
@@ -190,6 +191,7 @@ class MainActivity :
         binding.mainAllBtnLayout.setOnClickListener{
             if (isHome) {
                 supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                     .replace(R.id.main_frm, AllFragment())
                     .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_planner)
