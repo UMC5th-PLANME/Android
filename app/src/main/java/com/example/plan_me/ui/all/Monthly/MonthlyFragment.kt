@@ -100,7 +100,7 @@ class MonthlyFragment: Fragment(),
                         val categoryList = filteringCategory()
                         Log.d("filter", categoryList.toString())
                         Log.d("filter", groupedSchedules.toString())
-                        val btmSheet = DialogCalendarBtmFragment(categoryList, groupedSchedules, requireContext())
+                        val btmSheet = DialogCalendarBtmFragment(data.date, requireContext())
                         btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
                 }
