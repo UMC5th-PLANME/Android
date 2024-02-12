@@ -90,10 +90,10 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
                         container.textView.setBackgroundResource(R.drawable.calender_box_2)
                     } else if (data.date == selectedStartDate) {
                         // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.group_33)
+                        container.textView.setBackgroundResource(R.drawable.calendar_start)
                     } else if (data.date == selectedEndDate) {
                         // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.group_30)
+                        container.textView.setBackgroundResource(R.drawable.calendar_end)
                     } else {
                         container.textView.background = null
                     }
