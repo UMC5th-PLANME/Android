@@ -12,8 +12,6 @@ import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentMonthlyBinding
-import com.example.plan_me.data.local.entity.category
-import com.example.plan_me.data.local.entity.schedule
 import com.example.plan_me.ui.dialog.DialogCalendarBtmFragment
 import com.example.plan_me.ui.dialog.DialogYMFragment
 import com.example.plan_me.ui.dialog.DialogYMPickInerface

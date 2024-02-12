@@ -9,8 +9,8 @@ data class Schedule_input(
     var title : String,
     var start_time : String,
     var end_time : String,
-    var alarm : Int,
+    var alarm : Boolean,
     var alarm_time:String,
     var startDate:String,
-    var endDate:String
+    var endDate:String,
 )

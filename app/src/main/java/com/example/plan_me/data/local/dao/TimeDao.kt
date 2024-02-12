@@ -26,22 +26,22 @@ interface TimeDao {
     fun getSavedTime(set: Int): Time
 
     @Query("SELECT focusTime FROM TimeTable WHERE `set` = :set")
-    fun getFocusTime(set: Long): Long
+    fun getFocusTime(set: Int): Int
 
     @Query("SELECT breakTime FROM TimeTable WHERE `set` = :set")
-    fun getBreakTime(set: Long): Long
+    fun getBreakTime(set: Int): Int
 
     @Query("SELECT repeatCount FROM TimeTable WHERE `set` = :set")
     fun getRepeatCount(set: Int): Int
 
     @Query("UPDATE TimeTable SET focusTime = :focusTime, breakTime = :breakTime, repeatCount = :repeatCount WHERE `set` = :set")
-    fun updateTime(focusTime: Long, breakTime: Long, repeatCount: Int, set: Int)
+    fun updateTime(focusTime: Int, breakTime: Int, repeatCount: Int, set: Int)
 
     @Query("UPDATE TimeTable SET focusTime = :focusTime WHERE `set` = :set")
-    fun updateFocusTime(focusTime: Long, set: Int)
+    fun updateFocusTime(focusTime: Int, set: Int)
 
     @Query("UPDATE TimeTable SET breakTime = :breakTime WHERE `set` = :set")
-    fun updateBreakTime(breakTime: Long, set: Int)
+    fun updateBreakTime(breakTime: Int, set: Int)
 
     @Query("UPDATE TimeTable SET repeatCount = :repeatCount WHERE `set` = :set")
     fun updateRepeatCount(repeatCount: Int, set: Int)

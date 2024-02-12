@@ -10,7 +10,7 @@ import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private val sendClickCategory: SendClickCategory): RecyclerView.Adapter<MainDrawerRVAdapter.ViewHolder>(){
 
     interface SendClickCategory{
-        fun sendClickCategory(category:CategoryList)
+        fun sendClickCategory(category:CategoryList, position: Int)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MainDrawerRVAdapter.ViewHolder {
@@ -30,7 +30,7 @@ class MainDrawerRVAdapter(private val categoryList : List<CategoryList>, private
             binding.itemDrawerTv.text = categoryText
 
             binding.root.setOnClickListener {
-                sendClickCategory.sendClickCategory(categoryList[position])
+                sendClickCategory.sendClickCategory(categoryList[position], position)
             }
         }
     }

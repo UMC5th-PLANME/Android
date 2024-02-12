@@ -4,9 +4,12 @@ import TimerFocusFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 
-class TimerVPAdapter (activity: FragmentActivity) : FragmentStateAdapter(activity){
+class TimerVPAdapter (fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity){
+
+    private val focusFragment = TimerFocusFragment()
+    private val breakFragment = TimerBreakFragment()
+    private val repeatFragment = TimerRepeatCountFragment()
 
     override fun getItemCount(): Int = 3
 
@@ -16,5 +19,19 @@ class TimerVPAdapter (activity: FragmentActivity) : FragmentStateAdapter(activit
             1 -> TimerBreakFragment()
             else -> TimerRepeatCountFragment()
         }
+
     }
+
+    fun getFocusTime(): Int {
+        return focusFragment.getFocusTime()     // ** 분
+    }
+
+    fun getBreakTime(): Int {
+        return breakFragment.getBreakTime()     // ** 분
+    }
+
+    fun getRepeatCount(): Int {
+        return repeatFragment.getRepeatCount()  // ** 번
+    }
+
 }

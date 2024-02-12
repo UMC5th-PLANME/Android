@@ -2,6 +2,7 @@ package com.example.plan_me.data.remote.view.category
 
 import com.example.plan_me.data.remote.dto.category.AddCategoryRes
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.category.ModifyCategoryRes
 
 

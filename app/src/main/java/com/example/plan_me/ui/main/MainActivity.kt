@@ -18,8 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.category.AllCategoryView
+import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
@@ -28,7 +32,6 @@ import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
-import com.example.plan_me.ui.login.SendCategoryToPlannerFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
@@ -40,7 +43,7 @@ class MainActivity :
     DialogAddFragment.SendSignalToMain,
     DialogDeleteCategoryCheckFragment.SendDeleteMessage,
     DialogModifyFragment.SendModifyMessage ,
-    MainDrawerRVAdapter.SendClickCategory {
+    MainDrawerRVAdapter.SendClickCategory{
 
     private lateinit var binding: ActivityMainBinding
     private var isFabOpen = false
@@ -61,7 +64,10 @@ class MainActivity :
 
     private lateinit var categorys : List<CategoryList>
 
-    private lateinit var sendCategoryToPlannerFragment: SendCategoryToPlannerFragment
+    private lateinit var currentCategory : CategoryList
+    private var currentCategoryPosition : Int = -1
+
+    private var isAdd : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -84,8 +90,17 @@ class MainActivity :
         clickListener()
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (isAdd) {
+            isAdd = false
+            startFragment(currentCategory)
+        }
+    }
+
     private fun initActivity() {
         Log.d("init", categorys.toString())
+        startFragment(currentCategory)
         val layoutManager = LinearLayoutManager(this)
         val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
         drawerAdapter = MainDrawerRVAdapter(categorys, this)
@@ -103,13 +118,26 @@ class MainActivity :
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
     }
-    private fun getCategoryList() {  //연결 성공
+    private fun getCategoryList() {
         val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
-        Log.d("access token", access_token)
         val setCategoryService = CategoryService()
         setCategoryService.setAllCategoryView(this)
         setCategoryService.getCategoryAllFun(access_token!!)
     }
+    private fun startFragment(category: CategoryList) {
+        Log.d("startFragment", category.toString())
+        val bundle = Bundle()
+        bundle.putInt("id", category.categoryId)
+        bundle.putInt("color", category.color)
+        bundle.putString("name", category.name)
+        bundle.putString("emoticon", category.emoticon)
+        val plannerFragment = PlannerFragment()
+        plannerFragment.arguments = bundle
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, plannerFragment)
+            .commitAllowingStateLoss()
+    }
+
     private fun clickListener() {
         //다른 화면 클릭시 fab 닫기
         binding.root.setOnTouchListener { _, event ->
@@ -137,7 +165,12 @@ class MainActivity :
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainFabAddBtn.setOnClickListener {
-            switchActivity(ScheduleAddActivity())
+            val intent = Intent(this, ScheduleAddActivity::class.java)
+            val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
+            intent.putExtra("category", currentCategory)
+            intent.putExtra("categoryList", categoryArraList)
+            isAdd = true
+            startActivity(intent)
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.mainMenu.setOnClickListener{
@@ -211,40 +244,53 @@ class MainActivity :
     }
 
     override fun onAllCategorySuccess(response: AllCategoryRes) {
-        Log.d("all category", response.result.toString())
         categorys = response.result.categoryList
-        initActivity()
+        if(categorys.isNotEmpty()) {
+            if (currentCategoryPosition == -1) {
+                currentCategory = categorys[0]
+            } else {
+                currentCategory = categorys[currentCategoryPosition]
+            }
+            initActivity()
+        }
     }
 
     override fun onAllCategoryFailure(response: AllCategoryRes) {
         TODO("Not yet implemented")
     }
 
-    override fun sendSuccessSignal() {
+    override fun sendSuccessSignal() {  //add
         getCategoryList()
     }
 
-    override fun sendDeleteMessage() {
+    override fun sendDeleteMessage(position : Int) {    //delete
         category_delete.dismiss()
-        getCategoryList()
-    }
-
-    override fun sendModifySuccessSignal() {
-        category_modify.dismiss()
-        getCategoryList()
-    }
-
-    override fun sendClickCategory(category: CategoryList) {
-        if (isHome) {
-            val bundle = Bundle()
-            bundle.putString("name", category.name)
-            bundle.putString("emoticon", category.emoticon)
-            bundle.putInt("color", category.color)
-            val plannerFragment = PlannerFragment()
-            plannerFragment.arguments = bundle
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.main_frm, plannerFragment)
-                .commitAllowingStateLoss()
+        Log.d("position", position.toString())
+        Log.d("previousCategoryPosition", currentCategoryPosition.toString())
+        if (currentCategoryPosition == position) {
+            currentCategoryPosition = -1
+            getCategoryList()
+        }
+        else if (currentCategoryPosition > position) {
+            currentCategoryPosition -= 1
         }
     }
+
+    override fun sendModifySuccessSignal(position : Int) {  //modify
+        category_modify.dismiss()
+        currentCategoryPosition = position
+        getCategoryList()
+    }
+
+    override fun sendClickCategory(category: CategoryList, position: Int) {
+        if (isHome) {
+            currentCategoryPosition =position
+            currentCategory = categorys[currentCategoryPosition]
+            initActivity()
+        }
+    }
+
+
+
+
 }

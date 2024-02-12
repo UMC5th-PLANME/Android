@@ -10,28 +10,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.FragmentDialogAlarmBinding
 import com.example.plan_me.databinding.FragmentDialogDeleteCategoryBinding
-import com.example.plan_me.databinding.FragmentDialogModifyCategoryBinding
+import com.example.plan_me.databinding.FragmentDialogSelectCategoryBinding
 import com.example.plan_me.ui.main.MainActivity
 
-class DialogModifyCategoryFragment(context : Context, private val categoryList: List<CategoryList>, private val sendModifyMessage :DialogModifyFragment.SendModifyMessage):Dialog(context){
-    private lateinit var binding : FragmentDialogModifyCategoryBinding
-    private lateinit var adapter : ModifyCategoryRVAdapter
+class DialogSelectCategoryFragment(context : Context, private val categoryList: ArrayList<CategoryList>, private val dialogSelectCategoryInerface: DialogSelectCategoryInerface):Dialog(context){
+    private lateinit var binding : FragmentDialogSelectCategoryBinding
+    private lateinit var adapter : SelectCategoryRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = FragmentDialogModifyCategoryBinding.inflate(layoutInflater)
-        binding.dialogModifyCategoryRv
+        binding = FragmentDialogSelectCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.dialogModifyCategoryCancelBtn.setOnClickListener {
+        binding.dialogSelectCategoryCancelBtn.setOnClickListener {
             dismiss()
         }
         Log.d("list", categoryList.toString())
 
         val layoutManager = LinearLayoutManager(context)
-        adapter = ModifyCategoryRVAdapter(context, categoryList, sendModifyMessage)
-        binding.dialogModifyCategoryRv.layoutManager = layoutManager
-        binding.dialogModifyCategoryRv.adapter = adapter
+        adapter = SelectCategoryRVAdapter(context, categoryList, dialogSelectCategoryInerface)
+        binding.dialogSelectCategoryRv.layoutManager = layoutManager
+        binding.dialogSelectCategoryRv.adapter = adapter
     }
     //text
 }

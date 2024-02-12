@@ -14,7 +14,6 @@ import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerBreakBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
-import com.example.plan_me.ui.dialog.DialogTimerSettingFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 
 class TimerBreakActivity : AppCompatActivity() {
@@ -22,7 +21,6 @@ class TimerBreakActivity : AppCompatActivity() {
 
     private var isFabOpen = false
     private lateinit var dialogAdd : DialogAddFragment
-    private lateinit var dialogSetting: DialogTimerSettingFragment
     private lateinit var drawerView: View
     private lateinit var drawerCancel: ImageView
 
@@ -82,8 +80,6 @@ class TimerBreakActivity : AppCompatActivity() {
 
             // Timer-Break 에 시간이 남았다면 -> 초기화 알림 문구
 
-            dialogSetting = DialogTimerSettingFragment(this)
-            dialogSetting.show()
         }
     }
 

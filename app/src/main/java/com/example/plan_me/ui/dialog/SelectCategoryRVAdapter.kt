@@ -7,13 +7,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
 
-class ModifyCategoryRVAdapter(private val context: Context, private val categoryList : List<CategoryList>, private val sendModidyMessage :DialogModifyFragment.SendModifyMessage): RecyclerView.Adapter<ModifyCategoryRVAdapter.ViewHolder>(){
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ModifyCategoryRVAdapter.ViewHolder {
+class SelectCategoryRVAdapter(private val context: Context, private val categoryList : ArrayList<CategoryList>, dialogSelectCategoryInerface: DialogSelectCategoryInerface): RecyclerView.Adapter<SelectCategoryRVAdapter.ViewHolder>(){
+    private var dialogSelectCategoryInerface: DialogSelectCategoryInerface
+
+    init {
+        this.dialogSelectCategoryInerface = dialogSelectCategoryInerface
+    }
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): SelectCategoryRVAdapter.ViewHolder {
         val binding: ItemDrawerBinding = ItemDrawerBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
         return ViewHolder(binding)
     }
-    override fun onBindViewHolder(holder: ModifyCategoryRVAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SelectCategoryRVAdapter.ViewHolder, position: Int) {
         holder.bind(position)
     }
 
@@ -25,13 +30,10 @@ class ModifyCategoryRVAdapter(private val context: Context, private val category
             binding.itemDrawerTv.text = categoryText
 
             binding.root.setOnClickListener {
-                showCheckDialog(position)
+                dialogSelectCategoryInerface.onClickCategory(position)
             }
         }
     }
 
-    private fun showCheckDialog(position : Int) {
-        val checkDialog = DialogModifyFragment(context, categoryList[position], sendModidyMessage, position)
-        checkDialog.show()
-    }
+
 }

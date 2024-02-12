@@ -62,10 +62,10 @@ class ScheduleService  {
     fun addScheduleFun(accessToken: String, schedule_input: Schedule_input) {
         ScheduleService.addSchedule(accessToken, schedule_input).enqueue(object : Callback<AddScheduleRes> {
             override fun onResponse(call: Call<AddScheduleRes>, response: Response<AddScheduleRes>) {
-                Log.d("add category response", response.body().toString())
+                Log.d("add schedule response", response.body().toString())
                 val resp: AddScheduleRes = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2001" -> addScheduleView.onAddScheduleSuccess(resp)
+                    "COMMON200" -> addScheduleView.onAddScheduleSuccess(resp)
                     else -> addScheduleView.onAddScheduleFailure(resp)
                 }
             }
@@ -83,7 +83,7 @@ class ScheduleService  {
             ) {
                 val resp = response.body()!!
                 when(resp.code) {
-                    "CATEGORY2005" -> allScheduleView.onAllScheduleSuccess(resp)
+                    "SCHEDULE2002" -> allScheduleView.onAllScheduleSuccess(resp)
                     else -> allScheduleView.onAllScheduleFailure(resp)
                 }
             }

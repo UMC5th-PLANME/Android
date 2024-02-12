@@ -1,4 +1,5 @@
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,13 +35,17 @@ class TimerFocusFragment : Fragment(){
 
         // 최대값 설정
         hour.maxValue = 2
-
         min.maxValue = 5
 
         // 보여질 값 설정 (string)
         hour.displayedValues = arrayOf("0", "1", "2")
-
-        // min의 값은 10 단위로 설정
         min.displayedValues = arrayOf("0", "10", "20", "30", "40", "50")
+    }
+
+    fun getFocusTime(): Int {
+
+        val hour = binding.timerFocusNumberPickerHour.value
+        val min = binding.timerFocusNumberPickerMin.value
+        return hour * 60 + min  // 분으로 넘겨줌
     }
 }

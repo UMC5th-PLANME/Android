@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
-import com.example.plan_me.data.local.entity.category
-import com.example.plan_me.data.local.entity.schedule
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
 import com.kizitonwose.calendar.core.WeekDay

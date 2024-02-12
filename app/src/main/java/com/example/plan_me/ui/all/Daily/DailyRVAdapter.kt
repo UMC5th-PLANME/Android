@@ -6,9 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.databinding.ItemScheduleBinding
 import com.example.plan_me.data.local.entity.category
-import com.example.plan_me.data.local.entity.schedule
 
-class DailyRVAdapter(private val categoryList : ArrayList<category>, private val scheduleList : ArrayList<schedule>) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
+class DailyRVAdapter(private val categoryList : ArrayList<category>) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleBinding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
