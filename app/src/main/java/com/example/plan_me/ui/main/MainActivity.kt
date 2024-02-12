@@ -23,6 +23,7 @@ import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.databinding.ActivityMainBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
 import com.example.plan_me.ui.all.AllFragment
+import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogAddFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
@@ -274,12 +275,20 @@ class MainActivity :
         }
         else if (currentCategoryPosition > position) {
             currentCategoryPosition -= 1
+            getCategoryList()
+        }else {
+
+            getCategoryList()
         }
+        val customToast = CustomToast
+        customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
     }
 
     override fun sendModifySuccessSignal(position : Int) {  //modify
         category_modify.dismiss()
         currentCategoryPosition = position
+        val customToast = CustomToast
+        customToast.createToast(this, "카테고리가 수정되었습니다", 300, true)
         getCategoryList()
     }
 
