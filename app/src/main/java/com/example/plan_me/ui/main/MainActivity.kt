@@ -114,8 +114,16 @@ class MainActivity :
             binding.mainDrawerLayout.closeDrawers()
         }
         else {
-            super.onBackPressed()
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            if (!isHome) {
+                startFragment(currentCategory)
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            }else {
+                super.onBackPressed()
+                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            }
         }
     }
     private fun getCategoryList() {
