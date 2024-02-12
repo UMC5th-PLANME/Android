@@ -63,6 +63,21 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
         binding.dialogCalenderCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
             override fun bind(container: DayViewContainer, data: CalendarDay) {
                 container.textView.text = data.date.dayOfMonth.toString()
+
+                if (data.position == DayPosition.MonthDate) {
+                    container.textView.setTextColor(Color.BLACK)
+                } else {
+                    container.textView.setTextColor(Color.GRAY)
+                    container.canClick = false
+                }
+
+                if (container.canClick) {
+                    container.textView.setOnClickListener {
+                        onDaySelected(data.date)
+                        container.textView.setBackgroundResource(R.drawable.calender_onclick_circle)
+                    }
+                }
+
                 if (rangeRe) {
                     Log.d("true", "true")
                     container.textView.background = null
@@ -75,19 +90,13 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
                         container.textView.setBackgroundResource(R.drawable.calender_box_2)
                     } else if (data.date == selectedStartDate) {
                         // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.calender_box_1)
+                        container.textView.setBackgroundResource(R.drawable.calendar_start)
                     } else if (data.date == selectedEndDate) {
                         // 다른 날짜에 대한 배경 재설정
-                        container.textView.setBackgroundResource(R.drawable.calender_box_3)
+                        container.textView.setBackgroundResource(R.drawable.calendar_end)
                     } else {
                         container.textView.background = null
                     }
-                }
-                if (data.position == DayPosition.MonthDate) {
-                    container.textView.setTextColor(Color.BLACK)
-                } else {
-                    container.textView.setTextColor(Color.GRAY)
-                    container.canClick = false
                 }
             }
 
@@ -176,18 +185,27 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
             // 시작 날짜를 선택한 경우
             selectedStartDate = date
             selectedEndDate = null
-        } else if (selectedEndDate == null && date.isAfter(selectedStartDate)) {
-            // 끝 날짜를 선택한 경우
-            selectedEndDate = date
-            Log.d("month", selectedEndDate.toString())
+        } else if (selectedEndDate == null && selectedStartDate != null && date == selectedStartDate) {
+            // 다음에 지정해야하는데 같은 날짜 지정
+            selectedStartDate = date
+        }else if (selectedEndDate == null && selectedStartDate != null) {
+            // 두번째 날짜 선택
+            if (date.isAfter(selectedStartDate)) {
+                selectedEndDate = date
+            }else {
+                selectedEndDate = selectedStartDate
+                selectedStartDate = date
+            }
             binding.dialogCalenderCalendarView.notifyCalendarChanged()
-        } else {
+        }else if (selectedEndDate != null && selectedStartDate != null) {
             // 다시 시작 날짜부터 선택한 경우
             selectedStartDate = date
-            selectedEndDate = date
+            selectedEndDate = null
             rangeRe=true
             binding.dialogCalenderCalendarView.notifyCalendarChanged()
         }
+        Log.d("Date start", selectedStartDate.toString())
+        Log.d("Date end", selectedEndDate.toString())
     }
 
     private fun isDateInRange(date: LocalDate): Boolean {
@@ -197,25 +215,7 @@ class DialogCalenderFragment(context : Context, dialogCalenderInterface: DialogC
 
     inner class DayViewContainer(view: View): ViewContainer(view) {
         val textView = DialogCalendarDayLayoutBinding.bind(view).calendarDayText
-        var isSelected : Boolean = false
-        private var selectedDate: LocalDate? = null
         var canClick : Boolean = true
-        init {
-            view.setOnClickListener {
-                if (canClick) {
-                    if (!isSelected) {
-                        textView.setBackgroundResource(R.drawable.calender_onclick_circle)
-                        isSelected = true
-                        val text = textView.text.toString()
-                        val day = text.toInt()
-                        selectedDate = pageMonth.atDay(day)
-                        Log.d("selected", selectedDate.toString())
-                        onDaySelected(selectedDate!!)
-                    } else {
-                        isSelected = false
-                    }
-                }
-            }
-        }
+
     }
 }

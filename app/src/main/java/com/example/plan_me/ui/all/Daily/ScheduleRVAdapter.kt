@@ -19,6 +19,7 @@ import com.example.plan_me.ui.add.ScheduleAddActivity
 class ScheduleRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableList<ScheduleList>?, private val context: Context) :
     RecyclerView.Adapter<ScheduleRVAdapter.ViewHolder>(),
     ModifyScheduleView{
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleListBinding = ItemScheduleListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -75,6 +76,7 @@ class ScheduleRVAdapter(private val categoryList : List<CategoryList>, private v
 
     override fun onModifyScheduleSuccess(response: ModifyScheduleRes) {
         Log.d("성공", "")
+        notifyDataSetChanged()
     }
 
     override fun onModifyScheduleFailure(response: ModifyScheduleRes) {

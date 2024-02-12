@@ -33,7 +33,7 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
                 val count = scheduleMap[category.categoryId]!!.count { it.status }
                 val notyet = scheduleMap[category.categoryId]!!.size - count
                 binding.itemScheduleTv.text = category.emoticon + " " + category.name
-                binding.itemScheduleDetail.text = count.toString() + " completed • "+notyet.toString() + " not yet"  //수정해야함
+                binding.itemScheduleDetail.text = count.toString() + " completed • "+notyet.toString() + " not yet"
                 val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
                 binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
@@ -54,6 +54,9 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
                 binding.itemScheduleFlip.visibility = View.GONE
                 binding.itemScheduleMore.visibility = View.VISIBLE
                 binding.itemScheduleDetail.visibility = View.VISIBLE
+                val count = scheduleMap[category.categoryId]!!.count { it.status }
+                val notyet = scheduleMap[category.categoryId]!!.size - count
+                binding.itemScheduleDetail.text = count.toString() + " completed • "+notyet.toString() + " not yet"
             }
 
         }
