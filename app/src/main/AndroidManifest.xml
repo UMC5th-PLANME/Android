@@ -19,6 +19,7 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
         android:theme="@style/Theme.Plan_Me"
         tools:targetApi="31">
 
@@ -86,7 +87,6 @@
         <activity android:name=".ui.setting.SettingActivity"/>
         <activity android:name=".ui.setting.AccountActivity"/>
         <activity android:name=".ui.setting.ChangeNicknameActivity"/>
-        <activity android:name=".ui.setting.ChangeTypeActivity"/>
         <activity android:name=".ui.setting.ManageMestoryActivity"/>
         <activity android:name=".ui.setting.ConsumerCenterActivity"/>
         <activity android:name=".ui.setting.TermsPoliciesActivity"/>
