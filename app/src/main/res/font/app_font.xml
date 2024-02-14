@@ -8,14 +8,7 @@
         android:fontStyle="normal"
         android:fontWeight="1000"
         app:font="@font/pretendard_bold"
-        app:fontStyle="normal"
-        app:fontWeight="1000" />
-
-    <font
-        android:font="@font/agro_bold"
-        android:fontStyle="normal"
-        android:fontWeight="1000"
-        app:font="@font/agro_bold"
+        android:textAllCaps="false"
         app:fontStyle="normal"
         app:fontWeight="1000" />
 
@@ -28,13 +21,6 @@
         app:fontStyle="normal"
         app:fontWeight="500" />
 
-    <font
-        android:font="@font/agro_medium"
-        android:fontStyle="normal"
-        android:fontWeight="1000"
-        app:font="@font/agro_medium"
-        app:fontStyle="normal"
-        app:fontWeight="1000" />
 
     <!--regular-->
     <font
@@ -45,11 +31,4 @@
         app:fontStyle="normal"
         app:fontWeight="300" />
 
-    <font
-        android:font="@font/agro_regular"
-        android:fontStyle="normal"
-        android:fontWeight="1000"
-        app:font="@font/agro_regular"
-        app:fontStyle="normal"
-        app:fontWeight="1000" />
 </font-family>

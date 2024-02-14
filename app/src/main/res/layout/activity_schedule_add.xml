@@ -151,30 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="반복"
-                android:textSize="18dp"/>
-            
-            <TextView
-                android:id="@+id/schedule_repeat_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="없음"
-                android:fontFamily="@font/pretendard_regular"
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -182,21 +160,19 @@
                 android:text="알림"
                 android:textSize="18dp"/>
 
-            <TextView
-                android:id="@+id/schedule_alarm_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="일주일 전"
-                android:fontFamily="@font/pretendard_regular"
-                android:textSize="16dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"/>
+            <Switch
+                android:id="@+id/schedule_alarm_switch"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:thumb="@drawable/alarm_switch_thumb"
+                android:track="@drawable/alarm_switch_track"
+                android:background="@color/white"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/schedule_alarm_time_view"
                 android:layout_width="75dp"
                 android:layout_height="20dp"
-                app:cardBackgroundColor="@color/dark_gray"
+                app:cardBackgroundColor="@color/gray"
                 app:cardCornerRadius="25dp"
                 android:layout_marginStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"

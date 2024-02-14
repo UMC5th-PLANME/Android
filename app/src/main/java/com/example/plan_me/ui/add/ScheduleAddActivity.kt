@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.add
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
@@ -100,9 +101,12 @@ class ScheduleAddActivity():
                 if(schedule.startDate == schedule.endDate) startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일"
                 else startDate.monthValue.toString() +"월 " + startDate.dayOfMonth+"일 - "+ endDate.monthValue.toString() +"월 " + endDate.dayOfMonth+"일"
             binding.scheduleTimeTv.text = schedule.start_time.toString() + " ~ " + schedule.end_time.toString()
-            binding.scheduleRepeatTv.text = schedule.repeat_period
-            binding.scheduleAlarmTv.text = schedule.alarm.toString()
-            binding.scheduleAlarmTimeTv.text = schedule.alarm_time
+            if (schedule.alarm) {
+                binding.scheduleAlarmTimeTv.text = schedule.alarm_time
+                binding.scheduleAlarmSwitch.isChecked = true
+                binding.scheduleAlarmTimeView.isEnabled = true
+                binding.scheduleAlarmTimeView.setCardBackgroundColor(Color.parseColor("#393939"))
+            }
 
         }else if (intent.hasExtra("category") && intent.hasExtra("categoryList")){
             isModify = false
@@ -110,6 +114,7 @@ class ScheduleAddActivity():
             currentCategory = intent.getParcelableExtra("category")!!
             categoryList = intent.getParcelableArrayListExtra("categoryList")!!
         }
+        binding.scheduleAlarmTimeView.isEnabled = false
     }
 
     private fun init(){
@@ -120,17 +125,20 @@ class ScheduleAddActivity():
     }
 
     private fun clickListener() {
-        binding.scheduleAlarmTv.setOnClickListener {
-            dialogAlarm = DialogAlarmFragment(this)
-            dialogAlarm.show()
+        binding.scheduleAlarmSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+            if(isChecked) {
+                Log.d("dddd", binding.scheduleAlarmSwitch.isChecked.toString())
+                binding.scheduleAlarmTimeView.setCardBackgroundColor(Color.parseColor("#393939"))
+                binding.scheduleAlarmTimeView.isEnabled = true
+            } else {
+                binding.scheduleAlarmTimeView.setCardBackgroundColor(Color.parseColor("#A3A3A3"))
+                binding.scheduleAlarmTimeView.isEnabled = false
+                binding.scheduleAlarmTimeTv.text = "시간 선택"
+            }
         }
         binding.scheduleDateBtn.setOnClickListener {
             dialogCalender = DialogCalenderFragment(this, this)
             dialogCalender.show()
-        }
-        binding.scheduleRepeatTv.setOnClickListener {
-            dialogRepeat = DialogRepeatFragment(this, this)
-            dialogRepeat.show()
         }
         binding.scheduleAlarmTimeView.setOnClickListener {
             dialogTimePick = DialogTimePickFragment(this, this)
@@ -160,16 +168,17 @@ class ScheduleAddActivity():
         binding.scheduleEditCompleteBtn.setOnClickListener {
 
             val name = binding.scheduleNameEt.text.toString()
-            val alarm = binding.scheduleAlarmTimeTv.text.toString()
+            var alarm = binding.scheduleAlarmTimeTv.text.toString()
             if (name == "") {
                 customToast.createToast(this,"일정 제목을 입력해주세요", 300, false)
             } else if (!::startDate.isInitialized) {
                 customToast.createToast(this,"날짜를 설정해주세요", 300, false)
             } else if (startTime.isEmpty()) {
                 customToast.createToast(this,"시간을 설정해주세요", 300, false)
-            } else if (alarm == "") {
+            } else if (alarm == "시간 선택" && binding.scheduleAlarmSwitch.isChecked) {
                 customToast.createToast(this,"알람 시간을 설정해주세요", 300, false)
             }else {
+                if(alarm == "시간 선택") alarm = "00:00"
                 val access_token = "Bearer " + getSharedPreferences(
                     "getRes",
                     MODE_PRIVATE
@@ -184,7 +193,7 @@ class ScheduleAddActivity():
                         name,
                         startTime, //시간 예외
                         endTime,
-                        schedule.alarm,
+                        binding.scheduleAlarmSwitch.isChecked,
                         alarm,  //시간 예외 추가해야함
                         startDate.toString(),
                         endDate.toString())
@@ -192,6 +201,8 @@ class ScheduleAddActivity():
                     setScheduleService.setModifyScheduleView(this)
                     setScheduleService.modifyScheduleFun(access_token, schedule.id, schedule_input)
                 }else {
+                    if(alarm == "시간 선택") alarm = "00:00"
+                    Log.d("시간 선택", alarm.toString())
                     val scheduleInput = Schedule_input(
                         false,
                         currentCategory.categoryId,
@@ -199,7 +210,7 @@ class ScheduleAddActivity():
                         name,
                         startTime,
                         endTime,
-                        true,
+                        binding.scheduleAlarmSwitch.isChecked,
                         alarm,
                         startDate.toString(),
                         endDate.toString()

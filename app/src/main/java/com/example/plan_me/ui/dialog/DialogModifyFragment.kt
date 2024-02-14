@@ -12,12 +12,9 @@ import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Category_input
-import com.example.plan_me.data.local.entity.category
-import com.example.plan_me.data.remote.dto.category.AddCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.category.ModifyCategoryRes
 import com.example.plan_me.data.remote.service.category.CategoryService
-import com.example.plan_me.data.remote.view.category.AddCategoryView
 import com.example.plan_me.data.remote.view.category.ModifyCategoryView
 import com.example.plan_me.databinding.FragmentDialogAddCategoryBinding
 import java.lang.Integer.max
