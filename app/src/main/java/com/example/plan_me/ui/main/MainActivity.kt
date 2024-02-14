@@ -70,6 +70,8 @@ class MainActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        initBottomNavigation()
         getCategoryList()
         setContentView(binding.root)
 
@@ -107,6 +109,49 @@ class MainActivity :
         drawer.layoutManager = layoutManager
         drawer.adapter = drawerAdapter
         drawerAdapter.notifyDataSetChanged()
+    }
+
+    private fun initBottomNavigation(){
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frm, PlannerFragment())
+            .commitAllowingStateLoss()
+
+        binding.mainBtmNavi.setOnItemSelectedListener{ item ->
+            when (item.itemId) {
+
+                R.id.planner -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_frm, PlannerFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+
+                R.id.mestory -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_frm, PlannerFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.timer -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_frm, PlannerFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+                R.id.setting -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_frm, PlannerFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
     }
 
     override fun onBackPressed() {
@@ -149,31 +194,9 @@ class MainActivity :
 
     private fun clickListener() {
         //다른 화면 클릭시 fab 닫기
-        binding.root.setOnTouchListener { _, event ->
-            if (isFabOpen && event.action == MotionEvent.ACTION_DOWN) {
-                toggleFab()
-                return@setOnTouchListener true
-            }
-            return@setOnTouchListener false
-        }
-        binding.mainFabMenuBtn.setOnClickListener {
-            Log.d("fab","fab")
-            toggleFab()
-        }
-        binding.mainFabMestoryBtn.setOnClickListener {
-            Log.d("mestory", "mestory")
-            switchActivity(MestoryActivity())
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-        }
-        binding.mainFabTimerBtn.setOnClickListener {
-            switchActivity(TimerFocusActivity())
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-        }
-        binding.mainFabSettingBtn.setOnClickListener {
-            switchActivity(SettingActivity())
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-        }
-        binding.mainFabAddBtn.setOnClickListener {
+
+
+        binding.mainBtmAddFab.setOnClickListener {
             val intent = Intent(this, ScheduleAddActivity::class.java)
             val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
             intent.putExtra("category", currentCategory)
@@ -225,35 +248,6 @@ class MainActivity :
         startActivity(intent)
     }
 
-    private fun toggleFab() {
-        isFabOpen = if (isFabOpen) {
-            binding.mainFabMestoryBtn.startAnimation(fab_close)
-            binding.mainFabTimerBtn.startAnimation(fab_close)
-            binding.mainFabSettingBtn.startAnimation(fab_close)
-            binding.mainFabAddBtn.startAnimation(fab_close)
-            binding.mainFabMestoryBtn.isClickable = false
-            binding.mainFabTimerBtn.isClickable = false
-            binding.mainFabSettingBtn.isClickable = false
-            binding.mainFabAddBtn.isClickable = false
-            false
-        } else {
-            binding.mainFabMestoryBtn.startAnimation(fab_open)
-            binding.mainFabTimerBtn.startAnimation(fab_open)
-            binding.mainFabSettingBtn.startAnimation(fab_open)
-            binding.mainFabAddBtn.startAnimation(fab_open)
-
-            binding.mainFabMestoryBtn.visibility = View.VISIBLE
-            binding.mainFabTimerBtn.visibility = View.VISIBLE
-            binding.mainFabSettingBtn.visibility = View.VISIBLE
-            binding.mainFabAddBtn.visibility = View.VISIBLE
-
-            binding.mainFabMestoryBtn.setClickable(true)
-            binding.mainFabTimerBtn.setClickable(true)
-            binding.mainFabSettingBtn.setClickable(true)
-            binding.mainFabAddBtn.setClickable(true)
-            true
-        }
-    }
 
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         categorys = response.result.categoryList

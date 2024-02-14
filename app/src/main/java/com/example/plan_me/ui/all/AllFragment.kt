@@ -23,7 +23,6 @@ class AllFragment : Fragment() {
     private fun initViewPager() {
         val allViewPager2Adapter = AllViewPager2Adapter(requireActivity())
         allViewPager2Adapter.addFragment(DailyFragment())
-        allViewPager2Adapter.addFragment(WeeklyFragment())
         allViewPager2Adapter.addFragment(MonthlyFragment())
 
         binding.allVp.adapter = allViewPager2Adapter
@@ -32,8 +31,7 @@ class AllFragment : Fragment() {
         TabLayoutMediator(binding.allTb, binding.allVp) {tab, position ->
             when(position) {
                 0->tab.text = "daily"
-                1->tab.text = "weekly"
-                2->tab.text = "monthly"
+                1->tab.text = "monthly"
             }
         }.attach()
     }

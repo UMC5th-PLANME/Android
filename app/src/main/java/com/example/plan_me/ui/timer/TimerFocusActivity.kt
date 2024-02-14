@@ -16,19 +16,12 @@ import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerFocusBinding
 import com.example.plan_me.data.local.database.SettingDatabase
-import com.example.plan_me.data.local.entity.SettingTime
-import com.example.plan_me.data.local.entity.Time
 import com.example.plan_me.data.local.database.TimeDatabase
-import com.example.plan_me.data.local.entity.category
-import com.example.plan_me.data.remote.dto.mestory.SaveFocusTimeReq
-import com.example.plan_me.data.remote.dto.mestory.SaveFocusTimeRes
 import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
-import com.example.plan_me.data.remote.retrofit.SaveFocusTimeRetrofitInterface
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.setting.SettingActivity
-import retrofit2.Call
 
 
 class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener, TimerView {
