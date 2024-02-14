@@ -13,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -109,10 +108,6 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
         binding.accountNicknameLo.setOnClickListener {
             switchActivity(ChangeNicknameActivity())
-        }
-
-        binding.accountSocialLo.setOnClickListener {
-            switchActivity(ChangeTypeActivity())
         }
 
         binding.accountLogoutTv.setOnClickListener {

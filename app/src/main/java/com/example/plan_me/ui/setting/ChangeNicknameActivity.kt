@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
@@ -32,7 +31,6 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
         setContentView(binding.root)
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
-        //getData1()
         getData2()
         setLookUpService()
 
@@ -63,7 +61,7 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
 
         binding.changeNicknameBtn.setOnClickListener {
             setEditName()
-            customToast.createToast(this@ChangeNicknameActivity,"닉네임이 변경되었습니다.", 300, false)
+            customToast.createToast(this@ChangeNicknameActivity,"닉네임이 변경되었습니다.", 300, true)
         }
     }
 
@@ -72,12 +70,6 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
         finish()
         overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
     }
-
-//    private fun getData1() {
-//        // 데이터 읽어오기
-//        val sharedPreferences: SharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
-//        userImg = sharedPreferences.getString("userImg", userImg)
-//    }
 
     private fun getData2() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)

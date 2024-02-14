@@ -14,7 +14,7 @@ import retrofit2.http.*
 interface AuthRetrofitInterface {
 
     // 회원가입
-    @POST("/api/member/login")
+    @POST("/api/member/join")
     fun postSignUp(@Header("accessToken") accessToken: String, @Body member: Member): Call<SignUpRes>
 
     // 프로필 이미지 등록
