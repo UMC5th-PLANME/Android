@@ -29,4 +29,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/pretendard_bold</item>
     </style>
+    <style name="MyItemFont" parent="android:Widget.TextView">
+      <item name="android:fontFamily">@font/pretendard_bold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+
+
 </resources>
