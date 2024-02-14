@@ -14,7 +14,6 @@ class DialogTermsActivity(context: Context) : Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDialogTermsBinding.inflate(layoutInflater)
-        window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         setContentView(binding.root)
 
         binding.termsInfoCb.setOnCheckedChangeListener { _, _ ->

@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.setting
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityConsumerCenterBinding
+import com.example.plan_me.ui.dialog.DialogBottomConsumerCenterActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 
 class ConsumerCenterActivity: AppCompatActivity() {
@@ -28,6 +30,10 @@ class ConsumerCenterActivity: AppCompatActivity() {
         fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
         fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         clickListener()
+
+        binding.consumerCenterEmailTv.setOnClickListener {
+            showDialog(DialogBottomConsumerCenterActivity(this@ConsumerCenterActivity))
+        }
 
         binding.consumerCenterBackBtn.setOnClickListener {
             finish()
@@ -55,6 +61,11 @@ class ConsumerCenterActivity: AppCompatActivity() {
             switchActivity(MainActivity())
         }
     }
+
+    private fun showDialog(dialog: Dialog) {
+        dialog.show()
+    }
+
     private fun switchActivity(activity: Activity) {
         val intent = Intent(this, activity::class.java)
         startActivity(intent)

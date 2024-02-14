@@ -192,4 +192,7 @@
 회사는 파기 사유가 발생한 개인정보를 선정하고, 회사의 개인정보 보호 책임자의 승인을 받아 개인정보를 파기합니다.\n
 3. 파기 방법\n
 전자적 파일 형태의 정보는 기록을 재생할 수 없는 기술적 방법을 사용합니다.\n</string>
+
+    <string name="bottom_email">아래의 버튼을 누르시면\n이메일이 복사됩니다.</string>
+    <string name="email"><u>planme.help@gmail.com</u></string>
 </resources>
