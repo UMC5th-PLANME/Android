@@ -1,35 +1,69 @@
 package com.example.plan_me.ui.mestory
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.mestory.GetTimeResult
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
 
-class MestoryRVAdapter(): RecyclerView.Adapter<MestoryRVAdapter.ViewHolder>(){
+class MestoryRVAdapter(val context: Context, val result: List<GetTimeResult>): RecyclerView.Adapter<MestoryRVAdapter.ViewHolder>(),
+    AllCategoryView {
+    private var accessToken: String? = ""
+    private var categoryId: Int = 0
+    private var color: String? = ""
 
-    // test : category layout 확인
-    val likeData = arrayOf( "Exercise", "Study" )
-
-    // onCreateViewHolder : ViewHolder 를 생성해줘야 할 때 호출
-    // 중요!! itemview 객체를 만든 뒤에 이를 재활용하기 위해 ViewHoler 에 던져줌
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MestoryRVAdapter.ViewHolder {
         val binding: ItemMestoryCategoryOpenBinding = ItemMestoryCategoryOpenBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
+        //mestoryColor()
         return ViewHolder(binding)
     }
 
-    // onBindViewHolder : ViewHolder 에 데이터를 바인딩 해줘야 할 때마다 호출되는 함수
-    // 사용자가 화면을 스크롤 할 때마다 엄청나게 호출됨
-    // RecyclerView 안에서는 Index 를 position 이라고 함
     override fun onBindViewHolder(holder: MestoryRVAdapter.ViewHolder, position: Int) {
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int = likeData.size
+    override fun getItemCount(): Int = result.size
 
     inner class ViewHolder(val binding: ItemMestoryCategoryOpenBinding): RecyclerView.ViewHolder(binding.root){
         fun bind (position: Int) {
-            binding.mestoryCategoryTv.text = likeData[position]
+            binding.mestoryCategoryTv.text = result[position].category_name
+            //categoryData()
         }
+    }
+
+//    private fun getRemoteData() {
+//        val sharedPreferences: SharedPreferences = context.getSharedPreferences("getRes", MODE_PRIVATE)
+//        accessToken = sharedPreferences.getString("getAccessToken", accessToken)
+//    }
+//
+//    private fun categoryData() {
+//        val sharedPreferences: SharedPreferences = context.getSharedPreferences("category", MODE_PRIVATE)
+//        categoryId = sharedPreferences.getInt("categoryId", categoryId)
+//        color = sharedPreferences.getString("color", color)
+//    }
+
+//    private fun mestoryColor() {
+//        getRemoteData()
+//        categoryData()
+//        val categoryOneService = CategoryService()
+//        categoryOneService.setOneCategoryView(this@MestoryRVAdapter)
+//        categoryOneService.getOneCategoryFun("Bearer " + accessToken, categoryId)
+//    }
+
+    override fun onAllCategorySuccess(response: AllCategoryRes) {
+        Log.d("RESPONSE", response.result.toString())
+    }
+
+    override fun onAllCategoryFailure(response: AllCategoryRes) {
+        Log.d("FAILURE", response.message)
     }
 }

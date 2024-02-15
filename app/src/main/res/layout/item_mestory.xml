@@ -32,15 +32,15 @@
         app:layout_constraintStart_toEndOf="@id/item_mestory_emoticon_tv"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="@drawable/category_et"
-        android:backgroundTint="@color/deep_white_gray"
+        android:background="@drawable/hide_btn"
         android:text="숨김"
         android:textColor="@color/white"
         android:textSize="12dp"
         android:fontFamily="@font/pretendard_regular"
         android:gravity="center"
+        android:enabled="false"
         app:layout_constraintTop_toTopOf="@id/item_mestory_name_tv"
         app:layout_constraintBottom_toBottomOf="@id/item_mestory_name_tv"
         app:layout_constraintEnd_toEndOf="parent"/>
