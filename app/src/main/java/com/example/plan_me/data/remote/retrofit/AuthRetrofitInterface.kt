@@ -2,6 +2,7 @@ package com.example.plan_me.data.remote.retrofit
 
 import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.AutoLoginRes
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
@@ -12,6 +13,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface AuthRetrofitInterface {
+    // 자동 로그인
+    @GET("/api/member/login")
+    fun getAutoLogin(@Header("Authorization") Authorization: String): Call<AutoLoginRes>
+
 
     // 회원가입
     @POST("/api/member/join")
