@@ -16,7 +16,6 @@ import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityMestoryBinding
 import com.example.plan_me.ui.CircleTransform
 import com.example.plan_me.ui.dialog.DialogAddFragment
-import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.squareup.picasso.Picasso
 
@@ -80,7 +79,7 @@ class MestoryActivity : AppCompatActivity() {
         }
         binding.mestoryFabSettingBtn.setOnClickListener {
             Log.d("fab: mestory", "mestory -> setting")
-            switchActivity(SettingActivity())
+            //switchActivity(SettingActivity())
         }
     }
 

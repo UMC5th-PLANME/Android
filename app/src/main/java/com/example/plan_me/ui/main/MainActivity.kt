@@ -7,7 +7,6 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -29,12 +28,8 @@ import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
-import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
-import com.example.plan_me.ui.setting.SettingActivity
-import com.example.plan_me.ui.timer.TimerFocusActivity
-import com.example.plan_me.utils.alarm.AlarmFunctions
-import com.example.plan_me.utils.alarm.AlarmService
+import com.example.plan_me.ui.setting.SettingFragment
 
 class MainActivity :
     AppCompatActivity(),
@@ -45,7 +40,6 @@ class MainActivity :
     MainDrawerRVAdapter.SendClickCategory{
 
     private lateinit var binding: ActivityMainBinding
-    private var isFabOpen = false
     private lateinit var drawerView:View
     private lateinit var drawerAdd: TextView
     private lateinit var drawerDelete: TextView
@@ -145,7 +139,7 @@ class MainActivity :
                 R.id.setting -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-                        .replace(R.id.main_frm, PlannerFragment())
+                        .replace(R.id.main_frm, SettingFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
@@ -242,12 +236,6 @@ class MainActivity :
     private fun showDialog(dialog: Dialog) {
         dialog.show()
     }
-
-    private fun switchActivity(activity: Activity) {
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
-    }
-
 
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         categorys = response.result.categoryList

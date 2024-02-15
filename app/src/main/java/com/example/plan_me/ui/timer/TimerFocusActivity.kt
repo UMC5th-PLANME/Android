@@ -21,7 +21,6 @@ import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.mestory.MestoryActivity
-import com.example.plan_me.ui.setting.SettingActivity
 
 
 class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener, TimerView {
@@ -90,7 +89,7 @@ class TimerFocusActivity: AppCompatActivity(), ResetConfirmedListener, TimerView
         }
         binding.timerFocusFabSettingBtn.setOnClickListener {
             Log.d("fab: timer-focus", "timer-break -> mestory")
-            switchActivity(SettingActivity())
+            //switchActivity(SettingActivity())
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
 

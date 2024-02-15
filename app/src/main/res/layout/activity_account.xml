@@ -144,20 +144,9 @@
             android:textSize="12dp"
             android:fontFamily="@font/pretendard_regular"
             android:layout_marginEnd="15dp"
-            app:layout_constraintEnd_toStartOf="@id/account_social_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/account_social_tv"
             app:layout_constraintBottom_toBottomOf="@id/account_social_tv" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/account_social_btn"
-            android:layout_width="6dp"
-            android:layout_height="10dp"
-            android:background="@drawable/account_btn_arrow"
-            android:backgroundTint="@color/dark_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
