@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.planner
 
+import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -28,13 +29,13 @@ class PlannerFragment : Fragment() ,
     private var selectedSchedule : MutableList<ScheduleList>? = null
     val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
     private var categoryId : Int = 0
+    private var color: String = ""
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPlannerBinding.inflate(layoutInflater)
         init()
         return binding.root
-
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -59,7 +60,17 @@ class PlannerFragment : Fragment() ,
             binding.plannerCategoryImoticonTv.text = (arguments?.getString("emoticon")!!)
 
             getScheduleAll()
+            saveData()
         }
+    }
+
+    private fun saveData() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("category", AppCompatActivity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("categoryId", categoryId)
+        editor.putString("color", color)
+        editor.apply()
     }
 
     private fun getScheduleAll() {

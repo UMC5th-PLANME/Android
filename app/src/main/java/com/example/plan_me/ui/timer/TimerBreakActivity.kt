@@ -14,7 +14,7 @@ import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityTimerBreakBinding
 import com.example.plan_me.ui.dialog.DialogAddFragment
-import com.example.plan_me.ui.mestory.MestoryActivity
+import com.example.plan_me.ui.mestory.MestoryFragment
 
 class TimerBreakActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTimerBreakBinding
@@ -56,7 +56,7 @@ class TimerBreakActivity : AppCompatActivity() {
         }
         binding.timerBreakFabMestoryBtn.setOnClickListener {
             Log.d("fab: timer-break", "timer-break -> mestory")
-            switchActivity(MestoryActivity())
+            //switchActivity(MestoryFragment())
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
         binding.timerBreakFabPlannerBtn.setOnClickListener {

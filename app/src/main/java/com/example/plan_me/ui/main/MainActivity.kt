@@ -28,6 +28,7 @@ import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
+import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingFragment
 
@@ -125,7 +126,7 @@ class MainActivity :
                 R.id.mestory -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-                        .replace(R.id.main_frm, PlannerFragment())
+                        .replace(R.id.main_frm, MestoryFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }

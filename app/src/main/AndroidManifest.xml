@@ -74,8 +74,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.mestory.MestoryActivity"/>
-
         <activity android:name=".ui.timer.TimerFocusActivity"/>
         <activity android:name=".ui.timer.TimerBreakActivity"/>
         <activity android:name=".ui.timer.TimerSettingActivity" />
