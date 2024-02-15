@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -13,12 +14,15 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
@@ -41,7 +45,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 
-class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView, LookUpMemberView {
+class AccountFragment: Fragment(), ChangeProfileView, ProfileImageView, LookUpMemberView {
     private lateinit var binding: ActivityAccountBinding
     private var customToast = CustomToast
     private var userName: String? = ""
@@ -51,11 +55,13 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private lateinit var imageResult: ActivityResultLauncher<Intent>
     private var newImgUrl: String? = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ActivityAccountBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         getData2()
         setLookUpService()
@@ -73,7 +79,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
                 binding.accountImageIv.setImageURI(imageUrl)
                 Picasso.get().load(imageUrl).transform(CircleTransform()).into(binding.accountImageIv)
 
-                val file = File(absolutelyPath(imageUrl, this@AccountActivity))
+                val file = File(absolutelyPath(imageUrl, requireContext()))
                 val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
                 val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
 
@@ -91,8 +97,11 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         }
 
         binding.accountBackBtn.setOnClickListener {
-            finish()
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                .replace(R.id.main_frm, SettingFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.accountCameraLo.setOnClickListener {
@@ -107,31 +116,23 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
         }
 
         binding.accountNicknameLo.setOnClickListener {
-            switchActivity(ChangeNicknameActivity())
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                .replace(R.id.main_frm, ChangeNicknameFragment())
+                .commitAllowingStateLoss()
         }
 
         binding.accountLogoutTv.setOnClickListener {
-            showDialog(DialogLogoutActivity(this@AccountActivity, social))
+            showDialog(DialogLogoutActivity(requireContext(), social))
         }
 
         binding.accountDeleteTv.setOnClickListener {
-            showDialog(DialogDeleteActivity(this@AccountActivity, accessToken!!))
+            showDialog(DialogDeleteActivity(requireContext(), accessToken!!))
         }
     }
 
     private fun showDialog(dialog: Dialog) {
         dialog.show()
-    }
-
-    private fun switchActivity(activity: Activity) {
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
     }
 
     // 절대경로 변환
@@ -150,7 +151,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     private fun checkPermission(): Boolean {
         Log.d("checkPermission", "check")
         return (ContextCompat.checkSelfPermission(
-            this, Manifest.permission.READ_MEDIA_IMAGES
+            requireContext(), Manifest.permission.READ_MEDIA_IMAGES
         ) == PackageManager.PERMISSION_GRANTED)
     }
 
@@ -163,7 +164,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
             Log.d("permission", "사진 권한 요청")
         }
         ActivityCompat.requestPermissions(
-            this, arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+            requireActivity(), arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
             InitProfileActivity.REQUEST_PERMISSION_CODE
         )
     }
@@ -174,7 +175,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
                 openImagePicker()
             } else {
                 // 권한이 거부된 경우
-                customToast.createToast(this@AccountActivity,"사진 권한이 거부되었습니다.", 300, false)
+                customToast.createToast(requireContext(),"사진 권한이 거부되었습니다.", 300, false)
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -186,19 +187,19 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
     }
 
     private fun getData2() {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("getRes", MODE_PRIVATE)
         accessToken = sharedPreferences.getString("getAccessToken", accessToken)
     }
 
     private fun setImageService(image: MultipartBody.Part) {
         val setImageService = ImageService()
-        setImageService.setImageView(this@AccountActivity)
+        setImageService.setImageView(this@AccountFragment)
         setImageService.setProfileImg("Bearer " + accessToken, image)
     }
 
     private fun setEditProfileService() {
         val setEditProfileService = MemberService()
-        setEditProfileService.setChangeProfileView(this@AccountActivity)
+        setEditProfileService.setChangeProfileView(this@AccountFragment)
 
         Log.d("revise-image", "이미지 변경 O")
         val member = EditProfile(userName!!, newImgUrl!!)
@@ -207,7 +208,7 @@ class AccountActivity: AppCompatActivity(), ChangeProfileView, ProfileImageView,
 
     private fun setLookUpService() {
         val setLookUpService = MemberService()
-        setLookUpService.setLookUpMemberView(this@AccountActivity)
+        setLookUpService.setLookUpMemberView(this@AccountFragment)
         setLookUpService.getLookUpMember("Bearer " + accessToken)
     }
 

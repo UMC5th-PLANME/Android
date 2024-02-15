@@ -1,13 +1,15 @@
 package com.example.plan_me.ui.setting
 
-import android.app.Activity
-import android.content.Intent
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
@@ -18,18 +20,20 @@ import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.databinding.ActivityChangeNicknameBinding
 import com.example.plan_me.ui.dialog.CustomToast
 
-class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemberView {
+class ChangeNicknameFragment: Fragment(), ChangeProfileView, LookUpMemberView {
     private lateinit var binding: ActivityChangeNicknameBinding
     private var customToast = CustomToast
     private var userName : String? = ""
     private var accessToken: String? = ""
     private var userImg: String? = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ActivityChangeNicknameBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         getData2()
         setLookUpService()
@@ -55,43 +59,34 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
         })
 
         binding.changeNicknameBackBtn.setOnClickListener {
-            finish()
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                .replace(R.id.main_frm, AccountFragment())
+                .addToBackStack(null)
+                .commit()
         }
 
         binding.changeNicknameBtn.setOnClickListener {
             setEditName()
-            customToast.createToast(this@ChangeNicknameActivity,"닉네임이 변경되었습니다.", 300, true)
+            customToast.createToast(requireContext(),"닉네임이 변경되었습니다.", 300, true)
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-    }
-
     private fun getData2() {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("getRes", MODE_PRIVATE)
         accessToken = sharedPreferences.getString("getAccessToken", accessToken)
     }
 
     private fun setEditName() {
         val setChangeProfileService = MemberService()
-        setChangeProfileService.setChangeProfileView(this@ChangeNicknameActivity)
+        setChangeProfileService.setChangeProfileView(this@ChangeNicknameFragment)
         val member = EditProfile(userName!!, userImg!!)
         setChangeProfileService.setChangeProfile("Bearer " + accessToken, member)
     }
 
-    private fun switchActivity(activity: Activity) {
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
-        overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-    }
-
     private fun setLookUpService() {
         val setLookUpService = MemberService()
-        setLookUpService.setLookUpMemberView(this@ChangeNicknameActivity)
+        setLookUpService.setLookUpMemberView(this@ChangeNicknameFragment)
         setLookUpService.getLookUpMember("Bearer " + accessToken)
     }
 
@@ -101,7 +96,11 @@ class ChangeNicknameActivity: AppCompatActivity(), ChangeProfileView, LookUpMemb
 
     override fun onSetChangeProfileSuccess(response: ChangeMemberRes) {
         Log.d("닉네임 변경", response.result.toString())
-        switchActivity(AccountActivity())
+        parentFragmentManager.beginTransaction()
+            .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+            .replace(R.id.main_frm, AccountFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onSetChangeProfileFailure(isSuccess: Boolean, code: String, message: String) {
