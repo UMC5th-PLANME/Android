@@ -57,9 +57,7 @@ class DailyFragment : Fragment(),
 
 
         selectDate = currentWeek
-        calendarViewModel._isUpdated.observe(viewLifecycleOwner, Observer {
-            initDayCalendar()
-        })
+        initDayCalendar()
         clickListener()
 
         return binding.root
