@@ -38,7 +38,8 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class DailyFragment : Fragment(),
-    DialogDailyCalenderInterface{
+    DialogDailyCalenderInterface,
+    ScheduleRVAdapter.SendSignalModify{
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
     private val currentWeek = LocalDate.now()
@@ -57,9 +58,7 @@ class DailyFragment : Fragment(),
 
 
         selectDate = currentWeek
-        calendarViewModel._isUpdated.observe(viewLifecycleOwner, Observer {
-            initDayCalendar()
-        })
+        initDayCalendar()
         clickListener()
 
         return binding.root
@@ -134,7 +133,7 @@ class DailyFragment : Fragment(),
 
     private fun initRV() {
         Log.d("groupedSchedules",groupedSchedules.toString())
-        val dailyRVAdapter = DailyRVAdapter(calendarViewModel.filteringCategory(groupedSchedules), groupedSchedules, requireContext())
+        val dailyRVAdapter = DailyRVAdapter(calendarViewModel.filteringCategory(groupedSchedules), groupedSchedules, requireContext(), this)
         binding.dailyScheduleList.adapter = dailyRVAdapter
         binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
@@ -149,7 +148,9 @@ class DailyFragment : Fragment(),
         initRV()
     }
 
-
+    override fun sendSignalModify() {
+        calendarViewModel.getCategoryList()
+    }
 
 
 }

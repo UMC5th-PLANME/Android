@@ -14,7 +14,7 @@ import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.ui.all.Daily.ScheduleRVAdapter
 
-class DialogCalendarBtmRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableMap<Int, MutableList<ScheduleList>>, private val context: Context) : RecyclerView.Adapter<DialogCalendarBtmRVAdapter.ViewHolder>(){
+class DialogCalendarBtmRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableMap<Int, MutableList<ScheduleList>>, private val context: Context, private val sendSignalModify: ScheduleRVAdapter.SendSignalModify) : RecyclerView.Adapter<DialogCalendarBtmRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleBinding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -38,7 +38,7 @@ class DialogCalendarBtmRVAdapter(private val categoryList : List<CategoryList>, 
                 val newColor = ContextCompat.getColor(context, category.color) // Replace with your desired color resource
                 binding.itemScheduleView.background.setColorFilter(newColor, PorterDuff.Mode.SRC_IN)
 
-                    val dailyRVAdapter = ScheduleRVAdapter(categoryList, scheduleMap[category.categoryId], context)
+                    val dailyRVAdapter = ScheduleRVAdapter(categoryList, scheduleMap[category.categoryId], context, sendSignalModify)
                     binding.itemScheduleRv.adapter = dailyRVAdapter
                     binding.itemScheduleRv.layoutManager =
                         LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

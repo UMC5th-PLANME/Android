@@ -11,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,8 @@ import com.example.plan_me.ui.dialog.DialogModifyFragment
 import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingFragment
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
 import com.example.plan_me.utils.viewModel.NaviViewModel
 
@@ -51,9 +54,6 @@ class MainActivity :
     private lateinit var category_delete : DialogDeleteCategoryFragment
     private lateinit var category_modify : DialogModifyCategoryFragment
 
-    private var fab_open: Animation? = null
-    private var fab_close: Animation? = null
-
     private var isHome : Boolean = true
 
     lateinit var drawerAdapter : MainDrawerRVAdapter
@@ -65,12 +65,15 @@ class MainActivity :
 
     private lateinit var naviViewModel: NaviViewModel
     private lateinit var naviFragmentViewModel: NaviFragmentViewModel
+    private lateinit var calendarViewModel: CalendarViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
         naviFragmentViewModel = ViewModelProvider(this).get(NaviFragmentViewModel::class.java)
+        val factory = CalendarViewModelFactory(this.getSharedPreferences("getRes", MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
 
         initBottomNavigation()
         getCategoryList()
@@ -78,8 +81,6 @@ class MainActivity :
 
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
-        fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
         drawerAdd = findViewById(R.id.drawer_add_tv)
         drawerDelete = findViewById(R.id.drawer_delete_tv)

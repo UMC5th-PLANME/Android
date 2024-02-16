@@ -24,6 +24,7 @@ import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.CalendarDayLayoutBinding
 import com.example.plan_me.databinding.FragmentMonthlyBinding
+import com.example.plan_me.ui.all.Daily.ScheduleRVAdapter
 import com.example.plan_me.ui.dialog.DialogCalendarBtmFragment
 import com.example.plan_me.ui.dialog.DialogYMFragment
 import com.example.plan_me.ui.dialog.DialogYMPickInerface
@@ -47,7 +48,8 @@ import java.util.Locale
 
 //새로운 클릭 리스너 구현해야함
 class MonthlyFragment: Fragment(),
-    DialogYMPickInerface{
+    DialogYMPickInerface,
+    ScheduleRVAdapter.SendSignalModify{
     private lateinit var binding: FragmentMonthlyBinding
     private lateinit var dialogYMFragment: DialogYMFragment
 
@@ -104,7 +106,7 @@ class MonthlyFragment: Fragment(),
                         val categoryList = calendarViewModel.filteringCategory(groupedSchedules)
                         Log.d("filter", categoryList.toString())
                         Log.d("filter", groupedSchedules.toString())
-                        val btmSheet = DialogCalendarBtmFragment(data.date, requireContext())
+                        val btmSheet = DialogCalendarBtmFragment(data.date, requireContext(), this@MonthlyFragment)
                         btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }
                 }
@@ -237,6 +239,10 @@ class MonthlyFragment: Fragment(),
         binding.monthlyCalendarView.scrollToMonth(pageMonth)
         binding.monthlyDate.text = yearDigitsOnly.toString() + "." + month.toString()+"월"
         dialogYMFragment.dismiss()
+    }
+
+    override fun sendSignalModify() {
+        calendarViewModel.getCategoryList()
     }
 
 }
