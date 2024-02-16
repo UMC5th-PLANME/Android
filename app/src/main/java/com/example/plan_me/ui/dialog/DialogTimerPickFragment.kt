@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import com.example.plan_me.databinding.FragmentDialogTimerpickBinding
 
+/*
 class DialogTimerPickFragment(context : Context): Dialog(context) {
     private lateinit var binding: FragmentDialogTimerpickBinding
     fun onCreateView(
@@ -25,4 +26,4 @@ class DialogTimerPickFragment(context : Context): Dialog(context) {
 
         return binding.root
 
-}
+}*/
