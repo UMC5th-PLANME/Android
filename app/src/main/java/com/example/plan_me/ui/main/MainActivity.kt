@@ -31,6 +31,10 @@ import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
 import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
+import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.example.plan_me.ui.timer.TimerFragment
+import com.example.plan_me.utils.alarm.AlarmFunctions
+import com.example.plan_me.utils.alarm.AlarmService
 import com.example.plan_me.ui.setting.SettingFragment
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
@@ -142,6 +146,8 @@ class MainActivity :
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
                         .replace(R.id.main_frm, PlannerFragment())
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_frm, TimerFragment())
                         .commitAllowingStateLoss()
                     binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
@@ -218,6 +224,8 @@ class MainActivity :
                 isHome=true
             }
         }
+
+
     }
 
     private fun showDialog(dialog: Dialog) {
