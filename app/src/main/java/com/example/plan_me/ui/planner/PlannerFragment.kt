@@ -1,6 +1,5 @@
 package com.example.plan_me.ui.planner
 
-import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -12,13 +11,17 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
+import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
+import com.example.plan_me.utils.viewModel.NaviViewModel
 
 
 class PlannerFragment : Fragment() ,
@@ -28,12 +31,19 @@ class PlannerFragment : Fragment() ,
     private lateinit var schedules : List<ScheduleList>
     private var selectedSchedule : MutableList<ScheduleList>? = null
     val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
-    private var categoryId : Int = 0
-    private var color: String = ""
+    private lateinit var category : CategoryList
+
+
+    private lateinit var naviViewModel: NaviViewModel
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPlannerBinding.inflate(layoutInflater)
+        naviViewModel = ViewModelProvider(requireActivity())[NaviViewModel::class.java]
+        category = naviViewModel.currentCategory.value!!
+        naviViewModel.currentCategory.observe(viewLifecycleOwner, Observer {
+            category = it
+            init()})
         init()
         return binding.root
     }
@@ -46,9 +56,8 @@ class PlannerFragment : Fragment() ,
     }
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
-        if (arguments != null) {
-            categoryId = arguments?.getInt("id")!!
-            val newColor = ContextCompat.getColor(requireContext(), arguments?.getInt("color")!!) // Replace with your desired color resource
+        if (category != null) {
+            val newColor = ContextCompat.getColor(requireContext(), category.color) // Replace with your desired color resource
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
             shape.setColor(newColor)
@@ -56,21 +65,11 @@ class PlannerFragment : Fragment() ,
 
             // 설정한 모양을 레이아웃에 적용
             binding.plannerSecondLo.background = shape
-            binding.plannerCategoryNameTv.text = (arguments?.getString("name")!!)
-            binding.plannerCategoryImoticonTv.text = (arguments?.getString("emoticon")!!)
+            binding.plannerCategoryNameTv.text = category.name
+            binding.plannerCategoryImoticonTv.text = category.emoticon
 
             getScheduleAll()
-            saveData()
         }
-    }
-
-    private fun saveData() {
-        // 받아온 데이터 저장
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("category", AppCompatActivity.MODE_PRIVATE)
-        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-        editor.putInt("categoryId", categoryId)
-        editor.putString("color", color)
-        editor.apply()
     }
 
     private fun getScheduleAll() {
@@ -95,7 +94,7 @@ class PlannerFragment : Fragment() ,
         Log.d("groupedSchedule", groupedSchedules.toString())
     }
     private fun setSelectSchedule() {
-        selectedSchedule = groupedSchedules[categoryId] ?: null
+        selectedSchedule = groupedSchedules[category.categoryId] ?: null
         Log.d("selected", selectedSchedule.toString())
     }
 

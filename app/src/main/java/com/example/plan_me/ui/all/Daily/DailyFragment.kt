@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.all.Daily
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
@@ -21,6 +25,9 @@ import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
+import com.example.plan_me.utils.viewModel.NaviViewModel
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.daysOfWeek
@@ -31,26 +38,28 @@ import java.time.LocalDate
 import java.time.YearMonth
 
 class DailyFragment : Fragment(),
-    DialogDailyCalenderInterface,
-    AllScheduleView,
-    AllCategoryView{
+    DialogDailyCalenderInterface{
     private lateinit var binding: FragmentDailyBinding
     private val currentMonth = YearMonth.now()
     private val currentWeek = LocalDate.now()
     private lateinit var dialogDailyCalenderFragment :DialogDailyCalenderFragment
-    private lateinit var categoryList : List<CategoryList>
-    private lateinit var scheduleList : List<ScheduleList>
-    val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
+    var groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
+
+    private lateinit var calendarViewModel: CalendarViewModel
 
     private lateinit var selectDate: LocalDate
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentDailyBinding.inflate(layoutInflater)
+        val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
+
+
         selectDate = currentWeek
-
-
-        getCategoryList()
-        initDayCalendar()
+        calendarViewModel._isUpdated.observe(viewLifecycleOwner, Observer {
+            initDayCalendar()
+        })
         clickListener()
 
         return binding.root
@@ -58,8 +67,7 @@ class DailyFragment : Fragment(),
 
     override fun onResume() {
         super.onResume()
-        Log.d("Daily Resume", "resume")
-        getCategoryList()
+        calendarViewModel.getCategoryList()
     }
 
     private fun clickListener() {
@@ -69,7 +77,7 @@ class DailyFragment : Fragment(),
             selectDate = currentWeek
 
             binding.weekCalendarView.notifyCalendarChanged()
-            filteringSchedule()
+            groupedSchedules = calendarViewModel.filteringSchedule(currentWeek, groupedSchedules)
             initRV()
         }
         binding.dailyDialogCalendar.setOnClickListener {
@@ -83,6 +91,8 @@ class DailyFragment : Fragment(),
                 Log.d("data", data.date.toString())
                 if (selectDate == data.date) {
                     container.day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
+                    groupedSchedules = calendarViewModel.filteringSchedule(data.date, groupedSchedules)
+                    initRV()
                 }else {
                     container.day.weekDayLayout.setBackgroundResource(R.color.transparent)
                 }
@@ -92,8 +102,7 @@ class DailyFragment : Fragment(),
                     Log.d("selected", selectDate.toString())
                     container.day.weekDayLayout.setBackgroundResource(R.drawable.calendar_daily_circle_selected)
                     binding.weekCalendarView.notifyCalendarChanged()
-
-                    filteringSchedule()
+                    groupedSchedules = calendarViewModel.filteringSchedule(data.date, groupedSchedules)
                     initRV()
                 }
                 container.day.weekCalendarDayText.text = data.date.dayOfMonth.toString()
@@ -114,64 +123,18 @@ class DailyFragment : Fragment(),
             val month = it.days.first().date.monthValue
             binding.dailyDate.text = year+"."+month+"월"
         }
+
     }
     inner class WeekDayViewContainer(view: View): ViewContainer(view) {
         val day = CalendarWeekDayLayoutBinding.bind(view)
     }
 
-    private fun getScheduleAll() {
-        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
-            AppCompatActivity.MODE_PRIVATE
-        ).getString("getAccessToken", "")
-        val scheduleService = ScheduleService()
-        scheduleService.setAllScheduleView(this)
-        scheduleService.getScheduleAllFun(access_token)
-    }
 
-    private fun getCategoryList() {
-        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
-            AppCompatActivity.MODE_PRIVATE
-        ).getString("getAccessToken", "")
-        val setCategoryService = CategoryService()
-        setCategoryService.setAllCategoryView(this)
-        setCategoryService.getCategoryAllFun(access_token!!)
-    }
 
-    private fun filteringSchedule() {
-        // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
-        // 날짜까지 확인
-        groupedSchedules.clear()
-        for (schedule in scheduleList) {
-            val categoryId = schedule.category_id
-            val startDate = LocalDate.parse(schedule.startDate)
-            val endDate = LocalDate.parse(schedule.endDate)
-
-            if (selectDate.isEqual(startDate) || selectDate.isEqual(endDate) ||
-                (selectDate.isAfter(startDate) && selectDate.isBefore(endDate))) {
-                if (!groupedSchedules.containsKey(categoryId)) {
-                    groupedSchedules[categoryId] = mutableListOf()
-                }
-                groupedSchedules[categoryId]?.add(schedule)
-            }
-        }
-        Log.d("groupedSchedule", groupedSchedules.toString())
-    }
-
-    private fun filteringCategory(): List<CategoryList> {
-        val filteringCategory = mutableListOf<CategoryList>()
-
-        for ((categoryId, _) in groupedSchedules) {
-            val category = categoryList.find { it.categoryId == categoryId }
-            category?.let {
-                filteringCategory.add(it)
-            }
-        }
-
-        return filteringCategory
-    }
 
     private fun initRV() {
-        val dailyRVAdapter = DailyRVAdapter(filteringCategory(), groupedSchedules, requireContext())
+        Log.d("groupedSchedules",groupedSchedules.toString())
+        val dailyRVAdapter = DailyRVAdapter(calendarViewModel.filteringCategory(groupedSchedules), groupedSchedules, requireContext())
         binding.dailyScheduleList.adapter = dailyRVAdapter
         binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }
@@ -182,28 +145,11 @@ class DailyFragment : Fragment(),
         selectDate = date
 
         binding.weekCalendarView.notifyCalendarChanged()
-        filteringSchedule()
+        groupedSchedules = calendarViewModel.filteringSchedule(date, groupedSchedules)
         initRV()
     }
 
-    override fun onAllCategorySuccess(response: AllCategoryRes) {
-        categoryList = response.result.categoryList
-        getScheduleAll()
-    }
 
-    override fun onAllCategoryFailure(response: AllCategoryRes) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAllScheduleSuccess(response: AllScheduleRes) {
-        scheduleList = response.result.scheduleList
-        filteringSchedule()
-        initRV()
-    }
-
-    override fun onAllScheduleFailure(response: AllScheduleRes) {
-        TODO("Not yet implemented")
-    }
 
 
 }

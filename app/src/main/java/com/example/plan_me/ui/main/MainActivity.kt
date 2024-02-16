@@ -1,6 +1,5 @@
 package com.example.plan_me.ui.main
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
@@ -12,6 +11,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
@@ -31,6 +31,8 @@ import com.example.plan_me.ui.dialog.DialogModifyFragment
 import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingFragment
+import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
+import com.example.plan_me.utils.viewModel.NaviViewModel
 
 class MainActivity :
     AppCompatActivity(),
@@ -61,10 +63,14 @@ class MainActivity :
     private lateinit var currentCategory : CategoryList
     private var currentCategoryPosition : Int = -1
 
-    private var isAdd : Boolean = false
+    private lateinit var naviViewModel: NaviViewModel
+    private lateinit var naviFragmentViewModel: NaviFragmentViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
+        naviFragmentViewModel = ViewModelProvider(this).get(NaviFragmentViewModel::class.java)
 
         initBottomNavigation()
         getCategoryList()
@@ -90,14 +96,10 @@ class MainActivity :
 
     override fun onResume() {
         super.onResume()
-        if (isAdd) {
-            isAdd = false
-        }
     }
 
     private fun initActivity() {
         Log.d("init", categorys.toString())
-        startFragment(currentCategory)
         val layoutManager = LinearLayoutManager(this)
         val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
         drawerAdapter = MainDrawerRVAdapter(categorys, this)
@@ -107,7 +109,6 @@ class MainActivity :
     }
 
     private fun initBottomNavigation(){
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
@@ -116,6 +117,11 @@ class MainActivity :
             when (item.itemId) {
 
                 R.id.planner -> {
+                    isHome = true
+                    binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                    binding.mainAllBtn.text = "All"
+                    binding.mainAllBtn.setTextColor(Color.BLACK)
+                    binding.mainTopLayout.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, PlannerFragment())
@@ -128,6 +134,7 @@ class MainActivity :
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, MestoryFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
                 R.id.timer -> {
@@ -135,6 +142,7 @@ class MainActivity :
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, PlannerFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
                 R.id.setting -> {
@@ -142,6 +150,7 @@ class MainActivity :
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, SettingFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
             }
@@ -153,38 +162,12 @@ class MainActivity :
         if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
             binding.mainDrawerLayout.closeDrawers()
         }
-        else {
-            if (!isHome) {
-                startFragment(currentCategory)
-                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
-                binding.mainAllBtn.text = "ALL"
-                binding.mainAllBtn.setTextColor(Color.BLACK)
-                isHome=true
-            }else {
-                super.onBackPressed()
-                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-            }
-        }
     }
     private fun getCategoryList() {
         val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
         val setCategoryService = CategoryService()
         setCategoryService.setAllCategoryView(this)
         setCategoryService.getCategoryAllFun(access_token!!)
-    }
-    private fun startFragment(category: CategoryList) {
-        Log.d("startFragment", category.toString())
-        val bundle = Bundle()
-        bundle.putInt("id", category.categoryId)
-        bundle.putInt("color", category.color)
-        bundle.putString("name", category.name)
-        bundle.putString("emoticon", category.emoticon)
-        val plannerFragment = PlannerFragment()
-        plannerFragment.arguments = bundle
-        supportFragmentManager.beginTransaction()
-            .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-            .replace(R.id.main_frm, plannerFragment)
-            .commitAllowingStateLoss()
     }
 
     private fun clickListener() {
@@ -196,7 +179,6 @@ class MainActivity :
             val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
             intent.putExtra("category", currentCategory)
             intent.putExtra("categoryList", categoryArraList)
-            isAdd = true
             startActivity(intent)
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
@@ -221,13 +203,16 @@ class MainActivity :
                     .replace(R.id.main_frm, AllFragment())
                     .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_planner)
-                binding.mainAllBtn.text = "HOME"
+                binding.mainAllBtn.text = "Home"
                 binding.mainAllBtn.setTextColor(Color.WHITE)
                 isHome=false
             }else {
-                startFragment(currentCategory)
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                    .replace(R.id.main_frm, PlannerFragment())
+                    .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
-                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.text = "All"
                 binding.mainAllBtn.setTextColor(Color.BLACK)
                 isHome=true
             }
@@ -246,6 +231,10 @@ class MainActivity :
             } else {
                 currentCategory = categorys[currentCategoryPosition]
             }
+            naviViewModel.sendCategory(currentCategory)
+            initActivity()
+        }else {
+            naviViewModel.sendCategory(CategoryList(0,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
             initActivity()
         }
     }
@@ -270,7 +259,6 @@ class MainActivity :
             currentCategoryPosition -= 1
             getCategoryList()
         }else {
-
             getCategoryList()
         }
         val customToast = CustomToast
@@ -289,6 +277,7 @@ class MainActivity :
         if (isHome) {
             currentCategoryPosition =position
             currentCategory = categorys[currentCategoryPosition]
+            naviViewModel.sendCategory(currentCategory)
             initActivity()
         }
     }
