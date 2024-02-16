@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import com.example.plan_me.databinding.FragmentDialogTimerSettingBinding
 import com.example.plan_me.databinding.FragmentDialogYaerMonthPickerBinding
 import java.time.Year
 import java.time.YearMonth

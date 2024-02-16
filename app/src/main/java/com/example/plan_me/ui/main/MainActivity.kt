@@ -33,6 +33,7 @@ import com.example.plan_me.ui.mestory.MestoryActivity
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
+import com.example.plan_me.ui.timer.TimerFragment
 import com.example.plan_me.utils.alarm.AlarmFunctions
 import com.example.plan_me.utils.alarm.AlarmService
 
@@ -138,7 +139,7 @@ class MainActivity :
                 R.id.timer -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-                        .replace(R.id.main_frm, PlannerFragment())
+                        .replace(R.id.main_frm, TimerFragment())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
@@ -237,6 +238,8 @@ class MainActivity :
                 isHome=true
             }
         }
+
+
     }
 
     private fun showDialog(dialog: Dialog) {
