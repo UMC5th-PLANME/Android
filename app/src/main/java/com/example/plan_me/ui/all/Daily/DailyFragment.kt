@@ -132,7 +132,6 @@ class DailyFragment : Fragment(),
 
 
     private fun initRV() {
-        Log.d("groupedSchedules",groupedSchedules.toString())
         val dailyRVAdapter = DailyRVAdapter(calendarViewModel.filteringCategory(groupedSchedules), groupedSchedules, requireContext(), this)
         binding.dailyScheduleList.adapter = dailyRVAdapter
         binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

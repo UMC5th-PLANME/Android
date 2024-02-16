@@ -107,7 +107,7 @@ class PlannerFragment : Fragment() ,
 
     private fun setRvAdapter() {
         if (!selectedSchedule.isNullOrEmpty()) {
-            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext(), this)
+            plannerRVAdapter = PlannerRVAdapter(calendarViewModel._categoryList.value!! ,selectedSchedule!!, requireContext(), this)
             binding.plannerTodoRv.layoutManager = LinearLayoutManager(requireContext())
             binding.plannerTodoRv.adapter = plannerRVAdapter
         }

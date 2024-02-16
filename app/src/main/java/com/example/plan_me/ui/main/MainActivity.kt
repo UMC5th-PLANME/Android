@@ -176,9 +176,17 @@ class MainActivity :
 
 
         binding.mainBtmAddFab.setOnClickListener {
-            val intent = Intent(this, ScheduleAddActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            if (currentCategoryPosition == -1) {
+                val customToast = CustomToast
+                customToast.createToast(this, "카테고리를 생성해주세요", 300, false)
+            }else {
+                val intent = Intent(this, ScheduleAddActivity::class.java)
+                val categoryList = ArrayList(categorys)
+                intent.putExtra("category", currentCategory)
+                intent.putExtra("categoryList", categoryList)
+                startActivity(intent)
+                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            }
         }
         binding.mainMenu.setOnClickListener{
             binding.mainDrawerLayout.openDrawer(drawerView!!)
@@ -227,7 +235,8 @@ class MainActivity :
         categorys = response.result.categoryList
         if(categorys.isNotEmpty()) {
             if (currentCategoryPosition == -1) {
-                currentCategory = categorys[0]
+                naviViewModel.sendCategory(categorys[0])
+                currentCategory = naviViewModel.currentCategory.value!!
             } else {
                 currentCategory = categorys[currentCategoryPosition]
             }

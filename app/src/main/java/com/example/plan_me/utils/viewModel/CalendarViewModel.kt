@@ -87,8 +87,6 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         _scheduleList.value = response.result.scheduleList
         _isUpdated.value = true
-        Log.d("_categoryList",_categoryList.value.toString())
-        Log.d("_scheduleList",_scheduleList.value.toString())
     }
 
     override fun onAllScheduleFailure(response: AllScheduleRes) {

@@ -20,7 +20,7 @@ import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
 import com.example.plan_me.data.remote.view.schedule.OneScheduleView
 import com.example.plan_me.ui.add.ScheduleAddActivity
 
-class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>, private val context: Context, private val sendSignalModify:SendSignalModify): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>(),
+class PlannerRVAdapter(private val categoryList : List<CategoryList>,private val selectedSchedule : MutableList<ScheduleList>, private val context: Context, private val sendSignalModify:SendSignalModify): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>(),
     ModifyScheduleView{
 
     interface SendSignalModify{
@@ -33,6 +33,13 @@ class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>,
                 changeScheduleStatus(selectedSchedule[position])
                 selectedSchedule[position].status = !selectedSchedule[position].status
                 binding.todoBtn.isChecked = selectedSchedule[position].status
+            }
+            binding.todoTv.setOnClickListener {
+                val intent = Intent(context, ScheduleAddActivity::class.java)
+                val categoryIdOneList:CategoryList? = categoryList.find { it.categoryId == selectedSchedule[position].category_id }
+                intent.putExtra("schedule", selectedSchedule[position])
+                intent.putExtra("schedule_category", categoryIdOneList)
+                context.startActivity(intent)
             }
         }
     }
