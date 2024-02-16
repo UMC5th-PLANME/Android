@@ -17,19 +17,23 @@ class GetMestoryTimeService {
         this.getMestoryTimeView = getMestoryTimeView
     }
 
-    fun getMestoryTime(accessToken: String, memberId: MemberId, date: String) {
+    fun getMestoryTime(accessToken: String, memberId: Int, date: String) {
         val GetMestoryTimeService = getRetrofit().create(MestoryTimeRetrofitInterface::class.java)
-        GetMestoryTimeService.getMestoryTime(accessToken, memberId, date).enqueue(object:
-            Callback<GetMestoryTimeRes> {
-            override fun onResponse(
-                call: Call<GetMestoryTimeRes>,
-                response: Response<GetMestoryTimeRes>
-            ) {
-                Log.d("GET-FOCUS-TIME-SUCCESS", response.toString())
-                val resp:GetMestoryTimeRes = response.body()!!
-                when(resp.code) {
-                    "MESTORY2001" -> getMestoryTimeView.onGetMestoryTimeSuccess(resp)
-                    else -> getMestoryTimeView.onGetMestoryTimeFailure(resp.isSuccess, resp.code, resp.message)
+        GetMestoryTimeService.getMestoryTime(accessToken, memberId, date).enqueue(object: Callback<GetMestoryTimeRes> {
+            override fun onResponse(call: Call<GetMestoryTimeRes>, response: Response<GetMestoryTimeRes>) {
+                if (response.isSuccessful) {
+                    val resp: GetMestoryTimeRes? = response.body()
+
+                    if (resp != null) {
+                        when(resp.code) {
+                            "MESTORY2001" -> getMestoryTimeView.onGetMestoryTimeSuccess(resp)
+                            else -> getMestoryTimeView.onGetMestoryTimeFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("GET-FOCUS-TIME-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("GET-FOCUS-TIME-SUCCESS", "Response not successful: ${response.code()}")
                 }
             }
 

@@ -3,11 +3,13 @@ package com.example.plan_me.data.remote.service.auth
 import android.util.Log
 import com.example.plan_me.data.local.entity.EditProfile
 import com.example.plan_me.data.local.entity.Member
+import com.example.plan_me.data.remote.dto.auth.AutoLoginRes
 import com.example.plan_me.data.remote.dto.auth.ChangeMemberRes
 import com.example.plan_me.data.remote.dto.auth.DeleteMemberRes
 import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.auth.SignUpRes
 import com.example.plan_me.data.remote.retrofit.AuthRetrofitInterface
+import com.example.plan_me.data.remote.view.auth.AutoLoginView
 import com.example.plan_me.data.remote.view.auth.ChangeProfileView
 import com.example.plan_me.data.remote.view.auth.DeleteMemberView
 import com.example.plan_me.data.remote.view.auth.LookUpMemberView
@@ -18,10 +20,15 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MemberService {
+    private lateinit var autoLoginView: AutoLoginView
     private lateinit var signUpView: SignUpView
     private lateinit var changeProfileView: ChangeProfileView
     private lateinit var lookUpMemberView: LookUpMemberView
     private lateinit var deleteMemberView: DeleteMemberView
+
+    fun setAutoLoginView(autoLoginView: AutoLoginView) {
+        this.autoLoginView = autoLoginView
+    }
 
     fun setSignUpView(signUpView: SignUpView) {
         this.signUpView = signUpView
@@ -37,6 +44,31 @@ class MemberService {
 
     fun setDeleteMemberView(deleteMemberView: DeleteMemberView) {
         this.deleteMemberView = deleteMemberView
+    }
+
+    fun getAutoLogin(accessToken: String) {
+        val autoLoginService = getRetrofit().create(AuthRetrofitInterface::class.java)
+        autoLoginService.getAutoLogin(accessToken).enqueue(object : Callback<AutoLoginRes> {
+            override fun onResponse(call: Call<AutoLoginRes>, response: Response<AutoLoginRes>) {
+                if (response.isSuccessful) {
+                    val resp: AutoLoginRes? = response.body()
+                    if (resp != null) {
+                        when (resp.code) {
+                            "MEMBER2006" -> autoLoginView.onGetAutoLoginSuccess(resp)
+                            else -> autoLoginView.onGetAutoLoginFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("AUTO-LOGIN-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("AUTO-LOGIN-SUCCESS", "Response not successful: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<AutoLoginRes>, t: Throwable) {
+                Log.d("AUTO-LOGIN-FAILURE", t.toString())
+            }
+        })
     }
 
     fun setSignUp(accessToken: String, member: Member) {

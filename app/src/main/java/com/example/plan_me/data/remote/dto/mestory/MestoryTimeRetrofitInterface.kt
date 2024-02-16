@@ -9,8 +9,5 @@ import retrofit2.http.Path
 
 interface MestoryTimeRetrofitInterface {
     @GET("/api/meStory/{memberId}/{date}")
-    fun getMestoryTime(@Header("accessToken") accessToken: String,
-                       @Path("memberId") memberId: MemberId,
-                       @Path("date") date: String)
-    : Call<GetMestoryTimeRes>
+    fun getMestoryTime(@Header("Authorization") Authorization: String, @Path("memberId") memberId: Int, @Path("date") date: String): Call<GetMestoryTimeRes>
 }

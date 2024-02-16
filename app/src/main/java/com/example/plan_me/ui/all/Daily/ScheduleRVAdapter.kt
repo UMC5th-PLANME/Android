@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.local.entity.Schedule_input
 import com.example.plan_me.data.remote.dto.category.CategoryList
@@ -15,10 +16,16 @@ import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
 import com.example.plan_me.databinding.ItemScheduleListBinding
 import com.example.plan_me.ui.add.ScheduleAddActivity
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 
-class ScheduleRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableList<ScheduleList>?, private val context: Context) :
+class ScheduleRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableList<ScheduleList>?, private val context: Context, private val sendSignalModify: SendSignalModify) :
     RecyclerView.Adapter<ScheduleRVAdapter.ViewHolder>(),
     ModifyScheduleView{
+
+    interface SendSignalModify{
+        fun sendSignalModify()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleListBinding = ItemScheduleListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -77,6 +84,7 @@ class ScheduleRVAdapter(private val categoryList : List<CategoryList>, private v
     override fun onModifyScheduleSuccess(response: ModifyScheduleRes) {
         Log.d("성공", "")
         notifyDataSetChanged()
+        sendSignalModify.sendSignalModify()
     }
 
     override fun onModifyScheduleFailure(response: ModifyScheduleRes) {

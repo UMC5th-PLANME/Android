@@ -20,8 +20,12 @@ import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
 import com.example.plan_me.data.remote.view.schedule.OneScheduleView
 import com.example.plan_me.ui.add.ScheduleAddActivity
 
-class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>, private val context: Context): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>(),
+class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>, private val context: Context, private val sendSignalModify:SendSignalModify): RecyclerView.Adapter<PlannerRVAdapter.ViewHolder>(),
     ModifyScheduleView{
+
+    interface SendSignalModify{
+        fun sendSignalModify()
+    }
     inner class ViewHolder(val binding: ItemTodoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             binding.todoTv.text = selectedSchedule[position].title
@@ -70,6 +74,7 @@ class PlannerRVAdapter(private val selectedSchedule : MutableList<ScheduleList>,
 
     override fun onModifyScheduleSuccess(response: ModifyScheduleRes) {
         Log.d("수정 성공", "!!")
+        sendSignalModify.sendSignalModify()
     }
 
     override fun onModifyScheduleFailure(response: ModifyScheduleRes) {

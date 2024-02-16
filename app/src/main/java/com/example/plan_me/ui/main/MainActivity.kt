@@ -1,18 +1,18 @@
 package com.example.plan_me.ui.main
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
@@ -29,13 +29,18 @@ import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogDeleteCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
-import com.example.plan_me.ui.mestory.MestoryActivity
+import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.setting.SettingActivity
 import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.example.plan_me.ui.timer.TimerFragment
 import com.example.plan_me.utils.alarm.AlarmFunctions
 import com.example.plan_me.utils.alarm.AlarmService
+import com.example.plan_me.ui.setting.SettingFragment
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
+import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
+import com.example.plan_me.utils.viewModel.NaviViewModel
 
 class MainActivity :
     AppCompatActivity(),
@@ -46,7 +51,6 @@ class MainActivity :
     MainDrawerRVAdapter.SendClickCategory{
 
     private lateinit var binding: ActivityMainBinding
-    private var isFabOpen = false
     private lateinit var drawerView:View
     private lateinit var drawerAdd: TextView
     private lateinit var drawerDelete: TextView
@@ -54,9 +58,6 @@ class MainActivity :
 
     private lateinit var category_delete : DialogDeleteCategoryFragment
     private lateinit var category_modify : DialogModifyCategoryFragment
-
-    private var fab_open: Animation? = null
-    private var fab_close: Animation? = null
 
     private var isHome : Boolean = true
 
@@ -67,10 +68,17 @@ class MainActivity :
     private lateinit var currentCategory : CategoryList
     private var currentCategoryPosition : Int = -1
 
-    private var isAdd : Boolean = false
+    private lateinit var naviViewModel: NaviViewModel
+    private lateinit var naviFragmentViewModel: NaviFragmentViewModel
+    private lateinit var calendarViewModel: CalendarViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
+        naviFragmentViewModel = ViewModelProvider(this).get(NaviFragmentViewModel::class.java)
+        val factory = CalendarViewModelFactory(this.getSharedPreferences("getRes", MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
 
         initBottomNavigation()
         getCategoryList()
@@ -78,8 +86,6 @@ class MainActivity :
 
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
 
-        fab_open = AnimationUtils.loadAnimation(this, R.anim.fab_open)
-        fab_close = AnimationUtils.loadAnimation(this, R.anim.fab_close)
         drawerView = findViewById(R.id.drawer_layout)
         drawerAdd = findViewById(R.id.drawer_add_tv)
         drawerDelete = findViewById(R.id.drawer_delete_tv)
@@ -96,14 +102,10 @@ class MainActivity :
 
     override fun onResume() {
         super.onResume()
-        if (isAdd) {
-            isAdd = false
-        }
     }
 
     private fun initActivity() {
         Log.d("init", categorys.toString())
-        startFragment(currentCategory)
         val layoutManager = LinearLayoutManager(this)
         val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
         drawerAdapter = MainDrawerRVAdapter(categorys, this)
@@ -113,7 +115,6 @@ class MainActivity :
     }
 
     private fun initBottomNavigation(){
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
@@ -122,6 +123,11 @@ class MainActivity :
             when (item.itemId) {
 
                 R.id.planner -> {
+                    isHome = true
+                    binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                    binding.mainAllBtn.text = "All"
+                    binding.mainAllBtn.setTextColor(Color.BLACK)
+                    binding.mainTopLayout.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, PlannerFragment())
@@ -132,8 +138,9 @@ class MainActivity :
                 R.id.mestory -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-                        .replace(R.id.main_frm, PlannerFragment())
+                        .replace(R.id.main_frm, MestoryFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
                 R.id.timer -> {
@@ -141,13 +148,15 @@ class MainActivity :
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, TimerFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
                 R.id.setting -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-                        .replace(R.id.main_frm, PlannerFragment())
+                        .replace(R.id.main_frm, SettingFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
             }
@@ -159,38 +168,12 @@ class MainActivity :
         if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
             binding.mainDrawerLayout.closeDrawers()
         }
-        else {
-            if (!isHome) {
-                startFragment(currentCategory)
-                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
-                binding.mainAllBtn.text = "ALL"
-                binding.mainAllBtn.setTextColor(Color.BLACK)
-                isHome=true
-            }else {
-                super.onBackPressed()
-                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
-            }
-        }
     }
     private fun getCategoryList() {
         val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
         val setCategoryService = CategoryService()
         setCategoryService.setAllCategoryView(this)
         setCategoryService.getCategoryAllFun(access_token!!)
-    }
-    private fun startFragment(category: CategoryList) {
-        Log.d("startFragment", category.toString())
-        val bundle = Bundle()
-        bundle.putInt("id", category.categoryId)
-        bundle.putInt("color", category.color)
-        bundle.putString("name", category.name)
-        bundle.putString("emoticon", category.emoticon)
-        val plannerFragment = PlannerFragment()
-        plannerFragment.arguments = bundle
-        supportFragmentManager.beginTransaction()
-            .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
-            .replace(R.id.main_frm, plannerFragment)
-            .commitAllowingStateLoss()
     }
 
     private fun clickListener() {
@@ -202,7 +185,6 @@ class MainActivity :
             val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
             intent.putExtra("category", currentCategory)
             intent.putExtra("categoryList", categoryArraList)
-            isAdd = true
             startActivity(intent)
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
@@ -227,13 +209,16 @@ class MainActivity :
                     .replace(R.id.main_frm, AllFragment())
                     .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_planner)
-                binding.mainAllBtn.text = "HOME"
+                binding.mainAllBtn.text = "Home"
                 binding.mainAllBtn.setTextColor(Color.WHITE)
                 isHome=false
             }else {
-                startFragment(currentCategory)
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                    .replace(R.id.main_frm, PlannerFragment())
+                    .commitAllowingStateLoss()
                 binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
-                binding.mainAllBtn.text = "ALL"
+                binding.mainAllBtn.text = "All"
                 binding.mainAllBtn.setTextColor(Color.BLACK)
                 isHome=true
             }
@@ -246,12 +231,6 @@ class MainActivity :
         dialog.show()
     }
 
-    private fun switchActivity(activity: Activity) {
-        val intent = Intent(this, activity::class.java)
-        startActivity(intent)
-    }
-
-
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         categorys = response.result.categoryList
         if(categorys.isNotEmpty()) {
@@ -260,6 +239,10 @@ class MainActivity :
             } else {
                 currentCategory = categorys[currentCategoryPosition]
             }
+            naviViewModel.sendCategory(currentCategory)
+            initActivity()
+        }else {
+            naviViewModel.sendCategory(CategoryList(0,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
             initActivity()
         }
     }
@@ -284,7 +267,6 @@ class MainActivity :
             currentCategoryPosition -= 1
             getCategoryList()
         }else {
-
             getCategoryList()
         }
         val customToast = CustomToast
@@ -303,6 +285,7 @@ class MainActivity :
         if (isHome) {
             currentCategoryPosition =position
             currentCategory = categorys[currentCategoryPosition]
+            naviViewModel.sendCategory(currentCategory)
             initActivity()
         }
     }

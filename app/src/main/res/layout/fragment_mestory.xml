@@ -45,14 +45,14 @@
 
             <TextView
                 android:id="@+id/mestory_profile_date_tv"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="24. 1. 1"
-                android:textSize="18sp"
-                android:layout_marginStart="5dp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/pretendard_bold"
-                app:layout_constraintTop_toBottomOf="@id/mestory_profile_name_tv"/>
+                app:layout_constraintTop_toBottomOf="@id/mestory_profile_name_tv"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
                 android:id="@+id/mestory_mestory_tv"
@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:text="me story"
                 android:textSize="24sp"
-                android:layout_marginStart="5dp"
                 android:fontFamily="@font/pretendard_bold"
                 android:textColor="@color/white"
                 app:layout_constraintTop_toBottomOf="@id/mestory_profile_date_tv"
@@ -70,7 +69,7 @@
                 android:id="@+id/mestory_calendar_iv"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginEnd="18dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
                 app:tint="@color/white"
                 android:src="@drawable/calendar_btn"
@@ -85,7 +84,6 @@
                 android:layout_marginBottom="20dp"
                 android:src="@drawable/mestory_sharing"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/mestory_total_percent_line_gray"
                 app:layout_constraintTop_toBottomOf="@id/mestory_profile_date_tv"/>
 
             <ProgressBar
@@ -120,78 +118,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mestory_category_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mestory_top_layout"
         tools:listitem="@layout/item_mestory_category_open" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mestory_fab_setting_btn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="24dp"
-        app:tint="@color/white"
-        android:src="@drawable/main_btn_setting"
-        app:maxImageSize="40dp"
-        app:backgroundTint="@color/white_gray"
-        app:fabCustomSize="@dimen/design_fab_image_size"
-        android:visibility="gone"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mestory_fab_timer_btn"/>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mestory_fab_timer_btn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="24dp"
-        app:tint="@color/white"
-        android:src="@drawable/main_btn_timer"
-        app:maxImageSize="40dp"
-        app:backgroundTint="@color/white_gray"
-        android:visibility="gone"
-        app:fabCustomSize="@dimen/design_fab_image_size"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mestory_fab_planner_btn" />
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mestory_fab_planner_btn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="24dp"
-        app:tint="@color/white"
-        android:src="@drawable/main_btn_planner"
-        app:maxImageSize="40dp"
-        android:visibility="gone"
-        app:fabCustomSize="@dimen/design_fab_image_size"
-        app:backgroundTint="@color/white_gray"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/mestory_fab_menu_btn" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/mestory_fab_menu_btn"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="56dp"
-        app:backgroundTint="@color/dark_gray"
-        app:tint="@color/white"
-        app:maxImageSize="40dp"
-        app:fabCustomSize="@dimen/design_fab_image_size"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:src="@drawable/main_btn_mestory"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerCircle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

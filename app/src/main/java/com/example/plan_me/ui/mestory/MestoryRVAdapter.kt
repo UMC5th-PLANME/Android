@@ -1,35 +1,74 @@
 package com.example.plan_me.ui.mestory
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.plan_me.R
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.mestory.GetTimeResult
+import com.example.plan_me.data.remote.dto.schedule.ScheduleList
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.databinding.ItemMestoryCategoryOpenBinding
+import com.example.plan_me.ui.all.Daily.ScheduleRVAdapter
 
-class MestoryRVAdapter(): RecyclerView.Adapter<MestoryRVAdapter.ViewHolder>(){
+class MestoryRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableMap<Int, MutableList<ScheduleList>>, private val context: Context): RecyclerView.Adapter<MestoryRVAdapter.ViewHolder>() {
 
-    // test : category layout 확인
-    val likeData = arrayOf( "Exercise", "Study" )
-
-    // onCreateViewHolder : ViewHolder 를 생성해줘야 할 때 호출
-    // 중요!! itemview 객체를 만든 뒤에 이를 재활용하기 위해 ViewHoler 에 던져줌
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MestoryRVAdapter.ViewHolder {
         val binding: ItemMestoryCategoryOpenBinding = ItemMestoryCategoryOpenBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
+        //mestoryColor()
         return ViewHolder(binding)
     }
 
-    // onBindViewHolder : ViewHolder 에 데이터를 바인딩 해줘야 할 때마다 호출되는 함수
-    // 사용자가 화면을 스크롤 할 때마다 엄청나게 호출됨
-    // RecyclerView 안에서는 Index 를 position 이라고 함
     override fun onBindViewHolder(holder: MestoryRVAdapter.ViewHolder, position: Int) {
-        holder.bind(position)
-    }
-
-    override fun getItemCount(): Int = likeData.size
-
-    inner class ViewHolder(val binding: ItemMestoryCategoryOpenBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind (position: Int) {
-            binding.mestoryCategoryTv.text = likeData[position]
+        if (!scheduleMap.isNullOrEmpty()) {
+            holder.bind(categoryList[position], scheduleMap)
         }
     }
+
+    override fun getItemCount(): Int = categoryList.size
+
+    inner class ViewHolder(val binding: ItemMestoryCategoryOpenBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind (category: CategoryList, scheduleMap: MutableMap<Int, MutableList<ScheduleList>>) {
+
+            val count = scheduleMap[category.categoryId]!!.count { it.status }
+            val notyet = scheduleMap[category.categoryId]!!.size - count
+
+            if (!scheduleMap[category.categoryId].isNullOrEmpty()) {
+                binding.mestoryCategoryEmoticonTv.text = category.emoticon
+                binding.mestoryCategoryTv.text = category.name
+                binding.mestoryCategoryDetailTv.text = count.toString() + " completed • "+notyet.toString() + " not yet"
+                val colorCode = ContextCompat.getColor(context, category.color)
+                binding.mestoryItemOpenedCv.setCardBackgroundColor(colorCode)
+            }
+
+            binding.mestoryCategoryTv.isSelected = true
+
+            binding.mestoryCategoryDownBt.setOnClickListener {
+                binding.mestroyProgressLayout.visibility = View.VISIBLE
+                binding.mestoryCategoryUpBt.visibility = View.VISIBLE
+                binding.mestoryCategoryDownBt.visibility = View.GONE
+            }
+            binding.mestoryCategoryUpBt.setOnClickListener {
+                binding.mestoryCategoryUpBt.visibility = View.GONE
+                binding.mestroyProgressLayout.visibility = View.GONE
+                binding.mestoryCategoryDownBt.visibility = View.VISIBLE
+                binding.mestoryCategoryDetailTv.text = count.toString() + " completed • "+notyet.toString() + " not yet"
+            }
+            binding.mestoryCategoryProgressBar.progress =  ((count.toFloat()/ scheduleMap[category.categoryId]!!.size.toFloat()) * 100).toInt()
+            binding.mestoryCategoryProgressPercentageTv.text = ((count.toFloat()/ scheduleMap[category.categoryId]!!.size.toFloat()) * 100).toInt().toString() + "%"
+        }
+    }
+
 }
