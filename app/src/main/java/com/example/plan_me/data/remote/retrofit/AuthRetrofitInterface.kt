@@ -17,7 +17,6 @@ interface AuthRetrofitInterface {
     @GET("/api/member/login")
     fun getAutoLogin(@Header("Authorization") Authorization: String): Call<AutoLoginRes>
 
-
     // 회원가입
     @POST("/api/member/join")
     fun postSignUp(@Header("accessToken") accessToken: String, @Body member: Member): Call<SignUpRes>

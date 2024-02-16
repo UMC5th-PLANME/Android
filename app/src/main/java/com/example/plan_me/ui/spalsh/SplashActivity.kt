@@ -42,7 +42,7 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
 
     private fun getResponse() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
-        getAccessToken = sharedPreferences.getString("getAccessToken", getAccessToken)
+        getAccessToken = sharedPreferences.getString("getRefreshToken", getAccessToken)
     }
 
     private fun autoLoginService() {
@@ -50,6 +50,7 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
         getAutoLoginService.setAutoLoginView(this@SplashActivity)
 
         getResponse()
+        Log.d("토큰", getAccessToken.toString())
         getAutoLoginService.getAutoLogin("Bearer " + getAccessToken)
     }
 
