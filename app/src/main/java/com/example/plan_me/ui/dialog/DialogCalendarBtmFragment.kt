@@ -20,10 +20,11 @@ import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentDialogBtmCalendarBinding
 import com.example.plan_me.ui.all.Daily.DailyRVAdapter
+import com.example.plan_me.ui.all.Daily.ScheduleRVAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.time.LocalDate
 
-class DialogCalendarBtmFragment(private val date : LocalDate, private val context : Context):BottomSheetDialogFragment(),
+class DialogCalendarBtmFragment(private val date : LocalDate, private val context : Context, private val sendSignalModify: ScheduleRVAdapter.SendSignalModify):BottomSheetDialogFragment(),
     AllCategoryView,
     AllScheduleView{
     lateinit var binding : FragmentDialogBtmCalendarBinding
@@ -48,7 +49,7 @@ class DialogCalendarBtmFragment(private val date : LocalDate, private val contex
     private fun initRV() {
         filteringSchedule(date)
         val categoryList = filteringCategory()
-        val dailyRVAdapter = DialogCalendarBtmRVAdapter(categoryList, groupedSchedules, requireContext())
+        val dailyRVAdapter = DialogCalendarBtmRVAdapter(categoryList, groupedSchedules, requireContext(), sendSignalModify)
         binding.dialogCalenderBtmRv.adapter = dailyRVAdapter
         binding.dialogCalenderBtmRv.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }

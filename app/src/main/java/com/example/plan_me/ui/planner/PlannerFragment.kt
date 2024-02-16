@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.planner
 
+import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -21,11 +22,14 @@ import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.NaviViewModel
 
 
 class PlannerFragment : Fragment() ,
-    AllScheduleView{
+    AllScheduleView,
+    PlannerRVAdapter.SendSignalModify{
     private lateinit var binding: FragmentPlannerBinding
     private lateinit var plannerRVAdapter : PlannerRVAdapter
     private lateinit var schedules : List<ScheduleList>
@@ -35,6 +39,7 @@ class PlannerFragment : Fragment() ,
 
 
     private lateinit var naviViewModel: NaviViewModel
+    private lateinit var calendarViewModel: CalendarViewModel
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,6 +49,8 @@ class PlannerFragment : Fragment() ,
         naviViewModel.currentCategory.observe(viewLifecycleOwner, Observer {
             category = it
             init()})
+        val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
         init()
         return binding.root
     }
@@ -100,7 +107,7 @@ class PlannerFragment : Fragment() ,
 
     private fun setRvAdapter() {
         if (!selectedSchedule.isNullOrEmpty()) {
-            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext())
+            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext(), this)
             binding.plannerTodoRv.layoutManager = LinearLayoutManager(requireContext())
             binding.plannerTodoRv.adapter = plannerRVAdapter
         }
@@ -115,5 +122,9 @@ class PlannerFragment : Fragment() ,
 
     override fun onAllScheduleFailure(response: AllScheduleRes) {
         TODO("Not yet implemented")
+    }
+
+    override fun sendSignalModify() {
+        calendarViewModel.getCategoryList()
     }
 }
