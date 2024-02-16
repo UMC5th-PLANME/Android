@@ -1,10 +1,12 @@
 package com.example.plan_me.ui.all.Daily
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +16,8 @@ import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
 
 class DailyRVAdapter(private val categoryList : List<CategoryList>, private val scheduleMap: MutableMap<Int, MutableList<ScheduleList>>, private val context: Context, private val sendSignalModify: ScheduleRVAdapter.SendSignalModify) : RecyclerView.Adapter<DailyRVAdapter.ViewHolder>(){
+    private var categoryId: Int = 0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding : ItemScheduleBinding = ItemScheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
@@ -23,6 +27,8 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
         if (!scheduleMap.isNullOrEmpty()) {
             holder.bind(categoryList[position], scheduleMap)
         }
+        categoryId = categoryList[position].categoryId
+        saveResponse()
     }
 
     override fun getItemCount(): Int = categoryList.size
@@ -60,5 +66,13 @@ class DailyRVAdapter(private val categoryList : List<CategoryList>, private val 
             }
 
         }
+    }
+
+    private fun saveResponse() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("category", AppCompatActivity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("categoryId", categoryId)
+        editor.apply()
     }
 }
