@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.widget.Toast
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.auth.AutoLoginRes
 import com.example.plan_me.data.remote.service.auth.MemberService
@@ -40,6 +39,14 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
         }
     }
 
+    private fun saveResponse() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putString("getAccessToken", getAccessToken!!)
+        editor.apply()
+    }
+
     private fun getResponse() {
         val sharedPreferences: SharedPreferences = getSharedPreferences("getRes", MODE_PRIVATE)
         getAccessToken = sharedPreferences.getString("getRefreshToken", getAccessToken)
@@ -58,6 +65,7 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
         customToast.createToast(this@SplashActivity,"로그인되었습니다.", 300, true)
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
+        saveResponse()
     }
 
     override fun onGetAutoLoginFailure(isSuccess: Boolean, code: String, message: String) {
