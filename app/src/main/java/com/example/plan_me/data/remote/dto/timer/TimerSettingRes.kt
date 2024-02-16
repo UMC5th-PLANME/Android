@@ -1,11 +1,12 @@
 package com.example.plan_me.data.remote.dto.timer
 
+import androidx.lifecycle.MutableLiveData
 import com.google.gson.annotations.SerializedName
 
 data class TimerSettingReq(
-    @SerializedName("focusTime") val focusTime: Int,
-    @SerializedName("breakTime") val breakTime: Int,
-    @SerializedName("repeatCnt") val repeatCnt: Int,
+    @SerializedName("focusTime") val focusTime: MutableLiveData<String>,
+    @SerializedName("breakTime") val breakTime: MutableLiveData<String>,
+    @SerializedName("repeatCnt") val repeatCnt: MutableLiveData<Int>,
 )
 data class TimerSettingRes(
     @SerializedName("isSuccess") val isSuccess: Boolean,
