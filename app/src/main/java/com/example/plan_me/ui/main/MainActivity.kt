@@ -7,11 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.core.view.GravityCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,10 +28,7 @@ import com.example.plan_me.ui.dialog.DialogModifyCategoryFragment
 import com.example.plan_me.ui.dialog.DialogModifyFragment
 import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
-import com.example.plan_me.ui.timer.TimerFocusActivity
 import com.example.plan_me.ui.timer.TimerFragment
-import com.example.plan_me.utils.alarm.AlarmFunctions
-import com.example.plan_me.utils.alarm.AlarmService
 import com.example.plan_me.ui.setting.SettingFragment
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
@@ -183,9 +177,6 @@ class MainActivity :
 
         binding.mainBtmAddFab.setOnClickListener {
             val intent = Intent(this, ScheduleAddActivity::class.java)
-            val categoryArraList :ArrayList<CategoryList> = ArrayList(categorys)
-            intent.putExtra("category", currentCategory)
-            intent.putExtra("categoryList", categoryArraList)
             startActivity(intent)
             overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
         }
