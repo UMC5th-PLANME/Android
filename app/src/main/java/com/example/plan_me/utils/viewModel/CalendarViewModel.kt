@@ -29,7 +29,7 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
         getCategoryList()
     }
 
-    private fun getScheduleAll() {
+    fun getScheduleAll() {
         val access_token = "Bearer " + sharedPreferences.getString("getAccessToken", "")
         val scheduleService = ScheduleService()
         scheduleService.setAllScheduleView(this)
