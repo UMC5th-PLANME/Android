@@ -17,13 +17,15 @@ import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
+import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
+import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.ui.dialog.DialogTimerPickFragment
 
 
 class TimerFragment : Fragment(), ResetConfirmedListener, TimerView {
     private lateinit var binding: FragmentTimerFocusBinding
 
-    private lateinit var dialogTimerPickFragment: DialogTimerPickFragment
+    private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
     private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private var timer: CountDownTimer? = null
@@ -72,7 +74,6 @@ class TimerFragment : Fragment(), ResetConfirmedListener, TimerView {
 
 
 
-
         binding.timerFocusPlayBtn.setOnClickListener {
 
             val settingTimeDB = SettingDatabase.getInstance(this as Context)!!
@@ -99,11 +100,11 @@ class TimerFragment : Fragment(), ResetConfirmedListener, TimerView {
         }
 
         // Reset 클릭 시
-        binding.timerFocusResetBtn.setOnClickListener {
+        /*binding.timerFocusResetBtn.setOnClickListener {
             // Dialog 타이머 초기화 경고 띄우기
             dialogCautionResetTime = DialogCautionResetTimeFragment(this as Context, this)
             dialogCautionResetTime.show()
-        }
+        }*/
 
     }
 

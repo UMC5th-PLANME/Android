@@ -120,17 +120,17 @@ class MainActivity :
                     binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
                     binding.mainAllBtn.text = "All"
                     binding.mainAllBtn.setTextColor(Color.BLACK)
-                    binding.mainTopLayout.visibility = View.VISIBLE
                     supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
                         .replace(R.id.main_frm, PlannerFragment())
                         .commitAllowingStateLoss()
+                    binding.mainTopLayout.visibility = View.VISIBLE
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.mestory -> {
                     supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
                         .replace(R.id.main_frm, MestoryFragment())
                         .commitAllowingStateLoss()
                     binding.mainTopLayout.visibility = View.GONE
@@ -138,6 +138,8 @@ class MainActivity :
                 }
                 R.id.timer -> {
                     supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
+                        .replace(R.id.main_frm, PlannerFragment())
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
                         .replace(R.id.main_frm, TimerFragment())
                         .commitAllowingStateLoss()
@@ -146,7 +148,7 @@ class MainActivity :
                 }
                 R.id.setting -> {
                     supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
                         .replace(R.id.main_frm, SettingFragment())
                         .commitAllowingStateLoss()
                     binding.mainTopLayout.visibility = View.GONE
