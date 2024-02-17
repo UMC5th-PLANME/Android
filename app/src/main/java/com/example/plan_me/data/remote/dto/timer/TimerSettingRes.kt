@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.annotations.SerializedName
 
 data class TimerSettingReq(
-    @SerializedName("focusTime") val focusTime: MutableLiveData<String>,
-    @SerializedName("breakTime") val breakTime: MutableLiveData<String>,
-    @SerializedName("repeatCnt") val repeatCnt: MutableLiveData<Int>,
+    @SerializedName("focusTime") val focusTime: String,
+    @SerializedName("breakTime") val breakTime: String,
+    @SerializedName("repeatCnt") val repeatCnt: Int,
 )
 data class TimerSettingRes(
     @SerializedName("isSuccess") val isSuccess: Boolean,
