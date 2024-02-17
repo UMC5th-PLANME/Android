@@ -33,6 +33,8 @@ import com.example.plan_me.ui.dialog.DialogTimerPickFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickInterface
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
+import com.example.plan_me.utils.viewModel.TimerViewModel
+import com.example.plan_me.utils.viewModel.TimerViewModelFactory
 
 
 class TimerFragment : Fragment(),
@@ -47,7 +49,9 @@ class TimerFragment : Fragment(),
     private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private lateinit var calendarViewModel: CalendarViewModel
-    private lateinit var category_delete : DialogTimerCategoryFragment
+    private lateinit var category_timer : DialogTimerCategoryFragment
+
+    private lateinit var timerViewModel: TimerViewModel
 
     private var timer: CountDownTimer? = null
     private var remainingTimeInMillis: Long = 0
@@ -67,6 +71,12 @@ class TimerFragment : Fragment(),
         calendarViewModel._categoryList.observe(viewLifecycleOwner, Observer {
             init()
         })
+
+        val getResSharedPreferences = requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
+        val categoryIdSharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
+
+        val timerFactory = TimerViewModelFactory(getResSharedPreferences, categoryIdSharedPreferences)
+        timerViewModel = ViewModelProvider(this, timerFactory).get(TimerViewModel::class.java)
 
         binding.timerFocusSettingBtn.isEnabled = false
 
@@ -92,8 +102,8 @@ class TimerFragment : Fragment(),
     private fun clickListener() {
         // menu button
         binding.timerFocusMenuBtn.setOnClickListener{
-            category_delete = DialogTimerCategoryFragment(requireContext(), calendarViewModel._categoryList.value!!, this)
-            category_delete.show()
+            category_timer = DialogTimerCategoryFragment(requireContext(), calendarViewModel._categoryList.value!!, this)
+            category_timer.show()
         }
 
 
@@ -115,13 +125,10 @@ class TimerFragment : Fragment(),
 
             remainingTimeInMillis = remainingTime
 
-
-
             if (remainingTime == 0L) return@setOnClickListener
 
             val time = settingTimeDB.SettingTimeDao().getTime()
             Log.d("TimerFragment", "$time")
-
 
             // Timer 생성 or 이어서 실행 -> milliseconds 로 값 전달
             if (remainingTimeInMillis > 0) {
@@ -220,7 +227,6 @@ class TimerFragment : Fragment(),
 
 
     fun setFocusTime(focusTime: Int) {
-
         val seconds = (focusTime / 1000) % 60
         val minutes = (focusTime / (1000 * 60)) % 60
         val hours = focusTime / (1000 * 60 * 60)
@@ -300,7 +306,6 @@ class TimerFragment : Fragment(),
     }
 
     private fun saveResponse() {
-        // 받아온 데이터 저장
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putInt("category_id", category_id)
@@ -344,7 +349,7 @@ class TimerFragment : Fragment(),
     }
 
     override fun sendDeleteMessage(category: CategoryList) {
-        category_delete.dismiss()
+        category_timer.dismiss()
         calendarViewModel.getCategoryList()
         if (calendarViewModel._currentCategory.value == category) {
             calendarViewModel.sendCategory(CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
@@ -370,6 +375,35 @@ class TimerFragment : Fragment(),
         binding.timerFocusStudyEmoticon.setText(category.emoticon)
 
         binding.timerFocusSettingBtn.isEnabled = true
+
+        timerViewModel.getTimer()
+
+        // focusML observe
+        timerViewModel.getFocus().observe(viewLifecycleOwner, Observer { focusTime ->
+            // focusTime이 "00:00:00"이면 breakTime을 사용하여 UI에 반영
+            if (focusTime == "00:00:00") {
+                timerViewModel.getBreak().value?.let { breakTime ->
+                    binding.timerFocusTimeTv.text = breakTime
+                    Log.d("focusTime", "Break Time applied: $breakTime")
+                }
+            } else {
+                // focusTime이 "00:00:00"이 아니면 focusTime을 UI에 반영
+                binding.timerFocusTimeTv.text = focusTime
+                Log.d("focusTime", focusTime)
+            }
+        })
+
+        // breakML observe
+        timerViewModel.getBreak().observe(viewLifecycleOwner, Observer { breakTime ->
+            // breakTime을 UI에 반영
+            Log.d("breakTime", breakTime)
+        })
+
+        // repeatCntML observe
+        timerViewModel.getRepeat().observe(viewLifecycleOwner, Observer { repeatCount ->
+            // repeatCount를 UI에 반영
+            Log.d("repeatCount", repeatCount.toString())
+        })
     }
 
     override fun onSetTimerSuccess(response: TimerSettingRes) {
