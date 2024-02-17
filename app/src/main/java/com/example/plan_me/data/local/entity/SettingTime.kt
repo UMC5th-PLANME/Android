@@ -5,10 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "SettingTimeTable")
 data class SettingTime(
-    var baseFocusTime: Long = 3000000,
-    var remainingFocusTime: Long = 3000000,
-    var baseBreakTime: Long = 600000,
-    var remainingBreakTime: Long = 600000
+    var baseFocusTime: Int = 3000000,
+    var remainingFocusTime: Int = 3000000,
+    var baseBreakTime: Int = 600000,
+    var remainingBreakTime: Int = 600000
 ) {
     @PrimaryKey var set: Int? = null
 }

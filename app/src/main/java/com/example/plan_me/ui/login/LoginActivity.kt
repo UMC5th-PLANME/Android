@@ -29,7 +29,6 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import java.time.LocalDateTime
-import java.time.LocalTime
 
 class LoginActivity : AppCompatActivity(), SignUpView {
     private lateinit var binding: ActivityLoginBinding
