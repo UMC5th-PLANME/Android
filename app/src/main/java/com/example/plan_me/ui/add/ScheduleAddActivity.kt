@@ -1,13 +1,10 @@
 package com.example.plan_me.ui.add
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.plan_me.R
@@ -17,7 +14,6 @@ import com.example.plan_me.data.remote.dto.schedule.AddScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.DeleteScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ModifyScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
-import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
 import com.example.plan_me.data.remote.view.schedule.AddScheduleView
 import com.example.plan_me.data.remote.view.schedule.DeleteScheduleView
@@ -35,8 +31,6 @@ import com.example.plan_me.ui.dialog.DialogTimePickFragment
 import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
-import com.example.plan_me.ui.main.MainActivity
-import org.jetbrains.annotations.Async.Schedule
 import java.time.LocalDate
 
 class ScheduleAddActivity():
@@ -253,8 +247,8 @@ class ScheduleAddActivity():
         else return false
     }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
-        Log.d("start", startTime.toString())
-        Log.d("end", endTime.toString())
+        Log.d("start", startTime)
+        Log.d("end", endTime)
         if (isVaildRange(startTime,endTime)) {
             binding.scheduleTimeTv.text = startTime + " ~ " + endTime
             this.startTime = startTime

@@ -16,7 +16,7 @@ class DialogCautionResetTimeFragment(context : Context, resetConfirmedListener: 
     private val timeDB = TimeDatabase.getInstance(context)!!
     private val settingTimeDB = SettingDatabase.getInstance(context)!!
 
-    private lateinit var resetConfirmedListener: ResetConfirmedListener
+    private var resetConfirmedListener: ResetConfirmedListener
 
     init {
         this.resetConfirmedListener = resetConfirmedListener
@@ -49,7 +49,6 @@ class DialogCautionResetTimeFragment(context : Context, resetConfirmedListener: 
         binding.timerDialogCautionSaveCancelTimeTv.setOnClickListener {
             // mestory 에 기록 X
             resetConfirmedListener.onResetConfirmed(false)
-
             dismiss()
         }
     }

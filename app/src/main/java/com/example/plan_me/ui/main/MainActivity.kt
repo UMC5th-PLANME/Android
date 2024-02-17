@@ -136,6 +136,7 @@ class MainActivity :
                     binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.timer -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
@@ -146,6 +147,7 @@ class MainActivity :
                     binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.setting -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
@@ -173,7 +175,6 @@ class MainActivity :
 
     private fun clickListener() {
         //다른 화면 클릭시 fab 닫기
-
 
         binding.mainBtmAddFab.setOnClickListener {
             val intent = Intent(this, ScheduleAddActivity::class.java)
