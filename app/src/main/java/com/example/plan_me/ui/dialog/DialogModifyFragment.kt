@@ -57,6 +57,9 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
                     AppCompatActivity.MODE_PRIVATE
                 ).getString("getAccessToken", "")
                 Log.d("access token", access_token)
+                category.name = name
+                category.emoticon = emoticon
+                category.color = color
                 val setCategoryService = CategoryService()
                 setCategoryService.setModifyCategoryView(this)
                 val categoryInput = Category_input(name, emoticon, color)
