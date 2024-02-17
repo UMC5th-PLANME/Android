@@ -12,8 +12,8 @@ import retrofit2.http.*
 
 interface TimerRetrofitInterface {
     @POST("/api/focus/{categoryId}")
-    fun postTimerSetting(@Header("accessToken") accessToken: String, @Path("categoryId") categoryId: Int, @Body timerSettingReq: TimerSettingReq): Call<TimerSettingRes>
+    fun postTimerSetting(@Header("Authorization") Authorization: String, @Path("categoryId") categoryId: Int, @Body timerSettingReq: TimerSettingReq): Call<TimerSettingRes>
 
     @GET("/api/focus/{categoryId}")
-    fun getTimerSetting(@Header("accessToken") accessToken: String, @Path("categoryId") categoryId: Int): Call<TimerSettingRes>
+    fun getTimerSetting(@Header("Authorization") Authorization: String, @Path("categoryId") categoryId: Int): Call<TimerSettingRes>
 }

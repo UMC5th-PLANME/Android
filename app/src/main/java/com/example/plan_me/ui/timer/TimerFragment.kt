@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.timer
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -19,6 +20,10 @@ import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.data.local.entity.SettingTime
 import com.example.plan_me.data.local.entity.Time
 import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.timer.TimerSettingReq
+import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
+import com.example.plan_me.data.remote.service.timer.TimerService
+import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
@@ -34,7 +39,8 @@ class TimerFragment : Fragment(),
     DialogTimerPickInterface,
     ResetConfirmedListener,
     DialogDeleteCategoryCheckFragment.SendDeleteMessage,
-    DialogTimerCategoryFragment.SendData{
+    DialogTimerCategoryFragment.SendData,
+    TimerView{
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
@@ -45,6 +51,8 @@ class TimerFragment : Fragment(),
 
     private var timer: CountDownTimer? = null
     private var remainingTimeInMillis: Long = 0
+
+    private var category_id: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -291,9 +299,43 @@ class TimerFragment : Fragment(),
         updateInitRoomDB(focusMin, breakMin, repeatCount)
     }
 
+    private fun saveResponse() {
+        // 받아온 데이터 저장
+        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedPreferences.edit()
+        editor.putInt("category_id", category_id)
+        editor.apply()
+    }
+
+    private fun setTimerService(timerSettingReq: TimerSettingReq) {
+        val spf = requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
+        val spf2 = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
+        val access_token = spf.getString("getAccessToken", "")
+        val categoryId = spf2.getInt("category_id", 0)
+
+        val timerService = TimerService()
+        timerService.setTimerView(this@TimerFragment)
+        timerService.setTimer("Bearer " + access_token, categoryId, timerSettingReq)
+    }
+
     override fun onTimerSettingConfirm(focusMin: Int, breakMin: Int, repeatCount: Int) {
         timeSetting(focusMin, breakMin, repeatCount)
         Log.d("TimerSetting", "focusMin: $focusMin, breakMin: $breakMin, repeatCount: $repeatCount")
+
+        val focus_seconds = (focusMin / 60) % 60
+        val focus_minutes = focusMin % 60
+        val focus_hours = focusMin / 60
+
+        val break_seconds = (breakMin / 60) % 60
+        val break_minutes = breakMin % 60
+        val break_hours = breakMin / 60
+
+        val focus_formattedTime = String.format("%02d:%02d:%02d", focus_hours, focus_minutes, focus_seconds)
+        val break_formattedTime = String.format("%02d:%02d:%02d", break_hours, break_minutes, break_seconds)
+
+        val timerSettingReq = TimerSettingReq(focus_formattedTime, break_formattedTime, repeatCount)
+
+        setTimerService(timerSettingReq)
     }
 
     override fun onTimerSettingCancel() {
@@ -314,6 +356,9 @@ class TimerFragment : Fragment(),
     override fun sendData(category: CategoryList) {
         calendarViewModel.sendCategory(category)
 
+        category_id = category.categoryId
+        saveResponse()
+
         val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
         val shape = GradientDrawable()
         shape.shape = GradientDrawable.RECTANGLE
@@ -325,5 +370,13 @@ class TimerFragment : Fragment(),
         binding.timerFocusStudyEmoticon.setText(category.emoticon)
 
         binding.timerFocusSettingBtn.isEnabled = true
+    }
+
+    override fun onSetTimerSuccess(response: TimerSettingRes) {
+        Log.d("TIMER SAVE", response.result.toString())
+    }
+
+    override fun onSetTimerFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("TIMER-SAVE-FAILURE", message)
     }
 }
