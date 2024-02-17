@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -12,8 +13,6 @@
         android:gravity="center"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:paddingBottom="20dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,8 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:paddingHorizontal="30dp">
+            android:layout_marginHorizontal="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,69 +51,67 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <NumberPicker
-                        android:id="@+id/timer_focus_numberPicker_hour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="140dp"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginEnd="5dp"
-                        android:keepScreenOn="false"
-                        android:solidColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/guideline_focustime_50"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        style="@style/NumberPickerSetting"
-                        android:theme="@style/TimePicker_Custom" />
+                <NumberPicker
+                    android:id="@+id/timer_focus_numberPicker_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:keepScreenOn="false"
+                    android:solidColor="@color/white"
+                    android:layout_marginStart="60dp"
+                    app:layout_constraintEnd_toStartOf="@id/timer_focus_hour"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    style="@style/NumberPickerSetting" />
 
-                    <NumberPicker
+                <NumberPicker
+                    android:id="@+id/timer_focus_numberPicker_min"
+                    android:layout_width="wrap_content"
+                    android:layout_height="140dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="50dp"
+                    android:solidColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guideline_focustime_50"
+                    app:layout_constraintTop_toTopOf="parent"
+                    style="@style/NumberPickerSetting" />
 
-                        android:id="@+id/timer_focus_numberPicker_min"
-                        android:layout_width="wrap_content"
-                        android:layout_height="140dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="50dp"
-                        android:solidColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/guideline_focustime_50"
-                        app:layout_constraintTop_toTopOf="parent"
-                        style="@style/NumberPickerSetting"
-                        android:theme="@style/TimePicker_Custom" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:text="시간"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/timer_focus_numberPicker_hour"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/timer_focus_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="시간"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_focustime_50"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="분"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/timer_focus_numberPicker_min"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="분"
+                    android:textColor="@color/black"
+                    android:paddingLeft="15dp"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/timer_focus_numberPicker_min"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline_focustime_50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline_focustime_50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="130dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -121,8 +119,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:paddingHorizontal="30dp">
+            android:layout_marginHorizontal="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -142,13 +141,12 @@
                     android:keepScreenOn="false"
                     android:solidColor="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline_breaktime_50"
-                    style="@style/NumberPickerSetting" />
+                    app:layout_constraintEnd_toStartOf="@+id/guideline_breaktime_50" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="20dp"
                     android:text="시간"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -170,8 +168,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingHorizontal="20dp"
             android:layout_marginTop="20dp"
-            android:paddingHorizontal="30dp">
+            android:layout_marginHorizontal="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -198,7 +197,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="20dp"
                     android:text="회"
                     android:textColor="@color/black"
                     android:textSize="16sp"
@@ -244,6 +243,11 @@
                 android:textColor="@color/black"
                 android:gravity="center"/>
         </LinearLayout>
-
     </LinearLayout>
+
 </FrameLayout>
+
+
+
+
+

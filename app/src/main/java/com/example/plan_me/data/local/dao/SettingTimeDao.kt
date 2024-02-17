@@ -34,7 +34,7 @@ interface SettingTimeDao {
     @Query("SELECT RemainingBreakTime FROM SettingTimeTable WHERE `set` = :set")
     fun getRemainingBreakTime(set: Long): Long
     @Query("UPDATE SettingTimeTable SET baseFocusTime = :baseFocusTime, remainingFocusTime = :remainingFocusTime, baseBreakTime = :baseBreakTime, remainingBreakTime = :remainingBreakTime WHERE `set` = :set")
-    fun updateTime(baseFocusTime: Long, remainingFocusTime: Long, baseBreakTime: Long, remainingBreakTime: Long, set: Int)
+    fun updateTime(baseFocusTime: Int, remainingFocusTime: Int, baseBreakTime: Int, remainingBreakTime: Int, set: Int)
 
     @Query("UPDATE SettingTimeTable SET remainingFocusTime = :remainingFocusTime WHERE `set` = :set")
     fun updateRemainingFocusTime(remainingFocusTime: Long, set: Int)

@@ -137,6 +137,7 @@ class MainActivity :
                     binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.timer -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
@@ -147,6 +148,7 @@ class MainActivity :
                     binding.mainTopLayout.visibility = View.GONE
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.setting -> {
                     supportFragmentManager.beginTransaction()
                         .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
@@ -175,6 +177,7 @@ class MainActivity :
     }
 
     private fun clickListener() {
+
         binding.mainBtmAddFab.setOnClickListener {
             if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
                 val customToast = CustomToast

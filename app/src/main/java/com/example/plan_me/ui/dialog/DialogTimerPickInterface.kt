@@ -1,8 +1,7 @@
 package com.example.plan_me.ui.dialog
 
-
-class DialogTimerPickInterface {
-    // fun onTimerSettingConfirm()
-    // fun onTimerSetting
+interface DialogTimerPickInterface {
+    fun onTimerSettingConfirm(focusMin : Int, breakMin : Int, repeatCount : Int )
+    fun onTimerSettingCancel()
 }
 

@@ -74,8 +74,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.timer.TimerSettingActivity" />
-
         <activity android:name=".ui.main.MainActivity"/>
 
         <activity android:name=".ui.login.InitProfileActivity"/>
