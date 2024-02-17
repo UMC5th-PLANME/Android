@@ -61,6 +61,7 @@ class MonthlyFragment: Fragment(),
     private lateinit var firstDayOfWeek :DayOfWeek
 
     var groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
+    var categoryList = listOf<CategoryList>()
 
     private lateinit var calendarViewModel: CalendarViewModel
 
@@ -98,14 +99,10 @@ class MonthlyFragment: Fragment(),
                 }
 
                 groupedSchedules = calendarViewModel.filteringSchedule(data.date, groupedSchedules)
-                val categoryList = calendarViewModel.filteringCategory(groupedSchedules)
+                categoryList = calendarViewModel.filteringCategory(groupedSchedules)
 
                 container.day.monthyDayLayout.setOnClickListener {
                     if (container.canClick) {
-                        groupedSchedules = calendarViewModel.filteringSchedule(data.date, groupedSchedules)
-                        val categoryList = calendarViewModel.filteringCategory(groupedSchedules)
-                        Log.d("filter", categoryList.toString())
-                        Log.d("filter", groupedSchedules.toString())
                         val btmSheet = DialogCalendarBtmFragment(data.date, requireContext(), this@MonthlyFragment)
                         btmSheet.show(parentFragmentManager, btmSheet.tag)
                     }

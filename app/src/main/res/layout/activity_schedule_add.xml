@@ -47,7 +47,7 @@
 
             <TextView
                 android:id="@+id/schedule_category_name"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:text="STUDY"
                 android:textColor="@color/dark_gray"
@@ -55,7 +55,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/schedule_category_emoticon"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"/>
 
             <ImageView
                 android:id="@+id/schedule_category_detail"

@@ -243,9 +243,12 @@ class MainActivity :
         calendarViewModel.getCategoryList()
     }
 
-    override fun sendDeleteMessage(position : Int) {    //delete
+    override fun sendDeleteMessage(category: CategoryList) {    //delete
         category_delete.dismiss()
         calendarViewModel.getCategoryList()
+        if (calendarViewModel._currentCategory.value == category) {
+            calendarViewModel.sendCategory(CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
+        }
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
     }
