@@ -13,7 +13,7 @@ import com.example.plan_me.databinding.FragmentDialogDeleteCategoryBinding
 import com.example.plan_me.databinding.FragmentDialogModifyCategoryBinding
 import com.example.plan_me.ui.main.MainActivity
 
-class DialogModifyCategoryFragment(context : Context, private val categoryList: List<CategoryList>, private val sendModifyMessage :DialogModifyFragment.SendModifyMessage):Dialog(context){
+class DialogModifyCategoryFragment(context : Context, private val categoryList: List<CategoryList>?, private val sendModifyMessage :DialogModifyFragment.SendModifyMessage):Dialog(context){
     private lateinit var binding : FragmentDialogModifyCategoryBinding
     private lateinit var adapter : ModifyCategoryRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +28,12 @@ class DialogModifyCategoryFragment(context : Context, private val categoryList: 
         }
         Log.d("list", categoryList.toString())
 
-        val layoutManager = LinearLayoutManager(context)
-        adapter = ModifyCategoryRVAdapter(context, categoryList, sendModifyMessage)
-        binding.dialogModifyCategoryRv.layoutManager = layoutManager
-        binding.dialogModifyCategoryRv.adapter = adapter
+        if (categoryList != null) {
+            val layoutManager = LinearLayoutManager(context)
+            adapter = ModifyCategoryRVAdapter(context, categoryList, sendModifyMessage)
+            binding.dialogModifyCategoryRv.layoutManager = layoutManager
+            binding.dialogModifyCategoryRv.adapter = adapter
+        }
     }
     //text
 }

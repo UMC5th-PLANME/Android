@@ -24,9 +24,15 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
     val _scheduleList = MutableLiveData<List<ScheduleList>>()
 
     val _isUpdated = MutableLiveData<Boolean>()
+    val _currentCategory = MutableLiveData<CategoryList>()
 
     init {
         getCategoryList()
+        _currentCategory.value = CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" )
+    }
+
+    fun sendCategory(categoryList: CategoryList) {
+        _currentCategory.value = categoryList
     }
 
     fun getScheduleAll() {

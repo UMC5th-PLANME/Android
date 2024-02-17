@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.databinding.ItemDrawerBinding
 
-class DeleteCategoryRVAdapter(private val context: Context, private val categoryList : List<CategoryList>,private val sendDeleteMessage: DialogDeleteCategoryCheckFragment.SendDeleteMessage ): RecyclerView.Adapter<DeleteCategoryRVAdapter.ViewHolder>(){
+class DeleteCategoryRVAdapter(private val context: Context, private val categoryList : List<CategoryList>?,private val sendDeleteMessage: DialogDeleteCategoryCheckFragment.SendDeleteMessage ): RecyclerView.Adapter<DeleteCategoryRVAdapter.ViewHolder>(){
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): DeleteCategoryRVAdapter.ViewHolder {
         val binding: ItemDrawerBinding = ItemDrawerBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
 
@@ -17,15 +17,16 @@ class DeleteCategoryRVAdapter(private val context: Context, private val category
         holder.bind(position)
     }
 
-    override fun getItemCount(): Int = categoryList.size
+    override fun getItemCount(): Int = categoryList?.size ?: 0
 
     inner class ViewHolder(val binding: ItemDrawerBinding): RecyclerView.ViewHolder(binding.root){
         fun bind (position: Int) {
-            val categoryText = categoryList[position].emoticon +" "+categoryList[position].name
+            if (categoryList != null) {
+            val categoryText = categoryList!![position].emoticon +" "+categoryList!![position].name
             binding.itemDrawerTv.text = categoryText
 
             binding.root.setOnClickListener {
-                showCheckDialog(categoryList[position], position)
+                showCheckDialog(categoryList!![position], position)
             }
         }
     }
@@ -35,3 +36,4 @@ class DeleteCategoryRVAdapter(private val context: Context, private val category
         checkDialog.show()
     }
 }
+    }
