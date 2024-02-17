@@ -1,6 +1,7 @@
 package com.example.plan_me.ui.timer
 
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -8,43 +9,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.plan_me.R
 import com.example.plan_me.data.local.database.SettingDatabase
 import com.example.plan_me.data.local.database.TimeDatabase
 import com.example.plan_me.data.local.entity.SettingTime
 import com.example.plan_me.data.local.entity.Time
-import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
-import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
-import com.example.plan_me.data.remote.service.category.CategoryService
-import com.example.plan_me.data.remote.view.category.AllCategoryView
-import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
+import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
+import com.example.plan_me.ui.dialog.DialogTimerCategoryFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickInterface
-import com.example.plan_me.utils.viewModel.NaviViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 
 
-class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListener, TimerView, AllCategoryView {
+class TimerFragment : Fragment(),
+    DialogTimerPickInterface,
+    ResetConfirmedListener,
+    DialogDeleteCategoryCheckFragment.SendDeleteMessage,
+    DialogTimerCategoryFragment.SendData{
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
     private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
+    private lateinit var calendarViewModel: CalendarViewModel
+    private lateinit var category_delete : DialogTimerCategoryFragment
+
     private var timer: CountDownTimer? = null
     private var remainingTimeInMillis: Long = 0
-
-    private lateinit var drawerView:View
-
-    private lateinit var categories : List<CategoryList>
-    private lateinit var currentCategory : CategoryList
-    private var currentCategoryPosition : Int = -1
-
-    private lateinit var naviViewModel: NaviViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,21 +53,37 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
     ): View? {
         binding = FragmentTimerFocusBinding.inflate(layoutInflater, container, false)
 
-        naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
-        getCategoryList()
+        val factory = CalendarViewModelFactory(requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
 
-        drawerView = binding.root.findViewById(R.id.drawer_layout)
+        calendarViewModel._categoryList.observe(viewLifecycleOwner, Observer {
+            init()
+        })
 
         clickListener()
 
         return binding.root
     }
 
-    private fun clickListener() {
+    private fun init() {
+        Log.d("current",calendarViewModel._currentCategory.value!!.toString())
+        val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
+        val shape = GradientDrawable()
+        shape.shape = GradientDrawable.RECTANGLE
+        shape.setColor(newColor)
+        shape.cornerRadius = resources.getDimension(R.dimen.planner_corner_raidus) // 원하는 radius 값으로 대체
 
+        // 설정한 모양을 레이아웃에 적용
+        binding.timerFocusCategoryLo.background = shape
+        binding.timerFocusCategoryTv.text = calendarViewModel._currentCategory.value!!.name
+        binding.timerFocusStudyEmoticon.text = calendarViewModel._currentCategory.value!!.emoticon
+    }
+
+    private fun clickListener() {
         // menu button
         binding.timerFocusMenuBtn.setOnClickListener{
-            binding.timerFocusDrawerLayout.openDrawer(drawerView!!)
+            category_delete = DialogTimerCategoryFragment(requireContext(), calendarViewModel._categoryList.value!!, this)
+            category_delete.show()
         }
 
 
@@ -217,14 +233,6 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
         binding.timerFocusTimeClearTv.text = formattedTime
     }
 
-    private fun getCategoryList() {
-        val access_token = "Bearer " + requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)!!
-            .getString("getAccessToken", "")
-        val setCategoryService = CategoryService()
-        setCategoryService.setAllCategoryView(this)
-        setCategoryService.getCategoryAllFun(access_token!!)
-    }
-
     private fun updateInitRoomDB(focusMin: Int, breakMin: Int, repeatCount: Int) {
         val timeDB = TimeDatabase.getInstance(requireContext())!!
         val settingTimeDB = SettingDatabase.getInstance(requireContext())!!
@@ -281,32 +289,6 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
         updateInitRoomDB(focusMin, breakMin, repeatCount)
     }
 
-    override fun onSetTimerSuccess(response: TimerSettingRes) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onSetTimerFailure(isSuccess: Boolean, code: String, message: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onAllCategorySuccess(response: AllCategoryRes) {
-        categories = response.result.categoryList
-        if(categories.isNotEmpty()) {
-            if (currentCategoryPosition == -1) {
-                currentCategory = categories[0]
-            } else {
-                currentCategory = categories[currentCategoryPosition]
-            }
-            naviViewModel.sendCategory(currentCategory)
-        }else {
-            naviViewModel.sendCategory(CategoryList(0,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
-        }
-    }
-
-    override fun onAllCategoryFailure(response: AllCategoryRes) {
-        TODO("Not yet implemented")
-    }
-
     override fun onTimerSettingConfirm(focusMin: Int, breakMin: Int, repeatCount: Int) {
         timeSetting(focusMin, breakMin, repeatCount)
         Log.d("TimerSetting", "focusMin: $focusMin, breakMin: $breakMin, repeatCount: $repeatCount")
@@ -317,4 +299,28 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
         Log.d("TimerSettingCancel", "cancel")
     }
 
+    override fun sendDeleteMessage(category: CategoryList) {
+        category_delete.dismiss()
+        calendarViewModel.getCategoryList()
+        if (calendarViewModel._currentCategory.value == category) {
+            calendarViewModel.sendCategory(CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
+        }
+        val customToast = CustomToast
+        customToast.createToast(requireContext(), calendarViewModel._categoryList.value.toString(), 300, true)
+    }
+
+    override fun sendData(category: CategoryList) {
+        Log.d("sdjflkds", category.name)
+        calendarViewModel.sendCategory(category)
+
+        val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
+        val shape = GradientDrawable()
+        shape.shape = GradientDrawable.RECTANGLE
+        shape.setColor(newColor)
+        shape.cornerRadius = resources.getDimension(R.dimen.planner_corner_raidus) // 원하는 radius 값으로 대체
+
+        binding.timerFocusCategoryTv.setText(category.name)
+        binding.timerFocusCategoryLo.background = shape
+        binding.timerFocusStudyEmoticon.setText(category.emoticon)
+    }
 }
