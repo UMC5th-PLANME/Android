@@ -1,6 +1,7 @@
 package com.example.plan_me.data.remote.service.timer
 
 import android.util.Log
+import com.example.plan_me.data.remote.dto.timer.GetTimerRes
 import com.example.plan_me.data.remote.dto.timer.TimerSettingReq
 import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
 import com.example.plan_me.data.remote.retrofit.TimerRetrofitInterface
@@ -46,20 +47,20 @@ class TimerService {
 
     fun getTimer(accessToken: String, categoryId: Int) {
         val timerService = getRetrofit().create(TimerRetrofitInterface::class.java)
-        timerService.getTimerSetting(accessToken, categoryId).enqueue(object : Callback<TimerSettingRes> {
+        timerService.getTimerSetting(accessToken, categoryId).enqueue(object : Callback<GetTimerRes> {
             override fun onResponse(
-                call: Call<TimerSettingRes>,
-                response: Response<TimerSettingRes>
+                call: Call<GetTimerRes>,
+                response: Response<GetTimerRes>
             ) {
                 Log.d("GET-TIME-SUCCESS", response.toString())
-                val resp: TimerSettingRes = response.body()!!
+                val resp: GetTimerRes = response.body()!!
                 when(resp.code) {
                     "FOCUS2001" -> getTimerView.onGetTimerSuccess(resp)
                     else -> getTimerView.onGetTimerFailure(resp.isSuccess, resp.code, resp.message)
                 }
             }
 
-            override fun onFailure(call: Call<TimerSettingRes>, t: Throwable) {
+            override fun onFailure(call: Call<GetTimerRes>, t: Throwable) {
                 Log.d("GET-TIME-FAILURE", t.toString())
             }
         })

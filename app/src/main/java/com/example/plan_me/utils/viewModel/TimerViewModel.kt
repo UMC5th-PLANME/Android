@@ -5,11 +5,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
+import com.example.plan_me.data.remote.dto.timer.GetTimerRes
 import com.example.plan_me.data.remote.service.timer.TimerService
 import com.example.plan_me.data.remote.view.timer.GetTimerView
 
-class TimerViewModel(private val sharedPreferences: SharedPreferences): ViewModel(), GetTimerView {
+class TimerViewModel(private val getResSharedPreferences: SharedPreferences, private val categoryIdSharedPreferences: SharedPreferences): ViewModel(), GetTimerView {
     val focusML = MutableLiveData<String>().apply {
         Log.d("init focus mutable livedata", "focus 라이브 데이터 초기화")
         setValue("10:00:00")
@@ -30,17 +30,20 @@ class TimerViewModel(private val sharedPreferences: SharedPreferences): ViewMode
     fun getRepeat(): LiveData<Int> = repeatCntML
 
     fun getTimer() {
-        val access_token = "Bearer " + sharedPreferences.getString("getAccessToken", "")
-        val categoryId = sharedPreferences.getInt("category", 0)
+        val access_token = "Bearer " + getResSharedPreferences.getString("getAccessToken", "")
+        val categoryId = categoryIdSharedPreferences.getInt("category_id", 0)
 
         val timerService = TimerService()
         timerService.getTimerView(this@TimerViewModel)
         timerService.getTimer(access_token, categoryId)
     }
 
-    override fun onGetTimerSuccess(response: TimerSettingRes) {
+    override fun onGetTimerSuccess(response: GetTimerRes) {
         Log.d("TIMER VIEW 설정", response.result.toString())
-        getTimer()
+
+        focusML.value = response.result.focusTime
+        breakML.value = response.result.breakTime
+        repeatCntML.value = response.result.repeatCnt
     }
 
     override fun onGetTimerFailure(isSuccess: Boolean, code: String, message: String) {
