@@ -58,6 +58,9 @@ class MainActivity :
     private lateinit var naviFragmentViewModel: NaviFragmentViewModel
     private lateinit var calendarViewModel: CalendarViewModel
 
+    private var backPressedTime: Long = 0
+    private val BACK_PRESSED_INTERVAL: Long = 2000 // 두 번 누르는 간격 (밀리초)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -161,7 +164,16 @@ class MainActivity :
         if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
             binding.mainDrawerLayout.closeDrawers()
         }
+
+        if (backPressedTime + BACK_PRESSED_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed()
+            finish()
+        } else {
+            CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
+        }
+        backPressedTime = System.currentTimeMillis()
     }
+
     private fun clickListener() {
         binding.mainBtmAddFab.setOnClickListener {
             if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
@@ -211,8 +223,6 @@ class MainActivity :
                 isHome=true
             }
         }
-
-
     }
 
     private fun showDialog(dialog: Dialog) {

@@ -10,7 +10,7 @@ data class AutoLoginRes(
 )
 
 data class AutoLogin(
-    @SerializedName("member_id") val member_id: String,
+    @SerializedName("member_id") val member_id: Int,
     @SerializedName("accessToken") val accessToken: String,
     @SerializedName("refreshToken") val refreshToken: String,
     @SerializedName("expiration") val expiration: String
