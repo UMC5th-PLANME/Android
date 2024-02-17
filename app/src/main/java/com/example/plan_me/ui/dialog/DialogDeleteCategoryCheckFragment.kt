@@ -17,7 +17,7 @@ class DialogDeleteCategoryCheckFragment(context: Context, private val category: 
     private lateinit var binding: FragmentDialogCheckDeleteCategoryBinding
 
     interface SendDeleteMessage {
-        fun sendDeleteMessage(position : Int)
+        fun sendDeleteMessage(category: CategoryList)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class DialogDeleteCategoryCheckFragment(context: Context, private val category: 
 
     override fun onDeleteCategorySuccess(response: DeleteCategoryRes) {
         dismiss()
-        sendDeleteMessage.sendDeleteMessage(position)
+        sendDeleteMessage.sendDeleteMessage(category)
     }
 
     override fun onDeleteCategoryFailure(response: DeleteCategoryRes) {

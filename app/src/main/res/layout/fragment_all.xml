@@ -17,7 +17,7 @@
         app:tabIndicatorHeight="2dp"
         app:tabIndicatorColor="@color/dark_gray"
         app:tabTextAppearance="@style/tab_text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:tabBackground="@drawable/all_tb_background"
         android:layout_marginHorizontal="20dp"
         app:tabIndicatorFullWidth="true"/>

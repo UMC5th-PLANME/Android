@@ -61,11 +61,14 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
             if (selectDate.isEqual(startDate) || selectDate.isEqual(endDate) ||
                 (selectDate.isAfter(startDate) && selectDate.isBefore(endDate))) {
                 if (!groupedSchedules.containsKey(categoryId)) {
-                    groupedSchedules[categoryId] = mutableListOf()
+                    if (_categoryList.value!!.find { it.categoryId == categoryId } != null) {
+                        groupedSchedules[categoryId] = mutableListOf()
+                    }
                 }
                 groupedSchedules[categoryId]?.add(schedule)
             }
         }
+        Log.d("dfasdf", groupedSchedules.toString())
         return groupedSchedules
     }
 
@@ -78,6 +81,7 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
                 filteringCategory.add(it)
             }
         }
+        Log.d("dfasdf", filteringCategory.toString())
         return filteringCategory
     }
 

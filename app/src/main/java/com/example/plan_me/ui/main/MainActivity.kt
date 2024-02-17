@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,7 @@ import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.timer.TimerFragment
 import com.example.plan_me.ui.setting.SettingFragment
+import com.example.plan_me.utils.alarm.AlarmFunctions
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
@@ -72,7 +74,7 @@ class MainActivity :
             initActivity()
         })
 
-
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         initBottomNavigation()
         setContentView(binding.root)
 
@@ -89,8 +91,6 @@ class MainActivity :
             .commitAllowingStateLoss()
 
         clickListener()
-/*
-        AlarmFunctions(this).callAlarm("2024-02-10 21:05:10",  1, "asdf")*/
     }
 
     override fun onResume() {
@@ -162,18 +162,29 @@ class MainActivity :
         }
     }
 
-    override fun onBackPressed() {
-        if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
-            binding.mainDrawerLayout.closeDrawers()
-        }
+    private val onBackPressedCallback = object  : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
+                binding.mainDrawerLayout.closeDrawers()
+            }else if (!isHome) {
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                    .replace(R.id.main_frm, PlannerFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "All"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            } else {
 
-        if (backPressedTime + BACK_PRESSED_INTERVAL > System.currentTimeMillis()) {
-            super.onBackPressed()
-            finish()
-        } else {
-            CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
+                if (System.currentTimeMillis() - backPressedTime >= 1500) {
+                    backPressedTime = System.currentTimeMillis()
+                    CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
+                } else {
+                    finish()
+                }
+            }
         }
-        backPressedTime = System.currentTimeMillis()
     }
 
     private fun clickListener() {
@@ -181,7 +192,7 @@ class MainActivity :
         binding.mainBtmAddFab.setOnClickListener {
             if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
                 val customToast = CustomToast
-                customToast.createToast(this, "카테고리를 생성해주세요", 300, false)
+                customToast.createToast(this, "카테고리를 선택해주세요", 300, false)
             }else {
                 val intent = Intent(this, ScheduleAddActivity::class.java)
                 val categoryList = ArrayList(calendarViewModel._categoryList.value)
@@ -235,9 +246,12 @@ class MainActivity :
         calendarViewModel.getCategoryList()
     }
 
-    override fun sendDeleteMessage(position : Int) {    //delete
+    override fun sendDeleteMessage(category: CategoryList) {    //delete
         category_delete.dismiss()
         calendarViewModel.getCategoryList()
+        if (calendarViewModel._currentCategory.value == category) {
+            calendarViewModel.sendCategory(CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
+        }
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
     }

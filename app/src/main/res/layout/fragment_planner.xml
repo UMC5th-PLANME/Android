@@ -29,12 +29,17 @@
 
         <TextView
             android:id="@+id/planner_category_name_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_bold"
             android:text="SCHEDULE"
             android:textColor="@color/black"
-            android:textSize="32dp" />
+            android:textSize="32dp"
+            android:gravity="center"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="true"/>
+
     </LinearLayout>
 
     <LinearLayout

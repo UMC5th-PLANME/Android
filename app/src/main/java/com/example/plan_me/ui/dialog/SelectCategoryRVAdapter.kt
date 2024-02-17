@@ -26,8 +26,9 @@ class SelectCategoryRVAdapter(private val context: Context, private val category
 
     inner class ViewHolder(val binding: ItemDrawerBinding): RecyclerView.ViewHolder(binding.root){
         fun bind (position: Int) {
-            val categoryText = categoryList[position].emoticon +" "+categoryList[position].name
-            binding.itemDrawerTv.text = categoryText
+
+            binding.itemDrawerTitleTv.text = categoryList!![position].name
+            binding.itemDrawerEmoticonTv.text = categoryList!![position].emoticon
 
             binding.root.setOnClickListener {
                 dialogSelectCategoryInerface.onClickCategory(position)

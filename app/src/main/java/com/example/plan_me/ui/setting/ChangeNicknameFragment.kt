@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.EditProfile
@@ -69,6 +70,16 @@ class ChangeNicknameFragment: Fragment(), ChangeProfileView, LookUpMemberView {
         binding.changeNicknameBtn.setOnClickListener {
             setEditName()
             customToast.createToast(requireContext(),"닉네임이 변경되었습니다.", 300, true)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+    }
+    private val onBackPressedCallback = object  : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                .replace(R.id.main_frm, AccountFragment())
+                .commitAllowingStateLoss()
         }
     }
 

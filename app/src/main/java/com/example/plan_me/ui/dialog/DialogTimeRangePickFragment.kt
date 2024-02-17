@@ -51,18 +51,5 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
             endTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",endTime)
         }
-        binding.timeRangeCheckBox.setOnClickListener {
-            if (isChecked) {
-                Log.d("isChecked" , "false")
-                isChecked = false
-                binding.dialogTimepickStart.isEnabled = true
-                binding.dialogTimepickEnd.isEnabled =  true
-            }else {
-                Log.d("isChecked" , "true")
-                isChecked = true
-                binding.dialogTimepickStart.isEnabled = false
-                binding.dialogTimepickEnd.isEnabled =  false
-            }
-        }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityConsumerCenterBinding
@@ -32,9 +33,19 @@ class ConsumerSettingFragment: Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
     }
 
     private fun showDialog(dialog: Dialog) {
         dialog.show()
+    }
+
+    private val onBackPressedCallback = object  : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
+                .replace(R.id.main_frm, SettingFragment())
+                .commitAllowingStateLoss()
+        }
     }
 }

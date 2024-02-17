@@ -19,18 +19,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <androidx.appcompat.widget.AppCompatButton
+    <LinearLayout
         android:id="@+id/account_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/schedule_backarrow"
-        android:backgroundTint="@color/dark_gray"
-        app:layout_constraintHorizontal_bias="0.2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/account_tv"
         app:layout_constraintTop_toTopOf="@id/account_tv"
-        app:layout_constraintEnd_toStartOf="@id/account_tv"/>
+        app:layout_constraintEnd_toStartOf="@id/account_tv"
+        app:layout_constraintHorizontal_bias="0.2"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/schedule_backarrow"
+            android:backgroundTint="@color/dark_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/account_tv"
+            app:layout_constraintTop_toTopOf="@id/account_tv"
+            app:layout_constraintEnd_toStartOf="@id/account_tv"/>
+    </LinearLayout>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/account_image_lo"
@@ -153,7 +164,7 @@
         android:id="@+id/account_logout_delete_lo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="61dp"
+        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
