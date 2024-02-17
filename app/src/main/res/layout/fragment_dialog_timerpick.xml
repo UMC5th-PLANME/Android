@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        app:layout_constraintGuide_percent="0.5" />
+                        app:layout_constraintGuide_percent="0.5074074" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
@@ -143,7 +143,8 @@
                     android:solidColor="@color/white"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_breaktime_50"
-                    style="@style/NumberPickerSetting" />
+                    style="@style/NumberPickerSetting"
+                    android:theme="@style/TimePicker_Custom"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -193,7 +194,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/guideline_repeat_count_50"
                     app:layout_constraintTop_toTopOf="parent"
-                    style="@style/NumberPickerSetting" />
+                    style="@style/NumberPickerSetting"
+                    android:theme="@style/TimePicker_Custom"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -55,7 +55,6 @@
                 android:id="@+id/emoticon_lo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="26dp"
                 android:layout_marginVertical="12dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -69,7 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:weightSum="5">
 
                     <RadioButton
                         android:id="@+id/emoticon_1_btn"
@@ -225,9 +225,8 @@
 
             <LinearLayout
                 android:id="@+id/color_lo"
-                android:layout_width="219dp"
-                android:layout_height="64dp"
-                android:layout_marginHorizontal="26dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="12dp"
                 android:gravity="center"
                 android:orientation="vertical"

@@ -112,6 +112,7 @@ class ScheduleAddActivity():
 
         }else if (intent.hasExtra("category") && intent.hasExtra("categoryList")){
             isModify = false
+            binding.scheduleCategoryDetail.visibility = View.VISIBLE
             Log.d("dd", "dd")
             currentCategory = intent.getParcelableExtra("category")!!
             categoryList = intent.getParcelableArrayListExtra("categoryList")!!

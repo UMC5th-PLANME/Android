@@ -20,17 +20,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <LinearLayout
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/change_nickname_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/dark_gray"
-        android:background="@drawable/schedule_backarrow"
+
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintEnd_toStartOf="@id/change_nickname_tv"
         app:layout_constraintTop_toTopOf="@id/change_nickname_tv"
         app:layout_constraintBottom_toBottomOf="@id/change_nickname_tv"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/dark_gray"
+            android:background="@drawable/schedule_backarrow"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/change_nickname_edit_tv"

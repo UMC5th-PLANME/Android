@@ -177,7 +177,7 @@ class MainActivity :
         binding.mainBtmAddFab.setOnClickListener {
             if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
                 val customToast = CustomToast
-                customToast.createToast(this, "카테고리를 생성해주세요", 300, false)
+                customToast.createToast(this, "카테고리를 선택해주세요", 300, false)
             }else {
                 val intent = Intent(this, ScheduleAddActivity::class.java)
                 val categoryList = ArrayList(calendarViewModel._categoryList.value)
