@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.example.plan_me.R
 import com.example.plan_me.databinding.ActivityProducerBinding
@@ -25,6 +26,15 @@ class InfoProducerFragment: Fragment() {
                 .replace(R.id.main_frm, InfoSettingFragment())
                 .addToBackStack(null)
                 .commit()
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, onBackPressedCallback)
+    }
+    private val onBackPressedCallback = object  : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            parentFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.fadein, R.anim.fadeout2)
+                .replace(R.id.main_frm, InfoSettingFragment())
+                .commitAllowingStateLoss()
         }
     }
 }

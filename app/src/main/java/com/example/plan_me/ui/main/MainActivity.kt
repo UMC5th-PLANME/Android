@@ -164,7 +164,16 @@ class MainActivity :
         override fun handleOnBackPressed() {
             if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
                 binding.mainDrawerLayout.closeDrawers()
-            }else {
+            }else if (!isHome) {
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                    .replace(R.id.main_frm, PlannerFragment())
+                    .commitAllowingStateLoss()
+                binding.mainAllBtn.setBackgroundResource(R.drawable.planner_btn_all)
+                binding.mainAllBtn.text = "All"
+                binding.mainAllBtn.setTextColor(Color.BLACK)
+                isHome=true
+            } else {
 
                 if (System.currentTimeMillis() - backPressedTime >= 1500) {
                     backPressedTime = System.currentTimeMillis()
@@ -174,7 +183,6 @@ class MainActivity :
                 }
             }
         }
-
     }
 
     private fun clickListener() {

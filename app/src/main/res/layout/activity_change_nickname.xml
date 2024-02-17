@@ -81,7 +81,7 @@
         android:fontFamily="@font/pretendard_bold"
         android:gravity="center"
         android:paddingVertical="11dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintStart_toStartOf="@id/change_nickname_et"
         app:layout_constraintEnd_toEndOf="@id/change_nickname_et"
         app:layout_constraintBottom_toBottomOf="parent"/>
