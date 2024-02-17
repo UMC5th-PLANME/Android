@@ -60,6 +60,8 @@ class TimerFragment : Fragment(),
             init()
         })
 
+        binding.timerFocusSettingBtn.isEnabled = false
+
         clickListener()
 
         return binding.root
@@ -310,7 +312,6 @@ class TimerFragment : Fragment(),
     }
 
     override fun sendData(category: CategoryList) {
-        Log.d("sdjflkds", category.name)
         calendarViewModel.sendCategory(category)
 
         val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
@@ -322,5 +323,7 @@ class TimerFragment : Fragment(),
         binding.timerFocusCategoryTv.setText(category.name)
         binding.timerFocusCategoryLo.background = shape
         binding.timerFocusStudyEmoticon.setText(category.emoticon)
+
+        binding.timerFocusSettingBtn.isEnabled = true
     }
 }
