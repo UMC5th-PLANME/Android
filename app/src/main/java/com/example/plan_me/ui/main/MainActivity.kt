@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -73,7 +74,7 @@ class MainActivity :
             initActivity()
         })
 
-
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
         initBottomNavigation()
         setContentView(binding.root)
 
@@ -159,18 +160,21 @@ class MainActivity :
         }
     }
 
-    override fun onBackPressed() {
-        if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
-            binding.mainDrawerLayout.closeDrawers()
+    private val onBackPressedCallback = object  : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
+                binding.mainDrawerLayout.closeDrawers()
+            }else {
+
+                if (System.currentTimeMillis() - backPressedTime >= 1500) {
+                    backPressedTime = System.currentTimeMillis()
+                    CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
+                } else {
+                    finish()
+                }
+            }
         }
 
-        if (backPressedTime + BACK_PRESSED_INTERVAL > System.currentTimeMillis()) {
-            super.onBackPressed()
-            finish()
-        } else {
-            CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
-        }
-        backPressedTime = System.currentTimeMillis()
     }
 
     private fun clickListener() {
