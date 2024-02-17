@@ -54,6 +54,7 @@ class PlannerFragment : Fragment() ,
             setSelectSchedule()
             setRvAdapter()
         })
+        binding.plannerCategoryNameTv.isSelected = true
 
         init()
         return binding.root
