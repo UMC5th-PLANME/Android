@@ -6,34 +6,23 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
-import com.example.plan_me.data.remote.dto.category.AllCategoryRes
-import com.example.plan_me.data.remote.dto.category.CategoryList
-import com.example.plan_me.data.remote.dto.schedule.AllScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
-import com.example.plan_me.data.remote.service.category.CategoryService
-import com.example.plan_me.data.remote.service.schedule.ScheduleService
-import com.example.plan_me.data.remote.view.category.AllCategoryView
-import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.CalendarWeekDayLayoutBinding
 import com.example.plan_me.databinding.FragmentDailyBinding
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
-import com.example.plan_me.utils.viewModel.NaviViewModel
 import com.kizitonwose.calendar.core.WeekDay
 import com.kizitonwose.calendar.core.atStartOfMonth
 import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kizitonwose.calendar.view.WeekDayBinder
-import kotlinx.coroutines.selects.select
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -55,6 +44,11 @@ class DailyFragment : Fragment(),
         binding = FragmentDailyBinding.inflate(layoutInflater)
         val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
+
+        calendarViewModel._scheduleList.observe(viewLifecycleOwner, Observer {
+            groupedSchedules = calendarViewModel.filteringSchedule(currentWeek, groupedSchedules)
+            initRV()
+        })
 
 
         selectDate = currentWeek
@@ -132,7 +126,6 @@ class DailyFragment : Fragment(),
 
 
     private fun initRV() {
-        Log.d("groupedSchedules",groupedSchedules.toString())
         val dailyRVAdapter = DailyRVAdapter(calendarViewModel.filteringCategory(groupedSchedules), groupedSchedules, requireContext(), this)
         binding.dailyScheduleList.adapter = dailyRVAdapter
         binding.dailyScheduleList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

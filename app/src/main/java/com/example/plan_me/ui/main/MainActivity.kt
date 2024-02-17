@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,11 +34,9 @@ import com.example.plan_me.ui.setting.SettingFragment
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
-import com.example.plan_me.utils.viewModel.NaviViewModel
 
 class MainActivity :
     AppCompatActivity(),
-    AllCategoryView,
     DialogAddFragment.SendSignalToMain,
     DialogDeleteCategoryCheckFragment.SendDeleteMessage,
     DialogModifyFragment.SendModifyMessage ,
@@ -56,25 +55,25 @@ class MainActivity :
 
     lateinit var drawerAdapter : MainDrawerRVAdapter
 
-    private lateinit var categorys : List<CategoryList>
-
-    private lateinit var currentCategory : CategoryList
-    private var currentCategoryPosition : Int = -1
-
-    private lateinit var naviViewModel: NaviViewModel
     private lateinit var naviFragmentViewModel: NaviFragmentViewModel
     private lateinit var calendarViewModel: CalendarViewModel
+
+    private var backPressedTime: Long = 0
+    private val BACK_PRESSED_INTERVAL: Long = 2000 // 두 번 누르는 간격 (밀리초)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
         naviFragmentViewModel = ViewModelProvider(this).get(NaviFragmentViewModel::class.java)
         val factory = CalendarViewModelFactory(this.getSharedPreferences("getRes", MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
 
+        calendarViewModel._categoryList.observe(this, Observer {
+            initActivity()
+        })
+
+
         initBottomNavigation()
-        getCategoryList()
         setContentView(binding.root)
 
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
@@ -88,6 +87,7 @@ class MainActivity :
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_frm, PlannerFragment())
             .commitAllowingStateLoss()
+
         clickListener()
 /*
         AlarmFunctions(this).callAlarm("2024-02-10 21:05:10",  1, "asdf")*/
@@ -98,13 +98,14 @@ class MainActivity :
     }
 
     private fun initActivity() {
-        Log.d("init", categorys.toString())
-        val layoutManager = LinearLayoutManager(this)
-        val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
-        drawerAdapter = MainDrawerRVAdapter(categorys, this)
-        drawer.layoutManager = layoutManager
-        drawer.adapter = drawerAdapter
-        drawerAdapter.notifyDataSetChanged()
+        if (!calendarViewModel._categoryList.value.isNullOrEmpty()) {
+            val layoutManager = LinearLayoutManager(this)
+            val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
+            drawerAdapter = MainDrawerRVAdapter(calendarViewModel._categoryList.value!!, this)
+            drawer.layoutManager = layoutManager
+            drawer.adapter = drawerAdapter
+            drawerAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun initBottomNavigation(){
@@ -165,21 +166,30 @@ class MainActivity :
         if (binding.mainDrawerLayout.isDrawerOpen(GravityCompat.START)){
             binding.mainDrawerLayout.closeDrawers()
         }
-    }
-    private fun getCategoryList() {
-        val access_token = "Bearer " + getSharedPreferences("getRes", MODE_PRIVATE).getString("getAccessToken", "")
-        val setCategoryService = CategoryService()
-        setCategoryService.setAllCategoryView(this)
-        setCategoryService.getCategoryAllFun(access_token!!)
+
+        if (backPressedTime + BACK_PRESSED_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed()
+            finish()
+        } else {
+            CustomToast.createToast(this@MainActivity, "한 번 더 누르면 종료됩니다.", 300, true)
+        }
+        backPressedTime = System.currentTimeMillis()
     }
 
     private fun clickListener() {
-        //다른 화면 클릭시 fab 닫기
 
         binding.mainBtmAddFab.setOnClickListener {
-            val intent = Intent(this, ScheduleAddActivity::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
+                val customToast = CustomToast
+                customToast.createToast(this, "카테고리를 생성해주세요", 300, false)
+            }else {
+                val intent = Intent(this, ScheduleAddActivity::class.java)
+                val categoryList = ArrayList(calendarViewModel._categoryList.value)
+                intent.putExtra("category", calendarViewModel._currentCategory.value)
+                intent.putExtra("categoryList", categoryList)
+                startActivity(intent)
+                overridePendingTransition(R.anim.screen_none, R.anim.screen_exit)
+            }
         }
         binding.mainMenu.setOnClickListener{
             binding.mainDrawerLayout.openDrawer(drawerView!!)
@@ -188,11 +198,11 @@ class MainActivity :
             showDialog(DialogAddFragment(this@MainActivity, this))
         }
         drawerDelete.setOnClickListener {
-            category_delete = DialogDeleteCategoryFragment(this, categorys, this)
+            category_delete = DialogDeleteCategoryFragment(this, calendarViewModel._categoryList.value, this)
             category_delete.show()
         }
         drawerModify.setOnClickListener {
-            category_modify = DialogModifyCategoryFragment(this, categorys ,this)
+            category_modify = DialogModifyCategoryFragment(this, calendarViewModel._categoryList.value ,this)
             category_modify.show()
         }
         binding.mainAllBtnLayout.setOnClickListener{
@@ -216,70 +226,33 @@ class MainActivity :
                 isHome=true
             }
         }
-
-
     }
 
     private fun showDialog(dialog: Dialog) {
         dialog.show()
     }
-
-    override fun onAllCategorySuccess(response: AllCategoryRes) {
-        categorys = response.result.categoryList
-        if(categorys.isNotEmpty()) {
-            if (currentCategoryPosition == -1) {
-                currentCategory = categorys[0]
-            } else {
-                currentCategory = categorys[currentCategoryPosition]
-            }
-            naviViewModel.sendCategory(currentCategory)
-            initActivity()
-        }else {
-            naviViewModel.sendCategory(CategoryList(0,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
-            initActivity()
-        }
-    }
-
-    override fun onAllCategoryFailure(response: AllCategoryRes) {
-        TODO("Not yet implemented")
-    }
-
     override fun sendSuccessSignal() {  //add
-        getCategoryList()
+        calendarViewModel.getCategoryList()
     }
 
     override fun sendDeleteMessage(position : Int) {    //delete
         category_delete.dismiss()
-        Log.d("position", position.toString())
-        Log.d("previousCategoryPosition", currentCategoryPosition.toString())
-        if (currentCategoryPosition == position) {
-            currentCategoryPosition = -1
-            getCategoryList()
-        }
-        else if (currentCategoryPosition > position) {
-            currentCategoryPosition -= 1
-            getCategoryList()
-        }else {
-            getCategoryList()
-        }
+        calendarViewModel.getCategoryList()
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
     }
 
-    override fun sendModifySuccessSignal(position : Int) {  //modify
+    override fun sendModifySuccessSignal(category: CategoryList) {  //modify
         category_modify.dismiss()
-        currentCategoryPosition = position
+        calendarViewModel.getCategoryList()
+        calendarViewModel.sendCategory(category)
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 수정되었습니다", 300, true)
-        getCategoryList()
     }
 
     override fun sendClickCategory(category: CategoryList, position: Int) {
         if (isHome) {
-            currentCategoryPosition =position
-            currentCategory = categorys[currentCategoryPosition]
-            naviViewModel.sendCategory(currentCategory)
-            initActivity()
+            calendarViewModel.sendCategory(category)
         }
     }
 }

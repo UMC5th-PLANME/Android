@@ -25,7 +25,7 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
     private var isFirst = true
 
     interface SendModifyMessage {
-        fun sendModifySuccessSignal(position: Int)
+        fun sendModifySuccessSignal(categoryList: CategoryList)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +57,9 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
                     AppCompatActivity.MODE_PRIVATE
                 ).getString("getAccessToken", "")
                 Log.d("access token", access_token)
+                category.name = name
+                category.emoticon = emoticon
+                category.color = color
                 val setCategoryService = CategoryService()
                 setCategoryService.setModifyCategoryView(this)
                 val categoryInput = Category_input(name, emoticon, color)
@@ -193,8 +196,7 @@ class DialogModifyFragment(context : Context, private val category:CategoryList,
     }
 
     override fun onModifyCategorySuccess(response: ModifyCategoryRes) {
-        Log.d("response", response.toString())
-        sendModidyMessage.sendModifySuccessSignal(position)
+        sendModidyMessage.sendModifySuccessSignal(category)
         dismiss()
     }
 

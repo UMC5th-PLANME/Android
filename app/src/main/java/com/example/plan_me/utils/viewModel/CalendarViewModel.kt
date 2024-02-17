@@ -24,9 +24,15 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
     val _scheduleList = MutableLiveData<List<ScheduleList>>()
 
     val _isUpdated = MutableLiveData<Boolean>()
+    val _currentCategory = MutableLiveData<CategoryList>()
 
     init {
         getCategoryList()
+        _currentCategory.value = CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" )
+    }
+
+    fun sendCategory(categoryList: CategoryList) {
+        _currentCategory.value = categoryList
     }
 
     fun getScheduleAll() {
@@ -87,8 +93,6 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         _scheduleList.value = response.result.scheduleList
         _isUpdated.value = true
-        Log.d("_categoryList",_categoryList.value.toString())
-        Log.d("_scheduleList",_scheduleList.value.toString())
     }
 
     override fun onAllScheduleFailure(response: AllScheduleRes) {

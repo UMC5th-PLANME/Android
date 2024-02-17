@@ -24,33 +24,37 @@ import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
-import com.example.plan_me.utils.viewModel.NaviViewModel
 
 
 class PlannerFragment : Fragment() ,
-    AllScheduleView,
     PlannerRVAdapter.SendSignalModify{
     private lateinit var binding: FragmentPlannerBinding
     private lateinit var plannerRVAdapter : PlannerRVAdapter
-    private lateinit var schedules : List<ScheduleList>
     private var selectedSchedule : MutableList<ScheduleList>? = null
     val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
-    private lateinit var category : CategoryList
 
 
-    private lateinit var naviViewModel: NaviViewModel
     private lateinit var calendarViewModel: CalendarViewModel
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPlannerBinding.inflate(layoutInflater)
-        naviViewModel = ViewModelProvider(requireActivity())[NaviViewModel::class.java]
-        category = naviViewModel.currentCategory.value!!
-        naviViewModel.currentCategory.observe(viewLifecycleOwner, Observer {
-            category = it
-            init()})
         val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
+
+        calendarViewModel._currentCategory.observe(viewLifecycleOwner, Observer {
+            Log.d("_currentCategory",  calendarViewModel._currentCategory.value.toString())
+            init()
+            filteringSchedule()
+            setSelectSchedule()
+            setRvAdapter()
+        })
+        calendarViewModel._scheduleList.observe(viewLifecycleOwner, Observer {
+            filteringSchedule()
+            setSelectSchedule()
+            setRvAdapter()
+        })
+
         init()
         return binding.root
     }
@@ -59,12 +63,13 @@ class PlannerFragment : Fragment() ,
     override fun onResume() {
         super.onResume()
         Log.d("Resume", "resume")
-        getScheduleAll()
+        calendarViewModel.getCategoryList()
     }
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
-        if (category != null) {
-            val newColor = ContextCompat.getColor(requireContext(), category.color) // Replace with your desired color resource
+        Log.d("current",calendarViewModel._currentCategory.value!!.toString())
+            val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
             shape.setColor(newColor)
@@ -72,58 +77,40 @@ class PlannerFragment : Fragment() ,
 
             // 설정한 모양을 레이아웃에 적용
             binding.plannerSecondLo.background = shape
-            binding.plannerCategoryNameTv.text = category.name
-            binding.plannerCategoryImoticonTv.text = category.emoticon
-
-            getScheduleAll()
-        }
-    }
-
-    private fun getScheduleAll() {
-        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
-            AppCompatActivity.MODE_PRIVATE
-        ).getString("getAccessToken", "")
-        val scheduleService = ScheduleService()
-        scheduleService.setAllScheduleView(this)
-        scheduleService.getScheduleAllFun(access_token)
+            binding.plannerCategoryNameTv.text = calendarViewModel._currentCategory.value!!.name
+            binding.plannerCategoryImoticonTv.text = calendarViewModel._currentCategory.value!!.emoticon
     }
 
     private fun filteringSchedule() {
-        // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
-        groupedSchedules.clear()
-        for (schedule in schedules) {
-            val categoryId = schedule.category_id
-            if (!groupedSchedules.containsKey(categoryId)) {
-                groupedSchedules[categoryId] = mutableListOf()
+        Log.d("sche", calendarViewModel._scheduleList.value.toString())
+        if (calendarViewModel._scheduleList.value != null) {
+            // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
+            groupedSchedules.clear()
+            for (schedule in calendarViewModel._scheduleList.value!!) {
+                val categoryId = schedule.category_id
+                if (!groupedSchedules.containsKey(categoryId)) {
+                    groupedSchedules[categoryId] = mutableListOf()
+                }
+                groupedSchedules[categoryId]?.add(schedule)
             }
-            groupedSchedules[categoryId]?.add(schedule)
         }
-        Log.d("groupedSchedule", groupedSchedules.toString())
     }
     private fun setSelectSchedule() {
-        selectedSchedule = groupedSchedules[category.categoryId] ?: null
+        Log.d("groupedSchedule11", groupedSchedules.toString())
+        selectedSchedule = groupedSchedules[calendarViewModel._currentCategory.value!!.categoryId] ?: null
         Log.d("selected", selectedSchedule.toString())
     }
 
     private fun setRvAdapter() {
         if (!selectedSchedule.isNullOrEmpty()) {
-            plannerRVAdapter = PlannerRVAdapter(selectedSchedule!!, requireContext(), this)
+            binding.plannerTodoRv.visibility = View.VISIBLE
+            plannerRVAdapter = PlannerRVAdapter(calendarViewModel._categoryList.value!! ,selectedSchedule!!, requireContext(), this)
             binding.plannerTodoRv.layoutManager = LinearLayoutManager(requireContext())
             binding.plannerTodoRv.adapter = plannerRVAdapter
+        }else {
+            binding.plannerTodoRv.visibility = View.GONE
         }
     }
-
-    override fun onAllScheduleSuccess(response: AllScheduleRes) {
-        schedules = response.result.scheduleList
-        filteringSchedule()
-        setSelectSchedule()
-        setRvAdapter()
-    }
-
-    override fun onAllScheduleFailure(response: AllScheduleRes) {
-        TODO("Not yet implemented")
-    }
-
     override fun sendSignalModify() {
         calendarViewModel.getCategoryList()
     }
