@@ -28,8 +28,8 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
         setContentView(binding.root)
         window.statusBarColor = resources.getColor(R.color.dark_gray)
 
-        autoLoginService()
-
+       /* autoLoginService()
+*/
         if(getAccessToken == "") {
             Handler().postDelayed({
                 val intent = Intent(this, LoginActivity::class.java)
@@ -62,13 +62,13 @@ class SplashActivity : AppCompatActivity(), AutoLoginView {
     }
 
     override fun onGetAutoLoginSuccess(response: AutoLoginRes) {
+        saveResponse()
         customToast.createToast(this@SplashActivity,"로그인되었습니다.", 300, true)
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
-        saveResponse()
     }
 
     override fun onGetAutoLoginFailure(isSuccess: Boolean, code: String, message: String) {
-        Log.d("auto-login-fail", message)
+        customToast.createToast(this@SplashActivity,"로그인되었습니다.", 300, true)
     }
 }

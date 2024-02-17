@@ -12,7 +12,7 @@ import com.example.plan_me.databinding.FragmentDialogAlarmBinding
 import com.example.plan_me.databinding.FragmentDialogDeleteCategoryBinding
 import com.example.plan_me.ui.main.MainActivity
 
-class DialogDeleteCategoryFragment(context : Context, private val categoryList: List<CategoryList>, private val sendDeleteMessage: DialogDeleteCategoryCheckFragment.SendDeleteMessage):Dialog(context){
+class DialogDeleteCategoryFragment(context : Context, private val categoryList: List<CategoryList>?, private val sendDeleteMessage: DialogDeleteCategoryCheckFragment.SendDeleteMessage):Dialog(context){
     private lateinit var binding : FragmentDialogDeleteCategoryBinding
     private lateinit var adapter : DeleteCategoryRVAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,10 +26,12 @@ class DialogDeleteCategoryFragment(context : Context, private val categoryList: 
         }
         Log.d("list", categoryList.toString())
 
-        val layoutManager = LinearLayoutManager(context)
-        adapter = DeleteCategoryRVAdapter(context, categoryList, sendDeleteMessage)
-        binding.dialogDeleteCategoryRv.layoutManager = layoutManager
-        binding.dialogDeleteCategoryRv.adapter = adapter
+        if (categoryList != null) {
+            val layoutManager = LinearLayoutManager(context)
+            adapter = DeleteCategoryRVAdapter(context, categoryList, sendDeleteMessage)
+            binding.dialogDeleteCategoryRv.layoutManager = layoutManager
+            binding.dialogDeleteCategoryRv.adapter = adapter
+        }
     }
     //text
 }

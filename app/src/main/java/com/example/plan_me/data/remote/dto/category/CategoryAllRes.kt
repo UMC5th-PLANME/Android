@@ -19,9 +19,9 @@ data class CategoryListResponse(
 )
 data class CategoryList(
     @SerializedName("categoryId") val categoryId: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("emoticon") val emoticon: String,
-    @SerializedName("color") val color: Int,
+    @SerializedName("name") var name: String,
+    @SerializedName("emoticon") var emoticon: String,
+    @SerializedName("color") var color: Int,
     @SerializedName("meStoryHidden") val meStoryHidden: Boolean,
     @SerializedName("createdAt") val createdAt: String, // 날짜와 시간에 대한 포맷을 맞춰서 사용
     @SerializedName("updatedAt") val updatedAt: String // 날짜와 시간에 대한 포맷을 맞춰서 사용
