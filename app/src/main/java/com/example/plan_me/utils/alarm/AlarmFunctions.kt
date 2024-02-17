@@ -19,13 +19,13 @@ class AlarmFunctions(private val context: Context){
     private val ioScope by lazy { CoroutineScope(Dispatchers.IO) }
 
     @SuppressLint("ScheduleExactAlarm")
-    fun callAlarm(time : String, alarm_code : Int, content : String){
+    fun callAlarm(time : String, alarm_code : Int, title : String){
 
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val receiverIntent = Intent(context, AlarmReceiver::class.java) //리시버로 전달될 인텐트 설정
         receiverIntent.apply {
             putExtra("alarm_rqCode", alarm_code) //요청 코드를 리시버에 전달
-            putExtra("content", content) //수정_일정 제목을 리시버에 전달
+            putExtra("title", title) //수정_일정 제목을 리시버에 전달
         }
 
         val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){

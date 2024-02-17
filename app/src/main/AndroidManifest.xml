@@ -44,7 +44,9 @@
         <meta-data
             android:name="com.google.android.gms.auth.api.signin.CLIENT_ID"
             android:value="@string/google_client_id" />
-
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/dark_gray" />
         <activity
             android:name=".ui.spalsh.SplashActivity"
             android:exported="true">
@@ -74,7 +76,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.timer.TimerSettingActivity" />
 
         <activity android:name=".ui.main.MainActivity"/>
 

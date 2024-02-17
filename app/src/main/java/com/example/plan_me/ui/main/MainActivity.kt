@@ -31,6 +31,7 @@ import com.example.plan_me.ui.mestory.MestoryFragment
 import com.example.plan_me.ui.planner.PlannerFragment
 import com.example.plan_me.ui.timer.TimerFragment
 import com.example.plan_me.ui.setting.SettingFragment
+import com.example.plan_me.utils.alarm.AlarmFunctions
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.NaviFragmentViewModel
@@ -86,8 +87,6 @@ class MainActivity :
             .commitAllowingStateLoss()
 
         clickListener()
-/*
-        AlarmFunctions(this).callAlarm("2024-02-10 21:05:10",  1, "asdf")*/
     }
 
     override fun onResume() {

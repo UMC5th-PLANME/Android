@@ -36,6 +36,7 @@ import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
 import com.example.plan_me.ui.main.MainActivity
+import com.example.plan_me.utils.alarm.AlarmFunctions
 import org.jetbrains.annotations.Async.Schedule
 import java.time.LocalDate
 
@@ -65,6 +66,7 @@ class ScheduleAddActivity():
     private val customToast = CustomToast
 
     private lateinit var schedule : ScheduleList
+    private lateinit var scheduleInput : Schedule_input
 
     private var isModify : Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -186,7 +188,7 @@ class ScheduleAddActivity():
                 val setScheduleService = ScheduleService()
 
                 if (isModify) {
-                    val schedule_input = Schedule_input(
+                    scheduleInput = Schedule_input(
                         schedule.status,
                         schedule.category_id,
                         schedule.repeat_period,
@@ -199,11 +201,11 @@ class ScheduleAddActivity():
                         endDate.toString())
 
                     setScheduleService.setModifyScheduleView(this)
-                    setScheduleService.modifyScheduleFun(access_token, schedule.id, schedule_input)
+                    setScheduleService.modifyScheduleFun(access_token, schedule.id, scheduleInput)
                 }else {
                     if(alarm == "시간 선택") alarm = "00:00"
                     Log.d("시간 선택", alarm.toString())
-                    val scheduleInput = Schedule_input(
+                    scheduleInput = Schedule_input(
                         false,
                         currentCategory.categoryId,
                         "NONE",
@@ -293,6 +295,22 @@ class ScheduleAddActivity():
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         customToast.createToast(this,"일정이 생성되었습니다", 300, true)
+        var currentDate = startDate
+        if(scheduleInput.alarm) {
+           /* while (currentDate <= endDate) { //api 필요할듯
+                AlarmFunctions(this).callAlarm(
+                    currentDate.toString() + " " + scheduleInput.alarm_time + ":00",
+                    10,
+                    scheduleInput.title
+                )
+                currentDate = currentDate.plusDays(1) // 다음 날짜로 이동
+            }*/
+        }
+        AlarmFunctions(this).callAlarm(
+            currentDate.toString() + " " + scheduleInput.alarm_time + ":00",
+            11,
+            scheduleInput.title
+        )
         finish()
     }
 
