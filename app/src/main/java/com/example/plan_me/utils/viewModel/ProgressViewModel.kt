@@ -49,6 +49,7 @@ class ProgressViewModel : ViewModel() {
                             if (min.value!! == 0) {
                                 hour.postValue(hour.value!!-1)
                                 if (hour.value!! == 0) {
+                                    initClear()
                                     stopProgress()
                                 }
                                 min.postValue(59)
@@ -75,6 +76,9 @@ class ProgressViewModel : ViewModel() {
 
     fun initTime(hour :MutableLiveData<Int> , min :MutableLiveData<Int>, sec :MutableLiveData<Int>) {
         _time.postValue(String.format("%02d:%02d:%02d", hour.value, min.value, sec.value))
+    }
+    fun initClear() {
+        _time.postValue("CLEAR")
     }
     fun clear() {
         _progress.value = 0
