@@ -13,5 +13,5 @@ data class ModifyStatusCategoryRes(
 data class modify_status_category_info(
     @SerializedName("categoryId") val categoryId: Int,
     @SerializedName("meStoryHidden") val meStoryHidden: Boolean,
-    @SerializedName("updatedAt") val deletedAt: LocalTime,
+    @SerializedName("updatedAt") val updatedAt: String,
 )
