@@ -68,10 +68,6 @@ class TimerFragment : Fragment(),
         val factory = CalendarViewModelFactory(requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
 
-        calendarViewModel._categoryList.observe(viewLifecycleOwner, Observer {
-            init()
-        })
-
         val getResSharedPreferences = requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
         val categoryIdSharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
 

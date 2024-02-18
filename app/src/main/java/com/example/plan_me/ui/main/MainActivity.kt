@@ -267,6 +267,7 @@ class MainActivity :
     override fun sendClickCategory(category: CategoryList, position: Int) {
         if (isHome) {
             calendarViewModel.sendCategory(category)
+            binding.mainDrawerLayout.closeDrawers()
         }
     }
 }
