@@ -82,7 +82,7 @@ class MestoryFragment : Fragment(),
 
     private fun initRV(){
         groupedSchedules = calendarViewModel.filteringSchedule(selectDate, groupedSchedules)
-        val mestoryRVAdapter = MestoryRVAdapter(calendarViewModel.filteringCategory(groupedSchedules),groupedSchedules , requireContext())
+        val mestoryRVAdapter = MestoryRVAdapter(calendarViewModel.filteringCategoryHidden(groupedSchedules),groupedSchedules , requireContext())
         // RecyclerView 어댑터 설정
         binding.mestoryCategoryRv.layoutManager = LinearLayoutManager(requireContext())
         // RecyclerView 레이아웃 매니저 설정

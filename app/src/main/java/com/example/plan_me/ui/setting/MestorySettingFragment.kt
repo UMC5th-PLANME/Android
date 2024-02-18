@@ -1,5 +1,6 @@
 package com.example.plan_me.ui.setting
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
@@ -17,19 +19,23 @@ import com.example.plan_me.data.remote.service.category.CategoryService
 import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.data.remote.view.category.ModifyStatusCategoryView
 import com.example.plan_me.databinding.ActivityManageMestoryBinding
+import com.example.plan_me.utils.viewModel.CalendarViewModel
+import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 
-class MestorySettingFragment: Fragment(), AllCategoryView, ModifyStatusCategoryView {
+class MestorySettingFragment: Fragment(),
+    SendModifySuccess{
     private lateinit var binding: ActivityManageMestoryBinding
-    private lateinit var categoryList : List<CategoryList>
+    private lateinit var calendarViewModel: CalendarViewModel
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ActivityManageMestoryBinding.inflate(layoutInflater)
-        getCategoryList()
+        val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
+        calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initRV()
         binding.manageMestoryBackBtn.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
@@ -50,35 +56,18 @@ class MestorySettingFragment: Fragment(), AllCategoryView, ModifyStatusCategoryV
     }
 
     private fun initRV() {
-        val adapter = MestroySettingRVAdapter(categoryList, requireContext())
-        binding.manageMestoryListRv.adapter = adapter
-        binding.manageMestoryListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        Log.d("calendarViewModel._categoryList.value",calendarViewModel._categoryList.value.toString())
+        if (!calendarViewModel._categoryList.value.isNullOrEmpty()) {
+            val adapter = MestroySettingRVAdapter(calendarViewModel._categoryList.value!!, requireContext(), this)
+            binding.manageMestoryListRv.adapter = adapter
+            binding.manageMestoryListRv.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
-    private fun getCategoryList() {
-        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
-            .getString("getAccessToken", "")
-        val categoryService = CategoryService()
-        categoryService.setAllCategoryView(this)
-        categoryService.getCategoryAllFun(access_token!!)
+    override fun sendModifySuccess() {
+        calendarViewModel.getCategoryList()
     }
 
-    override fun onAllCategorySuccess(response: AllCategoryRes) {
-        Log.d("MestorySettingFragment", "Category 불러오기 설공")
-        categoryList = response.result.categoryList
-        initRV()
-    }
 
-    override fun onAllCategoryFailure(response: AllCategoryRes) {
-        Log.d("MestorySettingFragment", "Category 불러오기 실패")
-    }
-
-    override fun onModifyStatusCategorySuccess(response: ModifyStatusCategoryRes) {
-        Log.d("MestorySettingFragment", "Category에서 숨김 상태 변경 성공")
-
-    }
-
-    override fun onModifyStatusCategoryFailure(response: ModifyStatusCategoryRes) {
-        Log.d("MestorySettingFragment", "Category에서 숨김 상태 변경 실패")
-    }
 }
