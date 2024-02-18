@@ -8,6 +8,7 @@ import com.example.plan_me.data.remote.retrofit.TimerRetrofitInterface
 import com.example.plan_me.data.remote.view.timer.GetTimerView
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.utils.getRetrofit
+import com.example.plan_me.utils.viewModel.TimerViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,15 +49,20 @@ class TimerService {
     fun getTimer(accessToken: String, categoryId: Int) {
         val timerService = getRetrofit().create(TimerRetrofitInterface::class.java)
         timerService.getTimerSetting(accessToken, categoryId).enqueue(object : Callback<GetTimerRes> {
-            override fun onResponse(
-                call: Call<GetTimerRes>,
-                response: Response<GetTimerRes>
-            ) {
-                Log.d("GET-TIME-SUCCESS", response.toString())
-                val resp: GetTimerRes = response.body()!!
-                when(resp.code) {
-                    "FOCUS2001" -> getTimerView.onGetTimerSuccess(resp)
-                    else -> getTimerView.onGetTimerFailure(resp.isSuccess, resp.code, resp.message)
+            override fun onResponse(call: Call<GetTimerRes>, response: Response<GetTimerRes>) {
+                if(response.isSuccessful) {
+                    val resp: GetTimerRes? = response.body()
+                    if (resp != null) {
+                        when (resp.code) {
+                            "FOCUS2001" -> getTimerView.onGetTimerSuccess(resp)
+                            else -> getTimerView.onGetTimerFailure(resp.isSuccess, resp.code, resp.message)
+                        }
+                    } else {
+                        Log.e("GET-TIME-SUCCESS", "Response body is null")
+                    }
+                } else {
+                    Log.e("GET-TIME-SUCCESS", "Response not successful: ${response.code()}")
+                    getTimerView.onGetTimerFailure(true, "", "")
                 }
             }
 
