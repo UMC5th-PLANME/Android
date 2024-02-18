@@ -9,12 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Schedule_input
+import com.example.plan_me.data.remote.dto.alarm.AlarmDeleteRes
+import com.example.plan_me.data.remote.dto.alarm.AlarmGetRes
+import com.example.plan_me.data.remote.dto.alarm.AlarmPostRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.dto.schedule.AddScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.DeleteScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ModifyScheduleRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
+import com.example.plan_me.data.remote.service.alarm.AlarmService
 import com.example.plan_me.data.remote.service.schedule.ScheduleService
+import com.example.plan_me.data.remote.view.Alarm.AlarmDeleteView
+import com.example.plan_me.data.remote.view.Alarm.AlarmGetView
+import com.example.plan_me.data.remote.view.Alarm.AlarmPostView
 import com.example.plan_me.data.remote.view.schedule.AddScheduleView
 import com.example.plan_me.data.remote.view.schedule.DeleteScheduleView
 import com.example.plan_me.data.remote.view.schedule.ModifyScheduleView
@@ -33,7 +40,6 @@ import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.utils.alarm.AlarmFunctions
-import org.jetbrains.annotations.Async.Schedule
 import java.time.LocalDate
 
 class ScheduleAddActivity():
@@ -45,7 +51,10 @@ class ScheduleAddActivity():
     DialogSelectCategoryInerface ,
     AddScheduleView,
     ModifyScheduleView,
-    DeleteScheduleView{
+    DeleteScheduleView,
+    AlarmPostView,
+    AlarmGetView,
+    AlarmDeleteView{
     private lateinit var binding : ActivityScheduleAddBinding
     private lateinit var dialogCalender : DialogCalenderFragment
     private lateinit var dialogAlarm : DialogAlarmFragment
@@ -251,6 +260,25 @@ class ScheduleAddActivity():
         else if (startHour.toInt() < endHour.toInt()) return true
         else return false
     }
+
+    private fun postAlarm(scheduleId : Int, date : LocalDate) {
+        val access_token = "Bearer " + getSharedPreferences(
+            "getRes",
+            MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val alarmService = AlarmService()
+        alarmService.setAlarmPostView(this)
+        alarmService.postAlarmList(access_token, scheduleId, date)
+    }
+    private fun deleteAlarm(scheduleId : Int) {
+        val access_token = "Bearer " + getSharedPreferences(
+            "getRes",
+            MODE_PRIVATE
+        ).getString("getAccessToken", "")
+        val alarmService = AlarmService()
+        alarmService.setAlarmDeleteView(this)
+        alarmService.deleteAlarmList(access_token, scheduleId)
+    }
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
         Log.d("start", startTime)
         Log.d("end", endTime)
@@ -292,22 +320,14 @@ class ScheduleAddActivity():
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         customToast.createToast(this,"일정이 생성되었습니다", 300, true)
+
         var currentDate = startDate
-        if(scheduleInput.alarm) {
-           /* while (currentDate <= endDate) { //api 필요할듯
-                AlarmFunctions(this).callAlarm(
-                    currentDate.toString() + " " + scheduleInput.alarm_time + ":00",
-                    10,
-                    scheduleInput.title
-                )
+        if(response.result.alarm) {
+            while (currentDate <= endDate) { //api 필요할듯
+                postAlarm(response.result.id, currentDate)
                 currentDate = currentDate.plusDays(1) // 다음 날짜로 이동
-            }*/
+            }
         }
-        AlarmFunctions(this).callAlarm(
-            currentDate.toString() + " " + scheduleInput.alarm_time + ":00",
-            11,
-            scheduleInput.title
-        )
         finish()
     }
 
@@ -318,6 +338,7 @@ class ScheduleAddActivity():
 
     override fun onModifyScheduleSuccess(response: ModifyScheduleRes) {
         customToast.createToast(this,"일정이 수정되었습니다", 300, true)
+        deleteAlarm(schedule.id)
         finish()
     }
 
@@ -327,11 +348,50 @@ class ScheduleAddActivity():
 
     override fun onDeleteScheduleSuccess(response: DeleteScheduleRes) {
         customToast.createToast(this,"일정이 삭제되었습니다", 300, false)
+        deleteAlarm(schedule.id)
         finish()
     }
 
     override fun onDeleteScheduleFailure(response: DeleteScheduleRes) {
         customToast.createToast(this,"일정 삭제에 실패했니다", 300, false)
+    }
+
+    override fun onAlarmGetSuccess(response: AlarmGetRes) {
+
+    }
+
+    override fun onAlarmGetFailure(isSuccess: Boolean, code: String, message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAlarmPostSuccess(response: AlarmPostRes, date: LocalDate) {
+            AlarmFunctions(this).callAlarm(
+                date.toString() + " " + scheduleInput.alarm_time + ":00",
+                response.result.id,
+                currentCategory.emoticon+" "+currentCategory.name+" - "+scheduleInput.title
+            )
+    }
+
+    override fun onAlarmPostFailure(isSuccess: Boolean, code: String, message: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onAlarmDeleteSuccess(response: AlarmDeleteRes) {
+        Log.d("알람 삭제", "성공")
+        if (isModify) {
+            var currentDate = startDate
+            if(schedule.alarm) {
+                while (currentDate <= endDate) { //api 필요할듯
+                    postAlarm(response.result.id, currentDate)
+                    currentDate = currentDate.plusDays(1) // 다음 날짜로 이동
+                }
+            }
+            finish()
+        }
+    }
+
+    override fun onAlarmDeleteFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("알람 삭제", message)
     }
 
 
