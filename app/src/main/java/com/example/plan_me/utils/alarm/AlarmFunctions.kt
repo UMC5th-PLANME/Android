@@ -45,7 +45,7 @@ class AlarmFunctions(private val context: Context){
         val calendar = Calendar.getInstance()
         calendar.time = datetime
 
-        //API 23(android 6.0) 이상(해당 api 레벨부터 도즈모드 도입으로 setExact 사용 시 알람이 울리지 않음)
+        //API 23(android 6.0) 이상 (해당 api 레벨부터 도즈모드 도입으로 setExact 사용 시 알람이 울리지 않음)
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,calendar.timeInMillis,pendingIntent);
     }
 

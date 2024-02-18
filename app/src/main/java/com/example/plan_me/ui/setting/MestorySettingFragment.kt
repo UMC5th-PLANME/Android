@@ -5,15 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.plan_me.R
+import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.service.category.CategoryService
+import com.example.plan_me.data.remote.view.category.AllCategoryView
 import com.example.plan_me.databinding.ActivityManageMestoryBinding
 
-class MestorySettingFragment: Fragment() {
+class MestorySettingFragment: Fragment(), AllCategoryView {
     private lateinit var binding: ActivityManageMestoryBinding
-
+    private lateinit var categoryList : List<CategoryList>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = ActivityManageMestoryBinding.inflate(layoutInflater)
+        getCategoryList()
         return binding.root
     }
 
@@ -37,5 +44,28 @@ class MestorySettingFragment: Fragment() {
                 .replace(R.id.main_frm, SettingFragment())
                 .commitAllowingStateLoss()
         }
+    }
+
+    private fun initRV() {
+        val adapter = MestroySettingRVAdapter(categoryList, requireContext())
+        binding.manageMestoryListRv.adapter = adapter
+        binding.manageMestoryListRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun getCategoryList() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
+            .getString("getAccessToken", "")
+        val categoryService = CategoryService()
+        categoryService.setAllCategoryView(this)
+        categoryService.getCategoryAllFun(access_token!!)
+    }
+
+    override fun onAllCategorySuccess(response: AllCategoryRes) {
+        categoryList = response.result.categoryList
+        initRV()
+    }
+
+    override fun onAllCategoryFailure(response: AllCategoryRes) {
+        TODO("Not yet implemented")
     }
 }
