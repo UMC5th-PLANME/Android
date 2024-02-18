@@ -17,14 +17,14 @@ import retrofit2.http.*
 
 interface AlarmRetrofitInterface {
     @GET("/api/Alarm/{schedule_id}")
-    fun getAlarm(@Header("Authorization") Authorization: String, schedule_id: Int): Call<AlarmGetRes>
+    fun getAlarm(@Header("Authorization") Authorization: String, @Path("schedule_id") schedule_id: Int): Call<AlarmGetRes>
 
     // 회원가입
     @POST("/api/Alarm/{schedule_id}")
-    fun postAlarm(@Header("accessToken") accessToken: String, schedule_id: Int): Call<AlarmPostRes>
+    fun postAlarm(@Header("Authorization") Authorization: String, @Path("schedule_id") schedule_id: Int): Call<AlarmPostRes>
 
 
     @DELETE("/api/Alarm/{schedule_id}")
-    fun deleteAlarm(@Header("Authorization") Authorization: String, schedule_id: Int): Call<AlarmDeleteRes>
+    fun deleteAlarm(@Header("Authorization") Authorization: String, @Path("schedule_id") schedule_id: Int): Call<AlarmDeleteRes>
 
 }
