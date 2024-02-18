@@ -16,6 +16,7 @@ import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
 
 class AlarmService {
     private lateinit var alarmGetView: AlarmGetView
@@ -40,7 +41,7 @@ class AlarmService {
                     val resp: AlarmGetRes? = response.body()
                     if (resp != null) {
                         when (resp.code) {
-                            "IMAGE2001" -> alarmGetView.onAlarmGetSuccess(resp)
+                            "ALARM2001" -> alarmGetView.onAlarmGetSuccess(resp)
                             else -> alarmGetView.onAlarmGetFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {
@@ -56,7 +57,7 @@ class AlarmService {
         })
     }
 
-    fun postAlarmList(accessToken: String, schedule_id :Int) {
+    fun postAlarmList(accessToken: String, schedule_id :Int, date : LocalDate) {
         val alarmService = getRetrofit().create(AlarmRetrofitInterface::class.java)
         alarmService.postAlarm(accessToken, schedule_id).enqueue(object : Callback<AlarmPostRes> {
             override fun onResponse(call: Call<AlarmPostRes>, response: Response<AlarmPostRes>) {
@@ -64,7 +65,7 @@ class AlarmService {
                     val resp: AlarmPostRes? = response.body()
                     if (resp != null) {
                         when (resp.code) {
-                            "IMAGE2001" -> alarmPostView.onAlarmPostSuccess(resp)
+                            "COMMON200" -> alarmPostView.onAlarmPostSuccess(resp, date)
                             else -> alarmPostView.onAlarmPostFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {
@@ -87,7 +88,7 @@ class AlarmService {
                     val resp: AlarmDeleteRes? = response.body()
                     if (resp != null) {
                         when (resp.code) {
-                            "IMAGE2001" -> alarmDeleteView.onAlarmDeleteSuccess(resp)
+                            "ALARM2002" -> alarmDeleteView.onAlarmDeleteSuccess(resp)
                             else -> alarmDeleteView.onAlarmDeleteFailure(resp.isSuccess, resp.code, resp.message)
                         }
                     } else {
