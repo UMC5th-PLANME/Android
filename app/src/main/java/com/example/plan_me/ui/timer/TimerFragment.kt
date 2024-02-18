@@ -15,14 +15,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.plan_me.R
-import com.example.plan_me.data.local.database.SettingDatabase
-import com.example.plan_me.data.local.database.TimeDatabase
-import com.example.plan_me.data.local.entity.SettingTime
-import com.example.plan_me.data.local.entity.Time
 import com.example.plan_me.data.remote.dto.category.CategoryList
+import com.example.plan_me.data.remote.dto.timer.GetTimerRes
 import com.example.plan_me.data.remote.dto.timer.TimerSettingReq
 import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
 import com.example.plan_me.data.remote.service.timer.TimerService
+import com.example.plan_me.data.remote.view.timer.GetTimerView
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.CustomToast
@@ -33,6 +31,7 @@ import com.example.plan_me.ui.dialog.DialogTimerPickFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickInterface
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
+import com.example.plan_me.utils.viewModel.ProgressViewModel
 import com.example.plan_me.utils.viewModel.TimerViewModel
 import com.example.plan_me.utils.viewModel.TimerViewModelFactory
 
@@ -42,7 +41,8 @@ class TimerFragment : Fragment(),
     ResetConfirmedListener,
     DialogDeleteCategoryCheckFragment.SendDeleteMessage,
     DialogTimerCategoryFragment.SendData,
-    TimerView{
+    TimerView,
+    GetTimerView{
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
@@ -60,6 +60,9 @@ class TimerFragment : Fragment(),
 
     private var category_id: Int = 0
 
+
+    private lateinit var progressViewModel: ProgressViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -69,6 +72,11 @@ class TimerFragment : Fragment(),
 
         val factory = CalendarViewModelFactory(requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
+        progressViewModel = ViewModelProvider(this).get(ProgressViewModel::class.java)
+
+
+        binding.progressViewModel = progressViewModel
+        binding.lifecycleOwner = this
 
         calendarViewModel._categoryList.observe(viewLifecycleOwner, Observer {
             init()
@@ -102,9 +110,19 @@ class TimerFragment : Fragment(),
     }
 
     private fun clickListener() {
+        if (progressViewModel._hour.value == 0 &&progressViewModel._min.value == 0&&progressViewModel._sec.value == 0) {
+            binding.timerFocusPlayBtn.visibility = View.VISIBLE
+            binding.timerFocusPauseBtn.visibility = View.GONE
+            progressViewModel._time.value = "CLEAR"
+
+        }  //끝나면
         // menu button
-        binding.timerFocusMenuBtn.setOnClickListener{
-            category_timer = DialogTimerCategoryFragment(requireContext(), calendarViewModel._categoryList.value!!, this)
+        binding.timerFocusMenuBtn.setOnClickListener {
+            category_timer = DialogTimerCategoryFragment(
+                requireContext(),
+                calendarViewModel._categoryList.value!!,
+                this
+            )
             category_timer.show()
         }
 
@@ -120,26 +138,15 @@ class TimerFragment : Fragment(),
         }
 
         binding.timerFocusPlayBtn.setOnClickListener {
-
-            val settingTimeDB = SettingDatabase.getInstance(requireContext())!!
-            var remainingTime = settingTimeDB.SettingTimeDao().getRemainingFocusTime(2)
-
-            remainingTimeInMillis = remainingTime
-
-            if (remainingTime == 0L) return@setOnClickListener
-
-            val time = settingTimeDB.SettingTimeDao().getTime()
-            Log.d("TimerFragment", "$time")
-
-            // Timer 생성 or 이어서 실행 -> milliseconds 로 값 전달
-            if (remainingTimeInMillis > 0) {
-                startTimer(remainingTimeInMillis)
-            }
+            progressViewModel.startProgress(progressViewModel._hour, progressViewModel._min, progressViewModel._sec)
+            binding.timerFocusPlayBtn.visibility = View.GONE
+            binding.timerFocusPauseBtn.visibility = View.VISIBLE
         }
 
         binding.timerFocusPauseBtn.setOnClickListener {
-            pauseTimer()
-            saveElapsedTime()
+            progressViewModel.stopProgress()
+            binding.timerFocusPlayBtn.visibility = View.VISIBLE
+            binding.timerFocusPauseBtn.visibility = View.GONE
         }
 
         // Reset 클릭 시
@@ -151,161 +158,16 @@ class TimerFragment : Fragment(),
 
     }
 
-    // Timer를 시작하거나 이어서 실행하는 함수
-    private fun startTimer(millis: Long) {
-        timer = object : CountDownTimer(millis, 1000) {     // 1초마다
-            override fun onTick(millisUntilFinished: Long) {
-                remainingTimeInMillis = millisUntilFinished
-                updateTimerText()   // Text 를 업데이트
-            }
-
-            override fun onFinish() {
-                remainingTimeInMillis = 0
-                updateTimerText()
-                setTimerRunning(false)
-                saveElapsedTime()  // Timer 종료 시 저장
-                timeOut = true
-            }
-        }
-        timer?.start()
-        setTimerRunning(true)   // 버튼 변경
-    }
-
-    // Timer를 일시정지하는 함수
-    private fun pauseTimer() {
-        timer?.cancel()
-        setTimerRunning(false)
-    }
-
-    // Timer의 시간을 텍스트뷰에 업데이트하는 함수
-    private fun updateTimerText() {
-        val seconds = (remainingTimeInMillis / 1000) % 60
-        val minutes = (remainingTimeInMillis / (1000 * 60)) % 60
-        val hours = remainingTimeInMillis / (1000 * 60 * 60)
-
-        val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-        binding.timerFocusTimeClearTv.text = formattedTime
-    }
-
-    // 포커스를 잃거나 pause 버튼이 눌린 경우에 진행된 시간을 저장하는 함수
-    private fun saveElapsedTime() {
-        val settingTimeDB = SettingDatabase.getInstance(requireContext())!!
-        val elapsedTimeInMillis = remainingTimeInMillis
-        settingTimeDB.SettingTimeDao().updateRemainingFocusTime(elapsedTimeInMillis, 2)
-
-        val saveTime =  settingTimeDB.SettingTimeDao().getTime()
-        Log.d("saveElapsedTime", "TimeTable: $saveTime")    // 저장된 시간 확인
-    }
-    private fun setTimerRunning(isRunning: Boolean){
-
-        if(isRunning) { // Timer 실행 O
-            binding.timerFocusPlayBtn.visibility = View.GONE
-            binding.timerFocusPauseBtn.visibility = View.VISIBLE
-        }
-        else {
-            binding.timerFocusPlayBtn.visibility = View.VISIBLE
-            binding.timerFocusPauseBtn.visibility = View.GONE
-        }
-    }
 
     // ResetConfirmedListener 인터페이스 구현
     override fun onResetConfirmed(isConfirmed: Boolean) {
-        val timeDB = TimeDatabase.getInstance(this as Context)!!
-        val settingTimeDB = SettingDatabase.getInstance(this as Context)!!
 
         if (isConfirmed) {
-            // "저장 및 재설정"이 확인되었을 때의 동작
-            // timeTable set:2 시간 -> 0:00:00 으로 바꾸기
-            timeDB.timeDao().updateTime(0,0,1,2)
-
-            // SettingTable set:2 시간 ->
-            settingTimeDB.SettingTimeDao().updateTime(0,0,0,0,2)
 
             binding.timerFocusTimeTv.text = "0:00:00"
         }
     }
 
-
-
-    fun setFocusTime(focusTime: Int) {
-        val seconds = (focusTime / 1000) % 60
-        val minutes = (focusTime / (1000 * 60)) % 60
-        val hours = focusTime / (1000 * 60 * 60)
-
-        val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-        Log.d("Dialog -> TimerFragment", "FocusTime : $hours, $minutes, $seconds")
-
-        binding.timerFocusTimeTv.visibility = View.INVISIBLE
-        binding.timerFocusTimeClearTv.visibility = View.VISIBLE
-        binding.timerFocusTimeClearTv.text = formattedTime
-    }
-
-    fun setBreakTime(breakTime: Int) {
-        val seconds = (breakTime / 1000) % 60
-        val minutes = (breakTime / (1000 * 60)) % 60
-        val hours = breakTime / (1000 * 60 * 60)
-
-        val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
-        Log.d("Dialog -> TimerFragment", "BreakTime : $hours, $minutes, $seconds")
-        binding.timerFocusTimeClearTv.text = formattedTime
-    }
-
-    private fun updateInitRoomDB(focusMin: Int, breakMin: Int, repeatCount: Int) {
-        val timeDB = TimeDatabase.getInstance(requireContext())!!
-        val settingTimeDB = SettingDatabase.getInstance(requireContext())!!
-        val existingTime = timeDB.timeDao().getSavedTime(2)
-
-        if (existingTime != null) {
-            // set: 2가 이미 테이블에 존재하면 TimeTable 에 업데이트
-            timeDB.timeDao().updateTime(focusMin, breakMin, repeatCount, 2)
-
-            // SettingTimeTable 에 업데이트
-            settingTimeDB.SettingTimeDao().updateTime(convertMinutesToMilliseconds(focusMin),
-                convertMinutesToMilliseconds(focusMin),
-                convertMinutesToMilliseconds(breakMin),
-                convertMinutesToMilliseconds(breakMin), 2)
-        } else {
-            // set: 2가 테이블에 없으면 TimeTable 에 삽입
-            timeDB.timeDao().insert(
-                Time(
-                    focusMin,
-                    breakMin,
-                    repeatCount
-                ).apply {
-                    set = 2
-                }
-            )
-
-            // SettingTimeTable 에 업데이트
-            settingTimeDB.SettingTimeDao().insert(
-                SettingTime(
-                    convertMinutesToMilliseconds(focusMin),
-                    convertMinutesToMilliseconds(focusMin),
-                    convertMinutesToMilliseconds(breakMin),
-                    convertMinutesToMilliseconds(breakMin)
-                ).apply {
-                    set = 2
-                }
-            )
-        }
-    }
-    private fun convertMinutesToMilliseconds(minutes: Int): Int {
-        return minutes * 60 * 1000
-    }
-
-    private fun timeSetting(focusMin: Int, breakMin: Int, repeatCount : Int) {
-        if (focusMin == 0) {
-            val customToast = CustomToast
-            customToast.createToast(requireContext(), "집중 시간을 설정해주세요.",  500, false)
-        } else {
-            binding.timerFocus.text = "FOCUS"
-
-            val focusTimeInMilliSeconds = focusMin * 60 * 1000
-            setFocusTime(focusTimeInMilliSeconds)
-        }
-
-        updateInitRoomDB(focusMin, breakMin, repeatCount)
-    }
 
     private fun saveResponse() {
         val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
@@ -325,22 +187,20 @@ class TimerFragment : Fragment(),
         timerService.setTimer("Bearer " + access_token, categoryId, timerSettingReq)
     }
 
-    override fun onTimerSettingConfirm(focusMin: Int, breakMin: Int, repeatCount: Int) {
-        timeSetting(focusMin, breakMin, repeatCount)
-        Log.d("TimerSetting", "focusMin: $focusMin, breakMin: $breakMin, repeatCount: $repeatCount")
+    override fun onTimerSettingConfirm(focusMin: Int, breakMin: Int, repeatCount: Int) {  //시간 설정
+        progressViewModel._hour.value = focusMin / 60
+        progressViewModel._min.value = focusMin % 60
+        progressViewModel._sec.value = 0
 
-        val focus_seconds = 0
-        val focus_minutes = focusMin % 60
-        val focus_hours = focusMin / 60
+        progressViewModel._break_hour.value = breakMin / 60
+        progressViewModel._break_min.value = breakMin % 60
+        progressViewModel._break_sec.value = 0
 
-        val break_seconds = 0
-        val break_minutes = breakMin % 60
-        val break_hours = breakMin / 60
+        progressViewModel._repeat.value = repeatCount
 
-        val focus_formattedTime = String.format("%02d:%02d:%02d", focus_hours, focus_minutes, focus_seconds)
-        val break_formattedTime = String.format("%02d:%02d:%02d", break_hours, break_minutes, break_seconds)
-
-        val timerSettingReq = TimerSettingReq(focus_formattedTime, break_formattedTime, repeatCount)
+        progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
+        Log.d("progressViewModel._time.value!!", progressViewModel._time.value!!)
+        val timerSettingReq = TimerSettingReq(progressViewModel._time.value!!, progressViewModel._break_time.value!!, repeatCount)
 
         setTimerService(timerSettingReq)
     }
@@ -364,6 +224,7 @@ class TimerFragment : Fragment(),
         calendarViewModel.sendCategory(category)
 
         category_id = category.categoryId
+        Log.d("category_id", category_id.toString())
         saveResponse()
 
         val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
@@ -377,34 +238,14 @@ class TimerFragment : Fragment(),
         binding.timerFocusStudyEmoticon.setText(category.emoticon)
 
         binding.timerFocusSettingBtn.isEnabled = true
+        getTimer()
+    }
+    private fun getTimer() {
+        val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE).getString("getAccessToken", "")
 
-        timerViewModel.getTimer()
-
-        // focusML observe
-        timerViewModel.getFocus().observe(viewLifecycleOwner, Observer { focusTime ->
-            // focusTime이 "00:00:00"이면 breakTime을 사용하여 UI에 반영
-            if (timeOut == true) {
-                timerViewModel.getBreak().value?.let { breakTime ->
-                    binding.timerFocusTimeTv.text = breakTime
-                    Log.d("focusTime", "Break Time applied: $breakTime")
-                }
-            } else { // focusTime이 "00:00:00"이 아니면 focusTime을 UI에 반영
-                binding.timerFocusTimeTv.text = focusTime
-                Log.d("focusTime", focusTime)
-            }
-        })
-
-        // breakML observe
-        timerViewModel.getBreak().observe(viewLifecycleOwner, Observer { breakTime ->
-            // breakTime을 UI에 반영
-            Log.d("breakTime", breakTime)
-        })
-
-        // repeatCntML observe
-        timerViewModel.getRepeat().observe(viewLifecycleOwner, Observer { repeatCount ->
-            // repeatCount를 UI에 반영
-            Log.d("repeatCount", repeatCount.toString())
-        })
+        val timerService = TimerService()
+        timerService.getTimerView(this)
+        timerService.getTimer(access_token, category_id)
     }
 
     override fun onSetTimerSuccess(response: TimerSettingRes) {
@@ -413,5 +254,37 @@ class TimerFragment : Fragment(),
 
     override fun onSetTimerFailure(isSuccess: Boolean, code: String, message: String) {
         Log.d("TIMER-SAVE-FAILURE", message)
+    }
+
+    override fun onGetTimerSuccess(response: GetTimerRes) {
+        val focus = response.result.focusTime
+        val breakTime = response.result.breakTime
+        Log.d("ddddd", focus.substring(0,2).toInt().toString())
+        progressViewModel._hour.value = focus.substring(0,2).toInt()
+        progressViewModel._min.value = focus.substring(3,5).toInt()
+        progressViewModel._sec.value = 0
+
+        progressViewModel._break_hour.value = breakTime.substring(0,2).toInt()
+        progressViewModel._break_min.value = breakTime.substring(3,5).toInt()
+        progressViewModel._break_sec.value = 0
+
+        progressViewModel._repeat.value = response.result.repeatCnt
+
+
+        progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
+    }
+
+    override fun onGetTimerFailure(isSuccess: Boolean, code: String, message: String) {
+        progressViewModel._hour.value = 0
+        progressViewModel._min.value = 0
+        progressViewModel._sec.value = 0
+
+        progressViewModel._break_hour.value = 0
+        progressViewModel._break_min.value = 0
+        progressViewModel._break_sec.value = 0
+
+        progressViewModel._repeat.value = 1
+
+        progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
     }
 }

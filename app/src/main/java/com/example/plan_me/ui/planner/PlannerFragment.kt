@@ -34,8 +34,8 @@ class PlannerFragment : Fragment() ,
     val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
 
 
-    private lateinit var calendarViewModel: CalendarViewModel
 
+    private lateinit var calendarViewModel: CalendarViewModel
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentPlannerBinding.inflate(layoutInflater)
