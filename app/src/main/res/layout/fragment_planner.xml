@@ -1,78 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/planner_second_lo"
-        android:layout_width="0dp"
-        android:layout_height="92dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/planner_lo_category"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
+        <variable
+            name="calendarViewModel"
+            type="com.example.plan_me.utils.viewModel.CalendarViewModel" />
+    </data>
 
-        <TextView
-            android:id="@+id/planner_category_imoticon_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
-            android:text="📆"
-            android:textSize="24dp" />
-
-        <TextView
-            android:id="@+id/planner_category_name_tv"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="SCHEDULE"
-            android:textColor="@color/black"
-            android:textSize="32dp"
-            android:gravity="center"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:singleLine="true"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/planner_second_lo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/planner_day_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/pretendard_bold"
-            android:text="today"
-            android:textColor="@color/dark_gray"
-            android:textStyle="bold"
-            android:textSize="24dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/planner_todo_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        <LinearLayout
+            android:id="@+id/planner_second_lo"
+            android:layout_width="0dp"
+            android:layout_height="92dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="15dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_todo" />
-    </LinearLayout>
+            android:layout_marginTop="16dp"
+            android:background="@drawable/planner_lo_category"
+            android:backgroundTint="@{calendarViewModel._currentCategory.color}"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/planner_category_imoticon_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_regular"
+                android:text="@{calendarViewModel._currentCategory.emoticon}"
+                android:textSize="24dp" />
+
+            <TextView
+                android:id="@+id/planner_category_name_tv"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="@{calendarViewModel._currentCategory.name}"
+                android:textColor="@color/black"
+                android:textSize="32dp"
+                android:gravity="center"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/planner_second_lo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/planner_day_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/pretendard_bold"
+                android:text="today"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:textSize="24dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/planner_todo_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_todo" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

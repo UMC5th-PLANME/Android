@@ -42,9 +42,11 @@ class PlannerFragment : Fragment() ,
         val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
 
+        binding.calendarViewModel = calendarViewModel
+        binding.lifecycleOwner = this
+
         calendarViewModel._currentCategory.observe(viewLifecycleOwner, Observer {
             Log.d("_currentCategory",  calendarViewModel._currentCategory.value.toString())
-            init()
             filteringSchedule()
             setSelectSchedule()
             setRvAdapter()
@@ -56,7 +58,6 @@ class PlannerFragment : Fragment() ,
         })
         binding.plannerCategoryNameTv.isSelected = true
 
-        init()
         return binding.root
     }
 

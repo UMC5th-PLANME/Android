@@ -26,7 +26,7 @@ import com.example.plan_me.ui.dialog.CustomToast
 import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickFragment
 import com.example.plan_me.ui.dialog.DialogTimerPickInterface
-import com.example.plan_me.utils.viewModel.NaviViewModel
+import com.example.plan_me.utils.viewModel.ProgressViewModel
 
 
 class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListener, TimerView, AllCategoryView {
@@ -44,7 +44,9 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
     private lateinit var currentCategory : CategoryList
     private var currentCategoryPosition : Int = -1
 
-    private lateinit var naviViewModel: NaviViewModel
+
+    private lateinit var progressviewModel: ProgressViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,8 +54,9 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTimerFocusBinding.inflate(layoutInflater, container, false)
-
-        naviViewModel = ViewModelProvider(this).get(NaviViewModel::class.java)
+        progressviewModel=ViewModelProvider(this).get(ProgressViewModel::class.java)
+        binding.progressViewModel = progressviewModel
+        binding.lifecycleOwner = this // LiveData가 Observer로써 동작하도록 lifecycleOwner
         getCategoryList()
 
         drawerView = binding.root.findViewById(R.id.drawer_layout)
@@ -65,10 +68,7 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
 
     private fun clickListener() {
 
-        // menu button
-        binding.timerFocusMenuBtn.setOnClickListener{
-            binding.timerFocusDrawerLayout.openDrawer(drawerView!!)
-        }
+
 
 
         // Setting button
@@ -297,9 +297,7 @@ class TimerFragment : Fragment(), DialogTimerPickInterface, ResetConfirmedListen
             } else {
                 currentCategory = categories[currentCategoryPosition]
             }
-            naviViewModel.sendCategory(currentCategory)
         }else {
-            naviViewModel.sendCategory(CategoryList(0,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
         }
     }
 
