@@ -77,9 +77,9 @@ class ScheduleAddActivity():
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
+        clickListener()
         decide()
         init()
-        clickListener()
         setContentView(binding.root)
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
     }
@@ -99,7 +99,7 @@ class ScheduleAddActivity():
             endTime = schedule.end_time
             startDate = LocalDate.parse(schedule.startDate)
             endDate = LocalDate.parse(schedule.endDate)
-            Log.d("schedule","schedule")
+            Log.d("schedule",schedule.toString())
             binding.scheduleCategoryDetail.visibility = View.GONE
             binding.scheduleCategoryDelete.visibility = View.VISIBLE
 
@@ -121,8 +121,8 @@ class ScheduleAddActivity():
             Log.d("dd", "dd")
             currentCategory = intent.getParcelableExtra("category")!!
             categoryList = intent.getParcelableArrayListExtra("categoryList")!!
+            binding.scheduleAlarmTimeView.isEnabled = false
         }
-        binding.scheduleAlarmTimeView.isEnabled = false
     }
 
     private fun init(){
