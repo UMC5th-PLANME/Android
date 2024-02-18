@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.widget.NumberPicker
 import com.example.plan_me.databinding.FragmentDialogTimerpickBinding
 
@@ -100,6 +99,7 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
 
         // 확인 버튼 클릭 리스너 설정
         binding.dialogTimerpickConfirm.setOnClickListener {
+
             focusMin += focusHour
             dialogTimerPickInterface?.onTimerSettingConfirm(focusMin, breakMin, repeatCount)
             dismiss()
@@ -109,7 +109,6 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
             dialogTimerPickInterface?.onTimerSettingCancel()
             dismiss()
         }
-
     }
 }
 

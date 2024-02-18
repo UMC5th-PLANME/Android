@@ -73,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@id/timer_focus_cl">
 
             <LinearLayout
-                android:id="@+id/timer_focus_category_ll"
+                android:id="@+id/timer_focus_category_lo"
                 android:layout_width="match_parent"
                 android:layout_height="92dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,7 @@
 
                 <TextView
                     android:id="@+id/timer_focus_study_emoticon"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="📚"
                     android:textSize="24sp"
@@ -93,7 +93,8 @@
                     android:textAlignment="center"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/timer_focus_category_tv"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="STUDY"
                     android:textStyle="bold"
