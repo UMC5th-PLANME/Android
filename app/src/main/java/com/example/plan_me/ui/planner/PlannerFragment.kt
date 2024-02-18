@@ -47,6 +47,7 @@ class PlannerFragment : Fragment() ,
 
         calendarViewModel._currentCategory.observe(viewLifecycleOwner, Observer {
             Log.d("_currentCategory",  calendarViewModel._currentCategory.value.toString())
+            init()
             filteringSchedule()
             setSelectSchedule()
             setRvAdapter()
@@ -70,7 +71,6 @@ class PlannerFragment : Fragment() ,
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun init() {
-        Log.d("current",calendarViewModel._currentCategory.value!!.toString())
             val newColor = ContextCompat.getColor(requireContext(),  calendarViewModel._currentCategory.value!!.color) // Replace with your desired color resource
             val shape = GradientDrawable()
             shape.shape = GradientDrawable.RECTANGLE
@@ -79,8 +79,6 @@ class PlannerFragment : Fragment() ,
 
             // 설정한 모양을 레이아웃에 적용
             binding.plannerSecondLo.background = shape
-            binding.plannerCategoryNameTv.text = calendarViewModel._currentCategory.value!!.name
-            binding.plannerCategoryImoticonTv.text = calendarViewModel._currentCategory.value!!.emoticon
     }
 
     private fun filteringSchedule() {

@@ -20,7 +20,6 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/planner_lo_category"
-            android:backgroundTint="@{calendarViewModel._currentCategory.color}"
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
