@@ -39,7 +39,6 @@ import com.example.plan_me.utils.viewModel.TimerViewModelFactory
 class TimerFragment : Fragment(),
     DialogTimerPickInterface,
     ResetConfirmedListener,
-    DialogDeleteCategoryCheckFragment.SendDeleteMessage,
     DialogTimerCategoryFragment.SendData,
     TimerView,
     GetTimerView{
@@ -53,12 +52,8 @@ class TimerFragment : Fragment(),
 
     private lateinit var timerViewModel: TimerViewModel
 
-    private var timer: CountDownTimer? = null
-    private var remainingTimeInMillis: Long = 0
 
-    private var timeOut: Boolean = false
-
-    private var category_id: Int = 0
+    private var category_id: Int = -1
 
 
     private lateinit var progressViewModel: ProgressViewModel
@@ -71,7 +66,7 @@ class TimerFragment : Fragment(),
         binding = FragmentTimerFocusBinding.inflate(layoutInflater, container, false)
 
         val factory = CalendarViewModelFactory(requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE))
-        calendarViewModel = ViewModelProvider(this, factory).get(CalendarViewModel::class.java)
+        calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
         progressViewModel = ViewModelProvider(this).get(ProgressViewModel::class.java)
 
 
@@ -80,16 +75,21 @@ class TimerFragment : Fragment(),
 
         calendarViewModel._categoryList.observe(viewLifecycleOwner, Observer {
             init()
+            getTimer()
         })
 
         val getResSharedPreferences = requireContext().getSharedPreferences("getRes", AppCompatActivity.MODE_PRIVATE)
         val categoryIdSharedPreferences = requireContext().getSharedPreferences("category_id", AppCompatActivity.MODE_PRIVATE)
-
+        category_id = calendarViewModel._currentCategory.value!!.categoryId
         val timerFactory = TimerViewModelFactory(getResSharedPreferences, categoryIdSharedPreferences)
         timerViewModel = ViewModelProvider(this, timerFactory).get(TimerViewModel::class.java)
 
         binding.timerFocusSettingBtn.isEnabled = false
-
+        init()
+        if (category_id != -1) {
+            getTimer()
+            binding.timerFocusSettingBtn.isEnabled = true
+        }
         clickListener()
 
         return binding.root
@@ -110,12 +110,12 @@ class TimerFragment : Fragment(),
     }
 
     private fun clickListener() {
-        if (progressViewModel._hour.value == 0 &&progressViewModel._min.value == 0&&progressViewModel._sec.value == 0) {
+        /*if (progressViewModel._hour.value == -1 &&progressViewModel._min.value == -1&&progressViewModel._sec.value == -1) {
             binding.timerFocusPlayBtn.visibility = View.VISIBLE
             binding.timerFocusPauseBtn.visibility = View.GONE
             progressViewModel._time.value = "CLEAR"
 
-        }  //끝나면
+        }  //끝나면*/
         // menu button
         binding.timerFocusMenuBtn.setOnClickListener {
             category_timer = DialogTimerCategoryFragment(
@@ -210,16 +210,6 @@ class TimerFragment : Fragment(),
         Log.d("TimerSettingCancel", "cancel")
     }
 
-    override fun sendDeleteMessage(category: CategoryList) {
-        category_timer.dismiss()
-        calendarViewModel.getCategoryList()
-        if (calendarViewModel._currentCategory.value == category) {
-            calendarViewModel.sendCategory(CategoryList(-1,"Schedule","\uD83D\uDCC6" ,R.color.light_gray, false, "","" ))
-        }
-        val customToast = CustomToast
-        customToast.createToast(requireContext(), calendarViewModel._categoryList.value.toString(), 300, true)
-    }
-
     override fun sendData(category: CategoryList) {
         calendarViewModel.sendCategory(category)
 
@@ -238,6 +228,7 @@ class TimerFragment : Fragment(),
         binding.timerFocusStudyEmoticon.setText(category.emoticon)
 
         binding.timerFocusSettingBtn.isEnabled = true
+        category_timer.dismiss()
         getTimer()
     }
     private fun getTimer() {
@@ -269,7 +260,6 @@ class TimerFragment : Fragment(),
         progressViewModel._break_sec.value = 0
 
         progressViewModel._repeat.value = response.result.repeatCnt
-
 
         progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
     }
