@@ -57,7 +57,7 @@ class MestoryFragment : Fragment(),
         val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
         selectDate = currentWeek
-
+        binding.mestoryProfileDateTv.text = selectDate.toString()
         initRV()
         initProgressBar()
         clickListener()
@@ -94,10 +94,12 @@ class MestoryFragment : Fragment(),
         // 각 키(그룹)에 대해 반복
         for (entry in groupedSchedules) {
             // 현재 그룹의 스케줄 목록
-            val scheduleList = entry.value
-            // 현재 그룹의 스케줄 목록에 있는 항목 수를 총 항목 수에 추가
-            totalItemCount += scheduleList.size
-            totalFinishCount += scheduleList.count { it.status }
+            if (calendarViewModel._categoryList.value!!.find { it.categoryId == entry.key }?.meStoryHidden == false) {
+                val scheduleList = entry.value
+                // 현재 그룹의 스케줄 목록에 있는 항목 수를 총 항목 수에 추가
+                totalItemCount += scheduleList.size
+                totalFinishCount += scheduleList.count { it.status }
+            }
         }
         binding.mestoryTotalPercentLineGray.progress = ((totalFinishCount.toFloat()/ totalItemCount.toFloat()) * 100).toInt()
         binding.mestoryCategoryProgressPercentageTv.text =((totalFinishCount.toFloat()/ totalItemCount.toFloat()) * 100).toInt().toString() + "%"

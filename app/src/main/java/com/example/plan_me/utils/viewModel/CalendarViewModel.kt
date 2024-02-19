@@ -109,6 +109,9 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
 
     override fun onAllScheduleSuccess(response: AllScheduleRes) {
         _scheduleList.value = response.result.scheduleList
+        if (_currentCategory.value!!.categoryId == -1 && !_categoryList.value!!.isNullOrEmpty()) {
+            _currentCategory.value = _categoryList.value!![0]
+        }
         _isUpdated.value = true
     }
 

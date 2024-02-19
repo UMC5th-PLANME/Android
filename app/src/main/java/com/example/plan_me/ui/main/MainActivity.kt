@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.plan_me.R
+import com.example.plan_me.data.local.entity.Category_input
 import com.example.plan_me.data.remote.dto.category.AllCategoryRes
 import com.example.plan_me.data.remote.dto.category.CategoryList
 import com.example.plan_me.data.remote.service.category.CategoryService
@@ -52,6 +53,7 @@ class MainActivity :
 
     private lateinit var category_delete : DialogDeleteCategoryFragment
     private lateinit var category_modify : DialogModifyCategoryFragment
+    private lateinit var category_add : DialogAddFragment
 
     private var isHome : Boolean = true
 
@@ -61,7 +63,6 @@ class MainActivity :
     private lateinit var calendarViewModel: CalendarViewModel
 
     private var backPressedTime: Long = 0
-    private val BACK_PRESSED_INTERVAL: Long = 2000 // 두 번 누르는 간격 (밀리초)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +73,13 @@ class MainActivity :
 
         calendarViewModel._categoryList.observe(this, Observer {
             initActivity()
+        })
+        calendarViewModel._isUpdated.observe(this, Observer {
+            Log.d("calendarViewModel._isUpdated", calendarViewModel._isUpdated.value.toString())
+            if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
+                category_add = DialogAddFragment(this, this)
+                category_add.show()
+            }
         })
 
         onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
@@ -98,14 +106,12 @@ class MainActivity :
     }
 
     private fun initActivity() {
-        if (!calendarViewModel._categoryList.value.isNullOrEmpty()) {
             val layoutManager = LinearLayoutManager(this)
             val drawer = findViewById<RecyclerView>(R.id.drawer_rv)
             drawerAdapter = MainDrawerRVAdapter(calendarViewModel._categoryList.value!!, this)
             drawer.layoutManager = layoutManager
             drawer.adapter = drawerAdapter
             drawerAdapter.notifyDataSetChanged()
-        }
     }
 
     private fun initBottomNavigation(){
@@ -206,11 +212,17 @@ class MainActivity :
             binding.mainDrawerLayout.openDrawer(drawerView!!)
         }
         drawerAdd.setOnClickListener {
-            showDialog(DialogAddFragment(this@MainActivity, this))
+            category_add = DialogAddFragment(this, this)
+            category_add.show()
         }
         drawerDelete.setOnClickListener {
-            category_delete = DialogDeleteCategoryFragment(this, calendarViewModel._categoryList.value, this)
-            category_delete.show()
+            if (calendarViewModel._categoryList.value!!.size <= 1) {
+                val customToast = CustomToast
+                customToast.createToast(this, "기본 카테고리를 삭제할 수 없습니다", 300, false)
+            }else {
+                category_delete = DialogDeleteCategoryFragment(this, calendarViewModel._categoryList.value, this)
+                category_delete.show()
+            }
         }
         drawerModify.setOnClickListener {
             category_modify = DialogModifyCategoryFragment(this, calendarViewModel._categoryList.value ,this)
@@ -242,7 +254,7 @@ class MainActivity :
     private fun showDialog(dialog: Dialog) {
         dialog.show()
     }
-    override fun sendSuccessSignal() {  //add
+    override fun sendSuccessSignal(categoryId : Int) {  //add
         calendarViewModel.getCategoryList()
     }
 
@@ -254,6 +266,7 @@ class MainActivity :
         }
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 삭제되었습니다", 300, false)
+        binding.mainDrawerLayout.closeDrawers()
     }
 
     override fun sendModifySuccessSignal(category: CategoryList) {  //modify
@@ -262,6 +275,7 @@ class MainActivity :
         calendarViewModel.sendCategory(category)
         val customToast = CustomToast
         customToast.createToast(this, "카테고리가 수정되었습니다", 300, true)
+        binding.mainDrawerLayout.closeDrawers()
     }
 
     override fun sendClickCategory(category: CategoryList, position: Int) {

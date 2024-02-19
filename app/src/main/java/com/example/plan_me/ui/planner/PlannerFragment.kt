@@ -24,6 +24,7 @@ import com.example.plan_me.data.remote.view.schedule.AllScheduleView
 import com.example.plan_me.databinding.FragmentPlannerBinding
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
+import java.time.LocalDate
 
 
 class PlannerFragment : Fragment() ,
@@ -31,7 +32,8 @@ class PlannerFragment : Fragment() ,
     private lateinit var binding: FragmentPlannerBinding
     private lateinit var plannerRVAdapter : PlannerRVAdapter
     private var selectedSchedule : MutableList<ScheduleList>? = null
-    val groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
+    var groupedSchedules = mutableMapOf<Int, MutableList<ScheduleList>>()
+    private val currentWeek = LocalDate.now()
 
 
 
@@ -48,12 +50,15 @@ class PlannerFragment : Fragment() ,
         calendarViewModel._currentCategory.observe(viewLifecycleOwner, Observer {
             Log.d("_currentCategory",  calendarViewModel._currentCategory.value.toString())
             init()
-            filteringSchedule()
-            setSelectSchedule()
-            setRvAdapter()
+            if (calendarViewModel._currentCategory.value!!.categoryId != -1) {
+                groupedSchedules =
+                    calendarViewModel.filteringSchedule(currentWeek, groupedSchedules)
+                setSelectSchedule()
+                setRvAdapter()
+            }
         })
         calendarViewModel._scheduleList.observe(viewLifecycleOwner, Observer {
-            filteringSchedule()
+            groupedSchedules = calendarViewModel.filteringSchedule(currentWeek,groupedSchedules)
             setSelectSchedule()
             setRvAdapter()
         })
@@ -81,20 +86,6 @@ class PlannerFragment : Fragment() ,
             binding.plannerSecondLo.background = shape
     }
 
-    private fun filteringSchedule() {
-        Log.d("sche", calendarViewModel._scheduleList.value.toString())
-        if (calendarViewModel._scheduleList.value != null) {
-            // categoryId를 기준으로 ScheduleList를 그룹화하여 Schedule_filter 객체로 만듦
-            groupedSchedules.clear()
-            for (schedule in calendarViewModel._scheduleList.value!!) {
-                val categoryId = schedule.category_id
-                if (!groupedSchedules.containsKey(categoryId)) {
-                    groupedSchedules[categoryId] = mutableListOf()
-                }
-                groupedSchedules[categoryId]?.add(schedule)
-            }
-        }
-    }
     private fun setSelectSchedule() {
         Log.d("groupedSchedule11", groupedSchedules.toString())
         selectedSchedule = groupedSchedules[calendarViewModel._currentCategory.value!!.categoryId] ?: null

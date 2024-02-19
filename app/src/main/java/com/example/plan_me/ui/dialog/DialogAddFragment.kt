@@ -21,9 +21,10 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
     private lateinit var binding : FragmentDialogAddCategoryBinding
     private var ignoreCheckChange = false
     private var isFirst = true
+    lateinit var categoryInput : Category_input
 
     interface SendSignalToMain {
-        fun sendSuccessSignal()
+        fun sendSuccessSignal(categoryId : Int)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
                 Log.d("access token", access_token)
                 val setCategoryService = CategoryService()
                 setCategoryService.setAddCategoryView(this)
-                val categoryInput = Category_input(name, emoticon, color)
+                categoryInput = Category_input(name, emoticon, color)
                 setCategoryService.addCategoryFun(access_token!!, categoryInput)
             }
         }
@@ -143,7 +144,7 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
 
     override fun onAddCategorySuccess(response: AddCategoryRes) {
         Log.d("response", response.toString())
-        sendSignalToMain.sendSuccessSignal()
+        sendSignalToMain.sendSuccessSignal(response.result.categoryId)
         dismiss()
     }
 
