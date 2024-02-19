@@ -2,8 +2,8 @@ package com.example.plan_me.data.remote.service.mestory
 
 import android.util.Log
 import com.example.plan_me.data.remote.dto.mestory.FocusTimeSetting
-import com.example.plan_me.data.remote.dto.mestory.SaveFocusTimeReq
 import com.example.plan_me.data.remote.dto.mestory.SaveFocusTimeRes
+import com.example.plan_me.data.remote.dto.mestory.TotalFocusTime
 import com.example.plan_me.data.remote.dto.timer.TimerSettingRes
 import com.example.plan_me.data.remote.retrofit.SaveFocusTimeRetrofitInterface
 import com.example.plan_me.data.remote.retrofit.TimerRetrofitInterface
@@ -20,7 +20,7 @@ class SaveFocusTimeService {
         this.saveFocusTimeView = saveFocusTimeView
     }
 
-    fun setSaveFocusTime(accessToken: String, categoryId: Int, saveFocusTimeReq: SaveFocusTimeReq) {
+    fun setSaveFocusTime(accessToken: String, categoryId: Int, saveFocusTimeReq: TotalFocusTime) {
         val SaveFocusTimeService = getRetrofit().create(SaveFocusTimeRetrofitInterface::class.java)
         SaveFocusTimeService.postFocusTime(accessToken, categoryId, saveFocusTimeReq).enqueue(object :
         Callback<SaveFocusTimeRes> {
@@ -35,7 +35,6 @@ class SaveFocusTimeService {
                     else -> saveFocusTimeView.onSaveFocusTimeFailure(resp.isSuccess, resp.code, resp.message)
                 }
             }
-
             // 네트워크 X
             override fun onFailure(call: Call<SaveFocusTimeRes>, t: Throwable) {
                 Log.d("SAVE-FOCUS-TIME-FAILURE", t.toString())

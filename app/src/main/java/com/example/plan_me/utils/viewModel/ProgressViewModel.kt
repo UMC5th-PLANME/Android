@@ -18,6 +18,7 @@ class ProgressViewModel : ViewModel() {
     val _time = MutableLiveData<String>()
     val _break_time = MutableLiveData<String>()
     val mills = MutableLiveData<Float>()
+    val _isEnd = MutableLiveData<Boolean>()
 
     // 현재 진행중인 Job 객체를 저장
     private var job: Job? = null
@@ -33,13 +34,15 @@ class ProgressViewModel : ViewModel() {
         _time.value = "00:00:00"
         _break_time.value = "00:00:00"
         mills.value = 0f
+        _isEnd.value =false
     }
 
     fun startProgress(hour :MutableLiveData<Int> , min :MutableLiveData<Int>, sec :MutableLiveData<Int> ) {
-        val totalMilliseconds = ((hour.value ?: 0) * 60 + (min.value ?: 0)) * 60 * 1000
+        val totalMilliseconds = ((hour.value ?: 0) * 60 + (min.value ?: 0)) * 60 * 1000 + sec.value!! *1000
         if (job == null) {
             job = viewModelScope.launch(Dispatchers.IO) {
                 while (mills.value!! <= totalMilliseconds) {
+                    delay(50)
                     mills.postValue(mills.value!! + 50)
                     if (mills.value!! % 1000 == 0f) {
                         _progress.postValue(((mills.value!!/totalMilliseconds)*100).toInt())
@@ -49,8 +52,7 @@ class ProgressViewModel : ViewModel() {
                             if (min.value!! == 0) {
                                 hour.postValue(hour.value!!-1)
                                 if (hour.value!! == 0) {
-                                    initClear()
-                                    stopProgress()
+                                    _isEnd.postValue(true)
                                 }
                                 min.postValue(59)
                             }
@@ -58,8 +60,6 @@ class ProgressViewModel : ViewModel() {
                         }
                         initTime(hour, min, sec)
                     }
-
-                    delay(50)
                 }
             }
         }
@@ -78,7 +78,7 @@ class ProgressViewModel : ViewModel() {
         _time.postValue(String.format("%02d:%02d:%02d", hour.value, min.value, sec.value))
     }
     fun initClear() {
-        _time.postValue("CLEAR")
+        _time.postValue("00:00:00")
     }
     fun clear() {
         _progress.value = 0
@@ -90,5 +90,7 @@ class ProgressViewModel : ViewModel() {
         _break_min.value =0
         _time.value = "00:00:00"
         _break_time.value = "00:00:00"
+        mills.value = 0F
+        _isEnd.value  =false
     }
 }

@@ -60,9 +60,9 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
         // 최소값 설정
         breakMin.minValue = 0
         // 최대값 설정
-        breakMin.maxValue = 8
+        breakMin.maxValue = 10
         // 보여질 값 설정 (string)
-        breakMin.displayedValues = arrayOf("10", "15", "20", "25", "30", "35", "40", "45", "50")
+        breakMin.displayedValues = arrayOf("5","10", "15", "20", "25", "30", "35", "40", "45", "50", "55")
 
 
         // Repeat Count -> 반복 횟수
@@ -99,7 +99,6 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
 
         // 확인 버튼 클릭 리스너 설정
         binding.dialogTimerpickConfirm.setOnClickListener {
-
             focusMin += focusHour
             dialogTimerPickInterface?.onTimerSettingConfirm(focusMin, breakMin, repeatCount)
             dismiss()
