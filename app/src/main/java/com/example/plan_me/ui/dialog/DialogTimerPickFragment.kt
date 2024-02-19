@@ -42,13 +42,13 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
         focusMin.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         // 최소값 설정
         focusHour.minValue = 0
-        focusMin.minValue = 0
+        focusMin.minValue = 1
         // 최대값 설정
         focusHour.maxValue = 2
         focusMin.maxValue = 5
         // 보여질 값 설정 (string)
         focusHour.displayedValues = arrayOf("0", "1", "2")
-        focusMin.displayedValues = arrayOf("0", "10", "20", "30", "40", "50")
+        focusMin.displayedValues = arrayOf("10", "20", "30", "40", "50")
 
 
         // BreakTime

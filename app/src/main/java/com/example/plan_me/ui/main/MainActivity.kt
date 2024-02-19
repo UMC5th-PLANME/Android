@@ -76,9 +76,11 @@ class MainActivity :
         })
         calendarViewModel._isUpdated.observe(this, Observer {
             Log.d("calendarViewModel._isUpdated", calendarViewModel._isUpdated.value.toString())
-            if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
+            if (calendarViewModel._currentCategory.value!!.categoryId == -1&& calendarViewModel._isUpdated.value == true) {
                 category_add = DialogAddFragment(this, this)
-                category_add.show()
+                if (!category_add.isShowing) {
+                    category_add.show()
+                }
             }
         })
 
@@ -99,10 +101,6 @@ class MainActivity :
             .commitAllowingStateLoss()
 
         clickListener()
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     private fun initActivity() {
@@ -251,11 +249,18 @@ class MainActivity :
         }
     }
 
-    private fun showDialog(dialog: Dialog) {
-        dialog.show()
-    }
     override fun sendSuccessSignal(categoryId : Int) {  //add
         calendarViewModel.getCategoryList()
+    }
+
+    override fun sendCancel() {
+        if (calendarViewModel._currentCategory.value!!.categoryId == -1) {
+            val customToast = CustomToast
+            customToast.createToast(this, "카테고리를 생성해주세요", 300, false)
+
+        }else {
+            category_add.dismiss()
+        }
     }
 
     override fun sendDeleteMessage(category: CategoryList) {    //delete

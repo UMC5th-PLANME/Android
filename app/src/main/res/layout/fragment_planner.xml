@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pretendard_bold"
                 android:text="@{calendarViewModel._currentCategory.name}"
-                android:textColor="@color/black"
+                android:textColor="@color/dark_gray"
                 android:textSize="32dp"
                 android:gravity="center"
                 android:ellipsize="marquee"

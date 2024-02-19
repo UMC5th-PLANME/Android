@@ -283,7 +283,7 @@ class TimerFragment : Fragment(),
         Log.d("ddddd", focus.substring(0,2).toInt().toString())
         progressViewModel._hour.value = focus.substring(0,2).toInt()
         progressViewModel._min.value = focus.substring(3,5).toInt()
-        progressViewModel._sec.value = 10
+        progressViewModel._sec.value = 0
 
         progressViewModel._break_hour.value = breakTime.substring(0,2).toInt()
         progressViewModel._break_min.value = breakTime.substring(3,5).toInt()
