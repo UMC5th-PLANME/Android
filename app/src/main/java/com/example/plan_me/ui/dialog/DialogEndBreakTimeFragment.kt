@@ -8,8 +8,13 @@ import android.os.Bundle
 import com.example.plan_me.databinding.FragmentDialogEndBreakTimeBinding
 import com.example.plan_me.databinding.FragmentDialogSaveFocusTimeBinding
 
-class DialogEndBreakTimeFragment(context : Context): Dialog(context) {
+class DialogEndBreakTimeFragment(context : Context, dialogEndBreakTimeInterface: DialogEndBreakTimeInterface): Dialog(context) {
     private lateinit var binding : FragmentDialogEndBreakTimeBinding
+    private var dialogEndBreakTimeInterface : DialogEndBreakTimeInterface
+
+    init {
+        this.dialogEndBreakTimeInterface = dialogEndBreakTimeInterface
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +25,13 @@ class DialogEndBreakTimeFragment(context : Context): Dialog(context) {
 
         // 취소 버튼 눌렀을 때 -> FocusTimer 로 이동 -> 타이머 시작 X
         binding.timerDialogNotFocusTimeTv.setOnClickListener {
+            dialogEndBreakTimeInterface?.onPauseFocusTime()
             dismiss()
         }
 
         // 확인 버튼 눌렀을 때 -> FocusTimer 로 이동 -> 타이머 바로 시작
         binding.timerDialogNotFocusTimeTv.setOnClickListener {
+            dialogEndBreakTimeInterface?.onStartFocusTime()
             dismiss()
         }
     }
