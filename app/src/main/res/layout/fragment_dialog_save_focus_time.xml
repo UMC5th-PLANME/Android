@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="250dp"
@@ -31,23 +30,9 @@
 
 
         <TextView
-            android:id="@+id/timer_dialog_focus_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="&quot;N분 집중 성공&quot;"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="40dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:text="me story 에 기록하시겠습니까?"
@@ -55,8 +40,7 @@
             android:textSize="18dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/timer_dialog_focus_time_tv" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <LinearLayout
             android:layout_width="300dp"
