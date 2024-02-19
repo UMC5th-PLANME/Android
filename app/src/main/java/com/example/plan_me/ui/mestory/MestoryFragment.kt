@@ -2,6 +2,7 @@ package com.example.plan_me.ui.mestory
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -111,6 +112,49 @@ class MestoryFragment : Fragment(),
             dialogDailyCalenderFragment = DialogDailyCalenderFragment(requireContext(), this)
             dialogDailyCalenderFragment.show()
         }
+        binding.mestorySharingIv.setOnClickListener {
+            val intent = Intent(requireActivity(), MestoryShareActivity::class.java)
+            val categoryList = ArrayList(calendarViewModel.filteringCategoryHidden(groupedSchedules))
+            intent.putExtra("date", currentWeek.toString())
+            intent.putParcelableArrayListExtra("categoryList", categoryList)
+            val categoryPercentMap = calculateCategoryPercent()
+            val bundle = Bundle()
+            for ((categoryId, percent) in categoryPercentMap) {
+                bundle.putInt("category_$categoryId", percent)
+            }
+            intent.putExtra("categoryPercent", bundle)
+            intent.putExtra("img", userImg)
+            intent.putExtra("name", userName)
+            startActivity(intent)
+        }
+    }
+
+    fun calculateCategoryPercent(): Map<Int, Int> {
+        val categoryPercentMap = mutableMapOf<Int, Int>()
+
+        // 각 카테고리에 대해 반복하여 퍼센트를 계산합니다.
+        for (entry in groupedSchedules) {
+            val categoryId = entry.key
+            var totalItemCount = 0
+            var totalFinishCount = 0
+
+            if (calendarViewModel._categoryList.value!!.find { it.categoryId == entry.key }?.meStoryHidden == false) {
+                val scheduleList = entry.value
+                // 현재 그룹의 스케줄 목록에 있는 항목 수를 총 항목 수에 추가
+                totalItemCount += scheduleList.size
+                totalFinishCount += scheduleList.count { it.status }
+
+                // 해당 카테고리의 퍼센트 계산하여 맵에 추가
+                val percent = if (totalItemCount > 0) {
+                    ((totalFinishCount.toFloat() / totalItemCount.toFloat()) * 100).toInt()
+                } else {
+                    0
+                }
+                categoryPercentMap[categoryId] = percent
+            }
+        }
+
+        return categoryPercentMap
     }
 
     private fun getData2() {

@@ -83,6 +83,7 @@
         
         <activity android:name=".ui.add.ScheduleAddActivity"/>
 
+        <activity android:name=".ui.mestory.MestoryShareActivity"/>
     </application>
 
 </manifest>
