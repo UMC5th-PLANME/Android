@@ -83,7 +83,11 @@ class DialogTimerPickFragment(context: Context, dialogTimerPickInterface: Dialog
         }
 
         focusMin.setOnValueChangedListener { numberPicker, _ , newVal ->
-            this.focusMin = newVal * 10
+            if (newVal == 0) {
+                this.focusMin = 10 // 0이면 10으로 설정
+            } else {
+                this.focusMin = newVal * 10
+            }
         }
 
         breakMin.setOnValueChangedListener { numberPicker, _ , newVal ->

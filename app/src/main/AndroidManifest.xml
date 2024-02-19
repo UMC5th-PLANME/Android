@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
     <uses-permission android:name="android.permission.POST_NOTIFICARIONS" />
 
     <application
@@ -83,6 +84,7 @@
         
         <activity android:name=".ui.add.ScheduleAddActivity"/>
 
+        <activity android:name=".ui.mestory.MestoryShareActivity"/>
     </application>
 
 </manifest>

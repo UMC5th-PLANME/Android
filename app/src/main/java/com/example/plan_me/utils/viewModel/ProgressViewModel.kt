@@ -11,14 +11,12 @@ class ProgressViewModel : ViewModel() {
     val _hour = MutableLiveData<Int>()
     val _min = MutableLiveData<Int>()
     val _sec = MutableLiveData<Int>()
-    val _break_hour = MutableLiveData<Int>()
-    val _break_min = MutableLiveData<Int>()
-    val _break_sec = MutableLiveData<Int>()
-    val _repeat = MutableLiveData<Int>()
     val _time = MutableLiveData<String>()
-    val _break_time = MutableLiveData<String>()
     val mills = MutableLiveData<Float>()
     val _isEnd = MutableLiveData<Boolean>()
+    var hour = 0
+    var min = 0
+    var sec = 0
 
     // 현재 진행중인 Job 객체를 저장
     private var job: Job? = null
@@ -28,11 +26,7 @@ class ProgressViewModel : ViewModel() {
         _hour.value =0
         _min.value =0
         _sec.value =0
-        _break_hour.value =0
-        _break_sec.value =0
-        _break_min.value =0
         _time.value = "00:00:00"
-        _break_time.value = "00:00:00"
         mills.value = 0f
         _isEnd.value =false
     }
@@ -72,6 +66,7 @@ class ProgressViewModel : ViewModel() {
     }
     fun initProgress() {
         _progress.value = 0
+        mills.value = 0f
     }
 
     fun initTime(hour :MutableLiveData<Int> , min :MutableLiveData<Int>, sec :MutableLiveData<Int>) {
@@ -85,11 +80,19 @@ class ProgressViewModel : ViewModel() {
         _hour.value =0
         _min.value =0
         _sec.value =0
-        _break_hour.value =0
-        _break_sec.value =0
-        _break_min.value =0
         _time.value = "00:00:00"
-        _break_time.value = "00:00:00"
+        mills.value = 0F
+        _isEnd.value  =false
+        hour = 0
+        min - 0
+        sec = 0
+    }
+    fun reset() {
+        _progress.value = 0
+        _hour.value =hour
+        _min.value =min
+        _sec.value =sec
+        _time.postValue(String.format("%02d:%02d:%02d", hour, min, sec))
         mills.value = 0F
         _isEnd.value  =false
     }
