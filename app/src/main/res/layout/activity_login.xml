@@ -52,18 +52,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_kakao_btn"
         android:layout_marginTop="10dp"/>
-
-    <TextView
-        android:id="@+id/login_offline_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/offline"
-        android:layout_marginTop="12dp"
-        android:textSize="12dp"
-        android:textColor="@color/dark_gray"
-        android:fontFamily="@font/pretendard_bold"
-        app:layout_constraintTop_toBottomOf="@id/login_google_btn"
-        app:layout_constraintStart_toStartOf="@id/login_google_btn"
-        app:layout_constraintEnd_toEndOf="@id/login_google_btn"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
