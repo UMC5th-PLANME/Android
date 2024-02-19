@@ -57,7 +57,7 @@ class MestoryFragment : Fragment(),
         val factory = CalendarViewModelFactory(requireActivity().getSharedPreferences("getRes", Context.MODE_PRIVATE))
         calendarViewModel = ViewModelProvider(requireActivity(), factory).get(CalendarViewModel::class.java)
         selectDate = currentWeek
-
+        binding.mestoryProfileDateTv.text = selectDate.toString()
         initRV()
         initProgressBar()
         clickListener()
