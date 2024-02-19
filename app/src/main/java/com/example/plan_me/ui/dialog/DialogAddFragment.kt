@@ -25,6 +25,7 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
 
     interface SendSignalToMain {
         fun sendSuccessSignal(categoryId : Int)
+        fun sendCancel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,9 +34,6 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.addCategoryCancelBtn.setOnClickListener {
-            dismiss()
-        }
         binding.addCategorySaveBtn.setOnClickListener {//연결 완료
             val emoticon = findEmoticon(findCheckItemId(binding.emoticonGroup1, binding.emoticonGroup2))
             val color = findColor(findCheckItemId(binding.colorGroup1, binding.colorGroup2))
@@ -150,6 +148,6 @@ class DialogAddFragment(context : Context, private val sendSignalToMain: SendSig
 
     override fun onAddCategoryFailure(response: AddCategoryRes) {
         Log.d("response", response.toString())
-        dismiss()
+        sendSignalToMain.sendCancel()
     }
 }
