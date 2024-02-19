@@ -50,7 +50,6 @@ class TimerFragment : Fragment(),
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
-    private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var category_timer : DialogTimerCategoryFragment
@@ -174,8 +173,7 @@ class TimerFragment : Fragment(),
         // Reset 클릭 시
         binding.timerFocusResetBtn.setOnClickListener {
             // Dialog 타이머 초기화 경고 띄우기
-            dialogCautionResetTime = DialogCautionResetTimeFragment(this as Context, this)
-            dialogCautionResetTime.show()
+
         }
 
     }
