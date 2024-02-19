@@ -148,4 +148,5 @@ dependencies {
 
 
     implementation 'com.github.guilhe:circular-progress-view:2.0.0'
+    implementation 'io.github.ParkSangGwon:tedpermission-normal:3.3.0'
 }

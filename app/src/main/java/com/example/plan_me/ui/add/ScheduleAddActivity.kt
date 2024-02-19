@@ -1,11 +1,16 @@
 package com.example.plan_me.ui.add
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.plan_me.R
 import com.example.plan_me.data.local.entity.Schedule_input
@@ -38,8 +43,11 @@ import com.example.plan_me.ui.dialog.DialogTimePickFragment
 import com.example.plan_me.ui.dialog.DialogTimePickInerface
 import com.example.plan_me.ui.dialog.DialogTimeRangePickFragment
 import com.example.plan_me.ui.dialog.DialogTimeRangePickInerface
+import com.example.plan_me.ui.login.InitProfileActivity
 import com.example.plan_me.ui.main.MainActivity
 import com.example.plan_me.utils.alarm.AlarmFunctions
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import java.time.LocalDate
 
 class ScheduleAddActivity():
@@ -74,6 +82,8 @@ class ScheduleAddActivity():
     private lateinit var scheduleInput : Schedule_input
 
     private var isModify : Boolean = false
+
+    private val ALARM_PERMISSION_REQUEST_CODE = 1001
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScheduleAddBinding.inflate(layoutInflater)
@@ -82,6 +92,7 @@ class ScheduleAddActivity():
         init()
         setContentView(binding.root)
         overridePendingTransition(R.anim.screen_start, R.anim.screen_none)
+
     }
 
     override fun onBackPressed() {
@@ -174,6 +185,7 @@ class ScheduleAddActivity():
             setScheduleService.deleteScheduleFun(access_token, schedule.id)
         }
         binding.scheduleEditCompleteBtn.setOnClickListener {
+
 
             val name = binding.scheduleNameEt.text.toString()
             var alarm = binding.scheduleAlarmTimeTv.text.toString()
@@ -279,6 +291,7 @@ class ScheduleAddActivity():
         alarmService.setAlarmDeleteView(this)
         alarmService.deleteAlarmList(access_token, scheduleId)
     }
+
     override fun onRangeClickConfirm(startTime: String, endTime: String) {
         Log.d("start", startTime)
         Log.d("end", endTime)
@@ -320,7 +333,6 @@ class ScheduleAddActivity():
 
     override fun onAddScheduleSuccess(response: AddScheduleRes) {
         customToast.createToast(this,"일정이 생성되었습니다", 300, true)
-
         var currentDate = startDate
         if(response.result.alarm) {
             while (currentDate <= endDate) { //api 필요할듯
@@ -393,6 +405,5 @@ class ScheduleAddActivity():
     override fun onAlarmDeleteFailure(isSuccess: Boolean, code: String, message: String) {
         Log.d("알람 삭제", message)
     }
-
 
 }
