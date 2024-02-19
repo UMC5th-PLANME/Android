@@ -85,6 +85,19 @@ class CalendarViewModel(private val sharedPreferences: SharedPreferences):ViewMo
         return filteringCategory
     }
 
+    fun filteringCategoryHidden(groupedSchedules:MutableMap<Int, MutableList<ScheduleList>>): List<CategoryList> {
+        val filteringCategory = mutableListOf<CategoryList>()
+
+        for ((categoryId, _) in groupedSchedules) {
+            val category = _categoryList.value!!.find { it.categoryId == categoryId && !it.meStoryHidden}
+            category?.let {
+                filteringCategory.add(it)
+            }
+        }
+        Log.d("dfasdf", filteringCategory.toString())
+        return filteringCategory
+    }
+
     override fun onAllCategorySuccess(response: AllCategoryRes) {
         _categoryList.value = response.result.categoryList
         getScheduleAll()

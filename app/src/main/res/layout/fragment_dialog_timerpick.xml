@@ -65,7 +65,8 @@
                     app:layout_constraintEnd_toStartOf="@id/timer_focus_hour"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    style="@style/NumberPickerSetting" />
+                    style="@style/NumberPickerSetting"
+                    android:theme="@style/TimePicker_Custom" />
 
                 <NumberPicker
                     android:id="@+id/timer_focus_numberPicker_min"
@@ -78,7 +79,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/guideline_focustime_50"
                     app:layout_constraintTop_toTopOf="parent"
-                    style="@style/NumberPickerSetting" />
+                    style="@style/NumberPickerSetting"
+                    android:theme="@style/TimePicker_Custom"/>
 
                 <TextView
                     android:id="@+id/timer_focus_hour"

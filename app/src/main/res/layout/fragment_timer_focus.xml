@@ -126,24 +126,13 @@
             android:id="@+id/timer_focus_time_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0:00:00"
+            android:text="@{progressViewModel._time}"
             android:textSize="40sp"
             app:layout_constraintTop_toTopOf="@+id/timer_focus_circle_default"
             app:layout_constraintBottom_toBottomOf="@id/timer_focus_circle_default"
             app:layout_constraintStart_toStartOf="@id/timer_focus_circle_default"
             app:layout_constraintEnd_toEndOf="@id/timer_focus_circle_default"/>
 
-        <TextView
-            android:id="@+id/timer_focus_time_clear_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CLEAR"
-            android:textSize="40sp"
-            android:visibility="invisible"
-            app:layout_constraintTop_toTopOf="@+id/timer_focus_circle_default"
-            app:layout_constraintBottom_toBottomOf="@id/timer_focus_circle_default"
-            app:layout_constraintStart_toStartOf="@id/timer_focus_circle_default"
-            app:layout_constraintEnd_toEndOf="@id/timer_focus_circle_default"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/timer_focus_play_cv"
