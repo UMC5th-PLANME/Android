@@ -41,6 +41,7 @@ import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.example.plan_me.utils.viewModel.ProgressViewModel
 import com.example.plan_me.utils.viewModel.TimerViewModel
 import com.example.plan_me.utils.viewModel.TimerViewModelFactory
+import kotlin.math.abs
 
 
 class TimerFragment : Fragment(),
@@ -106,6 +107,16 @@ class TimerFragment : Fragment(),
                 binding.timerFocusPlayBtn.isEnabled = false
             }else {
                 binding.timerFocusPlayBtn.isEnabled = true
+            }
+        })
+
+
+        progressViewModel._progress.observe(viewLifecycleOwner, Observer {
+            Log.d("progress", progressViewModel._progress.value.toString())
+            if (progressViewModel._progress.value == 0) {
+                binding.timerFocusResetBtn.isEnabled = false
+            }else {
+                binding.timerFocusResetBtn.isEnabled = true
             }
         })
 
@@ -178,7 +189,7 @@ class TimerFragment : Fragment(),
         // Reset 클릭 시
         binding.timerFocusResetBtn.setOnClickListener {
             // Dialog 타이머 초기화 경고 띄우기
-            dialogCautionResetTime = DialogCautionResetTimeFragment(this as Context, this)
+            dialogCautionResetTime = DialogCautionResetTimeFragment(requireContext(), this)
             dialogCautionResetTime.show()
         }
 
@@ -189,8 +200,34 @@ class TimerFragment : Fragment(),
     override fun onResetConfirmed(isConfirmed: Boolean) {
 
         if (isConfirmed) {
+            var hour = progressViewModel.hour-progressViewModel._hour.value!!
+            var min = progressViewModel.min-progressViewModel._min.value!!
+            var sec = progressViewModel.sec-progressViewModel._sec.value!!
+            Log.d("sec",sec.toString())
+            if (sec <0) {
+                sec = abs(60 +sec)%60
+                min -= 1
+            }
+            if (min < 0) {
+                min = abs(60+min)%60
+                hour -= 1
+            }
+            val time = String.format("%02d:%02d:%02d", hour, min, sec)
+            Log.d("time", time)
+            progressViewModel.stopProgress()
+            progressViewModel.reset()
+            binding.timerFocusPlayBtn.visibility = View.VISIBLE
+            binding.timerFocusPauseBtn.visibility = View.GONE
 
-            binding.timerFocusTimeTv.text = "0:00:00"
+            val access_token = "Bearer " + requireActivity().getSharedPreferences("getRes",
+                AppCompatActivity.MODE_PRIVATE
+            ).getString("getAccessToken", "")
+            val meStoryService = SaveFocusTimeService()
+            meStoryService.saveFocusTimeView(this)
+            meStoryService.setSaveFocusTime(access_token, category_id, TotalFocusTime(time) )
+
+        }else {
+
         }
     }
 
@@ -214,20 +251,19 @@ class TimerFragment : Fragment(),
     }
 
     override fun onTimerSettingConfirm(focusMin: Int, breakMin: Int, repeatCount: Int) {  //시간 설정
-
         progressViewModel._hour.value = focusMin /60
         progressViewModel._min.value = focusMin%60
         progressViewModel._sec.value = 0
 
-        progressViewModel._break_hour.value = breakMin/60
-        progressViewModel._break_min.value = breakMin%60
-        progressViewModel._break_sec.value = 0
 
-        progressViewModel._repeat.value = repeatCount
+        progressViewModel.hour = focusMin /60
+        progressViewModel.min = focusMin%60
+        progressViewModel.sec = 0
 
-        progressViewModel._time.value =  String.format("%02d:%02d:%02d", progressViewModel._hour.value, progressViewModel._min.value, progressViewModel._sec.value)
+
+        progressViewModel._time.value =  String.format("%02d:%02d:%02d", progressViewModel.hour, progressViewModel.min,  progressViewModel.sec)
         Log.d("progressViewModel._time.value!!", progressViewModel._time.value!!)
-        val timerSettingReq = TimerSettingReq(progressViewModel._time.value!!, progressViewModel._break_time.value!!, repeatCount)
+        val timerSettingReq = TimerSettingReq(progressViewModel._time.value!!, "00:00:00", repeatCount)
 
         setTimerService(timerSettingReq)
     }
@@ -258,7 +294,7 @@ class TimerFragment : Fragment(),
         progressViewModel.stopProgress()
         binding.timerFocusPlayBtn.visibility = View.VISIBLE
         binding.timerFocusPauseBtn.visibility = View.GONE
-        progressViewModel.clear()
+        progressViewModel.initProgress()
         getTimer()
     }
     private fun getTimer() {
@@ -279,17 +315,14 @@ class TimerFragment : Fragment(),
 
     override fun onGetTimerSuccess(response: GetTimerRes) {
         focus = response.result.focusTime
-        breakTime = response.result.breakTime
         Log.d("ddddd", focus.substring(0,2).toInt().toString())
         progressViewModel._hour.value = focus.substring(0,2).toInt()
         progressViewModel._min.value = focus.substring(3,5).toInt()
         progressViewModel._sec.value = 0
 
-        progressViewModel._break_hour.value = breakTime.substring(0,2).toInt()
-        progressViewModel._break_min.value = breakTime.substring(3,5).toInt()
-        progressViewModel._break_sec.value = 0
-
-        progressViewModel._repeat.value = response.result.repeatCnt
+        progressViewModel.hour = focus.substring(0,2).toInt()
+        progressViewModel.min = focus.substring(3,5).toInt()
+        progressViewModel.sec = 0
 
         progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
     }
@@ -299,11 +332,6 @@ class TimerFragment : Fragment(),
         progressViewModel._min.value = 0
         progressViewModel._sec.value = 0
 
-        progressViewModel._break_hour.value = 0
-        progressViewModel._break_min.value = 0
-        progressViewModel._break_sec.value = 0
-
-        progressViewModel._repeat.value = 1
 
         progressViewModel.initTime( progressViewModel._hour,  progressViewModel._min,  progressViewModel._sec)
     }
@@ -316,6 +344,8 @@ class TimerFragment : Fragment(),
         val meStoryService = SaveFocusTimeService()
         meStoryService.saveFocusTimeView(this)
         meStoryService.setSaveFocusTime(access_token, category_id, TotalFocusTime(focus) )
+        val customToast = CustomToast
+        customToast.createToast(requireContext(),"집중 시간이 저장되었습니다", 300, true)
     }
 
     override fun onSaveFocusTimeCancel() {
