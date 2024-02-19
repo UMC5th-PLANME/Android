@@ -7,8 +7,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.plan_me.databinding.FragmentDialogSaveFocusTimeBinding
 
-class DialogSaveRepetitionTimeFragment(context : Context): Dialog(context) {
+class DialogSaveRepetitionTimeFragment(context : Context, dialogSaveRepetitionTimeInterface: DialogSaveRepetitionTimeInterface): Dialog(context) {
     private lateinit var binding : FragmentDialogSaveFocusTimeBinding
+    private var dialogSaveRepetitionTimeInterface : DialogSaveRepetitionTimeInterface
+
+    init {
+        this.dialogSaveRepetitionTimeInterface = dialogSaveRepetitionTimeInterface
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,17 +21,17 @@ class DialogSaveRepetitionTimeFragment(context : Context): Dialog(context) {
         setContentView(binding.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        // N분 집중 성공 -> 여기서 N을 바꿔야 하는데... 어떻게...?
-
 
         // 취소 버튼 눌렀을 때 ME 스토리 기록 X
         binding.timerDialogSaveCancelTimeTv.setOnClickListener {
+            dialogSaveRepetitionTimeInterface?.onSaveFocusTimeCancel()
             dismiss()
         }
 
         // 확인 버튼 눌렀을 때 ME 스토리에 기록
         binding.timerDialogSaveFocusTimeTv.setOnClickListener {
-
+            dialogSaveRepetitionTimeInterface?.onSaveFocusTimeConfirm()
+            dismiss()
         }
     }
 }

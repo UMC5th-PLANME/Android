@@ -7,8 +7,13 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.example.plan_me.databinding.FragmentDialogSaveResetBinding
 
-class DialogSaveResetFragment(context : Context): Dialog(context) {
+class DialogSaveResetFragment(context : Context, dialogSaveResetInterface: DialogSaveResetInterface): Dialog(context) {
     private lateinit var binding : FragmentDialogSaveResetBinding
+    private var dialogSaveResetInterface : DialogSaveResetInterface
+
+    init {
+        this.dialogSaveResetInterface = dialogSaveResetInterface
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,14 +24,14 @@ class DialogSaveResetFragment(context : Context): Dialog(context) {
 
         // 취소 버튼 눌렀을 때 ME 스토리 기록 X
         binding.timerDialogCancelResetTv.setOnClickListener {
+            dialogSaveResetInterface?.onSaveFocusTimeCancel()
             dismiss()
         }
 
         // 확인 버튼 눌렀을 때 ME 스토리에 기록
         binding.timerDialogSaveResetTv.setOnClickListener {
-
-
-
+            dialogSaveResetInterface?.onSaveFocusTimeConfirm()
+            dismiss()
         }
     }
 }

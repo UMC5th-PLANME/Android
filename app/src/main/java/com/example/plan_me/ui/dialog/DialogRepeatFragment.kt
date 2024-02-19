@@ -9,7 +9,7 @@ import com.example.plan_me.databinding.FragmentDialogRepeatBinding
 
 class DialogRepeatFragment(context : Context, dialogRepeatInterface: DialogRepeatInterface):Dialog(context){
     private lateinit var binding : FragmentDialogRepeatBinding
-    private lateinit var dialogRepeatInterface : DialogRepeatInterface
+    private var dialogRepeatInterface : DialogRepeatInterface
 
     init {
         this.dialogRepeatInterface = dialogRepeatInterface
