@@ -35,6 +35,10 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
             dialogTimeRangePickInerface?.onRangeClickCancel() // 여기에 선택된 값을 전달
         }
         binding.dialogTimerangepickConfirm.setOnClickListener{
+            if (isChecked) {
+                startTime = "00:00"
+                endTime = "23:59"
+            }
             dialogTimeRangePickInerface?.onRangeClickConfirm(startTime, endTime)
         }
         binding.dialogTimepickStart.setOnTimeChangedListener { view, hourOfDay, minute ->
@@ -50,6 +54,19 @@ class DialogTimeRangePickFragment(context : Context, dialogTimeRangePickInerface
             calendar.set(Calendar.MINUTE, minute)
             endTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(calendar.time)
             Log.d("time",endTime)
+        }
+        binding.timeRangeCheckBox.setOnClickListener {
+            if (isChecked) {
+                Log.d("isChecked" , "false")
+                isChecked = false
+                binding.dialogTimepickStart.isEnabled = true
+                binding.dialogTimepickEnd.isEnabled =  true
+            }else {
+                Log.d("isChecked" , "true")
+                isChecked = true
+                binding.dialogTimepickStart.isEnabled = false
+                binding.dialogTimepickEnd.isEnabled =  false
+            }
         }
     }
 }

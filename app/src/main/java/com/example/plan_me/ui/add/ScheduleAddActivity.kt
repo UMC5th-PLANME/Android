@@ -66,8 +66,8 @@ class ScheduleAddActivity():
     private lateinit var categoryList : ArrayList<CategoryList>
     private lateinit var startDate: LocalDate
     private lateinit var endDate: LocalDate
-    private lateinit var startTime: String
-    private lateinit var endTime: String
+    private  var startTime: String = ""
+    private  var endTime: String = ""
     private val customToast = CustomToast
 
     private lateinit var schedule : ScheduleList
@@ -181,7 +181,7 @@ class ScheduleAddActivity():
                 customToast.createToast(this,"일정 제목을 입력해주세요", 300, false)
             } else if (!::startDate.isInitialized) {
                 customToast.createToast(this,"날짜를 설정해주세요", 300, false)
-            } else if (startTime.isEmpty()) {
+            } else if (startTime == "") {
                 customToast.createToast(this,"시간을 설정해주세요", 300, false)
             } else if (alarm == "시간 선택" && binding.scheduleAlarmSwitch.isChecked) {
                 customToast.createToast(this,"알람 시간을 설정해주세요", 300, false)
