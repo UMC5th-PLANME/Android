@@ -11,17 +11,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.plan_me.data.remote.dto.category.AllCategoryRes
+import com.example.plan_me.data.remote.dto.auth.MemberRes
 import com.example.plan_me.data.remote.dto.mestory.GetMestoryTimeRes
 import com.example.plan_me.data.remote.dto.schedule.ScheduleList
+import com.example.plan_me.data.remote.service.auth.MemberService
 import com.example.plan_me.data.remote.service.mestory.GetMestoryTimeService
-import com.example.plan_me.data.remote.view.category.AllCategoryView
+import com.example.plan_me.data.remote.view.auth.LookUpMemberView
 import com.example.plan_me.data.remote.view.mestory.GetMestoryTimeView
 import com.example.plan_me.databinding.FragmentMestoryBinding
 import com.example.plan_me.ui.CircleTransform
-import com.example.plan_me.ui.dialog.DialogCalenderInterface
 import com.example.plan_me.ui.dialog.DialogDailyCalenderFragment
 import com.example.plan_me.ui.dialog.DialogDailyCalenderInterface
+import com.example.plan_me.ui.setting.AccountFragment
 import com.example.plan_me.utils.viewModel.CalendarViewModel
 import com.example.plan_me.utils.viewModel.CalendarViewModelFactory
 import com.squareup.picasso.Picasso
@@ -30,6 +31,7 @@ import java.time.format.DateTimeFormatter
 
 class MestoryFragment : Fragment(),
     GetMestoryTimeView,
+    LookUpMemberView,
     DialogDailyCalenderInterface{
     private lateinit var binding: FragmentMestoryBinding
 
@@ -38,7 +40,6 @@ class MestoryFragment : Fragment(),
 
     private var accessToken: String? = ""
     private var memberId: Int? = 0
-    private var color: String? = ""
 
     private val today = LocalDate.now()
     private val formatter = DateTimeFormatter.ofPattern("yyyyMMdd")
@@ -61,21 +62,20 @@ class MestoryFragment : Fragment(),
         initProgressBar()
         clickListener()
 
+        getData2()
+        setLookUpService()
+
         return binding.root
+    }
+
+    private fun setLookUpService() {
+        val setLookUpService = MemberService()
+        setLookUpService.setLookUpMemberView(this@MestoryFragment)
+        setLookUpService.getLookUpMember("Bearer " + accessToken)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getData()
-
-        binding.mestoryProfileDateTv.setText(today.toString())
-
-        binding.mestoryProfileNameTv.text = userName
-        if (userImg != "https://k.kakaocdn.net/dn/1G9kp/btsAot8liOn/8CWudi3uy07rvFNUkk3ER0/img_640x640.jpg" && userImg != "null") {
-            Picasso.get().load(userImg).transform(CircleTransform())
-                .into(binding.mestoryProfileIv)
-        }
 
         mestoryTime()
     }
@@ -91,7 +91,7 @@ class MestoryFragment : Fragment(),
     private fun initProgressBar() {
         var totalItemCount = 0
         var totalFinishCount =0
-// 각 키(그룹)에 대해 반복
+        // 각 키(그룹)에 대해 반복
         for (entry in groupedSchedules) {
             // 현재 그룹의 스케줄 목록
             val scheduleList = entry.value
@@ -109,14 +109,6 @@ class MestoryFragment : Fragment(),
             dialogDailyCalenderFragment = DialogDailyCalenderFragment(requireContext(), this)
             dialogDailyCalenderFragment.show()
         }
-    }
-
-
-    private fun getData() {
-        // 데이터 읽어오기
-        val sharedPreferences: SharedPreferences = requireContext().getSharedPreferences("userInfo", MODE_PRIVATE)
-        userName = sharedPreferences.getString("userName", userName)
-        userImg = sharedPreferences.getString("userImg", userImg)
     }
 
     private fun getData2() {
@@ -140,12 +132,37 @@ class MestoryFragment : Fragment(),
     }
 
     override fun onGetMestoryTimeFailure(isSuccess: Boolean, code: String, message: String) {
-        TODO("Not yet implemented")
+        Log.d("mestory 조회 실패", message)
     }
 
     override fun onClickCalender(date: LocalDate?) {
         selectDate = date!!
         binding.mestoryProfileDateTv.text = selectDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
         initRV()
+    }
+
+    private fun updateUI() {
+        binding.mestoryProfileNameTv.text = userName
+        if (userImg != AccountFragment.DEFAULT_IMG && userImg != "null") {
+            if (userImg == "") {
+                Picasso.get().load(userImg).transform(CircleTransform())
+                    .into(binding.mestoryProfileIv)
+            } else {
+                Picasso.get().load(userImg).transform(CircleTransform())
+                    .into(binding.mestoryProfileIv)
+            }
+        }
+    }
+
+    override fun onGetMemberSuccess(response: MemberRes) {
+        Log.d("회원 조회", response.result.toString())
+        userName = response.result.nickname
+        userImg = response.result.profile_image
+
+        updateUI()
+    }
+
+    override fun onGetMemberFailure(isSuccess: Boolean, code: String, message: String) {
+        Log.d("회원 조회 실패", message)
     }
 }

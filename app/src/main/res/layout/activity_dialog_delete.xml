@@ -31,7 +31,7 @@
             android:id="@+id/delete_ask_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Q. 회원탈퇴 관련 정책 언급?"
+            android:text="탈퇴 하시겠습니까?"
             android:textSize="16dp"
             android:textColor="@color/dark_gray"
             android:fontFamily="@font/pretendard_regular"
