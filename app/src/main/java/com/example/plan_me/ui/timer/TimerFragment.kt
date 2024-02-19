@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +11,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.plan_me.R
@@ -29,8 +27,6 @@ import com.example.plan_me.data.remote.view.timer.GetTimerView
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.CustomToast
-import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
-import com.example.plan_me.ui.dialog.DialogDeleteCategoryCheckFragment
 import com.example.plan_me.ui.dialog.DialogSaveFocusTimeFragment
 import com.example.plan_me.ui.dialog.DialogSaveFocusTimeInterface
 import com.example.plan_me.ui.dialog.DialogTimerCategoryFragment
@@ -55,7 +51,6 @@ class TimerFragment : Fragment(),
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
-    private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var category_timer : DialogTimerCategoryFragment
@@ -191,6 +186,7 @@ class TimerFragment : Fragment(),
             // Dialog 타이머 초기화 경고 띄우기
             dialogCautionResetTime = DialogCautionResetTimeFragment(requireContext(), this)
             dialogCautionResetTime.show()
+
         }
 
     }
