@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/schedule_dialog_shape"
+    android:layout_marginHorizontal="20dp"
+    android:paddingVertical="30dp">
+
+    <TextView
+        android:id="@+id/bottom_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_bold"
+        android:lineSpacingExtra="5dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/bottom_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bottom_email"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_regular"
+        android:lineSpacingExtra="5dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/bottom_email_tv"
+        app:layout_constraintEnd_toEndOf="@id/bottom_email_tv"
+        app:layout_constraintTop_toBottomOf="@id/bottom_email_tv"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bottom_btn"
+        android:layout_width="250dp"
+        android:layout_height="43dp"
+        android:background="@drawable/terms_btn"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bottom_tv"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
