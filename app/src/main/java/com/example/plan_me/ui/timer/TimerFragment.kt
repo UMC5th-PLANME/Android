@@ -27,6 +27,7 @@ import com.example.plan_me.data.remote.view.timer.GetTimerView
 import com.example.plan_me.data.remote.view.timer.TimerView
 import com.example.plan_me.databinding.FragmentTimerFocusBinding
 import com.example.plan_me.ui.dialog.CustomToast
+import com.example.plan_me.ui.dialog.DialogCautionResetTimeFragment
 import com.example.plan_me.ui.dialog.DialogSaveFocusTimeFragment
 import com.example.plan_me.ui.dialog.DialogSaveFocusTimeInterface
 import com.example.plan_me.ui.dialog.DialogTimerCategoryFragment
@@ -51,6 +52,7 @@ class TimerFragment : Fragment(),
     private lateinit var binding: FragmentTimerFocusBinding
 
     private lateinit var dialogTimerPickFragment : DialogTimerPickFragment
+    private lateinit var dialogCautionResetTime: DialogCautionResetTimeFragment
 
     private lateinit var calendarViewModel: CalendarViewModel
     private lateinit var category_timer : DialogTimerCategoryFragment
